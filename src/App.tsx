@@ -1,16 +1,13 @@
-import { Layout } from "antd";
-import Content from "./components/content/Content";
-import Footer from "./components/footer/Footer";
-import Navbar from "./components/navbar/Navbar";
+import React, { Suspense } from "react";
+
+const Main = React.lazy(() => import("./components/main/Main"));
 
 function App() {
   return (
     <div>
-      <Layout style={{ minHeight: "100vh" }}>
-        <Navbar />
-        <Content />
-        <Footer />
-      </Layout>
+      <Suspense fallback={<p>Loading...</p>}>
+        <Main />
+      </Suspense>
     </div>
   );
 }
