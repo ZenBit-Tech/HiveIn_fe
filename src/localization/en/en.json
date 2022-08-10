@@ -2,10 +2,13 @@
   "Home": {
     "title": "Home"
   },
-  "Dashboard": {
-    "title": "Dashboard"
+  "SearchWork": {
+    "title": "Search Work"
   },
-  "Redux": {
-    "title": "Redux test"
+  "Proposals": {
+    "title": "Proposals"
+  },
+  "MyContracts": {
+    "title": "My Contracts"
   }
 }

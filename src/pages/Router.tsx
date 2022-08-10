@@ -1,14 +1,19 @@
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "./Dashboard";
 import Home from "./Home";
-import ReduxTest from "./ReduxTest";
+import SearchWork from "./SearchWork";
+import Proposals from "./Proposals";
+import MyContracts from "./MyContracts";
 
 function Router() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/redux-test" element={<ReduxTest />} />
+      <Route path="/search-work" element={<SearchWork />} />
+      <Route path="/proposals" element={<Proposals />} />
+      <Route path="/my-contracts" element={<MyContracts />} />
+      <Route path="/messages" element={<Home />} />
+      <Route path="/settings" element={<Home />} />
+      <Route path="/profile" element={<Home />} />
     </Routes>
   );
 }

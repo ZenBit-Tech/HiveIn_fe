@@ -1,8 +1,8 @@
-import NavLinkStyles from "./style";
+import NavLinkStyles from "./NavLinkStyles";
 
 type Props = {
   path: string;
-  children: JSX.Element | string;
+  children: React.ReactNode;
 };
 
 function NavLink({ path, children }: Props) {
