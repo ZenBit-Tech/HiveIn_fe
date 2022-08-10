@@ -5,11 +5,12 @@ import {
   MessageFilled,
   MenuOutlined,
 } from "@ant-design/icons";
-import { Tooltip } from "antd";
+
 import NavLink from "../UI/navlink/NavLink";
-import NavbarStyles, { ButtonStyle, NavBarButtons } from "./NavbarStyles";
+import NavbarStyles, { NavBarButtons } from "./NavbarStyles";
 import logo from "./imgs/logo.svg";
 import useViewport from "../../hooks/useViewport";
+import NavBarButton from "../UI/navBarButton/NavBarButton";
 
 function Navbar() {
   const { t } = useTranslation();
@@ -34,40 +35,12 @@ function Navbar() {
       )}
 
       <NavBarButtons>
-        <Tooltip title="Chat">
-          <ButtonStyle
-            type="dashed"
-            shape="circle"
-            size="large"
-            icon={<MessageFilled />}
-          />
-        </Tooltip>
-        <Tooltip title="Settings">
-          <ButtonStyle
-            type="dashed"
-            shape="circle"
-            size="large"
-            icon={<SettingFilled />}
-          />
-        </Tooltip>
-        <Tooltip title="Profile">
-          <ButtonStyle
-            type="dashed"
-            shape="circle"
-            size="large"
-            icon={<UserOutlined />}
-          />
-        </Tooltip>
+        <NavBarButton icon={<MessageFilled />} title="Chat" />
+        <NavBarButton icon={<SettingFilled />} title="Settings" />
+        <NavBarButton icon={<UserOutlined />} title="Profile" />
 
         {screenWidth < mobileScreenSize ? (
-          <Tooltip title="Profile">
-            <ButtonStyle
-              type="dashed"
-              shape="circle"
-              size="large"
-              icon={<MenuOutlined />}
-            />
-          </Tooltip>
+          <NavBarButton icon={<MenuOutlined />} title="Menu" />
         ) : (
           ""
         )}

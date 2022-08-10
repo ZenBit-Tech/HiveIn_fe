@@ -1,9 +1,5 @@
-import { Button } from "antd";
 import { Header } from "antd/lib/layout/layout";
 import styled from "styled-components";
-
-const primaryBlue = "#065b90";
-const strongerBlue = "#254059";
 
 const NavbarStyles = styled(Header)`
   background-color: white;
@@ -20,19 +16,6 @@ export const NavBarButtons = styled.div`
   column-gap: 15px;
   align-items: center;
   margin-left: auto;
-`;
-
-export const ButtonStyle = styled(Button)`
-  color: ${primaryBlue};
-  border-color: ${primaryBlue};
-  &:hover {
-    color: ${strongerBlue};
-    border-color: ${strongerBlue};
-  }
-  &:focus {
-    color: ${strongerBlue};
-    border-color: ${strongerBlue};
-  }
 `;
 
 export default NavbarStyles;
