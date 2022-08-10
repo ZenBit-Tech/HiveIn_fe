@@ -2,6 +2,9 @@ import { Button } from "antd";
 import { Header } from "antd/lib/layout/layout";
 import styled from "styled-components";
 
+const primaryBlue = "#065b90";
+const strongerBlue = "#254059";
+
 const NavbarStyles = styled(Header)`
   background-color: white;
   display: flex;
@@ -20,15 +23,15 @@ export const NavBarButtons = styled.div`
 `;
 
 export const ButtonStyle = styled(Button)`
-  color: #7246e5;
-  border-color: #7246e5;
+  color: ${primaryBlue};
+  border-color: ${primaryBlue};
   &:hover {
-    color: #4d2d9f;
-    border-color: #4d2d9f;
+    color: ${strongerBlue};
+    border-color: ${strongerBlue};
   }
   &:focus {
-    color: #4d2d9f;
-    border-color: #4d2d9f;
+    color: ${strongerBlue};
+    border-color: ${strongerBlue};
   }
 `;
 
