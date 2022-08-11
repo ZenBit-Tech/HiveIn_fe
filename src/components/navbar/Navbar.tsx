@@ -1,12 +1,21 @@
 import { useTranslation } from "react-i18next";
-import { SettingFilled, UserOutlined, MessageFilled } from "@ant-design/icons";
 
-import NavLink from "../UI/navlink/NavLink";
-import NavbarStyles, { NavBarButtons } from "./NavbarStyles";
-import logo from "./imgs/logo.svg";
-import useViewport from "../../hooks/useViewport";
-import NavBarButton from "../UI/navBarButton/NavBarButton";
-import MenuDrawer from "../UI/navBarDrawer/MenuDrawer";
+import { SettingFilled, UserOutlined, MessageFilled } from "@ant-design/icons";
+import NavLink from "components/UI/navlink/NavLink";
+import NavbarStyles, { NavBarButtons } from "components/navbar/NavbarStyles";
+import logo from "components/navbar/imgs/logo.svg";
+import useViewport from "hooks/useViewport";
+import NavBarButton from "components/UI/navBarButton/NavBarButton";
+import MenuDrawer from "components/UI/navBarDrawer/MenuDrawer";
+import {
+  SEARCH_WORK_ROUTE,
+  HOME_PAGE_ROUTE,
+  PROPOSALS_ROUTE,
+  MY_CONTRACTS_ROUTE,
+  CHAT_ROUTE,
+  SETTINGS_ROUTE,
+  PROFILE_ROUTE,
+} from "utils/consts";
 
 function Navbar() {
   const { t } = useTranslation();
@@ -15,7 +24,7 @@ function Navbar() {
 
   return (
     <NavbarStyles>
-      <NavLink path="/">
+      <NavLink path={HOME_PAGE_ROUTE}>
         <img height="50px" alt="logo" src={logo} />
         {/* {t("Home.title")} */}
       </NavLink>
@@ -24,20 +33,20 @@ function Navbar() {
         ""
       ) : (
         <>
-          <NavLink path="/search-work">{t("SearchWork.title")}</NavLink>
-          <NavLink path="/proposals">{t("Proposals.title")}</NavLink>
-          <NavLink path="/my-contracts">{t("MyContracts.title")}</NavLink>
+          <NavLink path={SEARCH_WORK_ROUTE}>{t("SearchWork.title")}</NavLink>
+          <NavLink path={PROPOSALS_ROUTE}>{t("Proposals.title")}</NavLink>
+          <NavLink path={MY_CONTRACTS_ROUTE}>{t("MyContracts.title")}</NavLink>
         </>
       )}
 
       <NavBarButtons>
-        <NavLink path="/chat">
+        <NavLink path={CHAT_ROUTE}>
           <NavBarButton icon={<MessageFilled />} title={t("Chat.title")} />
         </NavLink>
-        <NavLink path="/settings">
+        <NavLink path={SETTINGS_ROUTE}>
           <NavBarButton icon={<SettingFilled />} title={t("Settings.title")} />
         </NavLink>
-        <NavLink path="/profile">
+        <NavLink path={PROFILE_ROUTE}>
           <NavBarButton icon={<UserOutlined />} title={t("Profile.title")} />
         </NavLink>
 
