@@ -7,10 +7,10 @@ import publicRoutes from "routes/publicRoutes";
 function Router() {
   return (
     <Routes>
-      {publicRoutes.map(({ path, Component }) => (
+      {publicRoutes.map(({ path, component: Component }) => (
         <Route key={path} path={path} element={<Component />} />
       ))}
-      {protectedRoutes.map(({ path, Component }) => (
+      {protectedRoutes.map(({ path, component: Component }) => (
         <Route
           key={path}
           path={path}
