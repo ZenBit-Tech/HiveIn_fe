@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { MenuOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { Col, Divider, Drawer, Row } from "antd";
-import NavLink from "../navlink/NavLink";
-import NavBarButton from "../navBarButton/NavBarButton";
+import NavLink from "components/UI/navlink/NavLink";
+import NavBarButton from "components/UI/navBarButton/NavBarButton";
 
 function MenuDrawer() {
   const { t } = useTranslation();
