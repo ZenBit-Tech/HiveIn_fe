@@ -6,7 +6,7 @@ import {
   SETTINGS_ROUTE,
   CHAT_ROUTE,
   PROFILE_ROUTE,
-} from "utils/consts";
+} from "utils/routeConsts";
 import Home from "pages/Home";
 import Proposals from "pages/Proposals";
 import SearchWork from "pages/SearchWork";

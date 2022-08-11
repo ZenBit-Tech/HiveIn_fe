@@ -15,7 +15,7 @@ import {
   CHAT_ROUTE,
   SETTINGS_ROUTE,
   PROFILE_ROUTE,
-} from "utils/consts";
+} from "utils/routeConsts";
 
 function Navbar() {
   const { t } = useTranslation();
