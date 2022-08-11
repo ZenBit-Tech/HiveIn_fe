@@ -2,15 +2,21 @@ import { ReactNode } from "react";
 import { Tooltip } from "antd";
 import ButtonStyle from "./navBarButtonStyles";
 
-interface NavBarButtonProps {
+interface NavBarButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   icon: ReactNode;
   title: string;
 }
 
-function NavBarButton({ icon, title }: NavBarButtonProps) {
+function NavBarButton({ icon, title, onClick }: NavBarButtonProps) {
   return (
     <Tooltip title={title}>
-      <ButtonStyle type="dashed" shape="circle" size="large" icon={icon} />
+      <ButtonStyle
+        type="dashed"
+        shape="circle"
+        size="large"
+        icon={icon}
+        onClick={onClick}
+      />
     </Tooltip>
   );
 }

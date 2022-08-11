@@ -1,16 +1,12 @@
 import { useTranslation } from "react-i18next";
-import {
-  SettingFilled,
-  UserOutlined,
-  MessageFilled,
-  MenuOutlined,
-} from "@ant-design/icons";
+import { SettingFilled, UserOutlined, MessageFilled } from "@ant-design/icons";
 
 import NavLink from "../UI/navlink/NavLink";
 import NavbarStyles, { NavBarButtons } from "./NavbarStyles";
 import logo from "./imgs/logo.svg";
 import useViewport from "../../hooks/useViewport";
 import NavBarButton from "../UI/navBarButton/NavBarButton";
+import MenuDrawer from "../UI/navBarDrawer/MenuDrawer";
 
 function Navbar() {
   const { t } = useTranslation();
@@ -30,7 +26,7 @@ function Navbar() {
         <>
           <NavLink path="/search-work">{t("SearchWork.title")}</NavLink>
           <NavLink path="/proposals">{t("Proposals.title")}</NavLink>
-          <NavLink path="/my-contracts">{t("MyContracts.title")}</NavLink>{" "}
+          <NavLink path="/my-contracts">{t("MyContracts.title")}</NavLink>
         </>
       )}
 
@@ -39,11 +35,7 @@ function Navbar() {
         <NavBarButton icon={<SettingFilled />} title="Settings" />
         <NavBarButton icon={<UserOutlined />} title="Profile" />
 
-        {screenWidth < mobileScreenSize ? (
-          <NavBarButton icon={<MenuOutlined />} title="Menu" />
-        ) : (
-          ""
-        )}
+        {screenWidth < mobileScreenSize ? <MenuDrawer /> : ""}
       </NavBarButtons>
     </NavbarStyles>
   );
