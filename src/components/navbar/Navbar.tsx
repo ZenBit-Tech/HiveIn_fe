@@ -31,9 +31,15 @@ function Navbar() {
       )}
 
       <NavBarButtons>
-        <NavBarButton icon={<MessageFilled />} title={t("Chat.title")} />
-        <NavBarButton icon={<SettingFilled />} title={t("Settings.title")} />
-        <NavBarButton icon={<UserOutlined />} title={t("Profile.title")} />
+        <NavLink path="/chat">
+          <NavBarButton icon={<MessageFilled />} title={t("Chat.title")} />
+        </NavLink>
+        <NavLink path="/settings">
+          <NavBarButton icon={<SettingFilled />} title={t("Settings.title")} />
+        </NavLink>
+        <NavLink path="/profile">
+          <NavBarButton icon={<UserOutlined />} title={t("Profile.title")} />
+        </NavLink>
 
         {screenWidth < mobileScreenSize ? <MenuDrawer /> : ""}
       </NavBarButtons>
