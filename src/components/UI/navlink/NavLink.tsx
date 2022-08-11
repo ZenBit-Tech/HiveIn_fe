@@ -1,4 +1,4 @@
-import NavLinkStyles from "./style";
+import NavLinkStyles from "components/UI/navlink/style";
 
 type Props = {
   path: string;

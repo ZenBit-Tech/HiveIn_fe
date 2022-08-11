@@ -11,8 +11,9 @@
 # production
 /build
 
-# Intellij configs
+# IDE's configs
 /.idea
+/.vscode
 
 # misc
 .DS_Store
