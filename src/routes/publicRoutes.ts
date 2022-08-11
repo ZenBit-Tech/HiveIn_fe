@@ -1,4 +1,5 @@
 import {
+  COMPLETE_REGISTRATION_ROUTE,
   HOME_PAGE_ROUTE,
   SEARCH_WORK_ROUTE,
   PROPOSALS_ROUTE,
@@ -6,43 +7,54 @@ import {
   SETTINGS_ROUTE,
   CHAT_ROUTE,
   PROFILE_ROUTE,
+  SIGN_UP_ROUTE,
 } from "utils/routeConsts";
 import Home from "pages/Home";
-import Proposals from "pages/Proposals";
+import SignUp from "pages/SignUp/Index";
+import CompleteRegistration from "pages/CompleteRegistration/Index";
 import SearchWork from "pages/SearchWork";
+import Proposals from "pages/Proposals";
 import MyContracts from "pages/MyContracts";
-import Settings from "pages/Settings";
 import Chat from "pages/Chat";
+import Settings from "pages/Settings";
 import Profile from "pages/Profile";
 
 const publicRoutes = [
   {
     path: HOME_PAGE_ROUTE,
-    Component: Home,
+    component: Home,
   },
   {
     path: SEARCH_WORK_ROUTE,
-    Component: SearchWork,
+    component: SearchWork,
   },
   {
     path: PROPOSALS_ROUTE,
-    Component: Proposals,
+    component: Proposals,
   },
   {
     path: MY_CONTRACTS_ROUTE,
-    Component: MyContracts,
+    component: MyContracts,
   },
   {
     path: CHAT_ROUTE,
-    Component: Chat,
+    component: Chat,
   },
   {
     path: SETTINGS_ROUTE,
-    Component: Settings,
+    component: Settings,
   },
   {
     path: PROFILE_ROUTE,
-    Component: Profile,
+    component: Profile,
+  },
+  {
+    path: SIGN_UP_ROUTE,
+    component: SignUp,
+  },
+  {
+    path: COMPLETE_REGISTRATION_ROUTE,
+    component: CompleteRegistration,
   },
 ];
 
