@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+
 import publicRoutes from "routes/publicRoutes";
 
 function Router() {

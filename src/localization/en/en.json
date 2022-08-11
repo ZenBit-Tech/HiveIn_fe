@@ -2,11 +2,26 @@
   "Home": {
     "title": "Home"
   },
-  "Dashboard": {
-    "title": "Dashboard"
+  "SearchWork": {
+    "title": "Search Work"
   },
-  "Redux": {
-    "title": "Redux test"
+  "Proposals": {
+    "title": "Proposals"
+  },
+  "MyContracts": {
+    "title": "My Contracts"
+  },
+  "Chat": {
+    "title": "Chat"
+  },
+  "Settings": {
+    "title": "Settings"
+  },
+  "Profile": {
+    "title": "Profile"
+  },
+  "Menu": {
+    "title": "Menu"
   },
   "SignUp": {
     "title": "SignUp",
@@ -18,4 +33,5 @@
   "CompleteRegistration": {
     "helloWorld": "Hello complete registration page!"
   }
+  
 }

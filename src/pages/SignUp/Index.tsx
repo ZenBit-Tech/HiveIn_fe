@@ -5,7 +5,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import Field from "components/DefaultField/Index";
-import { COMPLETE_REGISTRATION_ROUTE } from "utils/consts";
+import { COMPLETE_REGISTRATION_ROUTE } from "utils/routeConsts";
 import { useTranslation } from "react-i18next";
 import S from "./style";
 import signUpSchema from "./schema";
