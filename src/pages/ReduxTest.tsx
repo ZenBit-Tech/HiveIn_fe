@@ -1,7 +1,7 @@
 import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { decrement, increment } from "../slices/counterSlice";
-import { RootState } from "../store";
+import { decrement, increment } from "store/slices/counterSlice";
+import { RootState } from "store/store";
 
 function ReduxTest() {
   const { value } = useSelector((state: RootState) => state.counter);

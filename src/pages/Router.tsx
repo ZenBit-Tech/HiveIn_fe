@@ -1,14 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import Dashboard from "./Dashboard";
-import Home from "./Home";
-import ReduxTest from "./ReduxTest";
+import publicRoutes from "routes/publicRoutes";
 
 function Router() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/redux-test" element={<ReduxTest />} />
+      {publicRoutes.map(({ path, Component }) => (
+        <Route key={path} path={path} element={<Component />} />
+      ))}
     </Routes>
   );
 }
