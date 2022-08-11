@@ -1,19 +1,17 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-const primaryBlue = "#065b90";
-const secondaryGray = "#898989";
+import { SECONDARY_GRAY, PRIMARY_BLUE } from "utils/navBarConsts";
 
 const NavLinkStyles = styled(Link)`
-  color: ${secondaryGray};
+  color: ${SECONDARY_GRAY};
   font-size: 14px;
   font-weight: 400;
   &:hover {
-    border-bottom: 3px solid ${primaryBlue};
-    color: ${primaryBlue};
+    border-bottom: 3px solid ${PRIMARY_BLUE};
+    color: ${PRIMARY_BLUE};
   }
   &:active {
-    color: ${primaryBlue};
+    color: ${PRIMARY_BLUE};
   }
 `;
 

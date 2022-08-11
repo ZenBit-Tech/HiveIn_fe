@@ -1,19 +1,17 @@
 import { Button } from "antd";
 import styled from "styled-components";
-
-const primaryBlue = "#065b90";
-const strongerBlue = "#254059";
+import { PRIMARY_BLUE, STRONGER_BLUE } from "utils/navBarConsts";
 
 const ButtonStyle = styled(Button)`
-  color: ${primaryBlue};
-  border-color: ${primaryBlue};
+  color: ${PRIMARY_BLUE};
+  border-color: ${PRIMARY_BLUE};
   &:hover {
-    color: ${strongerBlue};
-    border-color: ${strongerBlue};
+    color: ${STRONGER_BLUE};
+    border-color: ${STRONGER_BLUE};
   }
   &:focus {
-    color: ${strongerBlue};
-    border-color: ${strongerBlue};
+    color: ${STRONGER_BLUE};
+    border-color: ${STRONGER_BLUE};
   }
 `;
 
