@@ -8,6 +8,7 @@ import {
   CHAT_ROUTE,
   PROFILE_ROUTE,
   SIGN_UP_ROUTE,
+  SIGN_IN,
 } from "utils/routeConsts";
 import Home from "pages/Home";
 import SignUp from "pages/SignUp/Index";
@@ -18,8 +19,14 @@ import MyContracts from "pages/MyContracts";
 import Chat from "pages/Chat";
 import Settings from "pages/Settings";
 import Profile from "pages/Profile";
+import SignIn from "pages/SignIn/Index";
 
-const publicRoutes = [
+interface RoutesType {
+  path: string;
+  component: () => JSX.Element;
+}
+
+const publicRoutes: RoutesType[] = [
   {
     path: HOME_PAGE_ROUTE,
     component: Home,
@@ -55,6 +62,10 @@ const publicRoutes = [
   {
     path: COMPLETE_REGISTRATION_ROUTE,
     component: CompleteRegistration,
+  },
+  {
+    path: SIGN_IN,
+    component: SignIn,
   },
 ];
 
