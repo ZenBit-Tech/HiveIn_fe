@@ -6,6 +6,7 @@ import {
   SETTINGS_ROUTE,
   CHAT_ROUTE,
   PROFILE_ROUTE,
+  LOGIN_ROUTE,
 } from "utils/routeConsts";
 import Home from "pages/Home";
 import Proposals from "pages/Proposals";
@@ -14,8 +15,14 @@ import MyContracts from "pages/MyContracts";
 import Settings from "pages/Settings";
 import Chat from "pages/Chat";
 import Profile from "pages/Profile";
+import Login from "pages/Login/Login";
 
-const publicRoutes = [
+export interface RoutesProps {
+  path: string;
+  Component: () => JSX.Element;
+}
+
+const publicRoutes: RoutesProps[] = [
   {
     path: HOME_PAGE_ROUTE,
     Component: Home,
@@ -43,6 +50,10 @@ const publicRoutes = [
   {
     path: PROFILE_ROUTE,
     Component: Profile,
+  },
+  {
+    path: LOGIN_ROUTE,
+    Component: Login,
   },
 ];
 
