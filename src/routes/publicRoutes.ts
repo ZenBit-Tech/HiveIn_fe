@@ -1,22 +1,17 @@
+import Dashboard from "pages/Dashboard";
+import ReduxTest from "pages/ReduxTest";
 import {
   COMPLETE_REGISTRATION_ROUTE,
   DASHBOARD_PAGE_ROUTE,
   HOME_PAGE_ROUTE,
   REDUX_TEST_PAGE_ROUTE,
   SIGN_UP_ROUTE,
-} from "../utils/consts";
-import Home from "../pages/Home";
-import Dashboard from "../pages/Dashboard";
-import ReduxTest from "../pages/ReduxTest";
-import SignUp from "../pages/SignUp/Index";
-import CompleteRegistration from "../pages/CompleteRegistration/Index";
+} from "utils/consts";
+import Home from "pages/Home";
+import SignUp from "pages/SignUp/Index";
+import CompleteRegistration from "pages/CompleteRegistration/Index";
 
-interface PublicRoute {
-  path: string;
-  component: () => JSX.Element;
-}
-
-const publicRoutes: PublicRoute[] = [
+const publicRoutes = [
   {
     path: HOME_PAGE_ROUTE,
     component: Home,

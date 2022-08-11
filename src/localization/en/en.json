@@ -9,6 +9,13 @@
     "title": "Redux test"
   },
   "SignUp": {
-    "title": "SignUp"
+    "title": "SignUp",
+    "signUpGoogle": "Sign Up with Google",
+    "register": "Register",
+    "or": "or",
+    "useEmail": "Use your email"
+  },
+  "CompleteRegistration": {
+    "helloWorld": "Hello complete registration page!"
   }
 }

@@ -1,12 +1,12 @@
 import { useTranslation } from "react-i18next";
-import NavLink from "../UI/navlink/NavLink";
-import NavbarStyles from "./style";
+import NavLink from "components/UI/navlink/NavLink";
+import NavbarStyles from "components/navbar/style";
 import {
   DASHBOARD_PAGE_ROUTE,
   HOME_PAGE_ROUTE,
   REDUX_TEST_PAGE_ROUTE,
   SIGN_UP_ROUTE,
-} from "../../utils/consts";
+} from "utils/consts";
 
 function Navbar() {
   const { t } = useTranslation();

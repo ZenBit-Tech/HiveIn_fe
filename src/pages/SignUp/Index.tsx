@@ -4,10 +4,11 @@ import { Button } from "antd";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import Field from "../../components/DefaultField/Index";
+import Field from "components/DefaultField/Index";
+import { COMPLETE_REGISTRATION_ROUTE } from "utils/consts";
+import { useTranslation } from "react-i18next";
 import S from "./style";
 import signUpSchema from "./schema";
-import { COMPLETE_REGISTRATION_ROUTE } from "../../utils/consts";
 
 interface SignUpForm extends FieldValues {
   email: string;
@@ -26,16 +27,18 @@ export default function SignUp() {
     return evt;
   }
 
+  const { t } = useTranslation();
+
   return (
     <S.Container>
       <S.FormBox>
         <Button type="primary" icon={<GoogleOutlined />}>
-          Sign Up with Google
+          {t("SignUp.signUpGoogle")}
         </Button>
         <div style={{ textAlign: "center" }}>
-          <span>or</span>
+          <span>{t("SignUp.or")}</span>
           <br />
-          <span>Use your email</span>
+          <span>{t("SignUp.useEmail")}</span>
         </div>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <Field label="Email" control={control} name="email" />
@@ -50,7 +53,7 @@ export default function SignUp() {
             type="primary"
             htmlType="submit"
           >
-            Register
+            {t("SignUp.register")}
           </Button>
         </S.Form>
       </S.FormBox>
