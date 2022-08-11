@@ -20,7 +20,11 @@ function MenuDrawer() {
 
   return (
     <>
-      <NavBarButton icon={<MenuOutlined />} title="Menu" onClick={showDrawer} />
+      <NavBarButton
+        icon={<MenuOutlined />}
+        title={t("Menu.title")}
+        onClick={showDrawer}
+      />
 
       <Drawer
         title=""

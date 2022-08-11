@@ -10,5 +10,18 @@
   },
   "MyContracts": {
     "title": "My Contracts"
+  },
+  "Chat": {
+    "title": "Chat"
+  },
+  "Settings": {
+    "title": "Settings"
+  },
+  "Profile": {
+    "title": "Profile"
+  },
+  "Menu": {
+    "title": "Menu"
   }
+  
 }
