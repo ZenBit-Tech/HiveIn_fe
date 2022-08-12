@@ -1,17 +1,17 @@
 import { useTranslation } from "react-i18next";
 
-import {
-  SettingFilled,
-  UserOutlined,
-  MessageFilled,
-  LogoutOutlined,
-} from "@ant-design/icons";
 import NavLink from "components/UI/navlink/NavLink";
 import NavbarStyles, { NavBarButtons } from "components/navbar/NavbarStyles";
 import logo from "components/navbar/imgs/logo.svg";
 import useViewport from "hooks/useViewport";
 import NavBarButton from "components/UI/navBarButton/NavBarButton";
 import MenuDrawer from "components/UI/navBarDrawer/MenuDrawer";
+import {
+  SettingFilled,
+  UserOutlined,
+  MessageFilled,
+  LogoutOutlined,
+} from "@ant-design/icons";
 import {
   SEARCH_WORK_ROUTE,
   HOME_PAGE_ROUTE,
@@ -21,7 +21,7 @@ import {
   SETTINGS_ROUTE,
   PROFILE_ROUTE,
   SIGN_UP_ROUTE,
-  LOGIN_ROUTE,
+  SIGN_IN_ROUTE,
 } from "utils/routeConsts";
 import useAuth from "hooks/useAuth";
 import { MOBILE_SCREEN_SIZE } from "utils/navBarConsts";
@@ -38,7 +38,7 @@ function Navbar() {
           <img height="50px" alt="logo" src={logo} />
         </NavLink>
         <NavLink path={SIGN_UP_ROUTE}>{t("SignUp.title")}</NavLink>
-        <NavLink path={LOGIN_ROUTE}>{t("Login")}</NavLink>
+        <NavLink path={SIGN_IN_ROUTE}>{t("SignIn.signIn")}</NavLink>
       </NavbarStyles>
     );
   }
@@ -71,7 +71,7 @@ function Navbar() {
         </NavLink>
         <NavBarButton
           icon={<LogoutOutlined />}
-          title={t("Sign Out")}
+          title={t("SignIn.signOut")}
           onClick={signOut}
         />
 

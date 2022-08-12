@@ -24,7 +24,7 @@
     "title": "Menu"
   },
   "SignUp": {
-    "title": "SignUp",
+    "title": "Sign Up",
     "signUpGoogle": "Sign Up with Google",
     "register": "Register",
     "or": "or",
@@ -34,6 +34,7 @@
     "title": "Get Job",
     "subtitle": "THE BEST WAY TO FIND YOUR JOB",
     "signIn": "Sign In",
+    "signOut": "Sign Out",
     "dontHaveAccount": "Don't have an account yet?",
     "forgotPass": "Forgot your password?",
     "register": "Register now",

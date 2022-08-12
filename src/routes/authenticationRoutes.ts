@@ -1,7 +1,7 @@
-import { SIGN_IN, SIGN_UP_ROUTE } from "utils/routeConsts";
+import { SIGN_IN_ROUTE, SIGN_UP_ROUTE } from "utils/routeConsts";
 import { RoutesType } from "routes/publicRoutes";
 import SignUp from "pages/SignUp/Index";
-import Login from "pages/Login/Login";
+import SignIn from "pages/SignIn/Index";
 
 const authenticationRoutes: RoutesType[] = [
   {
@@ -10,8 +10,8 @@ const authenticationRoutes: RoutesType[] = [
   },
 
   {
-    path: SIGN_IN,
-    component: Login,
+    path: SIGN_IN_ROUTE,
+    component: SignIn,
   },
 ];
 
