@@ -5,12 +5,12 @@ import {
 import Home from "pages/Home";
 import CompleteRegistration from "pages/CompleteRegistration/Index";
 
-export interface RoutesProps {
+export interface RoutesType {
   path: string;
   component: () => JSX.Element;
 }
 
-const publicRoutes: RoutesProps[] = [
+const publicRoutes: RoutesType[] = [
   {
     path: HOME_PAGE_ROUTE,
     component: Home,

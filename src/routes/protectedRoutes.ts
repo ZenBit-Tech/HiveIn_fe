@@ -4,7 +4,7 @@ import Profile from "pages/Profile";
 import Proposals from "pages/Proposals";
 import SearchWork from "pages/SearchWork";
 import Settings from "pages/Settings";
-import { RoutesProps } from "routes/publicRoutes";
+import { RoutesType } from "routes/publicRoutes";
 import {
   SEARCH_WORK_ROUTE,
   PROPOSALS_ROUTE,
@@ -14,7 +14,7 @@ import {
   SETTINGS_ROUTE,
 } from "utils/routeConsts";
 
-const protectedRoutes: RoutesProps[] = [
+const protectedRoutes: RoutesType[] = [
   {
     path: SEARCH_WORK_ROUTE,
     component: SearchWork,
