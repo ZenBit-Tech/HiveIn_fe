@@ -7,15 +7,13 @@ const useAuth = () => {
 
   const dispatch = useDispatch();
 
-  const signIn = (navigateTo: () => void) => {
+  const signIn = () => {
     dispatch(
       setSignIn({
         email: "test",
         role: "test",
       })
     );
-
-    navigateTo();
   };
 
   const signOut = () => {

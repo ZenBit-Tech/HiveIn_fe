@@ -1,6 +1,11 @@
 import { useTranslation } from "react-i18next";
 
-import { SettingFilled, UserOutlined, MessageFilled } from "@ant-design/icons";
+import {
+  SettingFilled,
+  UserOutlined,
+  MessageFilled,
+  LogoutOutlined,
+} from "@ant-design/icons";
 import NavLink from "components/UI/navlink/NavLink";
 import NavbarStyles, { NavBarButtons } from "components/navbar/NavbarStyles";
 import logo from "components/navbar/imgs/logo.svg";
@@ -18,20 +23,33 @@ import {
   SIGN_UP_ROUTE,
   LOGIN_ROUTE,
 } from "utils/routeConsts";
+import useAuth from "hooks/useAuth";
+import { MOBILE_SCREEN_SIZE } from "utils/navBarConsts";
 
 function Navbar() {
+  const { email, signOut } = useAuth();
   const { t } = useTranslation();
   const { screenWidth } = useViewport();
-  const mobileScreenSize = 768;
+
+  if (!email) {
+    return (
+      <NavbarStyles>
+        <NavLink path={HOME_PAGE_ROUTE}>
+          <img height="50px" alt="logo" src={logo} />
+        </NavLink>
+        <NavLink path={SIGN_UP_ROUTE}>{t("SignUp.title")}</NavLink>
+        <NavLink path={LOGIN_ROUTE}>{t("Login")}</NavLink>
+      </NavbarStyles>
+    );
+  }
 
   return (
     <NavbarStyles>
       <NavLink path={HOME_PAGE_ROUTE}>
         <img height="50px" alt="logo" src={logo} />
-        {/* {t("Home.title")} */}
       </NavLink>
 
-      {screenWidth < mobileScreenSize ? (
+      {screenWidth < MOBILE_SCREEN_SIZE ? (
         ""
       ) : (
         <>
@@ -51,11 +69,14 @@ function Navbar() {
         <NavLink path={PROFILE_ROUTE}>
           <NavBarButton icon={<UserOutlined />} title={t("Profile.title")} />
         </NavLink>
+        <NavBarButton
+          icon={<LogoutOutlined />}
+          title={t("Sign Out")}
+          onClick={signOut}
+        />
 
-        {screenWidth < mobileScreenSize ? <MenuDrawer /> : ""}
+        {screenWidth < MOBILE_SCREEN_SIZE ? <MenuDrawer /> : ""}
       </NavBarButtons>
-      <NavLink path={SIGN_UP_ROUTE}>{t("SignUp.title")}</NavLink>
-      <NavLink path={LOGIN_ROUTE}>{t("Login")}</NavLink>
     </NavbarStyles>
   );
 }

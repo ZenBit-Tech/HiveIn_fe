@@ -8,7 +8,7 @@ type LocationProps = {
 };
 
 function Login() {
-  const { signIn, signOut } = useAuth();
+  const { signIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation() as LocationProps;
 
@@ -16,27 +16,15 @@ function Login() {
 
   function handleSignIn(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
-    signIn(() => {
-      // Navigate to the page the user was before being disconnected
-      navigate(from, { replace: true });
-    });
-  }
-
-  function handleSignOut(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    signOut();
+    signIn();
+    // Navigate to the page the user was before being disconnected
+    navigate(from, { replace: true });
   }
 
   return (
-    <>
-      <form onSubmit={handleSignIn}>
-        <button type="submit">Login</button>
-      </form>
-      <form onSubmit={handleSignOut}>
-        <button type="submit">SignOut</button>
-      </form>
-    </>
+    <form onSubmit={handleSignIn}>
+      <button type="submit">Login</button>
+    </form>
   );
 }
 
