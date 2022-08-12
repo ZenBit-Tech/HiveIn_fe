@@ -27,11 +27,11 @@ import useAuth from "hooks/useAuth";
 import { MOBILE_SCREEN_SIZE } from "utils/navBarConsts";
 
 function Navbar() {
-  const { isAuthenticated, signOut } = useAuth();
+  const { authToken, signOut } = useAuth();
   const { t } = useTranslation();
   const { screenWidth } = useViewport();
 
-  if (!isAuthenticated) {
+  if (!authToken) {
     return (
       <NavbarStyles>
         <NavLink path={HOME_PAGE_ROUTE}>
