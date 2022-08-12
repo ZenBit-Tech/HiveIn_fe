@@ -16,6 +16,7 @@ import {
   SETTINGS_ROUTE,
   PROFILE_ROUTE,
   SIGN_UP_ROUTE,
+  LOGIN_ROUTE,
 } from "utils/routeConsts";
 
 function Navbar() {
@@ -54,6 +55,7 @@ function Navbar() {
         {screenWidth < mobileScreenSize ? <MenuDrawer /> : ""}
       </NavBarButtons>
       <NavLink path={SIGN_UP_ROUTE}>{t("SignUp.title")}</NavLink>
+      <NavLink path={LOGIN_ROUTE}>{t("Login")}</NavLink>
     </NavbarStyles>
   );
 }
