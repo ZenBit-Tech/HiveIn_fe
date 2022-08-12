@@ -2,9 +2,9 @@ import { Navigate } from "react-router-dom";
 import useAuth from "hooks/useAuth";
 
 function SignedInRouteBlocker({ children }: { children: JSX.Element }) {
-  const { email } = useAuth();
+  const { isAuthenticated } = useAuth();
 
-  if (email) {
+  if (isAuthenticated) {
     return <Navigate to="/" replace />;
   }
 
