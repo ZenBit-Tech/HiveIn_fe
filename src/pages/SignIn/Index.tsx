@@ -68,7 +68,12 @@ export default function SignIn() {
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <S.InputContainer>
             <Field label="Email or username" control={control} name="email" />
-            <Field label="Password" control={control} name="password" />
+            <Field
+              type="password"
+              label="Password"
+              control={control}
+              name="password"
+            />
             <Text style={{ color: PRIMARY, cursor: "pointer" }}>
               {t("SignIn.forgotPass")}
             </Text>

@@ -49,11 +49,17 @@ export default function SignUp() {
         </div>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <Field label="Email" control={control} name="email" />
-          <Field label="Create a password" control={control} name="password" />
+          <Field
+            label="Create a password"
+            type="password"
+            control={control}
+            name="password"
+          />
           <Field
             label="Confirm password"
             control={control}
             name="passwordConfirm"
+            type="password"
           />
           <Button
             style={{ width: "50%", height: "50px", fontSize: "18px" }}
