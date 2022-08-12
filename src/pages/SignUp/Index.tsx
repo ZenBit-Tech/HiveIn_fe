@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import Field from "components/DefaultField/Index";
 import { COMPLETE_REGISTRATION_ROUTE } from "utils/routeConsts";
 import { useTranslation } from "react-i18next";
+import SignUpService from "services/user/signUp";
+import { toast } from "react-toastify";
 import S from "./style";
 import signUpSchema from "./schema";
 
@@ -22,9 +24,14 @@ export default function SignUp() {
     resolver: yupResolver(signUpSchema),
   });
 
-  function onSubmit(evt: SignUpForm) {
+  async function onSubmit({ email, password }: SignUpForm) {
+    const response = await SignUpService({ email, password });
+    if (!response) {
+      toast.error("An error ocurred");
+      return;
+    }
+    toast.success("Successful Sign up");
     navigate(COMPLETE_REGISTRATION_ROUTE);
-    return evt;
   }
 
   const { t } = useTranslation();

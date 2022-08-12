@@ -2,6 +2,8 @@ import { Layout } from "antd";
 import React, { Suspense } from "react";
 import Footer from "components/footer/Footer";
 import Navbar from "components/navbar/Navbar";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 const Content = React.lazy(() => import("./components/content/Content"));
 
@@ -15,6 +17,7 @@ function App() {
           <Footer />
         </Layout>
       </Suspense>
+      <ToastContainer />
     </div>
   );
 }
