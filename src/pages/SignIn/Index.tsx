@@ -15,10 +15,11 @@ interface SignInForm extends FieldValues {
   password: string;
 }
 
+const { Title, Text } = Typography;
+
 export default function SignIn() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const { Title, Text } = Typography;
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const { control, handleSubmit } = useForm<SignInForm>({
     resolver: yupResolver(signInSchema),
