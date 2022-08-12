@@ -1,18 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuth, setSignIn, setSignOut } from "store/slices/userSlice";
-import { RootState } from "store/store";
+import { RootState, userPersistor } from "store/store";
 
 const useAuth = () => {
-  const { isAuthenticated, email, role } = useSelector(
+  const { isAuthenticated, token, email, role } = useSelector(
     (state: RootState) => state.user
   );
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
     if (token) {
       dispatch(
         setAuth({
@@ -20,32 +18,32 @@ const useAuth = () => {
         })
       );
     }
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   const signIn = () => {
     // Requesting token to the backend and saving it
-    // in localStorage
-    localStorage.setItem("token", JSON.stringify("token"));
-
+    // in localStorage with Redux Persist
     dispatch(
       setSignIn({
         isAuthenticated: true,
+        token: "test",
         email: "test",
         role: "test",
       })
     );
   };
 
-  const signOut = () => {
-    localStorage.removeItem("token");
-
+  const signOut = async () => {
     dispatch(
       setSignOut({
         isAuthenticated: false,
+        token: undefined,
         email: undefined,
         role: undefined,
       })
     );
+
+    await userPersistor.purge();
   };
 
   return { isAuthenticated, email, role, signIn, signOut };
