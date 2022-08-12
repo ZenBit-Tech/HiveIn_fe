@@ -1,30 +1,60 @@
 import {
-  DASHBOARD_PAGE_ROUTE,
+  COMPLETE_REGISTRATION_ROUTE,
   HOME_PAGE_ROUTE,
-  REDUX_TEST_PAGE_ROUTE,
-  SETTINGS_PAGE_ROUTE,
-} from "utils/consts";
+  SEARCH_WORK_ROUTE,
+  PROPOSALS_ROUTE,
+  MY_CONTRACTS_ROUTE,
+  SETTINGS_ROUTE,
+  CHAT_ROUTE,
+  PROFILE_ROUTE,
+  SIGN_UP_ROUTE,
+} from "utils/routeConsts";
 import Home from "pages/Home";
-import Dashboard from "pages/Dashboard";
-import ReduxTest from "pages/ReduxTest";
+import SignUp from "pages/SignUp/Index";
+import CompleteRegistration from "pages/CompleteRegistration/Index";
+import SearchWork from "pages/SearchWork";
+import Proposals from "pages/Proposals";
+import MyContracts from "pages/MyContracts";
+import Chat from "pages/Chat";
 import Settings from "pages/Settings/Settings";
+import Profile from "pages/Profile";
 
 const publicRoutes = [
   {
     path: HOME_PAGE_ROUTE,
-    Component: Home,
+    component: Home,
   },
   {
-    path: DASHBOARD_PAGE_ROUTE,
-    Component: Dashboard,
+    path: SEARCH_WORK_ROUTE,
+    component: SearchWork,
   },
   {
-    path: REDUX_TEST_PAGE_ROUTE,
-    Component: ReduxTest,
+    path: PROPOSALS_ROUTE,
+    component: Proposals,
   },
   {
-    path: SETTINGS_PAGE_ROUTE,
-    Component: Settings,
+    path: MY_CONTRACTS_ROUTE,
+    component: MyContracts,
+  },
+  {
+    path: CHAT_ROUTE,
+    component: Chat,
+  },
+  {
+    path: SETTINGS_ROUTE,
+    component: Settings,
+  },
+  {
+    path: PROFILE_ROUTE,
+    component: Profile,
+  },
+  {
+    path: SIGN_UP_ROUTE,
+    component: SignUp,
+  },
+  {
+    path: COMPLETE_REGISTRATION_ROUTE,
+    component: CompleteRegistration,
   },
 ];
 
