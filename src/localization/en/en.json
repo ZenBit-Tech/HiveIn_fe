@@ -43,6 +43,102 @@
   },
   "CompleteRegistration": {
     "helloWorld": "Hello complete registration page!"
+  },
+  "ProfileEditForm": {
+    "formTitle": "Profile",
+    "position": {
+      "title": "Position"
+    },
+    "category": {
+      "title": "Category",
+      "options": [
+        "Legal",
+        "IT",
+        "Sales",
+        "Finance",
+        "Construction",
+        "Accounting",
+        "Design",
+        "Security",
+        "Healthcare",
+        "Marketing"
+      ]
+    },
+    "rate": {
+      "title": "Rate",
+      "helperText": "Charge per hour"
+    },
+    "skills": {
+      "title": "Skills",
+      "skillsOptions": [
+        "Business analyst",
+        "Consulting",
+        "Estimate",
+        "Recruiting",
+        "SMM",
+        "Copyrighting",
+        "UI/UX",
+        "Quality control",
+        "Taxation",
+        "Coaching",
+        "Full stack",
+        "Administration",
+        "Communication",
+        "Java Script",
+        "QA automation",
+        "ReactJS",
+        "Python",
+        "Game dev",
+        "Flutter",
+        "Node.js",
+        "DevOps",
+        "Scrum master",
+        "Agile coach",
+        "Project manager"
+      ]
+    },
+    "englishLevel": {
+      "title": "English level",
+      "options": [
+        "Pre-Intermediate",
+        "Intermediate",
+        "Upper-Intermediate"
+      ]
+    },
+    "description": {
+      "title": "Description",
+      "helperText": "Input 30-50 words"
+    },
+    "education": {
+      "title": "Education",
+      "helperTextPlace": "School / University",
+      "helperTextPosition": "Degree",
+      "helperTextCity": "City",
+      "helperTextDescription": "Description",
+      "helperTextDateStart": "Start date",
+      "helperTextDateEnd": "End Date"
+    },
+    "experience": {
+      "title": "Experience",
+      "helperTextPlace": "Employer",
+      "helperTextPosition": "Job title",
+      "helperTextCity": "City",
+      "helperTextDescription": "Description",
+      "helperTextDateStart": "Start date",
+      "helperTextDateEnd": "End Date"
+    }
+  },
+  "profileFormErrorMessages": {
+    "positionEmpty": "enter position",
+    "categoryNotChosen": "choose category",
+    "rateSmallerThenZero": "should be greater than 0",
+    "skillsNotChosen": "select at least 3 options",
+    "englishLevelNotChosen": "choose your english level",
+    "descriptionEmpty": "write short description"
+  },
+  "profileEditFormButtonsNames": {
+    "submit": "Save changes",
+    "addEducation": "+ add education",
+    "addEmployment": "+ add employment"
   }
-  
 }

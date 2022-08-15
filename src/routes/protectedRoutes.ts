@@ -3,7 +3,7 @@ import MyContracts from "pages/MyContracts";
 import Profile from "pages/Profile";
 import Proposals from "pages/Proposals";
 import SearchWork from "pages/SearchWork";
-import Settings from "pages/Settings";
+import Settings from "pages/Settings/Settings";
 import { RoutesType } from "routes/publicRoutes";
 import {
   SEARCH_WORK_ROUTE,
