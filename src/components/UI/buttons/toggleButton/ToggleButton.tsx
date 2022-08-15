@@ -1,11 +1,11 @@
 import React from "react";
-import { IToggleButtonProps } from "components/UI/buttons/toggleButton/typesDef";
 import {
   ToggleButtonGroup,
   ToggleButton as ToggleButtonM,
 } from "@mui/material";
 import { Controller } from "react-hook-form";
 import { SErrorMessage } from "components/UI/textField/style";
+import { IToggleButtonProps } from "components/UI/buttons/toggleButton/typesDef";
 
 function ToggleButton(props: IToggleButtonProps) {
   const { options, control, formFieldName, errors } = props;

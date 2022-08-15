@@ -15,8 +15,9 @@ import i18next from "localization/en/en.json";
 
 function EducationColumn(props: IEducationColumnProps) {
   const { type, deletable, id, removeHandler, index, control } = props;
+  const educationColumnType = "education";
   const inputsProps =
-    type === "education"
+    type === educationColumnType
       ? {
           helperTextPlace: i18next.ProfileEditForm.education.helperTextPlace,
           helperTextPosition:
@@ -52,7 +53,7 @@ function EducationColumn(props: IEducationColumnProps) {
 
   return (
     <SWrapper>
-      {deletable ? (
+      {deletable && (
         <IconButton
           sx={deleteButtonSx}
           onClick={() => handleRemoveButton(id)}
@@ -60,7 +61,7 @@ function EducationColumn(props: IEducationColumnProps) {
         >
           <DeleteOutlineIcon />
         </IconButton>
-      ) : null}
+      )}
       <SDiv>
         <TextField
           maxLength={25}

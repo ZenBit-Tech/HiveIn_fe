@@ -2,6 +2,7 @@ import React from "react";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import TextFieldM from "@mui/material/TextField";
 import { Control, Controller } from "react-hook-form";
+import { INPUT_DATE_FORMAT_PRIMARY } from "utils/inputPropsConsts";
 
 function DatePicker(props: {
   label: string;
@@ -20,9 +21,9 @@ function DatePicker(props: {
       render={({ field }) => (
         <DesktopDatePicker
           label={label}
-          inputFormat="MM/dd/yyyy"
+          inputFormat={INPUT_DATE_FORMAT_PRIMARY}
           value={field.value}
-          onChange={(date) => field.onChange(date)}
+          onChange={field.onChange}
           renderInput={(params) => (
             <TextFieldM sx={{ width: "340px" }} size="small" {...params} />
           )}

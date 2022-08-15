@@ -24,8 +24,11 @@ function TextField(props: ITextFieldProps) {
     control,
     errors,
   } = props;
+
+  const inputNumberType = "number";
+
   const endAdornment =
-    type === "number" ? (
+    type === inputNumberType ? (
       <InputAdornment position="end">$</InputAdornment>
     ) : undefined;
 

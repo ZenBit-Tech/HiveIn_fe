@@ -97,23 +97,34 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
       <SkillsLayout errors={errors} control={control} options={skillsOptions} />
     ) : null;
 
+  const elementTypes: { [propName: string]: typeof element } = {
+    textInput: "textInput",
+    numberInput: "numberInput",
+    textarea: "textarea",
+    select: "select",
+    toggleButton: "toggleButton",
+    educationColumn: "educationColumn",
+    experienceColumn: "experienceColumn",
+    skillsLayout: "skillsLayout",
+  };
+
   const renderElement = (type: typeof element): JSX.Element | null => {
     switch (type) {
-      case "textInput":
+      case elementTypes.textInput:
         return renderTextInput();
-      case "numberInput":
+      case elementTypes.numberInput:
         return renderNumberInput();
-      case "textarea":
+      case elementTypes.textarea:
         return renderTextarea();
-      case "select":
+      case elementTypes.select:
         return renderSelect();
-      case "toggleButton":
+      case elementTypes.toggleButton:
         return renderToggleButton();
-      case "educationColumn":
+      case elementTypes.educationColumn:
         return renderEducationColumn();
-      case "experienceColumn":
+      case elementTypes.experienceColumn:
         return renderExperienceColumn();
-      case "skillsLayout":
+      case elementTypes.skillsLayout:
         return renderSkillsLayout();
       default:
         return null;
