@@ -1,21 +1,27 @@
-import api from "services/api";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+// import api from "services/api";
 
 interface SignUp {
   email: string;
   password: string;
 }
 
-const SignUpService = async ({ email, password }: SignUp) => {
-  try {
-    const response = await api.post("/auth/sign-up", {
-      email,
-      password,
-    });
-    if (!response) return false;
-    return response.data;
-  } catch {
-    return false;
-  }
-};
+const signUpApi = createApi({
+  reducerPath: "signUp",
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000" }),
+  endpoints: (builder) => ({
+    signUp: builder.mutation<boolean, SignUp>({
+      query: ({ email, password }) => ({
+        url: "/auth/sign-up",
+        method: "POST",
+        body: {
+          email,
+          password,
+        },
+      }),
+      transformResponse: (response: boolean) => response,
+    }),
+  }),
+});
 
-export default SignUpService;
+export default { useSignUpMutation: signUpApi.useSignUpMutation } = signUpApi;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { GoogleOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { FieldValues, useForm } from "react-hook-form";
@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import Field from "components/DefaultField/Index";
 import { COMPLETE_REGISTRATION_ROUTE } from "utils/routeConsts";
 import { useTranslation } from "react-i18next";
-import SignUpService from "services/user/signUp";
+import api from "services/user/signUp";
 import { toast } from "react-toastify";
 import S from "./style";
 import signUpSchema from "./schema";
@@ -23,17 +23,24 @@ export default function SignUp() {
   const { control, handleSubmit } = useForm<SignUpForm>({
     resolver: yupResolver(signUpSchema),
   });
+  const { useSignUpMutation } = api;
+  const [signUp, { isError, isSuccess, isLoading }] = useSignUpMutation();
 
-  async function onSubmit({ email, password }: SignUpForm) {
-    const response = await SignUpService({ email, password });
-    if (!response) {
+  useEffect(() => {
+    if (!isLoading && isError) {
       toast.error("An error ocurred");
       return;
     }
-    toast.success("Successful Sign up");
-    navigate(COMPLETE_REGISTRATION_ROUTE);
-  }
+    if (!isLoading && isSuccess) {
+      toast.success("Successful Sign up");
+      navigate(COMPLETE_REGISTRATION_ROUTE);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
 
+  async function onSubmit({ email, password }: SignUpForm) {
+    await signUp({ email, password });
+  }
   const { t } = useTranslation();
 
   return (
