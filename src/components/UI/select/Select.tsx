@@ -2,7 +2,7 @@ import React from "react";
 import { FormControl, MenuItem, Select as SelectM } from "@mui/material";
 import { ISelectProps } from "components/UI/select/typesDef";
 import { Controller } from "react-hook-form";
-import { SErrorMessage } from "../textField/style";
+import { SErrorMessage } from "components/UI/textField/style";
 
 function Select(props: ISelectProps) {
   const { options, control, formFieldName, errors } = props;

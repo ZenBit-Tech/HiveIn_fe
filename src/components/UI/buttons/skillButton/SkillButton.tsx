@@ -1,6 +1,6 @@
 import React, { MouseEventHandler, useState } from "react";
 import { Button } from "@mui/material";
-import { ISkillButtonProps } from "./typesDef";
+import { ISkillButtonProps } from "components/UI/buttons/skillButton/typesDef";
 
 function SkillButton({ text, append, remove }: ISkillButtonProps) {
   const [active, setActive] = useState<boolean>(false);
