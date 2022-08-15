@@ -1,6 +1,6 @@
 import { Control, FieldErrorsImpl } from "react-hook-form";
 
-export interface ISelectProps {
+export interface IToggleButtonProps {
   options: string[];
   control: Control;
   formFieldName: string;

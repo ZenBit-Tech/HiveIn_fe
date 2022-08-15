@@ -1,38 +1,42 @@
 import React from "react";
-import {
-  FormControl,
-  MenuItem,
-  Select as SelectM,
-  SelectChangeEvent,
-} from "@mui/material";
-import { IProps } from "components/UI/select/typesDef";
+import { FormControl, MenuItem, Select as SelectM } from "@mui/material";
+import { ISelectProps } from "components/UI/select/typesDef";
+import { Controller } from "react-hook-form";
+import { SErrorMessage } from "../textField/style";
 
-function Select(props: IProps) {
-  const { options } = props;
-  const [activeOption, setActiveOption] = React.useState("");
+function Select(props: ISelectProps) {
+  const { options, control, formFieldName, errors } = props;
   const sxProps = {
     "& legend": { display: "none" },
     "& fieldset": { top: 0 },
   };
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setActiveOption(event.target.value);
-  };
-
   return (
     <FormControl fullWidth>
-      <SelectM
-        sx={sxProps}
-        value={activeOption}
-        onChange={handleChange}
-        size="small"
-      >
-        {options.map((option) => (
-          <MenuItem key={option} value={option}>
-            {option}
-          </MenuItem>
-        ))}
-      </SelectM>
+      <Controller
+        name={formFieldName}
+        control={control}
+        defaultValue="Sales"
+        render={({ field }) => (
+          <SelectM
+            error={!!errors[`${formFieldName}`]?.message}
+            {...field}
+            sx={sxProps}
+            size="small"
+          >
+            {options.map((option) => (
+              <MenuItem key={option} value={option}>
+                {option}
+              </MenuItem>
+            ))}
+          </SelectM>
+        )}
+      />
+      {!!errors[`${formFieldName}`]?.message && (
+        <SErrorMessage>
+          {errors[`${formFieldName}`]?.message?.toString()}
+        </SErrorMessage>
+      )}
     </FormControl>
   );
 }

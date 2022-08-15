@@ -1,13 +1,32 @@
-export interface IProps {
+import {
+  Control,
+  DeepRequired,
+  FieldErrorsImpl,
+  FieldValues,
+} from "react-hook-form";
+
+export interface ILayoutElementWithoutControl {
   title: string;
   element:
     | "textInput"
-    | "select"
     | "numberInput"
+    | "textarea"
+    | "select"
     | "toggleButton"
     | "educationColumn"
-    | "experienceColumn";
+    | "experienceColumn"
+    | "skillsLayout";
+  containerWidth: "full" | "half";
+  formFieldName: string;
   selectOptions?: string[];
   toggleButtonOptions?: string[];
+  skillsOptions?: string[];
   helperText?: string;
+  maxLength?: number;
+}
+
+export interface ILayoutElementWithTitleProps
+  extends ILayoutElementWithoutControl {
+  control: Control;
+  errors: FieldErrorsImpl<DeepRequired<FieldValues>>;
 }

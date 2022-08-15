@@ -1,31 +1,81 @@
 import React from "react";
+import { Controller } from "react-hook-form";
 import {
   FormHelperText,
   InputAdornment,
   TextField as TextFieldM,
 } from "@mui/material";
-import { IProps } from "components/UI/textField/typesDef";
-import { sxProps, SWrapper } from "components/UI/textField/style";
+import { ITextFieldProps } from "components/UI/textField/typesDef";
+import {
+  sxProps,
+  SWrapper,
+  SErrorMessage,
+} from "components/UI/textField/style";
 
-function TextField(props: IProps) {
-  const { type, width, helperText } = props;
-  const inputProps =
+function TextField(props: ITextFieldProps) {
+  const {
+    type,
+    width,
+    helperText,
+    multiline,
+    rows,
+    maxLength,
+    formFieldName,
+    control,
+    errors,
+  } = props;
+  const endAdornment =
     type === "number" ? (
       <InputAdornment position="end">$</InputAdornment>
     ) : undefined;
 
   return (
     <SWrapper width={width}>
-      <TextFieldM
-        fullWidth
-        type={type}
-        size="small"
-        sx={sxProps}
-        InputProps={{
-          endAdornment: inputProps,
-        }}
-      />
+      {formFieldName && control ? (
+        <Controller
+          name={formFieldName}
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <TextFieldM
+              {...field}
+              error={!!errors?.[`${formFieldName}`]?.message}
+              fullWidth
+              multiline={multiline}
+              rows={rows}
+              type={type}
+              size="small"
+              sx={sxProps}
+              InputProps={{
+                endAdornment,
+                rows,
+                inputProps: { maxLength },
+              }}
+            />
+          )}
+        />
+      ) : (
+        <TextFieldM
+          error={!!errors?.[`${formFieldName}`]?.message}
+          fullWidth
+          multiline={multiline}
+          rows={rows}
+          type={type}
+          size="small"
+          sx={sxProps}
+          InputProps={{
+            endAdornment,
+            rows,
+            inputProps: { maxLength },
+          }}
+        />
+      )}
       {!!helperText && <FormHelperText>{helperText}</FormHelperText>}
+      {!!errors?.[`${formFieldName}`]?.message && (
+        <SErrorMessage>
+          {errors?.[`${formFieldName}`]?.message?.toString()}
+        </SErrorMessage>
+      )}
     </SWrapper>
   );
 }

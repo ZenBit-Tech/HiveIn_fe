@@ -1,28 +1,120 @@
 import React from "react";
-import { IProps } from "components/layoutElementWithTitle/typesDef";
+import { ILayoutElementWithTitleProps } from "components/layoutElementWithTitle/typesDef";
 import { SH, SDiv, SWrapper } from "components/layoutElementWithTitle/style";
 import TextField from "components/UI/textField/TextField";
 import Select from "components/UI/select/Select";
-import ToggleButton from "components/UI/toggleButton/ToggleButton";
+import ToggleButton from "components/UI/buttons/toggleButton/ToggleButton";
+import EducationLayout from "components/educationLayout/EducationLayout";
+import SkillsLayout from "components/skillsLayout/SkillsLayout";
 
-function LayoutElementWithTitle(props: IProps) {
-  const { element, title, selectOptions, helperText, toggleButtonOptions } =
-    props;
+function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
+  const {
+    element,
+    title,
+    formFieldName,
+    containerWidth,
+    selectOptions,
+    helperText,
+    toggleButtonOptions,
+    maxLength,
+    skillsOptions,
+    control,
+    errors,
+  } = props;
 
-  const renderElement = (type: typeof element) => {
+  const renderTextInput = () => (
+    <TextField
+      errors={errors}
+      control={control}
+      formFieldName={formFieldName}
+      maxLength={maxLength}
+      multiline={false}
+      width="full"
+      type="text"
+    />
+  );
+
+  const renderNumberInput = () => (
+    <TextField
+      errors={errors}
+      control={control}
+      formFieldName={formFieldName}
+      multiline={false}
+      width="half"
+      type="number"
+      helperText={helperText}
+    />
+  );
+
+  const renderTextarea = () => (
+    <TextField
+      errors={errors}
+      control={control}
+      formFieldName={formFieldName}
+      maxLength={maxLength}
+      rows={2}
+      multiline
+      width="full"
+      type="text"
+      helperText={helperText}
+    />
+  );
+
+  const renderSelect = () =>
+    selectOptions ? (
+      <Select
+        errors={errors}
+        formFieldName={formFieldName}
+        control={control}
+        options={selectOptions}
+      />
+    ) : null;
+
+  const renderToggleButton = () =>
+    toggleButtonOptions ? (
+      <ToggleButton
+        formFieldName={formFieldName}
+        control={control}
+        options={toggleButtonOptions}
+        errors={errors}
+      />
+    ) : null;
+
+  const renderEducationColumn = () => (
+    <EducationLayout control={control} maxCountOfColumns={4} type="education" />
+  );
+
+  const renderExperienceColumn = () => (
+    <EducationLayout
+      control={control}
+      maxCountOfColumns={8}
+      type="experience"
+    />
+  );
+
+  const renderSkillsLayout = () =>
+    skillsOptions ? (
+      <SkillsLayout errors={errors} control={control} options={skillsOptions} />
+    ) : null;
+
+  const renderElement = (type: typeof element): JSX.Element | null => {
     switch (type) {
       case "textInput":
-        return <TextField width="full" type="text" />;
-      case "select":
-        return !!selectOptions && <Select options={selectOptions} />;
+        return renderTextInput();
       case "numberInput":
-        return <TextField width="half" type="number" helperText={helperText} />;
+        return renderNumberInput();
+      case "textarea":
+        return renderTextarea();
+      case "select":
+        return renderSelect();
       case "toggleButton":
-        return (
-          !!toggleButtonOptions && (
-            <ToggleButton options={toggleButtonOptions} />
-          )
-        );
+        return renderToggleButton();
+      case "educationColumn":
+        return renderEducationColumn();
+      case "experienceColumn":
+        return renderExperienceColumn();
+      case "skillsLayout":
+        return renderSkillsLayout();
       default:
         return null;
     }
@@ -31,7 +123,7 @@ function LayoutElementWithTitle(props: IProps) {
   return (
     <SWrapper>
       <SH>{title}</SH>
-      <SDiv>{renderElement(element)}</SDiv>
+      <SDiv width={containerWidth}>{renderElement(element)}</SDiv>
     </SWrapper>
   );
 }
