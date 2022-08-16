@@ -13,18 +13,20 @@ const Content = React.lazy(() => import("./components/content/Content"));
 
 function App() {
   return (
-    <Suspense fallback={<p>Loading...</p>}>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={userPersistor}>
-          <Layout style={{ minHeight: "100vh" }}>
-            <Navbar />
-            <Content />
-            <Footer />
-          </Layout>
-        </PersistGate>
-      </Provider>
-    </Suspense>
+    <>
+      <Suspense fallback={<p>Loading...</p>}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={userPersistor}>
+            <Layout style={{ minHeight: "100vh" }}>
+              <Navbar />
+              <Content />
+              <Footer />
+            </Layout>
+          </PersistGate>
+        </Provider>
+      </Suspense>
       <ToastContainer />
+    </>
   );
 }
 
