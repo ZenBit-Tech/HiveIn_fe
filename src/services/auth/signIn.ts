@@ -1,26 +1,30 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-interface SignUp {
+interface SignIn {
   email: string;
   password: string;
 }
 
-const userApi = createApi({
-  reducerPath: "signUp",
+interface SignInResponse {
+  accessToken: string;
+}
+
+const authApi = createApi({
+  reducerPath: "signIn",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000" }),
   endpoints: (builder) => ({
-    signUp: builder.mutation<boolean, SignUp>({
+    signIn: builder.mutation<SignInResponse, SignIn>({
       query: ({ email, password }) => ({
-        url: "/auth/sign-up",
+        url: "/auth/sign-in",
         method: "POST",
         body: {
           email,
           password,
         },
       }),
-      transformResponse: (response: boolean) => response,
+      transformResponse: (response: SignInResponse) => response,
     }),
   }),
 });
 
-export default { useSignUpMutation: userApi.useSignUpMutation } = userApi;
+export default { useSignInMutation: authApi.useSignInMutation } = authApi;

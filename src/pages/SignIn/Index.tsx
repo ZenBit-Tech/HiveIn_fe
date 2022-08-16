@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Typography, Modal } from "antd";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Field from "components/DefaultField/Index";
 import { useTranslation } from "react-i18next";
 import { PRIMARY } from "utils/colorConsts";
 import { PROFILE_ROUTE, SIGN_UP_ROUTE } from "utils/routeConsts";
 import useAuth from "hooks/useAuth";
+import signInService from "services/auth/signIn";
 import S from "./style";
 import signInSchema from "./schema";
 
@@ -18,24 +19,20 @@ interface SignInForm extends FieldValues {
 
 const { Title, Text } = Typography;
 
-type LocationProps = {
-  state: {
-    from: Location;
-  };
-};
-
 export default function SignIn() {
   const { signIn } = useAuth();
   const { t } = useTranslation();
 
-  const location = useLocation() as LocationProps;
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname || "/";
-
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const { control, handleSubmit } = useForm<SignInForm>({
     resolver: yupResolver(signInSchema),
   });
+
+  const { useSignInMutation } = signInService;
+
+  const [runSignIn, { isError, isLoading, isSuccess, data }] =
+    useSignInMutation();
 
   const handleCloseErrorModal = () => {
     setIsErrorModalOpen(false);
@@ -47,10 +44,6 @@ export default function SignIn() {
       onOk: () => navigate(PROFILE_ROUTE),
       centered: true,
     });
-
-    signIn();
-    // Navigate to the page the user was before being disconnected
-    navigate(from, { replace: true });
   };
 
   const error = () => {
@@ -66,10 +59,19 @@ export default function SignIn() {
     navigate(SIGN_UP_ROUTE);
   };
 
-  function onSubmit(evt: SignInForm) {
-    success();
-    error();
-    return evt;
+  useEffect(() => {
+    if (!isLoading && isError) {
+      error();
+    }
+    if (!isLoading && isSuccess) {
+      signIn(String(data?.accessToken));
+      success();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
+
+  function onSubmit({ email, password }: SignInForm) {
+    runSignIn({ email, password });
   }
 
   return (
