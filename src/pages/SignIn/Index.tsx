@@ -70,8 +70,8 @@ export default function SignIn() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
-  function onSubmit({ email, password }: SignInForm) {
-    runSignIn({ email, password });
+  async function onSubmit({ email, password }: SignInForm) {
+    await runSignIn({ email, password });
   }
 
   return (

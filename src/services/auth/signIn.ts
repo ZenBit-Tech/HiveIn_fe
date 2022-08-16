@@ -11,7 +11,7 @@ interface SignInResponse {
 
 const authApi = createApi({
   reducerPath: "signIn",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000" }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
   endpoints: (builder) => ({
     signIn: builder.mutation<SignInResponse, SignIn>({
       query: ({ email, password }) => ({

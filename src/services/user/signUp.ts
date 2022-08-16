@@ -7,7 +7,7 @@ interface SignUp {
 
 const userApi = createApi({
   reducerPath: "signUp",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000" }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
   endpoints: (builder) => ({
     signUp: builder.mutation<boolean, SignUp>({
       query: ({ email, password }) => ({
