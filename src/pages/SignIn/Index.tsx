@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { PRIMARY } from "utils/colorConsts";
 import { PROFILE_ROUTE, SIGN_UP_ROUTE } from "utils/routeConsts";
 import useAuth from "hooks/useAuth";
+import GoogleAuthButton from "components/UI/googleAuthButton/GoogleAuthButton";
 import S from "./style";
 import signInSchema from "./schema";
 
@@ -80,6 +81,7 @@ export default function SignIn() {
         </Title>
       </S.TextsBox>
       <S.FormBox>
+        <GoogleAuthButton>{t("SignIn.signInGoogle")}</GoogleAuthButton>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <S.InputContainer>
             <Field label="Email or username" control={control} name="email" />

@@ -1,5 +1,4 @@
 import React from "react";
-import { GoogleOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Field from "components/DefaultField/Index";
 import { COMPLETE_REGISTRATION_ROUTE } from "utils/routeConsts";
 import { useTranslation } from "react-i18next";
+import GoogleAuthButton from "components/UI/googleAuthButton/GoogleAuthButton";
 import S from "./style";
 import signUpSchema from "./schema";
 
@@ -32,9 +32,8 @@ export default function SignUp() {
   return (
     <S.Container>
       <S.FormBox>
-        <Button type="primary" icon={<GoogleOutlined />}>
-          {t("SignUp.signUpGoogle")}
-        </Button>
+        <GoogleAuthButton>{t("SignUp.signUpGoogle")}</GoogleAuthButton>
+
         <div style={{ textAlign: "center" }}>
           <span>{t("SignUp.or")}</span>
           <br />
