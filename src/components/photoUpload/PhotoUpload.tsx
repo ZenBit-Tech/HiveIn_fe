@@ -18,10 +18,8 @@ import {
 } from "utils/photoUploadConsts";
 
 function PhotoUpload() {
-  const [isLoading, setIsLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>(
-    "https://pbs.twimg.com/profile_images/1541920820204797952/RaMNiqHx_400x400.jpg"
-  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const { t } = useTranslation();
 
   const getBase64 = (img: RcFile, callback: (url: string) => void) => {
