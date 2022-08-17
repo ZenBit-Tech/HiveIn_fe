@@ -6,12 +6,14 @@ interface UserState {
   authToken: string | undefined;
   email: string | undefined;
   role: "freelancer" | "client" | undefined;
+  id: number | undefined;
 }
 
 const initialState: UserState = {
   authToken: undefined,
   email: undefined,
   role: undefined,
+  id: undefined,
 };
 
 const userSlice = createSlice({
@@ -19,8 +21,8 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setAuthToken: (state, action) => {
-      const { authToken } = action.payload;
-      return { ...state, authToken };
+      const { authToken, email, id } = action.payload;
+      return { ...state, authToken, email, id };
     },
     setSignIn: (state, action) => {
       return { ...state, ...action.payload };

@@ -5,8 +5,10 @@ interface SignIn {
   password: string;
 }
 
-interface SignInResponse {
-  accessToken: string;
+export interface SignInResponse {
+  token: string;
+  email: string;
+  id: number;
 }
 
 const authApi = createApi({
@@ -24,7 +26,15 @@ const authApi = createApi({
       }),
       transformResponse: (response: SignInResponse) => response,
     }),
+    googleOAuthSignIn: builder.query<SignInResponse, void>({
+      query: () => ({
+        url: "/auth/google/success",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export default { useSignInMutation: authApi.useSignInMutation } = authApi;
+export const { useSignInMutation, useGoogleOAuthSignInQuery } = authApi;
+
+export default authApi;

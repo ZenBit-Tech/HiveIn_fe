@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Field from "components/DefaultField/Index";
 import { useTranslation } from "react-i18next";
 import useAuth from "hooks/useAuth";
-import signInService from "services/auth/signIn";
+import { useSignInMutation } from "services/auth/signIn";
 import GoogleAuthButton from "components/UI/googleAuthButton/GoogleAuthButton";
 import { PROFILE_ROUTE, SIGN_UP_ROUTE } from "utils/routeConsts";
 import { PRIMARY } from "utils/colorConsts";
@@ -18,27 +18,18 @@ interface SignInForm extends FieldValues {
   password: string;
 }
 
-// type LocationProps = {
-//   state: {
-//     from: Location;
-//   };
-// };
 const { Title, Text } = Typography;
 
 export default function SignIn() {
   const { signIn } = useAuth();
   const { t } = useTranslation();
 
-  // const location = useLocation() as LocationProps;
   const navigate = useNavigate();
-  // const from = location.state?.from?.pathname || "/";
 
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const { control, handleSubmit } = useForm<SignInForm>({
     resolver: yupResolver(signInSchema),
   });
-
-  const { useSignInMutation } = signInService;
 
   const [runSignIn, { isError, isLoading, isSuccess, data }] =
     useSignInMutation();
@@ -73,7 +64,8 @@ export default function SignIn() {
       error();
     }
     if (!isLoading && isSuccess) {
-      signIn(String(data?.accessToken));
+      console.log(data);
+      signIn(data!);
       success();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

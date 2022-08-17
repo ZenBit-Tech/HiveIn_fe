@@ -40,7 +40,8 @@
     "forgotPass": "Forgot your password?",
     "register": "Register now",
     "successLogin": "You have successfully logged in",
-    "errorLogin": "Invalid email and/or password"
+    "errorLogin": "Invalid email and/or password",
+    "errorGoogleOAuth": "Server error, please try again"
   },
   "CompleteRegistration": {
     "helloWorld": "Hello complete registration page!"
