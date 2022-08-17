@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import useAuth from "hooks/useAuth";
-import { useGoogleOAuthSignInQuery } from "services/auth/signIn";
+import { useGoogleOAuthSignInQuery } from "services/auth/signInAPI";
 import { Modal } from "antd";
 import { HOME_PAGE_ROUTE } from "utils/routeConsts";
 import { useNavigate } from "react-router-dom";

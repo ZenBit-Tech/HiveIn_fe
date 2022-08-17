@@ -9,6 +9,7 @@ export interface SignInResponse {
   token: string;
   email: string;
   id: number;
+  role: "freelancer" | "client" | undefined;
 }
 
 const authApi = createApi({

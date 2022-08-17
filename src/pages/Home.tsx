@@ -1,6 +1,6 @@
 import useAuth from "hooks/useAuth";
 import { useEffect } from "react";
-import { useGoogleOAuthSignInQuery } from "services/auth/signIn";
+import { useGoogleOAuthSignInQuery } from "services/auth/signInAPI";
 
 function Home() {
   const { signIn } = useAuth();

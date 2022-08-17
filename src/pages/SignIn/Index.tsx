@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Field from "components/DefaultField/Index";
 import { useTranslation } from "react-i18next";
 import useAuth from "hooks/useAuth";
-import { useSignInMutation } from "services/auth/signIn";
+import { useSignInMutation } from "services/auth/signInAPI";
 import GoogleAuthButton from "components/UI/googleAuthButton/GoogleAuthButton";
 import { PROFILE_ROUTE, SIGN_UP_ROUTE } from "utils/routeConsts";
 import { PRIMARY } from "utils/colorConsts";
@@ -64,7 +64,6 @@ export default function SignIn() {
       error();
     }
     if (!isLoading && isSuccess) {
-      console.log(data);
       signIn(data!);
       success();
     }

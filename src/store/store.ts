@@ -8,8 +8,8 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import signUpApi from "services/user/signUp";
-import authApi from "services/auth/signIn";
+import signUpApi from "services/user/signUpAPI";
+import authApi from "services/auth/signInAPI";
 
 import counterReducer from "store/slices/counterSlice";
 import userPersistedReducer from "store/slices/userSlice";

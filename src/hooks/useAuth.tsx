@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { SignInResponse } from "services/auth/signIn";
+import { SignInResponse } from "services/auth/signInAPI";
 import { setSignIn, setSignOut } from "store/slices/userSlice";
 import { RootState, userPersistor } from "store/store";
 
 const useAuth = () => {
-  const { authToken, email, id } = useSelector(
+  const { authToken, email, id, role } = useSelector(
     (state: RootState) => state.user
   );
 
@@ -19,6 +19,7 @@ const useAuth = () => {
         authToken: res.token,
         email: res.email,
         id: res.id,
+        role: res.role,
       })
     );
   };
@@ -29,13 +30,14 @@ const useAuth = () => {
         authToken: undefined,
         email: undefined,
         id: undefined,
+        role: undefined,
       })
     );
 
     await userPersistor.purge();
   };
 
-  return { authToken, email, id, signIn, signOut };
+  return { authToken, email, id, role, signIn, signOut };
 };
 
 export default useAuth;
