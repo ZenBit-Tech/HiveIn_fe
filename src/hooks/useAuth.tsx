@@ -9,12 +9,12 @@ const useAuth = () => {
 
   const dispatch = useDispatch();
 
-  const signIn = () => {
+  const signIn = (token: string) => {
     // Requesting authToken to the backend and saving it
     // in localStorage with Redux Persist
     dispatch(
       setSignIn({
-        authToken: "test",
+        authToken: token,
         email: "test",
         role: "test",
       })

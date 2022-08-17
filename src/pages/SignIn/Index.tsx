@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Typography, Modal } from "antd";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Field from "components/DefaultField/Index";
 import { useTranslation } from "react-i18next";
-import { PRIMARY } from "utils/colorConsts";
-import { PROFILE_ROUTE, SIGN_UP_ROUTE } from "utils/routeConsts";
 import useAuth from "hooks/useAuth";
+import signInService from "services/auth/signIn";
 import GoogleAuthButton from "components/UI/googleAuthButton/GoogleAuthButton";
+import { PROFILE_ROUTE, SIGN_UP_ROUTE } from "utils/routeConsts";
+import { PRIMARY } from "utils/colorConsts";
 import S from "./style";
 import signInSchema from "./schema";
 
@@ -17,25 +18,30 @@ interface SignInForm extends FieldValues {
   password: string;
 }
 
-type LocationProps = {
-  state: {
-    from: Location;
-  };
-};
+// type LocationProps = {
+//   state: {
+//     from: Location;
+//   };
+// };
+const { Title, Text } = Typography;
 
 export default function SignIn() {
   const { signIn } = useAuth();
   const { t } = useTranslation();
 
-  const location = useLocation() as LocationProps;
+  // const location = useLocation() as LocationProps;
   const navigate = useNavigate();
-  const from = location.state?.from?.pathname || "/";
+  // const from = location.state?.from?.pathname || "/";
 
-  const { Title, Text } = Typography;
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const { control, handleSubmit } = useForm<SignInForm>({
     resolver: yupResolver(signInSchema),
   });
+
+  const { useSignInMutation } = signInService;
+
+  const [runSignIn, { isError, isLoading, isSuccess, data }] =
+    useSignInMutation();
 
   const handleCloseErrorModal = () => {
     setIsErrorModalOpen(false);
@@ -47,10 +53,6 @@ export default function SignIn() {
       onOk: () => navigate(PROFILE_ROUTE),
       centered: true,
     });
-
-    signIn();
-    // Navigate to the page the user was before being disconnected
-    navigate(from, { replace: true });
   };
 
   const error = () => {
@@ -66,10 +68,19 @@ export default function SignIn() {
     navigate(SIGN_UP_ROUTE);
   };
 
-  function onSubmit(evt: SignInForm) {
-    success();
-    error();
-    return evt;
+  useEffect(() => {
+    if (!isLoading && isError) {
+      error();
+    }
+    if (!isLoading && isSuccess) {
+      signIn(String(data?.accessToken));
+      success();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
+
+  async function onSubmit({ email, password }: SignInForm) {
+    await runSignIn({ email, password });
   }
 
   return (
@@ -85,7 +96,12 @@ export default function SignIn() {
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <S.InputContainer>
             <Field label="Email or username" control={control} name="email" />
-            <Field label="Password" control={control} name="password" />
+            <Field
+              type="password"
+              label="Password"
+              control={control}
+              name="password"
+            />
             <Text style={{ color: PRIMARY, cursor: "pointer" }}>
               {t("SignIn.forgotPass")}
             </Text>
