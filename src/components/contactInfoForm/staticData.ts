@@ -1,5 +1,5 @@
 import i18n from "localization/en/en.json";
-import { ILayoutElementWithoutControl } from "../layoutElementWithTitle/typesDef";
+import { ILayoutElementWithoutControl } from "components/layoutElementWithTitle/typesDef";
 
 const propsDataCollection: ILayoutElementWithoutControl[] = [
   {

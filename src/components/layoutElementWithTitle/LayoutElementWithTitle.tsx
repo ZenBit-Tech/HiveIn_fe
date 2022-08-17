@@ -6,7 +6,7 @@ import Select from "components/UI/select/Select";
 import ToggleButton from "components/UI/buttons/toggleButton/ToggleButton";
 import EducationLayout from "components/educationLayout/EducationLayout";
 import SkillsLayout from "components/skillsLayout/SkillsLayout";
-import PhoneInput from "../UI/phoneInput/PhoneInput";
+import PhoneInput from "components/UI/phoneInput/PhoneInput";
 
 function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
   const {

@@ -3,6 +3,7 @@ import IconButton from "@mui/joy/IconButton";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import i18next from "localization/en/en.json";
 import TextField from "components/UI/textField/TextField";
 import {
   SDiv,
@@ -11,7 +12,6 @@ import {
 } from "components/educationColumn/style";
 import { IEducationColumnProps } from "components/educationColumn/typesDef";
 import DatePicker from "components/UI/datePicker/DatePicker";
-import i18next from "localization/en/en.json";
 
 function EducationColumn(props: IEducationColumnProps) {
   const { type, deletable, id, removeHandler, index, control } = props;

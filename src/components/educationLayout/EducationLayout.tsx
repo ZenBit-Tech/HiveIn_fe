@@ -2,9 +2,9 @@ import React, { MouseEventHandler, useState } from "react";
 import { Button } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 import { useFieldArray, Controller } from "react-hook-form";
+import i18next from "localization/en/en.json";
 import EducationColumn from "components/educationColumn/EducationColumn";
 import { IEducationLayoutProps } from "components/educationLayout/typesDef";
-import i18next from "localization/en/en.json";
 
 function EducationLayout({
   type,

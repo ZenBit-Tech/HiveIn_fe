@@ -1,10 +1,10 @@
 import React from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import i18next from "localization/en/en.json";
 import propsDataCollection from "components/profileEditForm/staticData";
 import LayoutElementWithTitle from "components/layoutElementWithTitle/LayoutElementWithTitle";
 import schema from "validation/profileEditFormValidationSchema";
-import i18next from "localization/en/en.json";
 import FormSubmitButton from "components/UI/buttons/formSubmitButton/FormSubmitButton";
 import { SButtonWrapper } from "components/profileEditForm/styles";
 
