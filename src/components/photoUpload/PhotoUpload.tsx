@@ -6,6 +6,7 @@ import type {
   UploadProps,
 } from "antd/es/upload/interface";
 import { message, Upload } from "antd";
+import ImgCrop from "antd-img-crop";
 import { LoadingOutlined, UserOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import {
@@ -18,7 +19,9 @@ import {
 
 function PhotoUpload() {
   const [isLoading, setIsLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>();
+  const [imageUrl, setImageUrl] = useState<string>(
+    "https://pbs.twimg.com/profile_images/1541920820204797952/RaMNiqHx_400x400.jpg"
+  );
   const { t } = useTranslation();
 
   const getBase64 = (img: RcFile, callback: (url: string) => void) => {
@@ -52,22 +55,24 @@ function PhotoUpload() {
   return (
     <>
       <h2>{t("profileUploadPhoto.title")}</h2>
-      <Upload
-        name="avatar"
-        listType="picture-card"
-        maxCount={1}
-        beforeUpload={beforeUpload}
-        onChange={handleChange}
-      >
-        {imageUrl ? (
-          <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
-        ) : (
-          <div>
-            {isLoading ? <LoadingOutlined /> : <UserOutlined />}
-            <p>{t("profileUploadPhoto.input")}</p>
-          </div>
-        )}
-      </Upload>
+      <ImgCrop>
+        <Upload
+          name="avatar"
+          listType="picture-card"
+          maxCount={1}
+          beforeUpload={beforeUpload}
+          onChange={handleChange}
+        >
+          {imageUrl ? (
+            <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
+          ) : (
+            <div>
+              {isLoading ? <LoadingOutlined /> : <UserOutlined />}
+              <p>{t("profileUploadPhoto.input")}</p>
+            </div>
+          )}
+        </Upload>
+      </ImgCrop>
     </>
   );
 }
