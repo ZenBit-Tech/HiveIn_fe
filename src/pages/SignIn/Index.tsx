@@ -6,7 +6,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Field from "components/DefaultField/Index";
 import { useTranslation } from "react-i18next";
 import { PRIMARY } from "utils/colorConsts";
-import { PROFILE_ROUTE, SIGN_UP_ROUTE } from "utils/routeConsts";
+import {
+  FORGOT_PASSWORD_ROUTE,
+  PROFILE_ROUTE,
+  SIGN_UP_ROUTE,
+} from "utils/routeConsts";
 import useAuth from "hooks/useAuth";
 import S from "./style";
 import signInSchema from "./schema";
@@ -65,6 +69,11 @@ export default function SignIn() {
     navigate(SIGN_UP_ROUTE);
   };
 
+  const goToForgotPassword = () => {
+    window.scroll(0, 0);
+    navigate(FORGOT_PASSWORD_ROUTE);
+  };
+
   function onSubmit(evt: SignInForm) {
     success();
     error();
@@ -84,7 +93,10 @@ export default function SignIn() {
           <S.InputContainer>
             <Field label="Email or username" control={control} name="email" />
             <Field label="Password" control={control} name="password" />
-            <Text style={{ color: PRIMARY, cursor: "pointer" }}>
+            <Text
+              style={{ color: PRIMARY, cursor: "pointer" }}
+              onClick={goToForgotPassword}
+            >
               {t("SignIn.forgotPass")}
             </Text>
           </S.InputContainer>

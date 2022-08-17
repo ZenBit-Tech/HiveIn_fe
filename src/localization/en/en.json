@@ -41,6 +41,14 @@
     "successLogin": "You have successfully logged in",
     "errorLogin": "Invalid email and/or password"
   },
+  "ForgotPassword": {
+    "title": "Forgot your password?",
+    "subtitle" : "Enter your email. We'll email instructions on how to reset your password.",
+    "resetPassword": "Reset password",
+    "rememberPassword": "Just remembered password?",
+    "signIn": "Sign In",
+    "checkMailBox" : "We send you a recovery e-mail with instructions. Please check your e-mail."
+  },
   "CompleteRegistration": {
     "helloWorld": "Hello complete registration page!"
   },
