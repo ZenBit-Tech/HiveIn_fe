@@ -140,5 +140,12 @@
     "submit": "Save changes",
     "addEducation": "+ add education",
     "addEmployment": "+ add employment"
+  },
+  "profileUploadPhoto": {
+    "title": "Profile photo",
+    "input": "Click to upload your photo"
+  },
+  "profileUploadPhotoErrors": {
+    "pngOrJpeg": "You can only upload JPG/PNG file"
   }
 }
