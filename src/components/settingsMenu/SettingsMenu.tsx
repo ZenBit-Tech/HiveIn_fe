@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import i18next from "localization/en/en.json";
 import { SETTINGS_CONTACT_INFO_ROUTE, SETTINGS_ROUTE } from "utils/routeConsts";
 import { SButton } from "components/settingsMenu/styles";
-import { PRIMARY, DISABLED } from "../../utils/colorConsts";
+import { PRIMARY, DISABLED } from "utils/colorConsts";
 
 function SettingsMenu() {
   return (
