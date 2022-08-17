@@ -12,7 +12,7 @@ interface GoogleAuthButtonProps {
 
 function GoogleAuthButton({ children }: GoogleAuthButtonProps) {
   const googleLogin = () => {
-    window.open("http://localhost:4000/auth/google", "_self");
+    window.open(`${process.env.REACT_APP_API_URL}/auth/google`, "_self");
   };
 
   return (
