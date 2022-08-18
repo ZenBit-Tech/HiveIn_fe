@@ -1,5 +1,4 @@
-import React from "react";
-import { GoogleOutlined } from "@ant-design/icons";
+import React, { useEffect } from "react";
 import { Button } from "antd";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import Field from "components/DefaultField/Index";
 import { COMPLETE_REGISTRATION_ROUTE } from "utils/routeConsts";
 import { useTranslation } from "react-i18next";
+import GoogleAuthButton from "components/UI/googleAuthButton/GoogleAuthButton";
+import api from "services/user/signUpAPI";
+import { toast } from "react-toastify";
 import S from "./style";
 import signUpSchema from "./schema";
 
@@ -21,20 +23,31 @@ export default function SignUp() {
   const { control, handleSubmit } = useForm<SignUpForm>({
     resolver: yupResolver(signUpSchema),
   });
+  const { useSignUpMutation } = api;
+  const [signUp, { isError, isSuccess, isLoading }] = useSignUpMutation();
 
-  function onSubmit(evt: SignUpForm) {
-    navigate(COMPLETE_REGISTRATION_ROUTE);
-    return evt;
+  useEffect(() => {
+    if (!isLoading && isError) {
+      toast.error("An error ocurred");
+      return;
+    }
+    if (!isLoading && isSuccess) {
+      toast.success("Successful Sign up");
+      navigate(COMPLETE_REGISTRATION_ROUTE);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
+
+  async function onSubmit({ email, password }: SignUpForm) {
+    await signUp({ email, password });
   }
-
   const { t } = useTranslation();
 
   return (
     <S.Container>
       <S.FormBox>
-        <Button type="primary" icon={<GoogleOutlined />}>
-          {t("SignUp.signUpGoogle")}
-        </Button>
+        <GoogleAuthButton>{t("SignUp.signUpGoogle")}</GoogleAuthButton>
+
         <div style={{ textAlign: "center" }}>
           <span>{t("SignUp.or")}</span>
           <br />
@@ -42,11 +55,17 @@ export default function SignUp() {
         </div>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <Field label="Email" control={control} name="email" />
-          <Field label="Create a password" control={control} name="password" />
+          <Field
+            label="Create a password"
+            type="password"
+            control={control}
+            name="password"
+          />
           <Field
             label="Confirm password"
             control={control}
             name="passwordConfirm"
+            type="password"
           />
           <Button
             style={{ width: "50%", height: "50px", fontSize: "18px" }}
