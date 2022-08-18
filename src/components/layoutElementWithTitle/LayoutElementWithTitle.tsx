@@ -6,6 +6,7 @@ import Select from "components/UI/select/Select";
 import ToggleButton from "components/UI/buttons/toggleButton/ToggleButton";
 import EducationLayout from "components/educationLayout/EducationLayout";
 import SkillsLayout from "components/skillsLayout/SkillsLayout";
+import PhoneInput from "components/UI/phoneInput/PhoneInput";
 
 function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
   const {
@@ -20,6 +21,7 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     skillsOptions,
     control,
     errors,
+    message,
   } = props;
 
   const renderTextInput = () => (
@@ -59,6 +61,12 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
       helperText={helperText}
     />
   );
+
+  const renderPhoneInput = () => (
+    <PhoneInput name={formFieldName} control={control} />
+  );
+
+  const renderText = () => (message ? <p>{message}</p> : null);
 
   const renderSelect = () =>
     selectOptions ? (
@@ -106,6 +114,8 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     educationColumn: "educationColumn",
     experienceColumn: "experienceColumn",
     skillsLayout: "skillsLayout",
+    phoneInput: "phoneInput",
+    text: "text",
   };
 
   const renderElement = (type: typeof element): JSX.Element | null => {
@@ -126,6 +136,10 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
         return renderExperienceColumn();
       case elementTypes.skillsLayout:
         return renderSkillsLayout();
+      case "phoneInput":
+        return renderPhoneInput();
+      case "text":
+        return renderText();
       default:
         return null;
     }

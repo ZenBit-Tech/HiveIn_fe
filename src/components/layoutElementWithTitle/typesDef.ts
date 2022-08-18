@@ -15,7 +15,9 @@ export interface ILayoutElementWithoutControl {
     | "toggleButton"
     | "educationColumn"
     | "experienceColumn"
-    | "skillsLayout";
+    | "skillsLayout"
+    | "text"
+    | "phoneInput";
   containerWidth: "full" | "half";
   formFieldName: string;
   selectOptions?: string[];
@@ -23,6 +25,7 @@ export interface ILayoutElementWithoutControl {
   skillsOptions?: string[];
   helperText?: string;
   maxLength?: number;
+  message?: string;
 }
 
 export interface ILayoutElementWithTitleProps

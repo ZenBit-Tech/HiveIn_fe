@@ -142,5 +142,29 @@
     "submit": "Save changes",
     "addEducation": "+ add education",
     "addEmployment": "+ add employment"
+  },
+  "settingMenuButtonsNames": {
+    "profile": "Edit profile",
+    "contacts": "Edit Contacts"
+  },
+  "contactInfoForm": {
+    "title": "Contact Info",
+    "submitButtonText": "save changes",
+    "fieldsData": {
+      "email": {
+        "title": "email"
+      },
+      "firstName": {
+        "title": "First name",
+        "errorMessage": "please enter your name"
+      },
+      "lastName": {
+        "title": "Last name",
+        "errorMessage": "please enter your last name"
+      },
+      "phoneNumber": {
+        "title": "Phone number"
+      }
+    }
   }
 }
