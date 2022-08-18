@@ -16,7 +16,7 @@ function GoogleAuthButton({ children }: GoogleAuthButtonProps) {
   };
 
   return (
-    <GoogleButton onClick={() => googleLogin()}>
+    <GoogleButton onClick={googleLogin}>
       <Image alt="Google" src={google} />
       <Text>{children}</Text>
     </GoogleButton>

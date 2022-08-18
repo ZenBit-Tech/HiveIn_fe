@@ -25,14 +25,7 @@ const useAuth = () => {
   };
 
   const signOut = async () => {
-    dispatch(
-      setSignOut({
-        authToken: undefined,
-        email: undefined,
-        id: undefined,
-        role: undefined,
-      })
-    );
+    dispatch(setSignOut());
 
     await userPersistor.purge();
   };

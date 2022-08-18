@@ -3,17 +3,17 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 
 interface UserState {
-  authToken: string | undefined;
-  email: string | undefined;
-  role: "freelancer" | "client" | undefined;
-  id: number | undefined;
+  authToken: string | null;
+  email: string | null;
+  role: "freelancer" | "client" | null;
+  id: number | null;
 }
 
 const initialState: UserState = {
-  authToken: undefined,
-  email: undefined,
-  role: undefined,
-  id: undefined,
+  authToken: null,
+  email: null,
+  role: null,
+  id: null,
 };
 
 const userSlice = createSlice({
@@ -27,9 +27,7 @@ const userSlice = createSlice({
     setSignIn: (state, action) => {
       return { ...state, ...action.payload };
     },
-    setSignOut: (state, action) => {
-      return { ...state, ...action.payload };
-    },
+    setSignOut: () => initialState,
   },
 });
 
