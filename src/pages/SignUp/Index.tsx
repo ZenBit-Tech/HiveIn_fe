@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import GoogleAuthButton from "components/UI/googleAuthButton/GoogleAuthButton";
 import { useSignUpMutation } from "services/auth/setAuthAPI";
 import { toast } from "react-toastify";
+import useAuth from "hooks/useAuth";
 import S from "./style";
 import signUpSchema from "./schema";
 
@@ -19,11 +20,12 @@ interface SignUpForm extends FieldValues {
 }
 
 export default function SignUp() {
+  const { signIn } = useAuth();
   const navigate = useNavigate();
   const { control, handleSubmit } = useForm<SignUpForm>({
     resolver: yupResolver(signUpSchema),
   });
-  const [signUp, { isError, isSuccess, isLoading }] = useSignUpMutation();
+  const [signUp, { isError, isSuccess, isLoading, data }] = useSignUpMutation();
 
   useEffect(() => {
     if (!isLoading && isError) {
@@ -32,13 +34,15 @@ export default function SignUp() {
     }
     if (!isLoading && isSuccess) {
       toast.success("Successful Sign up");
-      navigate(COMPLETE_REGISTRATION_ROUTE);
+      console.log(data);
+      signIn(data!);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   async function onSubmit({ email, password }: SignUpForm) {
     await signUp({ email, password });
+    navigate(COMPLETE_REGISTRATION_ROUTE);
   }
   const { t } = useTranslation();
 

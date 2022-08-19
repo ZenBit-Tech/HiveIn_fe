@@ -27,7 +27,7 @@ const authApi = createApi({
       }),
       transformResponse: (response: AuthResponse) => response,
     }),
-    signUp: builder.mutation<boolean, AuthFields>({
+    signUp: builder.mutation<AuthResponse, AuthFields>({
       query: ({ email, password }) => ({
         url: "/auth/sign-up",
         method: "POST",
@@ -36,7 +36,7 @@ const authApi = createApi({
           password,
         },
       }),
-      transformResponse: (response: boolean) => response,
+      transformResponse: (response: AuthResponse) => response,
     }),
     googleOAuthSignIn: builder.query<AuthResponse, void>({
       query: () => ({
