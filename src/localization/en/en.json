@@ -49,6 +49,15 @@
     "signIn": "Sign In",
     "checkMailBox" : "We send you a recovery e-mail with instructions. Please check your e-mail."
   },
+   "RestorePassword": {
+    "title": "Change password?",
+    "subtitle" : "Choose a new password with this account.",
+    "signIn": "Sign In",
+    "newPassword": "New password",
+    "confirmNewPassword": "Confirm new password",
+    "successfullyTitle" : "Change password success",
+    "successfullyText": "You have successfully logged in"
+  },
   "CompleteRegistration": {
     "helloWorld": "Hello complete registration page!"
   },

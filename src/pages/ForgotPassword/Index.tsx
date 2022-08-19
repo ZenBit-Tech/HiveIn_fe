@@ -7,7 +7,8 @@ import { SIGN_IN_ROUTE } from "utils/routeConsts";
 import { useTranslation } from "react-i18next";
 import { PRIMARY } from "utils/colorConsts";
 import S from "./style";
-import signUpSchema from "./schema";
+import ForgotPasswordSchema from "./schema";
+import api from "../../service/user/forgotPassword";
 
 interface ForgotPasswordForm extends FieldValues {
   email: string;
@@ -16,10 +17,14 @@ interface ForgotPasswordForm extends FieldValues {
 export default function ForgotPassword() {
   const navigate = useNavigate();
   const { control, handleSubmit } = useForm<ForgotPasswordForm>({
-    resolver: yupResolver(signUpSchema),
+    resolver: yupResolver(ForgotPasswordSchema),
   });
   const { t } = useTranslation();
   const { Title, Text } = Typography;
+
+  const { useForgotPasswordMutation } = api;
+
+  const [forgotPassword] = useForgotPasswordMutation();
 
   const success = () => {
     Modal.success({
@@ -28,10 +33,9 @@ export default function ForgotPassword() {
     });
   };
 
-  function onSubmit(evt: ForgotPasswordForm) {
+  async function onSubmit({ email }: ForgotPasswordForm) {
+    await forgotPassword({ email });
     success();
-
-    return evt;
   }
 
   const goToLogin = () => {
