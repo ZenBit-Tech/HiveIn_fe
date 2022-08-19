@@ -34,7 +34,6 @@ export default function SignUp() {
     }
     if (!isLoading && isSuccess) {
       toast.success("Successful Sign up");
-      console.log(data);
       signIn(data!);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
