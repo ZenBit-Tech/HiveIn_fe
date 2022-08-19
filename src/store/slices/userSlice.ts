@@ -20,9 +20,8 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setAuthToken: (state, action) => {
-      const { authToken, email, id } = action.payload;
-      return { ...state, authToken, email, id };
+    setUser: (state, action) => {
+      return { ...state, ...action.payload };
     },
     setSignIn: (state, action) => {
       return { ...state, ...action.payload };
@@ -38,5 +37,5 @@ const persistConfig = {
 
 const userPersistedReducer = persistReducer(persistConfig, userSlice.reducer);
 
-export const { setSignIn, setSignOut, setAuthToken } = userSlice.actions;
+export const { setSignIn, setSignOut, setUser } = userSlice.actions;
 export default userPersistedReducer;

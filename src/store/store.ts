@@ -8,8 +8,8 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import signUpApi from "services/user/signUpAPI";
-import authApi from "services/auth/signInAPI";
+import setUserApi from "services/user/setUserAPI";
+import authApi from "services/auth/setAuthAPI";
 
 import counterReducer from "store/slices/counterSlice";
 import userPersistedReducer from "store/slices/userSlice";
@@ -17,7 +17,7 @@ import userPersistedReducer from "store/slices/userSlice";
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
-    [signUpApi.reducerPath]: signUpApi.reducer,
+    [setUserApi.reducerPath]: setUserApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     user: userPersistedReducer,
   },

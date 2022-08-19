@@ -7,7 +7,7 @@ import Field from "components/DefaultField/Index";
 import { COMPLETE_REGISTRATION_ROUTE } from "utils/routeConsts";
 import { useTranslation } from "react-i18next";
 import GoogleAuthButton from "components/UI/googleAuthButton/GoogleAuthButton";
-import api from "services/user/signUpAPI";
+import { useSignUpMutation } from "services/auth/setAuthAPI";
 import { toast } from "react-toastify";
 import S from "./style";
 import signUpSchema from "./schema";
@@ -23,7 +23,6 @@ export default function SignUp() {
   const { control, handleSubmit } = useForm<SignUpForm>({
     resolver: yupResolver(signUpSchema),
   });
-  const { useSignUpMutation } = api;
   const [signUp, { isError, isSuccess, isLoading }] = useSignUpMutation();
 
   useEffect(() => {

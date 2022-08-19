@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { SignInResponse } from "services/auth/signInAPI";
+import { AuthResponse } from "services/auth/setAuthAPI";
 import { setSignIn, setSignOut } from "store/slices/userSlice";
 import { RootState, userPersistor } from "store/store";
 
@@ -10,7 +10,7 @@ const useAuth = () => {
 
   const dispatch = useDispatch();
 
-  const signIn = (res: SignInResponse) => {
+  const signIn = (res: AuthResponse) => {
     // Requesting authToken to the backend and saving it
     // in localStorage with Redux Persist
 

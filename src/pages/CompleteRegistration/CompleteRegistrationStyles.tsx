@@ -85,7 +85,7 @@ export const FormBox = styled.div`
 export const ApplyButton = styled.div`
   cursor: pointer;
   position: relative;
-  display: flex;
+  display: ${(props) => (props.role ? "flex" : "none")};
   font-size: 1.1em;
   align-items: center;
   justify-content: center;
