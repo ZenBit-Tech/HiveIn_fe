@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { PRIMARY } from "utils/colorConsts";
 import S from "./style";
 import ForgotPasswordSchema from "./schema";
-import api from "../../service/user/forgotPassword";
+import api from "../../services/auth/forgotPassword";
 
 interface ForgotPasswordForm extends FieldValues {
   email: string;

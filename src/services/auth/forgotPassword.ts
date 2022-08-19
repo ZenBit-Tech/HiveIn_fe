@@ -11,7 +11,7 @@ interface RestorePassword {
 
 const forgotPassApi = createApi({
   reducerPath: "forgotPassword",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000" }),
+  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
   endpoints: (builder) => ({
     forgotPassword: builder.mutation<boolean, ForgotPassword>({
       query: ({ email }) => ({

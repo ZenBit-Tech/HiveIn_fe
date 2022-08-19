@@ -8,7 +8,7 @@ import { HOME_PAGE_ROUTE } from "utils/routeConsts";
 import { useTranslation } from "react-i18next";
 import S from "./style";
 import RestorePasswordSchema from "./schema";
-import api from "../../service/user/forgotPassword";
+import api from "../../services/auth/forgotPassword";
 
 interface RestorePasswordForm extends FieldValues {
   password: string;
@@ -59,11 +59,13 @@ export default function RestorePassword() {
           <Field
             label={t("RestorePassword.newPassword")}
             control={control}
+            type="password"
             name="password"
           />
           <Field
             label={t("RestorePassword.confirmNewPassword")}
             control={control}
+            type="password"
             name="passwordConfirm"
           />
           <Button
