@@ -1,54 +1,45 @@
 import React from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import i18next from "localization/en/en.json";
-import propsDataCollection from "components/profileEditForm/staticData";
 import LayoutElementWithTitle from "components/layoutElementWithTitle/LayoutElementWithTitle";
-import schema from "validation/profileEditFormValidationSchema";
+import propsDataCollection from "components/contactInfoForm/staticData";
 import FormSubmitButton from "components/UI/buttons/formSubmitButton/FormSubmitButton";
 import { SButtonWrapper } from "components/profileEditForm/styles";
+import contactEditFormValidationSchema from "validation/contactEditFormValidationSchema";
 
-function ProfileEditForm() {
+function ContactInfoForm() {
   const {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<FieldValues>({
-    defaultValues: {
-      position: "",
-      category: "",
-      rate: 0,
-      skills: [],
-      englishLevel: "",
-      description: "",
-      education: [],
-      experience: [],
-    },
-    resolver: yupResolver(schema),
+  } = useForm({
+    resolver: yupResolver(contactEditFormValidationSchema),
   });
 
   const onSubmit = (data: any) => {
     // eslint-disable-next-line no-console
     console.log(data);
   };
+
   return (
     <>
-      <h2>{i18next.ProfileEditForm.formTitle}</h2>
+      <h2>{i18next.contactInfoForm.title}</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         {propsDataCollection.map((propsData) => (
           <LayoutElementWithTitle
-            errors={errors}
             key={propsData.title}
             control={control}
+            errors={errors}
             {...propsData}
           />
         ))}
         <SButtonWrapper>
-          <FormSubmitButton text={i18next.profileEditFormButtonsNames.submit} />
+          <FormSubmitButton text={i18next.contactInfoForm.submitButtonText} />
         </SButtonWrapper>
       </form>
     </>
   );
 }
 
-export default ProfileEditForm;
+export default ContactInfoForm;

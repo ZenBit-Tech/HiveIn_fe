@@ -34,12 +34,14 @@
     "title": "Get Job",
     "subtitle": "THE BEST WAY TO FIND YOUR JOB",
     "signIn": "Sign In",
+    "signInGoogle": "Sign In with Google",
     "signOut": "Sign Out",
     "dontHaveAccount": "Don't have an account yet?",
     "forgotPass": "Forgot your password?",
     "register": "Register now",
     "successLogin": "You have successfully logged in",
-    "errorLogin": "Invalid email and/or password"
+    "errorLogin": "Invalid email and/or password",
+    "errorGoogleOAuth": "Server error, please try again"
   },
   "ForgotPassword": {
     "title": "Forgot your password?",
@@ -157,5 +159,29 @@
     "submit": "Save changes",
     "addEducation": "+ add education",
     "addEmployment": "+ add employment"
+  },
+  "settingMenuButtonsNames": {
+    "profile": "Edit profile",
+    "contacts": "Edit Contacts"
+  },
+  "contactInfoForm": {
+    "title": "Contact Info",
+    "submitButtonText": "save changes",
+    "fieldsData": {
+      "email": {
+        "title": "email"
+      },
+      "firstName": {
+        "title": "First name",
+        "errorMessage": "please enter your name"
+      },
+      "lastName": {
+        "title": "Last name",
+        "errorMessage": "please enter your last name"
+      },
+      "phoneNumber": {
+        "title": "Phone number"
+      }
+    }
   }
 }

@@ -7,7 +7,7 @@ import {
 } from "react-hook-form";
 import SkillButton from "components/UI/buttons/skillButton/SkillButton";
 import SDiv from "components/skillsLayout/style";
-import { SErrorMessage } from "../UI/textField/style";
+import { SErrorMessage } from "components/UI/textField/style";
 
 function SkillsLayout({
   options,

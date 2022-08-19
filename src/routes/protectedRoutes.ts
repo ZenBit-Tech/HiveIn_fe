@@ -12,6 +12,7 @@ import {
   MY_CONTRACTS_ROUTE,
   PROFILE_ROUTE,
   SETTINGS_ROUTE,
+  SETTINGS_CONTACT_INFO_ROUTE,
 } from "utils/routeConsts";
 
 const protectedRoutes: RoutesType[] = [
@@ -33,6 +34,10 @@ const protectedRoutes: RoutesType[] = [
   },
   {
     path: SETTINGS_ROUTE,
+    component: Settings,
+  },
+  {
+    path: SETTINGS_CONTACT_INFO_ROUTE,
     component: Settings,
   },
   {

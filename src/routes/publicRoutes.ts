@@ -3,7 +3,7 @@ import {
   HOME_PAGE_ROUTE,
 } from "utils/routeConsts";
 import Home from "pages/Home";
-import CompleteRegistration from "pages/CompleteRegistration/Index";
+import CompleteRegistration from "pages/CompleteRegistration/CompleteRegistration";
 
 export interface RoutesType {
   path: string;
