@@ -1,12 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 
 interface UserState {
-  authToken: string | undefined;
-  email: string | undefined;
-  role: "freelancer" | "client" | undefined;
-  id: number | undefined;
+  authToken?: string | undefined;
+  email?: string | undefined;
+  role?: "freelancer" | "client" | undefined;
+  id?: number | undefined;
 }
 
 const initialState: UserState = {
@@ -20,11 +20,8 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state, action) => {
-      return { ...state, ...action.payload };
-    },
-    setSignIn: (state, action) => {
-      return { ...state, ...action.payload };
+    setUser: (state, { payload }: PayloadAction<UserState>) => {
+      return { ...state, ...payload };
     },
     setSignOut: () => initialState,
   },
@@ -37,5 +34,5 @@ const persistConfig = {
 
 const userPersistedReducer = persistReducer(persistConfig, userSlice.reducer);
 
-export const { setSignIn, setSignOut, setUser } = userSlice.actions;
+export const { setUser, setSignOut } = userSlice.actions;
 export default userPersistedReducer;
