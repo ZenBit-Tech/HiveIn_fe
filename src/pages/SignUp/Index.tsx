@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import { Button } from "antd";
+import { Button, Modal } from "antd";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Field from "components/DefaultField/Index";
 import { COMPLETE_REGISTRATION_ROUTE } from "utils/routeConsts";
-import { useTranslation } from "react-i18next";
 import GoogleAuthButton from "components/UI/googleAuthButton/GoogleAuthButton";
 import { useSignUpMutation } from "services/auth/setAuthAPI";
 import { toast } from "react-toastify";
@@ -22,6 +22,7 @@ interface SignUpForm extends FieldValues {
 export default function SignUp() {
   const { signIn } = useAuth();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { control, handleSubmit } = useForm<SignUpForm>({
     resolver: yupResolver(signUpSchema),
   });
@@ -29,21 +30,25 @@ export default function SignUp() {
 
   useEffect(() => {
     if (!isLoading && isError) {
-      toast.error("An error ocurred");
+      toast.error(t("SignUp.alreadyRegistered"));
       return;
     }
     if (!isLoading && isSuccess) {
-      toast.success("Successful Sign up");
-      signIn(data!);
+      Modal.success({
+        title: t("SignUp.successfulSignUp"),
+        onOk: () => {
+          navigate(COMPLETE_REGISTRATION_ROUTE);
+          signIn(data!);
+        },
+        centered: true,
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   async function onSubmit({ email, password }: SignUpForm) {
     await signUp({ email, password });
-    navigate(COMPLETE_REGISTRATION_ROUTE);
   }
-  const { t } = useTranslation();
 
   return (
     <S.Container>
