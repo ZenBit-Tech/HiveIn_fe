@@ -31,7 +31,7 @@ export default function SignIn() {
     resolver: yupResolver(signInSchema),
   });
 
-  const [runSignIn, { isError, isLoading, isSuccess, data }] =
+  const [runSignIn, { isError, isLoading, isSuccess, data, error }] =
     useSignInMutation();
 
   const handleCloseErrorModal = () => {
@@ -41,14 +41,17 @@ export default function SignIn() {
   const success = () => {
     Modal.success({
       title: t("SignIn.successLogin"),
-      onOk: () => navigate(PROFILE_ROUTE),
+      onOk: () => {
+        navigate(PROFILE_ROUTE);
+        signIn(data!);
+      },
       centered: true,
     });
   };
 
-  const error = () => {
+  const errorMessage = (statusCode: string | number) => {
     Modal.error({
-      title: t("SignIn.errorLogin"),
+      title: t(`ServerErrors.${statusCode}`),
       centered: true,
       okButtonProps: { danger: true },
     });
@@ -61,10 +64,12 @@ export default function SignIn() {
 
   useEffect(() => {
     if (!isLoading && isError) {
-      error();
+      if ("status" in error!) {
+        errorMessage(error.status);
+        return;
+      }
     }
     if (!isLoading && isSuccess) {
-      signIn(data!);
       success();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
