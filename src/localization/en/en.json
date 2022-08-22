@@ -42,10 +42,14 @@
     "forgotPass": "Forgot your password?",
     "register": "Register now",
     "successLogin": "You have successfully logged in",
-    "errorGoogleOAuth": "Server error, please try again",
-    "404": "Email not found, please Sign Up",
+    "errorGoogleOAuth": "Server error, please try again"
+  },
+  "ServerErrors": {
+    "404": "Email not found, please sign up",
     "401": "Invalid email and/or password",
-    "409": "Email already registered. Please login with your Google account"
+    "409": "Email already registered. Please login with your password or your Google account.",
+    "500": "Server error, please try again",
+    "FETCH_ERROR" : "Server error, please try again"
   },
   "CompleteRegistration": {
     "client": "I'm a client, hiring for a project",

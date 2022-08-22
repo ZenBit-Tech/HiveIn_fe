@@ -26,12 +26,15 @@ export default function SignUp() {
   const { control, handleSubmit } = useForm<SignUpForm>({
     resolver: yupResolver(signUpSchema),
   });
-  const [signUp, { isError, isSuccess, isLoading, data }] = useSignUpMutation();
+  const [signUp, { isError, isSuccess, isLoading, data, error }] =
+    useSignUpMutation();
 
   useEffect(() => {
     if (!isLoading && isError) {
-      toast.error(t("SignUp.alreadyRegistered"));
-      return;
+      if ("status" in error!) {
+        toast.error(t(`ServerErrors.${error.status}`));
+        return;
+      }
     }
     if (!isLoading && isSuccess) {
       Modal.success({

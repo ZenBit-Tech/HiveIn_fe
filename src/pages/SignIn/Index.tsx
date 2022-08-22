@@ -51,7 +51,7 @@ export default function SignIn() {
 
   const errorMessage = (statusCode: string | number) => {
     Modal.error({
-      title: t(`SignIn.${statusCode}`),
+      title: t(`ServerErrors.${statusCode}`),
       centered: true,
       okButtonProps: { danger: true },
     });
@@ -66,6 +66,7 @@ export default function SignIn() {
     if (!isLoading && isError) {
       if ("status" in error!) {
         errorMessage(error.status);
+        return;
       }
     }
     if (!isLoading && isSuccess) {
