@@ -10,15 +10,16 @@ import {
 } from "redux-persist";
 import signUpApi from "services/user/signUpAPI";
 import authApi from "services/auth/signInAPI";
-
 import counterReducer from "store/slices/counterSlice";
 import userPersistedReducer from "store/slices/userSlice";
+import { getUserContactInfoApi } from "services/contactInfo/contactInfoAPI";
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     [signUpApi.reducerPath]: signUpApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
+    [getUserContactInfoApi.reducerPath]: getUserContactInfoApi.reducer,
     user: userPersistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -26,7 +27,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(getUserContactInfoApi.middleware),
 });
 
 export const userPersistor = persistStore(store);

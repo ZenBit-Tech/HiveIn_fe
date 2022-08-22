@@ -25,7 +25,6 @@ export interface ILayoutElementWithoutControl {
   skillsOptions?: string[];
   helperText?: string;
   maxLength?: number;
-  message?: string;
 }
 
 export interface ILayoutElementWithTitleProps
