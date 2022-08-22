@@ -6,9 +6,9 @@ import Field from "components/DefaultField/Index";
 import { SIGN_IN_ROUTE } from "utils/routeConsts";
 import { useTranslation } from "react-i18next";
 import { PRIMARY } from "utils/colorConsts";
+import api from "services/auth/forgotPassword";
 import S from "./style";
 import ForgotPasswordSchema from "./schema";
-import api from "../../services/auth/forgotPassword";
 
 interface ForgotPasswordForm extends FieldValues {
   email: string;

@@ -6,9 +6,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Field from "components/DefaultField/Index";
 import { HOME_PAGE_ROUTE } from "utils/routeConsts";
 import { useTranslation } from "react-i18next";
+import api from "services/auth/forgotPassword";
 import S from "./style";
 import RestorePasswordSchema from "./schema";
-import api from "../../services/auth/forgotPassword";
 
 interface RestorePasswordForm extends FieldValues {
   password: string;
