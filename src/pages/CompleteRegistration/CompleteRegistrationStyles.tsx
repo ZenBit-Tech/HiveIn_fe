@@ -4,7 +4,6 @@ import styled from "styled-components";
 import {
   BLUE,
   DARK_BLUE,
-  // GOOGLE_BTN_BACKGROUND,
   LIGHT_BLUE,
   TEXT_GRAY,
   WHITE,
