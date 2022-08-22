@@ -63,7 +63,8 @@ function ContactInfoForm() {
     if (submitSuccess) toast.success("changes saved");
     //  @ts-ignore
     if (submitError) toast.error(error.data.message[0]);
-    if (getUserError) toast.error("Sorry, user not found");
+    if (getUserError)
+      toast.error(i18next.contactInfoForm.errorMessages.userNotFound);
     // eslint-disable-next-line
   }, [submitSuccess, submitError, getUserError]);
 
