@@ -17,12 +17,7 @@ import {
 import { RootState } from "store/store";
 
 function ContactInfoForm() {
-  const [initialState, setInitialState] = useState<IContactInfoState>({
-    email: "",
-    firstName: "",
-    lastName: "",
-    phone: null,
-  });
+  const [initialState, setInitialState] = useState<IContactInfoState>();
 
   const userId = useSelector<RootState>(({ user }) => user.id);
   const {
@@ -39,8 +34,8 @@ function ContactInfoForm() {
     if (isSuccess)
       setInitialState({
         email: data.email,
-        firstName: data.firstName,
-        lastName: data.lastName,
+        firstName: data.firstName ?? "",
+        lastName: data.lastName ?? "",
         phone: data.phone === null ? null : data.phone.slice(1),
       });
   }, [data, isSuccess]);
@@ -69,10 +64,7 @@ function ContactInfoForm() {
   }, [submitSuccess, submitError, getUserError]);
 
   const onSubmit = (formData: any) => {
-    const phone =
-      formData.phone === null || formData.phone === ""
-        ? null
-        : `+${formData.phone}`;
+    const phone = !formData.phone ? null : `+${formData.phone}`;
 
     if (isSuccess)
       updateUser({
