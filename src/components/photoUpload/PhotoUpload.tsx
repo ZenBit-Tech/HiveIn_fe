@@ -9,13 +9,7 @@ import { message, Upload } from "antd";
 import ImgCrop from "antd-img-crop";
 import { LoadingOutlined, UserOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
-import {
-  UPLOADING,
-  DONE,
-  ERROR,
-  IS_JPEG,
-  IS_PNG,
-} from "utils/photoUploadConsts";
+import { UPLOADING, IS_JPEG, IS_PNG } from "utils/photoUploadConsts";
 
 function PhotoUpload() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -39,14 +33,11 @@ function PhotoUpload() {
     info: UploadChangeParam<UploadFile>
   ) => {
     if (info.file.status === UPLOADING) setIsLoading(true);
-    if (info.file.status === DONE) {
-      getBase64(info.file.originFileObj as RcFile, (url) => {
+    else {
+      getBase64(info.file.originFileObj as RcFile, async (url) => {
         setIsLoading(false);
         setImageUrl(url);
       });
-    }
-    if (info.file.status === ERROR) {
-      setIsLoading(false);
     }
   };
 
@@ -58,6 +49,7 @@ function PhotoUpload() {
           name="avatar"
           listType="picture-card"
           maxCount={1}
+          showUploadList={false}
           beforeUpload={beforeUpload}
           onChange={handleChange}
         >
