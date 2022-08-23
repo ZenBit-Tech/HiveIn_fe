@@ -8,7 +8,11 @@ import { useTranslation } from "react-i18next";
 import useAuth from "hooks/useAuth";
 import { useSignInMutation } from "services/auth/setAuthAPI";
 import GoogleAuthButton from "components/UI/googleAuthButton/GoogleAuthButton";
-import { PROFILE_ROUTE, SIGN_UP_ROUTE } from "utils/routeConsts";
+import {
+  FORGOT_PASSWORD_ROUTE,
+  PROFILE_ROUTE,
+  SIGN_UP_ROUTE,
+} from "utils/routeConsts";
 import { PRIMARY } from "utils/colorConsts";
 import S from "./style";
 import signInSchema from "./schema";
@@ -59,6 +63,11 @@ export default function SignIn() {
     navigate(SIGN_UP_ROUTE);
   };
 
+  const goToForgotPassword = () => {
+    window.scroll(0, 0);
+    navigate(FORGOT_PASSWORD_ROUTE);
+  };
+
   useEffect(() => {
     if (!isLoading && isError) {
       error();
@@ -93,7 +102,10 @@ export default function SignIn() {
               control={control}
               name="password"
             />
-            <Text style={{ color: PRIMARY, cursor: "pointer" }}>
+            <Text
+              style={{ color: PRIMARY, cursor: "pointer" }}
+              onClick={goToForgotPassword}
+            >
               {t("SignIn.forgotPass")}
             </Text>
           </S.InputContainer>

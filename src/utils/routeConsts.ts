@@ -9,3 +9,6 @@ export const PROFILE_ROUTE = "/profile";
 export const SIGN_UP_ROUTE = "/sign-up";
 export const COMPLETE_REGISTRATION_ROUTE = "/complete-registration";
 export const SIGN_IN_ROUTE = "/login";
+export const FORGOT_PASSWORD_ROUTE = "/forgot-password";
+export const RESTORE_PASSWORD_ROUTE = "/restore-password";
+export const WELCOME_ROUTE = "/welcome";
