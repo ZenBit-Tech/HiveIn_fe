@@ -4,6 +4,7 @@ import Profile from "pages/Profile";
 import Proposals from "pages/Proposals";
 import SearchWork from "pages/SearchWork";
 import Settings from "pages/Settings/Settings";
+import Welcome from "pages/Welcome";
 import { RoutesType } from "routes/publicRoutes";
 import {
   SEARCH_WORK_ROUTE,
@@ -13,6 +14,7 @@ import {
   PROFILE_ROUTE,
   SETTINGS_ROUTE,
   SETTINGS_CONTACT_INFO_ROUTE,
+  WELCOME,
 } from "utils/routeConsts";
 
 const protectedRoutes: RoutesType[] = [
@@ -43,6 +45,10 @@ const protectedRoutes: RoutesType[] = [
   {
     path: PROFILE_ROUTE,
     component: Profile,
+  },
+  {
+    path: WELCOME,
+    component: Welcome,
   },
 ];
 
