@@ -14,7 +14,7 @@ import {
   PROFILE_ROUTE,
   SETTINGS_ROUTE,
   SETTINGS_CONTACT_INFO_ROUTE,
-  WELCOME,
+  WELCOME_ROUTE,
 } from "utils/routeConsts";
 
 const protectedRoutes: RoutesType[] = [
@@ -47,7 +47,7 @@ const protectedRoutes: RoutesType[] = [
     component: Profile,
   },
   {
-    path: WELCOME,
+    path: WELCOME_ROUTE,
     component: Welcome,
   },
 ];
