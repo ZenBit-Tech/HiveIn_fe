@@ -1,10 +1,6 @@
 import React from "react";
 import { Controller } from "react-hook-form";
-import {
-  FormHelperText,
-  InputAdornment,
-  TextField as TextFieldM,
-} from "@mui/material";
+import { InputAdornment, TextField as TextFieldM } from "@mui/material";
 import { ITextFieldProps } from "components/UI/textField/typesDef";
 import {
   sxProps,
@@ -23,6 +19,7 @@ function TextField(props: ITextFieldProps) {
     formFieldName,
     control,
     errors,
+    disabled,
   } = props;
 
   const inputNumberType = "number";
@@ -42,13 +39,15 @@ function TextField(props: ITextFieldProps) {
           render={({ field }) => (
             <TextFieldM
               {...field}
+              disabled={disabled}
               error={!!errors?.[`${formFieldName}`]?.message}
               fullWidth
+              sx={helperText ? undefined : sxProps}
               multiline={multiline}
               rows={rows}
               type={type}
+              label={helperText}
               size="small"
-              sx={sxProps}
               InputProps={{
                 endAdornment,
                 rows,
@@ -65,7 +64,7 @@ function TextField(props: ITextFieldProps) {
           rows={rows}
           type={type}
           size="small"
-          sx={sxProps}
+          sx={helperText ? undefined : sxProps}
           InputProps={{
             endAdornment,
             rows,
@@ -73,7 +72,6 @@ function TextField(props: ITextFieldProps) {
           }}
         />
       )}
-      {!!helperText && <FormHelperText>{helperText}</FormHelperText>}
       {!!errors?.[`${formFieldName}`]?.message && (
         <SErrorMessage>
           {errors?.[`${formFieldName}`]?.message?.toString()}

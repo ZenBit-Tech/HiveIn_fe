@@ -182,6 +182,9 @@
       "phoneNumber": {
         "title": "Phone number"
       }
+    },
+    "errorMessages": {
+      "userNotFound": "userNotFound"
     }
   }
 }
