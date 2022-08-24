@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { GOOGLE_BTN_BACKGROUND, WHITE } from "utils/colorConsts";
-import { GOOGLE_WRAPPER_SIZE } from "utils/navBarConsts";
+import { GOOGLE_WRAPPER_SIZE } from "utils/mediaQueryConsts";
 
 const GoogleButton = styled.div`
   cursor: pointer;

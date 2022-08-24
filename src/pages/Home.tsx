@@ -1,21 +1,7 @@
-import useAuth from "hooks/useAuth";
-import { useEffect } from "react";
-import { useGoogleOAuthSignInQuery } from "services/auth/signInAPI";
+import useGoogleAuth from "hooks/useGoogleAuth";
 
 function Home() {
-  const { signIn } = useAuth();
-  const {
-    data: signInResponse,
-    isLoading,
-    isSuccess,
-  } = useGoogleOAuthSignInQuery();
-
-  useEffect(() => {
-    if (!isLoading && isSuccess) {
-      signIn(signInResponse);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading]);
+  useGoogleAuth();
 
   return <div>Home</div>;
 }

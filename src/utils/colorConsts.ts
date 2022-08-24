@@ -1,4 +1,7 @@
 export const LIGHT_GRAY = "#ddd";
+export const BLUE = "#065b90";
+export const LIGHT_BLUE = "#c4d9ec";
+export const DARK_BLUE = "#0d375e";
 export const WHITE = "#ffffff";
 export const PRIMARY = "#1890ff";
 export const DISABLED = "#898989";
