@@ -14,15 +14,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store/store";
 import { setUser } from "store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { SETTINGS_ROUTE } from "utils/routeConsts";
-import { useSetUserMutation } from "services/user/setUserAPI";
+import { WELCOME_ROUTE } from "utils/routeConsts";
+import { useUpdateUserMutation } from "services/user/setUserAPI";
 import { toast } from "react-toastify";
 
 export default function CompleteRegistration() {
   const { email, role } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const [updateRole, { isSuccess, isError, isLoading, error }] =
-    useSetUserMutation();
+    useUpdateUserMutation();
 
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ export default function CompleteRegistration() {
       return;
     }
     if (!isLoading && isSuccess) {
-      navigate(SETTINGS_ROUTE);
+      navigate(WELCOME_ROUTE);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
