@@ -7,9 +7,10 @@ import Wrapper, {
   ButtonText,
   RadioGroup,
 } from "pages/CompleteRegistration/CompleteRegistrationStyles";
+import useGoogleAuth from "hooks/useGoogleAuth";
+import useJwtDecoder from "hooks/useJwtDecoder";
 import { useTranslation } from "react-i18next";
 import { RadioChangeEvent } from "antd";
-import useGoogleAuth from "hooks/useGoogleAuth";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store/store";
 import { setUser } from "store/slices/userSlice";
@@ -19,13 +20,15 @@ import { useUpdateUserMutation } from "services/user/setUserAPI";
 import { toast } from "react-toastify";
 
 export default function CompleteRegistration() {
-  const { email, role } = useSelector((state: RootState) => state.user);
+  const { role } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
-  const [updateRole, { isSuccess, isError, isLoading, error }] =
-    useUpdateUserMutation();
+  const { sub } = useJwtDecoder();
 
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  const [updateRole, { isSuccess, isError, isLoading, error }] =
+    useUpdateUserMutation();
 
   useGoogleAuth();
 
@@ -52,7 +55,7 @@ export default function CompleteRegistration() {
 
   const sendToDB = () => {
     updateRole({
-      email,
+      id: sub,
       role,
     });
   };

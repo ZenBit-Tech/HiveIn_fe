@@ -3,28 +3,23 @@ import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import i18next from "localization/en/en.json";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
 import LayoutElementWithTitle from "components/layoutElementWithTitle/LayoutElementWithTitle";
 import propsDataCollection from "components/contactInfoForm/staticData";
 import FormSubmitButton from "components/UI/buttons/formSubmitButton/FormSubmitButton";
 import { SButtonWrapper } from "components/profileEditForm/styles";
 import contactEditFormValidationSchema from "validation/contactEditFormValidationSchema";
-import { IContactInfoState } from "components/contactInfoForm/typesDef";
 import {
+  IUser,
   useGetUserQuery,
   useUpdateUserMutation,
-} from "services/contactInfo/contactInfoAPI";
-import { RootState } from "store/store";
+} from "services/user/setUserAPI";
+import useJwtDecoder from "hooks/useJwtDecoder";
 
 function ContactInfoForm() {
-  const [initialState, setInitialState] = useState<IContactInfoState>();
+  const [initialState, setInitialState] = useState<IUser>();
 
-  const userId = useSelector<RootState>(({ user }) => user.id);
-  const {
-    data,
-    isSuccess,
-    isError: getUserError,
-  } = useGetUserQuery(Number(userId));
+  const { sub } = useJwtDecoder();
+  const { data, isSuccess, isError: getUserError } = useGetUserQuery(sub!);
   const [
     updateUser,
     { error, isError: submitError, isSuccess: submitSuccess },
@@ -36,7 +31,7 @@ function ContactInfoForm() {
         email: data.email,
         firstName: data.firstName ?? "",
         lastName: data.lastName ?? "",
-        phone: data.phone === null ? null : data.phone.slice(1),
+        phone: data.phone,
       });
   }, [data, isSuccess]);
 
@@ -68,9 +63,9 @@ function ContactInfoForm() {
 
     if (isSuccess)
       updateUser({
+        id: sub,
         ...formData,
         phone,
-        id: data.id,
       });
 
     return null;

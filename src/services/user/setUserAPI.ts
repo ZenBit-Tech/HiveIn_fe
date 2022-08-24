@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "store/store";
 
 export interface IUser {
+  id?: string | undefined;
   email?: string | undefined;
   role?: string | undefined;
   firstName?: string | undefined;
@@ -25,11 +26,11 @@ const userApi = createApi({
   }),
   endpoints: (builder) => ({
     getUser: builder.query<IUser, string>({
-      query: (email) => `/settings-info/${email}`,
+      query: (id) => `/settings-info/${id}`,
     }),
     updateUser: builder.mutation<IUser, IUser>({
-      query: ({ email, ...userInfo }: IUser) => ({
-        url: `/settings-info/${email}`,
+      query: ({ id, ...userInfo }: IUser) => ({
+        url: `/settings-info/${id}`,
         method: "PATCH",
         body: {
           ...userInfo,
