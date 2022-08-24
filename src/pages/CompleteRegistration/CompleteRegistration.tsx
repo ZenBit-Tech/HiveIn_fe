@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Wrapper, {
   RoleRadio,
   TitleText,
@@ -15,16 +16,31 @@ import { setUser } from "store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { SETTINGS_ROUTE } from "utils/routeConsts";
 import { useSetUserMutation } from "services/user/setUserAPI";
+import { toast } from "react-toastify";
 
 export default function CompleteRegistration() {
-  const { id, role } = useSelector((state: RootState) => state.user);
+  const { email, role } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
-  const [updateRole] = useSetUserMutation();
+  const [updateRole, { isSuccess, isError, isLoading, error }] =
+    useSetUserMutation();
 
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   useGoogleAuth();
+
+  useEffect(() => {
+    if (!isLoading && isError) {
+      if ("status" in error!) {
+        toast.error(t("CompleteRegistration.error"));
+      }
+      return;
+    }
+    if (!isLoading && isSuccess) {
+      navigate(SETTINGS_ROUTE);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
 
   const setRole = (e: RadioChangeEvent) => {
     dispatch(
@@ -36,10 +52,9 @@ export default function CompleteRegistration() {
 
   const sendToDB = () => {
     updateRole({
-      id,
+      email,
       role,
     });
-    navigate(SETTINGS_ROUTE);
   };
 
   return (
@@ -60,7 +75,7 @@ export default function CompleteRegistration() {
           </RoleRadio>
         </RadioGroup>
         <ApplyButton role={role} onClick={sendToDB}>
-          Create My Account
+          {t("CompleteRegistration.button")}
         </ApplyButton>
       </FormBox>
     </Wrapper>

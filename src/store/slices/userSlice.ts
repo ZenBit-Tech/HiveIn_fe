@@ -6,14 +6,12 @@ interface UserState {
   authToken?: string | undefined;
   email?: string | undefined;
   role?: "freelancer" | "client" | undefined;
-  id?: number | undefined;
 }
 
 const initialState: UserState = {
   authToken: undefined,
   email: undefined,
   role: undefined,
-  id: undefined,
 };
 
 const userSlice = createSlice({

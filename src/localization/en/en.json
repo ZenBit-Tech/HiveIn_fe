@@ -71,7 +71,9 @@
   "CompleteRegistration": {
     "client": "I'm a client, hiring for a project",
     "freelancer": "I'm a freelancer, looking for work",
-    "title": "Join as a client or freelancer"
+    "title": "Join as a client or freelancer",
+    "button": "Create My Account",
+    "error": "Server error, please try again"
   },
   "ProfileEditForm": {
     "formTitle": "Profile",
