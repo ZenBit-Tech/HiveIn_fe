@@ -31,7 +31,7 @@ function ContactInfoForm() {
         email: data.email,
         firstName: data.firstName ?? "",
         lastName: data.lastName ?? "",
-        phone: data.phone,
+        phone: data.phone ? data.phone.slice(1) : undefined,
       });
   }, [data, isSuccess]);
 
