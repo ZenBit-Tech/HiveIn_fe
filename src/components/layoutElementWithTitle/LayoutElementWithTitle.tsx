@@ -21,7 +21,6 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     skillsOptions,
     control,
     errors,
-    message,
   } = props;
 
   const renderTextInput = () => (
@@ -66,7 +65,16 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     <PhoneInput name={formFieldName} control={control} />
   );
 
-  const renderText = () => (message ? <p>{message}</p> : null);
+  const renderText = () => (
+    <TextField
+      disabled
+      control={control}
+      formFieldName={formFieldName}
+      multiline={false}
+      width="full"
+      type="text"
+    />
+  );
 
   const renderSelect = () =>
     selectOptions ? (

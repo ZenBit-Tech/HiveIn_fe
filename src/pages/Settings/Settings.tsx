@@ -4,10 +4,7 @@ import SettingsMenu from "components/settingsMenu/SettingsMenu";
 import ProfileEditForm from "components/profileEditForm/ProfileEditForm";
 import ContactInfoForm from "components/contactInfoForm/ContactInfoForm";
 import { useLocation } from "react-router-dom";
-import {
-  SETTINGS_CONTACT_INFO_ROUTE,
-  SETTINGS_ROUTE,
-} from "../../utils/routeConsts";
+import { SETTINGS_CONTACT_INFO_ROUTE, SETTINGS_ROUTE } from "utils/routeConsts";
 
 function Settings() {
   const { pathname } = useLocation();

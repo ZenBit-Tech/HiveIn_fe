@@ -53,19 +53,19 @@
   },
   "ForgotPassword": {
     "title": "Forgot your password?",
-    "subtitle" : "Enter your email. We'll email instructions on how to reset your password.",
+    "subtitle": "Enter your email. We'll email instructions on how to reset your password.",
     "resetPassword": "Reset password",
     "rememberPassword": "Just remembered password?",
     "signIn": "Sign In",
-    "checkMailBox" : "We send you a recovery e-mail with instructions. Please check your e-mail."
+    "checkMailBox": "We send you a recovery e-mail with instructions. Please check your e-mail."
   },
-   "RestorePassword": {
+  "RestorePassword": {
     "title": "Change password?",
-    "subtitle" : "Choose a new password with this account.",
+    "subtitle": "Choose a new password with this account.",
     "signIn": "Sign In",
     "newPassword": "New password",
     "confirmNewPassword": "Confirm new password",
-    "successfullyTitle" : "Change password success",
+    "successfullyTitle": "Change password success",
     "successfullyText": "You have successfully logged in"
   },
   "CompleteRegistration": {
@@ -74,6 +74,10 @@
     "title": "Join as a client or freelancer",
     "button": "Create My Account",
     "error": "Server error, please try again"
+  },
+  "Welcome": {
+    "title": "Welcome",
+    "link": "Create my profile"
   },
   "ProfileEditForm": {
     "formTitle": "Profile",
@@ -130,11 +134,7 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": [
-        "Pre-Intermediate",
-        "Intermediate",
-        "Upper-Intermediate"
-      ]
+      "options": ["Pre-Intermediate", "Intermediate", "Upper-Intermediate"]
     },
     "description": {
       "title": "Description",
@@ -194,6 +194,9 @@
       "phoneNumber": {
         "title": "Phone number"
       }
+    },
+    "errorMessages": {
+      "userNotFound": "userNotFound"
     }
   }
 }
