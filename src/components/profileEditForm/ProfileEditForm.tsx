@@ -13,7 +13,7 @@ import {
   useUpdateProfileMutation,
 } from "services/profileInfo/profileInfoAPI";
 import useJwtDecoder from "hooks/useJwtDecoder";
-import { IEducation, IExperience } from "../../services/profileInfo/typesDef";
+import { IEducation, IExperience } from "services/profileInfo/typesDef";
 
 function ProfileEditForm() {
   const { sub } = useJwtDecoder();

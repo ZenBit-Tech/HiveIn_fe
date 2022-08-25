@@ -4,7 +4,7 @@ import { ISelectProps } from "components/UI/select/typesDef";
 import { Controller } from "react-hook-form";
 import { SErrorMessage } from "components/UI/textField/style";
 import { selectStyles } from "components/UI/select/style";
-import { useGetInfoQuery } from "../../../services/categoriesAndSkills/categoriesAndSkills";
+import { useGetInfoQuery } from "services/categoriesAndSkills/categoriesAndSkills";
 
 function Select(props: ISelectProps) {
   const { control, formFieldName, errors } = props;
