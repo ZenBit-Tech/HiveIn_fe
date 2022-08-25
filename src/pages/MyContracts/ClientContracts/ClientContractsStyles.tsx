@@ -1,50 +1,57 @@
 import styled from "styled-components";
-import Title from "antd/lib/typography/Title";
+import { BLACK, TEXT_GRAY } from "utils/colorConsts";
 
-import { TEXT_GRAY } from "utils/colorConsts";
+interface ITitle {
+  pd: string;
+  pd_bottom: string;
+  font_sz: string;
+}
 
 const PageContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
   column-gap: 10px;
 `;
 
-export const Section = styled.section`
+export const Header = styled.div`
   width: 60%;
-  border: 1px solid red;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: center;
-`;
-
-export const ContentBox = styled.section`
-  border: 1px solid blue;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
-export const TitleText = styled(Title)`
+export const TitleText = styled.div<ITitle>`
+  display: flex;
+  font-size: ${(props) => props.font_sz};
+  flex-direction: column;
+  color: ${BLACK};
+  padding: ${(props) => props.pd};
+  padding-bottom: ${(props) => props.pd_bottom};
+  font-weight: 400;
+`;
+
+export const NameText = styled.div`
   color: ${TEXT_GRAY};
-  padding: 20px;
-  border: 1px solid black;
+  font-size: 14px;
+  padding: 5px;
+  font-weight: 400;
 `;
 
-export const Filter = styled.div`
-  border: 1px solid green;
-  width: 40%;
-  padding: 10px;
-`;
-
-export const JobList = styled.div`
-  border: 1px solid red;
+export const Section = styled.div`
   width: 60%;
-  padding: 10px;
+  display: flex;
+  align-items: center;
+`;
+
+export const JobPosting = styled.div`
+  border: 1px solid ${TEXT_GRAY};
+  padding: 25px;
+  border-radius: 10px;
+  width: 70%;
 `;
 
 export default PageContainer;

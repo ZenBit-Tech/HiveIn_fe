@@ -10,6 +10,14 @@
   },
   "MyContracts": {
     "title": "My Contracts"
+    
+  },
+  "MyJobs": {
+    "title": "My Jobs",
+    "subTitle": "Your Projects",
+    "postJob": "Post a Job",
+    "allPostings": "Your Postings",
+    "nothingToShow": "No active job posts"
   },
   "Chat": {
     "title": "Chat"
