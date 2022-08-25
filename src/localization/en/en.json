@@ -186,5 +186,27 @@
     "errorMessages": {
       "userNotFound": "userNotFound"
     }
+  },
+  "Talent": {
+    "Discover": {
+      "tabName": "Discover",
+      "title": "Find the best candidate",
+      "keyWords": "Key words:",
+      "category": "Choose a category:",
+      "skills": "Choose at least 3 skills from the following:",
+      "foundCandidates": "Found candidates",
+      "recentlyViewed": "Recently viewed",
+      "seeAll": "See all",
+      "seeLess": "See less"
+    },
+    "YourHires": {
+      "tabName": "Your hires"
+    },
+    "RecentlyViewed": {
+      "tabName": "Recently viewed"
+    },
+    "SavedTalent": {
+      "tabName": "Saved talent"
+    }
   }
 }

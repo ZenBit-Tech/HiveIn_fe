@@ -12,3 +12,7 @@ export const SIGN_IN_ROUTE = "/login";
 export const FORGOT_PASSWORD_ROUTE = "/forgot-password";
 export const RESTORE_PASSWORD_ROUTE = "/restore-password";
 export const WELCOME_ROUTE = "/welcome";
+export const DISCOVER_ROUTE = "/discover";
+export const YOUR_HIRES_ROUTE = "/your-hires";
+export const SAVED_TALENT_ROUTE = "/saved-talent";
+export const RECENTLY_VIEWED_ROUTE = "/recently-viewed";
