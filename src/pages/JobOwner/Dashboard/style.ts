@@ -19,14 +19,14 @@ const Form = styled.form`
   align-items: center;
   justify-content: space-evenly;
   width: 70%;
-  height: 35vh;
+  height: 45vh;
   margin: 10px 0;
 `;
 
 const Box = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-evenly;
   width: 70%;
 `;

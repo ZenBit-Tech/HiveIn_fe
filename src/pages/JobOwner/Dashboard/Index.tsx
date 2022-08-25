@@ -1,14 +1,23 @@
+import React from "react";
 import { Button, Divider, Typography } from "antd";
 import JobPost from "components/JobPost/Index";
 import TextField from "components/UI/textField/TextField";
-import React from "react";
 import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { BLUE } from "utils/colorConsts";
+import { yupResolver } from "@hookform/resolvers/yup";
 import S from "./style";
+import resolver from "./schema";
 
 export default function Dashboard() {
-  const { control } = useForm();
-  const { Title, Text } = Typography;
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(resolver),
+  });
+  const { Title } = Typography;
 
   const mockPosts = [
     {
@@ -26,12 +35,25 @@ export default function Dashboard() {
       createdAt: new Date(),
     },
   ];
+  const { t } = useTranslation();
+  const stepsList = [
+    t("Dashboard.createJobTutorial.list.item1"),
+    t("Dashboard.createJobTutorial.list.item2"),
+    t("Dashboard.createJobTutorial.list.item3"),
+    t("Dashboard.createJobTutorial.list.item4"),
+  ];
+
+  function onSubmit(evt: any) {
+    return evt;
+  }
+
   return (
     <S.Container>
-      <S.Form>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
         <div style={{ width: "50%" }}>
           <S.InputBox>
             <TextField
+              errors={errors}
               formFieldName="name"
               type="text"
               width="full"
@@ -41,6 +63,7 @@ export default function Dashboard() {
           </S.InputBox>
           <S.InputBox>
             <TextField
+              errors={errors}
               formFieldName="description"
               multiline
               type="text"
@@ -50,17 +73,20 @@ export default function Dashboard() {
               control={control}
             />
           </S.InputBox>
+          <Button htmlType="submit" shape="round" size="large" type="primary">
+            {t("Dashboard.buttons.save")}
+          </Button>
         </div>
         <Button shape="round" size="large" type="primary">
-          Post a job
+          {t("Dashboard.buttons.createPosts")}
         </Button>
       </S.Form>
       <S.Box>
         <Divider />
         <S.TitleContainer>
-          <Title level={4}>Your postings</Title>
+          <Title level={4}>{t("Dashboard.titles.posts")}</Title>
           <Button shape="round" size="large" type="primary">
-            See all postings
+            {t("Dashboard.buttons.seePosts")}
           </Button>
         </S.TitleContainer>
         {mockPosts.map(({ createdAt, hired, messages, name, proposals }) => (
@@ -78,9 +104,9 @@ export default function Dashboard() {
       <S.Box>
         <Divider />
         <S.TitleContainer>
-          <Title level={4}>Your drafts</Title>
+          <Title level={4}>{t("Dashboard.titles.drafts")}</Title>
           <Button shape="round" size="large" type="primary">
-            See all drafts
+            {t("Dashboard.buttons.seeDrafts")}
           </Button>
         </S.TitleContainer>
         {mockPosts.map(({ createdAt, name }) => (
@@ -88,15 +114,26 @@ export default function Dashboard() {
             <JobPost createdAt={createdAt} name={name} />
           </div>
         ))}
+        <Divider />
       </S.Box>
       <S.Box>
-        <Title level={4} style={{ color: BLUE }}>
-          What is there for you in a Talent?
-        </Title>
-        <Text>
-          {`A huge community with millions of talented professionals within
-          ${(<Text style={{ color: BLUE }}>4 steps</Text>)} away`}
-        </Text>
+        <div style={{ width: "45%" }}>
+          <Title level={4} style={{ color: BLUE }}>
+            {t("Dashboard.createJobTutorial.title")}
+          </Title>
+          <span>
+            {t("Dashboard.createJobTutorial.subtitle.start")}{" "}
+            <span style={{ color: BLUE }}>
+              {t("Dashboard.createJobTutorial.subtitle.focus")}
+            </span>{" "}
+            {t("Dashboard.createJobTutorial.subtitle.end")}
+          </span>
+          <ol>
+            {stepsList.map((item) => (
+              <li style={{ padding: "5px 0" }}>{item}</li>
+            ))}
+          </ol>
+        </div>
       </S.Box>
     </S.Container>
   );
