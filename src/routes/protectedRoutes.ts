@@ -1,4 +1,5 @@
 import Chat from "pages/Chat";
+import Dashboard from "pages/JobOwner/Dashboard/Index";
 import MyContracts from "pages/MyContracts";
 import Profile from "pages/Profile";
 import Proposals from "pages/Proposals";
@@ -15,6 +16,7 @@ import {
   SETTINGS_ROUTE,
   SETTINGS_CONTACT_INFO_ROUTE,
   WELCOME_ROUTE,
+  DASHBOARD_ROUTE,
 } from "utils/routeConsts";
 
 const protectedRoutes: RoutesType[] = [
@@ -49,6 +51,10 @@ const protectedRoutes: RoutesType[] = [
   {
     path: WELCOME_ROUTE,
     component: Welcome,
+  },
+  {
+    path: DASHBOARD_ROUTE,
+    component: Dashboard,
   },
 ];
 

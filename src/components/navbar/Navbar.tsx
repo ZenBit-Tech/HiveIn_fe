@@ -22,6 +22,7 @@ import {
   PROFILE_ROUTE,
   SIGN_UP_ROUTE,
   SIGN_IN_ROUTE,
+  DASHBOARD_ROUTE,
 } from "utils/routeConsts";
 import useAuth from "hooks/useAuth";
 import { MOBILE_SCREEN_SIZE } from "utils/navBarConsts";
@@ -56,6 +57,7 @@ function Navbar() {
           <NavLink path={SEARCH_WORK_ROUTE}>{t("SearchWork.title")}</NavLink>
           <NavLink path={PROPOSALS_ROUTE}>{t("Proposals.title")}</NavLink>
           <NavLink path={MY_CONTRACTS_ROUTE}>{t("MyContracts.title")}</NavLink>
+          <NavLink path={DASHBOARD_ROUTE}>{t("Dashboard.title")}</NavLink>
         </>
       )}
 
