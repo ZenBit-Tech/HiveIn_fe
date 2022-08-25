@@ -1,5 +1,5 @@
 import Chat from "pages/Chat";
-import MyContracts from "pages/MyContracts/MyContracts";
+import MyJobs from "pages/MyJobs/MyContracts";
 import Profile from "pages/Profile";
 import Proposals from "pages/Proposals";
 import SearchWork from "pages/SearchWork";
@@ -15,6 +15,7 @@ import {
   SETTINGS_ROUTE,
   SETTINGS_CONTACT_INFO_ROUTE,
   WELCOME_ROUTE,
+  MY_JOBS_ROUTE,
 } from "utils/routeConsts";
 
 const protectedRoutes: RoutesType[] = [
@@ -28,7 +29,11 @@ const protectedRoutes: RoutesType[] = [
   },
   {
     path: MY_CONTRACTS_ROUTE,
-    component: MyContracts,
+    component: MyJobs,
+  },
+  {
+    path: MY_JOBS_ROUTE,
+    component: MyJobs,
   },
   {
     path: CHAT_ROUTE,

@@ -7,10 +7,11 @@ import PageContainer, {
   NameText,
   Section,
   TitleText,
-} from "pages/MyContracts/ClientContracts/ClientContractsStyles";
+} from "pages/MyJobs/ClientContracts/ClientContractsStyles";
 import { useTranslation } from "react-i18next";
 import { SEARCH_WORK_ROUTE } from "utils/routeConsts";
 
+// Testing without backend connected
 const jobPosts: any[] | undefined = [
   { id: "1", title: "Test1", description: "test" },
   { id: "2", title: "Test2", description: "test2" },

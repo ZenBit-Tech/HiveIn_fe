@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { BLACK, TEXT_GRAY } from "utils/colorConsts";
+import { WRAP_SCREEN_SIZE } from "utils/mediaQueryConsts";
 
 interface ITitle {
   pd: string;
@@ -22,6 +23,9 @@ export const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: ${WRAP_SCREEN_SIZE}) {
+    width: 100%;
+  }
 `;
 
 export const TitleText = styled.div<ITitle>`
@@ -45,6 +49,9 @@ export const Section = styled.div`
   width: 60%;
   display: flex;
   align-items: center;
+  @media (max-width: ${WRAP_SCREEN_SIZE}) {
+    width: 100%;
+  }
 `;
 
 export const JobPosting = styled.div`
@@ -52,6 +59,9 @@ export const JobPosting = styled.div`
   padding: 25px;
   border-radius: 10px;
   width: 70%;
+  @media (max-width: ${WRAP_SCREEN_SIZE}) {
+    width: 100%;
+  }
 `;
 
 export default PageContainer;

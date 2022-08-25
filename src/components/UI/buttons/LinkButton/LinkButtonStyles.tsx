@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { BLUE, WHITE, DARK_BLUE } from "utils/colorConsts";
+import { LINK_BUTTON_WRAP_SIZE } from "utils/mediaQueryConsts";
 
 const Button = styled.div`
   border-radius: 50px;
@@ -14,6 +15,9 @@ const Button = styled.div`
   color: ${WHITE};
   &:hover {
     background-color: ${DARK_BLUE};
+  }
+  @media (max-width: ${LINK_BUTTON_WRAP_SIZE}) {
+    display: none;
   }
 `;
 
