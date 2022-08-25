@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-
+import jwt_decode from "jwt-decode";
 import NavLink from "components/UI/navlink/NavLink";
 import NavbarStyles, { NavBarButtons } from "components/navbar/NavbarStyles";
 import logo from "components/navbar/imgs/logo.svg";
@@ -26,11 +26,65 @@ import {
 } from "utils/routeConsts";
 import useAuth from "hooks/useAuth";
 import { MOBILE_SCREEN_SIZE } from "utils/navBarConsts";
+import { useEffect, useState } from "react";
+
+interface NavLinkType {
+  title: string;
+  to: string;
+}
+
+interface TokenType {
+  role: string;
+}
 
 function Navbar() {
   const { authToken, signOut } = useAuth();
+  const [role, setRole] = useState("");
+  const [navLinks, setNavLinks] = useState<NavLinkType[]>([]);
   const { t } = useTranslation();
   const { screenWidth } = useViewport();
+
+  useEffect(() => {
+    if (!authToken) return;
+    const decoded: TokenType = jwt_decode(authToken);
+    setRole(decoded.role);
+  }, [authToken]);
+
+  useEffect(() => {
+    if (role === "freelancer") {
+      setNavLinks([
+        {
+          to: SEARCH_WORK_ROUTE,
+          title: t("SearchWork.title"),
+        },
+        {
+          to: PROPOSALS_ROUTE,
+          title: t("Proposals.title"),
+        },
+        {
+          to: MY_CONTRACTS_ROUTE,
+          title: t("MyContracts.title"),
+        },
+      ]);
+    }
+    if (role === "client") {
+      setNavLinks([
+        {
+          to: DASHBOARD_ROUTE,
+          title: t("Dashboard.title"),
+        },
+        {
+          to: DASHBOARD_ROUTE,
+          title: "Jobs",
+        },
+        {
+          to: DASHBOARD_ROUTE,
+          title: "Talent",
+        },
+      ]);
+    }
+    // eslint-disable-next-line
+  }, [role, authToken]);
 
   if (!authToken) {
     return (
@@ -54,10 +108,9 @@ function Navbar() {
         ""
       ) : (
         <>
-          <NavLink path={SEARCH_WORK_ROUTE}>{t("SearchWork.title")}</NavLink>
-          <NavLink path={PROPOSALS_ROUTE}>{t("Proposals.title")}</NavLink>
-          <NavLink path={MY_CONTRACTS_ROUTE}>{t("MyContracts.title")}</NavLink>
-          <NavLink path={DASHBOARD_ROUTE}>{t("Dashboard.title")}</NavLink>
+          {navLinks.map(({ title, to }) => (
+            <NavLink path={to}>{title}</NavLink>
+          ))}
         </>
       )}
 
@@ -65,12 +118,22 @@ function Navbar() {
         <NavLink path={CHAT_ROUTE}>
           <NavBarButton icon={<MessageFilled />} title={t("Chat.title")} />
         </NavLink>
-        <NavLink path={SETTINGS_ROUTE}>
-          <NavBarButton icon={<SettingFilled />} title={t("Settings.title")} />
-        </NavLink>
-        <NavLink path={PROFILE_ROUTE}>
-          <NavBarButton icon={<UserOutlined />} title={t("Profile.title")} />
-        </NavLink>
+        {role === "freelancer" ? (
+          <>
+            <NavLink path={SETTINGS_ROUTE}>
+              <NavBarButton
+                icon={<SettingFilled />}
+                title={t("Settings.title")}
+              />
+            </NavLink>
+            <NavLink path={PROFILE_ROUTE}>
+              <NavBarButton
+                icon={<UserOutlined />}
+                title={t("Profile.title")}
+              />
+            </NavLink>
+          </>
+        ) : null}
         <NavBarButton
           icon={<LogoutOutlined />}
           title={t("SignIn.signOut")}
