@@ -14,7 +14,7 @@ import { IEducationColumnProps } from "components/educationColumn/typesDef";
 import DatePicker from "components/UI/datePicker/DatePicker";
 
 function EducationColumn(props: IEducationColumnProps) {
-  const { type, deletable, id, removeHandler, index, control } = props;
+  const { type, id, removeHandler, index, control } = props;
   const educationColumnType = "education";
   const inputsProps =
     type === educationColumnType
@@ -53,15 +53,14 @@ function EducationColumn(props: IEducationColumnProps) {
 
   return (
     <SWrapper>
-      {deletable && (
-        <IconButton
-          sx={deleteButtonSx}
-          onClick={() => handleRemoveButton(id)}
-          variant="outlined"
-        >
-          <DeleteOutlineIcon />
-        </IconButton>
-      )}
+      <IconButton
+        sx={deleteButtonSx}
+        onClick={() => handleRemoveButton(id)}
+        variant="outlined"
+      >
+        <DeleteOutlineIcon />
+      </IconButton>
+
       <SDiv>
         <TextField
           maxLength={25}

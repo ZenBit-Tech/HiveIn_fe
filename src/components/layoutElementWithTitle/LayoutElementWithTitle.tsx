@@ -18,9 +18,10 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     helperText,
     toggleButtonOptions,
     maxLength,
-    skillsOptions,
     control,
     errors,
+    freelancerInfo,
+    setValue,
   } = props;
 
   const renderTextInput = () => (
@@ -109,8 +110,12 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
   );
 
   const renderSkillsLayout = () =>
-    skillsOptions ? (
-      <SkillsLayout errors={errors} control={control} options={skillsOptions} />
+    freelancerInfo ? (
+      <SkillsLayout
+        options={freelancerInfo?.skills}
+        errors={errors}
+        setValue={setValue}
+      />
     ) : null;
 
   const elementTypes: { [propName: string]: typeof element } = {

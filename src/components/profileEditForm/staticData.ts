@@ -28,7 +28,6 @@ const propsDataCollection: ILayoutElementWithoutControl[] = [
     element: "skillsLayout",
     formFieldName: "skills",
     containerWidth: "full",
-    skillsOptions: i18next.ProfileEditForm.skills.skillsOptions,
   },
   {
     title: i18next.ProfileEditForm.englishLevel.title,
