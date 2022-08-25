@@ -5,7 +5,7 @@ function SignedInRouteBlocker({ children }: { children: JSX.Element }) {
   const { authToken } = useAuth();
 
   if (authToken) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/search-work" replace />;
   }
 
   return children;

@@ -10,7 +10,6 @@ import {
 } from "redux-persist";
 import setUserApi from "services/user/setUserAPI";
 import authApi from "services/auth/setAuthAPI";
-
 import counterReducer from "store/slices/counterSlice";
 import userPersistedReducer from "store/slices/userSlice";
 import { getUserContactInfoApi } from "services/contactInfo/contactInfoAPI";

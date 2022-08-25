@@ -1,7 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { RootState } from "store/store";
 
-interface User {
-  id: number | undefined;
+export interface IUser {
+  id?: string | undefined;
+  email?: string | undefined;
   role?: string | undefined;
   firstName?: string | undefined;
   lastName?: string | undefined;
@@ -10,21 +12,35 @@ interface User {
 
 const userApi = createApi({
   reducerPath: "setUser",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: process.env.REACT_APP_API_URL,
+    prepareHeaders: (headers, { getState }) => {
+      const { authToken } = (getState() as RootState).user;
+
+      if (authToken) {
+        headers.set("Authorization", `Bearer ${authToken}`);
+      }
+
+      return headers;
+    },
+  }),
   endpoints: (builder) => ({
-    setUser: builder.mutation<User, User>({
-      query: ({ id, ...patch }) => ({
+    getUser: builder.query<IUser, string>({
+      query: (id) => `/settings-info/${id}`,
+    }),
+    updateUser: builder.mutation<IUser, IUser>({
+      query: ({ id, ...userInfo }: IUser) => ({
         url: `/settings-info/${id}`,
         method: "PATCH",
         body: {
-          ...patch,
+          ...userInfo,
         },
       }),
-      transformResponse: (response: User) => response,
+      transformResponse: (response: IUser) => response,
     }),
   }),
 });
 
-export const { useSetUserMutation } = userApi;
+export const { useUpdateUserMutation, useGetUserQuery } = userApi;
 
 export default userApi;

@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AuthResponse } from "services/auth/setAuthAPI";
-import { setSignIn, setSignOut } from "store/slices/userSlice";
+import { setSignOut, setUser } from "store/slices/userSlice";
 import { RootState, userPersistor } from "store/store";
 
 const useAuth = () => {
-  const { authToken, email, id, role } = useSelector(
+  const { authToken, email, role } = useSelector(
     (state: RootState) => state.user
   );
 
@@ -15,10 +15,9 @@ const useAuth = () => {
     // in localStorage with Redux Persist
 
     dispatch(
-      setSignIn({
+      setUser({
         authToken: res.token,
         email: res.email,
-        id: res.id,
         role: res.role,
       })
     );
@@ -30,7 +29,7 @@ const useAuth = () => {
     await userPersistor.purge();
   };
 
-  return { authToken, email, id, role, signIn, signOut };
+  return { authToken, email, role, signIn, signOut };
 };
 
 export default useAuth;
