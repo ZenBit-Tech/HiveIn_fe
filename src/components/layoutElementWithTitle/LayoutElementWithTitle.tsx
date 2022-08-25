@@ -14,7 +14,6 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     title,
     formFieldName,
     containerWidth,
-    selectOptions,
     helperText,
     toggleButtonOptions,
     maxLength,
@@ -77,15 +76,9 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     />
   );
 
-  const renderSelect = () =>
-    selectOptions ? (
-      <Select
-        errors={errors}
-        formFieldName={formFieldName}
-        control={control}
-        options={selectOptions}
-      />
-    ) : null;
+  const renderSelect = () => (
+    <Select errors={errors} formFieldName={formFieldName} control={control} />
+  );
 
   const renderToggleButton = () =>
     toggleButtonOptions ? (

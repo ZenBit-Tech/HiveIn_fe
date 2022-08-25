@@ -22,7 +22,6 @@ export interface ILayoutElementWithoutControl {
     | "phoneInput";
   containerWidth: "full" | "half";
   formFieldName: string;
-  selectOptions?: string[];
   toggleButtonOptions?: string[];
   helperText?: string;
   maxLength?: number;

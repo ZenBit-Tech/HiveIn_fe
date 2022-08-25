@@ -14,7 +14,6 @@ const propsDataCollection: ILayoutElementWithoutControl[] = [
     element: "select",
     formFieldName: "category",
     containerWidth: "half",
-    selectOptions: i18next.ProfileEditForm.category.options,
   },
   {
     title: i18next.ProfileEditForm.rate.title,

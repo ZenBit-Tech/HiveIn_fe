@@ -85,19 +85,7 @@
       "title": "Position"
     },
     "category": {
-      "title": "Category",
-      "options": [
-        "Legal",
-        "IT",
-        "Sales",
-        "Finance",
-        "Construction",
-        "Accounting",
-        "Design",
-        "Security",
-        "Healthcare",
-        "Marketing"
-      ]
+      "title": "Category"
     },
     "rate": {
       "title": "Rate",
