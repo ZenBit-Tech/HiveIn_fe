@@ -1,11 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-interface SignIn {
+interface AuthFields {
   email: string;
   password: string;
 }
 
-export interface SignInResponse {
+export interface AuthResponse {
   token: string;
   email: string;
   id: number;
@@ -16,7 +16,7 @@ const authApi = createApi({
   reducerPath: "signIn",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
   endpoints: (builder) => ({
-    signIn: builder.mutation<SignInResponse, SignIn>({
+    signIn: builder.mutation<AuthResponse, AuthFields>({
       query: ({ email, password }) => ({
         url: "/auth/sign-in",
         method: "POST",
@@ -25,9 +25,20 @@ const authApi = createApi({
           password,
         },
       }),
-      transformResponse: (response: SignInResponse) => response,
+      transformResponse: (response: AuthResponse) => response,
     }),
-    googleOAuthSignIn: builder.query<SignInResponse, void>({
+    signUp: builder.mutation<AuthResponse, AuthFields>({
+      query: ({ email, password }) => ({
+        url: "/auth/sign-up",
+        method: "POST",
+        body: {
+          email,
+          password,
+        },
+      }),
+      transformResponse: (response: AuthResponse) => response,
+    }),
+    googleOAuthSignIn: builder.query<AuthResponse, void>({
       query: () => ({
         url: "/auth/google/success",
         credentials: "include",
@@ -36,6 +47,10 @@ const authApi = createApi({
   }),
 });
 
-export const { useSignInMutation, useGoogleOAuthSignInQuery } = authApi;
+export const {
+  useSignInMutation,
+  useSignUpMutation,
+  useGoogleOAuthSignInQuery,
+} = authApi;
 
 export default authApi;

@@ -10,4 +10,5 @@ export interface ITextFieldProps {
   rows?: number;
   maxLength?: number;
   errors?: FieldErrorsImpl;
+  disabled?: boolean;
 }

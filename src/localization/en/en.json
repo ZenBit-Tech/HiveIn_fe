@@ -26,6 +26,8 @@
   "SignUp": {
     "title": "Sign Up",
     "signUpGoogle": "Sign Up with Google",
+    "successfulSignUp": "You have been successfully registered",
+    "alreadyRegistered": "Email already registered. Please sign in",
     "register": "Register",
     "or": "or",
     "useEmail": "Use your email"
@@ -40,8 +42,14 @@
     "forgotPass": "Forgot your password?",
     "register": "Register now",
     "successLogin": "You have successfully logged in",
-    "errorLogin": "Invalid email and/or password",
     "errorGoogleOAuth": "Server error, please try again"
+  },
+  "ServerErrors": {
+    "404": "Email not found, please sign up",
+    "401": "Invalid email and/or password",
+    "409": "Email already registered. Please login with your password or your Google account.",
+    "500": "Server error, please try again",
+    "FETCH_ERROR": "Server error, please try again"
   },
   "ForgotPassword": {
     "title": "Forgot your password?",
@@ -62,7 +70,15 @@
     "successfullyText": "You have successfully logged in"
   },
   "CompleteRegistration": {
-    "helloWorld": "Hello complete registration page!"
+    "client": "I'm a client, hiring for a project",
+    "freelancer": "I'm a freelancer, looking for work",
+    "title": "Join as a client or freelancer",
+    "button": "Create My Account",
+    "error": "Server error, please try again"
+  },
+  "Welcome": {
+    "title": "Welcome",
+    "link": "Create my profile"
   },
   "ProfileEditForm": {
     "formTitle": "Profile",
@@ -179,6 +195,9 @@
       "phoneNumber": {
         "title": "Phone number"
       }
+    },
+    "errorMessages": {
+      "userNotFound": "userNotFound"
     }
   }
 }

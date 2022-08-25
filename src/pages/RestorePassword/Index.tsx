@@ -33,8 +33,7 @@ export default function RestorePassword() {
 
   async function onSubmit({ password }: RestorePasswordForm) {
     if (token) {
-      const response = await restorePassword({ token, password });
-      console.log(response);
+      await restorePassword({ token, password });
     }
 
     Modal.success({
