@@ -7,7 +7,7 @@ import PageContainer, {
   NameText,
   Section,
   TitleText,
-} from "pages/MyJobs/ClientContracts/ClientContractsStyles";
+} from "pages/MyJobs/ClientJobs/ClientJobsStyles";
 import { useTranslation } from "react-i18next";
 import { SEARCH_WORK_ROUTE } from "utils/routeConsts";
 
@@ -17,7 +17,7 @@ const jobPosts: any[] | undefined = [
   { id: "2", title: "Test2", description: "test2" },
 ];
 
-function ClientContracts() {
+function ClientJobs() {
   const { email } = useAuth();
   const { t } = useTranslation();
 
@@ -51,4 +51,4 @@ function ClientContracts() {
   );
 }
 
-export default ClientContracts;
+export default ClientJobs;

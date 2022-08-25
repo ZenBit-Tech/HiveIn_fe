@@ -1,4 +1,4 @@
-import ClientContracts from "pages/MyJobs/ClientContracts/ClientContracts";
+import ClientContracts from "pages/MyJobs/ClientJobs/ClientJobs";
 
 function MyJobs() {
   return <ClientContracts />;

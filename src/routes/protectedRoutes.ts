@@ -1,5 +1,5 @@
 import Chat from "pages/Chat";
-import MyJobs from "pages/MyJobs/MyContracts";
+import MyJobs from "pages/MyJobs/MyJobs";
 import Profile from "pages/Profile";
 import Proposals from "pages/Proposals";
 import SearchWork from "pages/SearchWork";
