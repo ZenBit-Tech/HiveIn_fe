@@ -22,7 +22,8 @@ import {
   PROFILE_ROUTE,
   SIGN_UP_ROUTE,
   SIGN_IN_ROUTE,
-  DASHBOARD_ROUTE,
+  CLIENT_PROFILE,
+  CLIENT_HOME,
 } from "utils/routeConsts";
 import useAuth from "hooks/useAuth";
 import { MOBILE_SCREEN_SIZE } from "utils/navBarConsts";
@@ -70,15 +71,11 @@ function Navbar() {
     if (role === "client") {
       setNavLinks([
         {
-          to: DASHBOARD_ROUTE,
-          title: t("Dashboard.title"),
-        },
-        {
-          to: DASHBOARD_ROUTE,
+          to: CLIENT_HOME,
           title: "Jobs",
         },
         {
-          to: DASHBOARD_ROUTE,
+          to: CLIENT_HOME,
           title: "Talent",
         },
       ]);
@@ -100,7 +97,7 @@ function Navbar() {
 
   return (
     <NavbarStyles>
-      <NavLink path={HOME_PAGE_ROUTE}>
+      <NavLink path={role === "freelancer" ? HOME_PAGE_ROUTE : CLIENT_HOME}>
         <img height="50px" alt="logo" src={logo} />
       </NavLink>
 
@@ -133,12 +130,21 @@ function Navbar() {
               />
             </NavLink>
           </>
-        ) : null}
-        <NavBarButton
-          icon={<LogoutOutlined />}
-          title={t("SignIn.signOut")}
-          onClick={signOut}
-        />
+        ) : (
+          <>
+            <NavLink path={CLIENT_PROFILE}>
+              <NavBarButton
+                icon={<UserOutlined />}
+                title={t("Profile.title")}
+              />
+            </NavLink>
+            <NavBarButton
+              icon={<LogoutOutlined />}
+              title={t("SignIn.signOut")}
+              onClick={signOut}
+            />
+          </>
+        )}
 
         {screenWidth < MOBILE_SCREEN_SIZE ? <MenuDrawer /> : ""}
       </NavBarButtons>
