@@ -208,5 +208,32 @@
     "errorMessages": {
       "userNotFound": "userNotFound"
     }
+  },
+  "Dashboard": {
+    "title": "Dashboard",
+    "titles": {
+      "posts": "Your postings",
+      "drafts": "Your drafts"
+    },
+    "buttons": {
+        "save": "Save changes",
+        "createPosts": "Post a job",
+        "seePosts": "See all posts",
+        "seeDrafts": "See all drafts"
+      },
+    "createJobTutorial": {
+      "title": "What is there for you in a Talent?",
+      "subtitle": {
+        "start": "A huge community with millions of talented professionals within",
+        "focus": "4 steps",
+        "end": "away"
+      },
+      "list": {
+        "item1": "Post a job at a GetJobs jobs marketplace",
+        "item2": "Find the best freelancer",
+        "item3": "Send the message in Chat",
+        "item4": "Hire the freelancer"
+      }
+    }
   }
 }

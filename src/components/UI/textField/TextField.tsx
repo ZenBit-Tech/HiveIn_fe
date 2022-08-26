@@ -13,7 +13,7 @@ function TextField(props: ITextFieldProps) {
     type,
     width,
     helperText,
-    multiline,
+    multiline = false,
     rows,
     maxLength,
     formFieldName,
