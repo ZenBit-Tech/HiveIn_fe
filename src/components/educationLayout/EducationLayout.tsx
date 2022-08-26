@@ -13,17 +13,7 @@ function EducationLayout({
   const { append, remove, fields } = useFieldArray({ control, name: type });
 
   const handleAddColumn: MouseEventHandler = () => {
-    append({
-      jobTitle: "",
-      employer: "",
-      startDate: null,
-      endDate: null,
-      city: "",
-      description: "",
-      degree: "",
-      school: "",
-      active: true,
-    });
+    append({ active: true });
   };
 
   const handleRemoveColumn = (id: string, index: number): void => {

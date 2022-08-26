@@ -67,15 +67,7 @@ function ProfileEditForm() {
 
     const shouldBeDeleted = filteredId.map((id) => ({
       id,
-      city: "",
-      description: "",
-      school: "",
-      endDate: new Date().toISOString(),
-      degree: "",
-      startDate: new Date().toISOString(),
       active: false,
-      employer: "",
-      jobTitle: "",
     }));
 
     return [...current, ...shouldBeDeleted];
