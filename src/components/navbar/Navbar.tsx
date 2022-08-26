@@ -16,7 +16,7 @@ import {
   SEARCH_WORK_ROUTE,
   HOME_PAGE_ROUTE,
   PROPOSALS_ROUTE,
-  MY_CONTRACTS_ROUTE,
+  MY_JOBS_ROUTE,
   CHAT_ROUTE,
   SETTINGS_ROUTE,
   PROFILE_ROUTE,
@@ -56,7 +56,7 @@ function Navbar() {
         <>
           <NavLink path={SEARCH_WORK_ROUTE}>{t("SearchWork.title")}</NavLink>
           <NavLink path={PROPOSALS_ROUTE}>{t("Proposals.title")}</NavLink>
-          <NavLink path={MY_CONTRACTS_ROUTE}>{t("MyContracts.title")}</NavLink>
+          <NavLink path={MY_JOBS_ROUTE}>{t("MyJobs.title")}</NavLink>
           <NavLink path={DASHBOARD_ROUTE}>{t("Dashboard.title")}</NavLink>
         </>
       )}

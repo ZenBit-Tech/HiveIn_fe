@@ -1,5 +1,5 @@
 function MyContracts() {
-  return <div>My Contracts</div>;
+  return <div>MyContracts</div>;
 }
 
 export default MyContracts;
