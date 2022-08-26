@@ -13,6 +13,8 @@ import authApi from "services/auth/setAuthAPI";
 import counterReducer from "store/slices/counterSlice";
 import userPersistedReducer from "store/slices/userSlice";
 import { getUserContactInfoApi } from "services/contactInfo/contactInfoAPI";
+import { getProfileInfoApi } from "services/profileInfo/profileInfoAPI";
+import { getSkillsOrCategory } from "services/categoriesAndSkills/categoriesAndSkills";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +22,8 @@ export const store = configureStore({
     [setUserApi.reducerPath]: setUserApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [getUserContactInfoApi.reducerPath]: getUserContactInfoApi.reducer,
+    [getProfileInfoApi.reducerPath]: getProfileInfoApi.reducer,
+    [getSkillsOrCategory.reducerPath]: getSkillsOrCategory.reducer,
     user: userPersistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -27,7 +31,10 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(getUserContactInfoApi.middleware),
+    })
+      .concat(getUserContactInfoApi.middleware)
+      .prepend(getProfileInfoApi.middleware)
+      .prepend(getSkillsOrCategory.middleware),
 });
 
 export const userPersistor = persistStore(store);

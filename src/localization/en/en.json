@@ -59,7 +59,7 @@
     "401": "Invalid email and/or password",
     "409": "Email already registered. Please login with your password or your Google account.",
     "500": "Server error, please try again",
-    "FETCH_ERROR" : "Server error, please try again" 
+    "FETCH_ERROR": "Server error, please try again"
   },
   "ForgotPassword": {
     "title": "Forgot your password?",
@@ -95,56 +95,22 @@
       "title": "Position"
     },
     "category": {
-      "title": "Category",
-      "options": [
-        "Legal",
-        "IT",
-        "Sales",
-        "Finance",
-        "Construction",
-        "Accounting",
-        "Design",
-        "Security",
-        "Healthcare",
-        "Marketing"
-      ]
+      "title": "Category"
     },
     "rate": {
       "title": "Rate",
       "helperText": "Charge per hour"
     },
     "skills": {
-      "title": "Skills",
-      "skillsOptions": [
-        "Business analyst",
-        "Consulting",
-        "Estimate",
-        "Recruiting",
-        "SMM",
-        "Copyrighting",
-        "UI/UX",
-        "Quality control",
-        "Taxation",
-        "Coaching",
-        "Full stack",
-        "Administration",
-        "Communication",
-        "Java Script",
-        "QA automation",
-        "ReactJS",
-        "Python",
-        "Game dev",
-        "Flutter",
-        "Node.js",
-        "DevOps",
-        "Scrum master",
-        "Agile coach",
-        "Project manager"
-      ]
+      "title": "Skills"
     },
     "englishLevel": {
       "title": "English level",
-      "options": ["Pre-Intermediate", "Intermediate", "Upper-Intermediate"]
+      "options": [
+        "pre-intermediate",
+        "intermediate",
+        "upper-intermediate"
+      ]
     },
     "description": {
       "title": "Description",
@@ -175,8 +141,12 @@
     "rateSmallerThenZero": "should be greater than 0",
     "skillsNotChosen": "select at least 3 options",
     "englishLevelNotChosen": "choose your english level",
-    "descriptionEmpty": "write short description"
+    "descriptionEmpty": "write short description",
+    "userNotFound": "sorry, user not found",
+    "defaultError": "sorry, something went wrong",
+    "requiredEducation": "all fields must be filled in if you want to save changes"
   },
+  "profileSuccessSubmitMessage": "changes saved",
   "profileEditFormButtonsNames": {
     "submit": "Save changes",
     "addEducation": "+ add education",
