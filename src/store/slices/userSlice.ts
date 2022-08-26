@@ -6,7 +6,6 @@ interface UserState {
   authToken?: string;
   email?: string;
   role?: "freelancer" | "client";
-  id?: number;
 }
 
 const initialState: UserState = {
