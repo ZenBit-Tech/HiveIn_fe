@@ -5,7 +5,7 @@ interface IResponseData {
   name: string;
 }
 
-export const getProfileInfoAPI = createApi({
+export const getSkillsOrCategory = createApi({
   reducerPath: "skillsAPI",
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_API_URL,
@@ -17,4 +17,4 @@ export const getProfileInfoAPI = createApi({
   }),
 });
 
-export const { useGetInfoQuery } = getProfileInfoAPI;
+export const { useGetInfoQuery } = getSkillsOrCategory;
