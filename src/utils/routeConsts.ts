@@ -3,6 +3,7 @@ export const SEARCH_WORK_ROUTE = "/search-work";
 export const PROPOSALS_ROUTE = "/proposals";
 export const MY_CONTRACTS_ROUTE = "/my-contracts";
 export const MY_JOBS_ROUTE = "/my-jobs";
+export const MY_JOB_ROUTE = `/${MY_JOBS_ROUTE}/:jobId`;
 export const CHAT_ROUTE = "/chat";
 export const SETTINGS_ROUTE = "/settings/profile";
 export const SETTINGS_CONTACT_INFO_ROUTE = "/settings/contact";

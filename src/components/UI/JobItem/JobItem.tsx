@@ -1,25 +1,30 @@
-import { Divider } from "antd";
-import LongMenu from "components/UI/JobItem/DropdownMenu";
 import JobTitle, {
   JobDescription,
-  RouterLink,
+  SkillTag,
 } from "components/UI/JobItem/JobItemStyles";
+import { useTranslation } from "react-i18next";
 
 interface Props {
-  title: string;
   description: string;
-  link: string;
+  payout: string;
+  skills: string[];
 }
 
-function JobItem({ title, description, link }: Props) {
+function JobItem({ description, payout, skills }: Props) {
+  const { t } = useTranslation();
+
   return (
     <>
-      <JobTitle>
-        <RouterLink to={link}>{title}</RouterLink>
-        <LongMenu />
+      <JobTitle font_sz="1.3em">
+        {t("MyJobs.info")} <JobTitle>{payout}</JobTitle>
       </JobTitle>
       <JobDescription>{description}</JobDescription>
-      <Divider />
+      <JobTitle font_sz="1.0em" pd_bottom="10px">
+        {t("MyJobs.skills")}
+      </JobTitle>
+      {skills.map((skill) => (
+        <SkillTag>{skill}</SkillTag>
+      ))}
     </>
   );
 }

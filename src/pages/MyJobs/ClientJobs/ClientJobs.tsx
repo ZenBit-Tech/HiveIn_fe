@@ -1,9 +1,9 @@
 import LinkButton from "components/UI/buttons/LinkButton/LinkButton";
-import JobItem from "components/UI/JobItem/JobItem";
+import JobItem from "components/UI/JobItems/JobItems";
 import useAuth from "hooks/useAuth";
 import PageContainer, {
   Header,
-  JobPosting,
+  Card,
   NameText,
   Section,
   TitleText,
@@ -13,8 +13,8 @@ import { SEARCH_WORK_ROUTE } from "utils/routeConsts";
 
 // Testing without backend connected
 const jobPosts: any[] | undefined = [
-  { id: "1", title: "Test1", description: "test" },
-  { id: "2", title: "Test2", description: "test2" },
+  { id: "1", title: "Freelancing website", description: "Description" },
+  { id: "2", title: "Landing page design", description: "Description" },
 ];
 
 function ClientJobs() {
@@ -24,14 +24,14 @@ function ClientJobs() {
   return (
     <PageContainer>
       <Header>
-        <TitleText font_sz="2.5em" pd="20px" pd_bottom="5%">
+        <TitleText>
           {t("MyJobs.subTitle")}
           <NameText>{email}</NameText>
         </TitleText>
         <LinkButton link={SEARCH_WORK_ROUTE}>{t("MyJobs.postJob")}</LinkButton>
       </Header>
       <Section>
-        <JobPosting>
+        <Card>
           <TitleText font_sz="1.5em" pd="5px" pd_bottom="10%">
             {t("MyJobs.allPostings")}
           </TitleText>
@@ -45,7 +45,7 @@ function ClientJobs() {
           ))}
 
           {jobPosts ? "" : t("MyJobs.nothingToShow")}
-        </JobPosting>
+        </Card>
       </Section>
     </PageContainer>
   );
