@@ -1,22 +1,21 @@
-import React, { MouseEventHandler, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { ISkillButtonProps } from "components/UI/buttons/skillButton/typesDef";
 
-function SkillButton({ text, append, remove }: ISkillButtonProps) {
-  const [active, setActive] = useState<boolean>(false);
+function SkillButton({ text, toggleActive, id, isActive }: ISkillButtonProps) {
+  const [active, setActive] = useState<boolean>(isActive);
 
-  const clickHandler: MouseEventHandler = () => {
-    if (active) remove(text);
-    else append(text);
-    setActive((state) => !state);
-  };
+  useEffect(() => {
+    setActive(isActive);
+  }, [isActive]);
 
   return (
     <Button
-      onClick={clickHandler}
+      onClick={() => toggleActive(id)}
       color={active ? "success" : "primary"}
       variant={active ? "contained" : "outlined"}
       size="small"
+      type="button"
     >
       {text}
     </Button>
