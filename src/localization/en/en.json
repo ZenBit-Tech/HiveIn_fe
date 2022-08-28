@@ -156,13 +156,15 @@
     "file": "Attach a file",
     "save": "Review and save your post",
     "post": "Now post your job",
+    "modal": "Your post has been successfully saved",
     "validation": {
-      "title": "enter position",
+      "title": "enter title",
       "category": "choose category",
       "rate": "should be greater than 0",
+      "duration": "should be greater than 0",
       "skills": "select at least 3 options",
       "englishLevel": "choose your english level",
-      "description": "write short description"
+      "description": "description is required"
     }
   },
   "ProfileEditForm": {
