@@ -11,6 +11,15 @@
   "MyContracts": {
     "title": "My Contracts"
   },
+  "MyJobs": {
+    "title": "My Jobs",
+    "subTitle": "Your Projects",
+    "postJob": "Post a Job",
+    "allPostings": "Your Postings",
+    "nothingToShow": "No active job posts",
+    "info": "About the project",
+    "skills": "Necessary Skills"
+  },
   "Chat": {
     "title": "Chat"
   },
@@ -173,19 +182,74 @@
       "title": "Position"
     },
     "category": {
-      "title": "Category",
+      "title": "Category"
+    },
+    "rate": {
+      "title": "Enter the charge per hour",
+      "placeholder": "Input a number"
+    },
+    "skills": {
+      "title": "Please, mark at least 3 skills",
       "options": [
-        "Legal",
-        "IT",
-        "Sales",
-        "Finance",
-        "Construction",
-        "Accounting",
-        "Design",
-        "Security",
-        "Healthcare",
-        "Marketing"
+        "Business analyst",
+        "Consulting",
+        "Estimate",
+        "Recruiting",
+        "SMM",
+        "Copyrighting",
+        "UI/UX",
+        "Quality control",
+        "Taxation",
+        "Coaching",
+        "Fullstack",
+        "Administration",
+        "Communication",
+        "Javascript",
+        "QA automation",
+        "ReactJS",
+        "Python",
+        "Game dev",
+        "Flutter",
+        "Node.js",
+        "DevOps",
+        "Scrum master",
+        "Agile coach",
+        "Project manager"
       ]
+    },
+    "englishLevel": {
+      "title": "Please, choose only one level of English",
+      "options": ["Pre-Intermediate", "Intermediate", "Upper-Intermediate"]
+    },
+    "description": {
+      "title": "Write job description (Project start and end dates; description of the work you want performed; deliverables you wish to receive and deadlines if applicable; budget)",
+      "placeholder": "Description",
+      "errors": [
+        "Note! Description is required",
+        "Note! Must be more than 50 characters"
+      ]
+    },
+    "file": "Attach a file",
+    "save": "Review and save your post",
+    "post": "Now post your job",
+    "modal": "Your post has been successfully saved",
+    "validation": {
+      "title": "enter title",
+      "category": "choose category",
+      "rate": "should be greater than 0",
+      "duration": "should be greater than 0",
+      "skills": "select at least 3 options",
+      "englishLevel": "choose your english level",
+      "description": "description is required"
+    }
+  },
+  "ProfileEditForm": {
+    "formTitle": "Profile",
+    "position": {
+      "title": "Position"
+    },
+    "category": {
+      "title": "Category"
     },
     "rate": {
       "title": "Rate",
@@ -222,7 +286,7 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": ["Pre-Intermediate", "Intermediate", "Upper-Intermediate"]
+      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
     },
     "description": {
       "title": "Description",
@@ -253,8 +317,12 @@
     "rateSmallerThenZero": "should be greater than 0",
     "skillsNotChosen": "select at least 3 options",
     "englishLevelNotChosen": "choose your english level",
-    "descriptionEmpty": "write short description"
+    "descriptionEmpty": "write short description",
+    "userNotFound": "sorry, user not found",
+    "defaultError": "sorry, something went wrong",
+    "requiredEducation": "all fields must be filled in if you want to save changes"
   },
+  "profileSuccessSubmitMessage": "changes saved",
   "profileEditFormButtonsNames": {
     "submit": "Save changes",
     "addEducation": "+ add education",
@@ -285,6 +353,33 @@
     },
     "errorMessages": {
       "userNotFound": "userNotFound"
+    }
+  },
+  "Dashboard": {
+    "title": "Dashboard",
+    "titles": {
+      "posts": "Your postings",
+      "drafts": "Your drafts"
+    },
+    "buttons": {
+      "save": "Save changes",
+      "createPosts": "Post a job",
+      "seePosts": "See all posts",
+      "seeDrafts": "See all drafts"
+    },
+    "createJobTutorial": {
+      "title": "What is there for you in a Talent?",
+      "subtitle": {
+        "start": "A huge community with millions of talented professionals within",
+        "focus": "4 steps",
+        "end": "away"
+      },
+      "list": {
+        "item1": "Post a job at a GetJobs jobs marketplace",
+        "item2": "Find the best freelancer",
+        "item3": "Send the message in Chat",
+        "item4": "Hire the freelancer"
+      }
     }
   },
   "UI": {

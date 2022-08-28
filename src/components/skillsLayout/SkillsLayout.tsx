@@ -1,37 +1,53 @@
-import React from "react";
-import {
-  useFieldArray,
-  Controller,
-  Control,
-  FieldErrorsImpl,
-} from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import { FieldErrorsImpl } from "react-hook-form";
 import SkillButton from "components/UI/buttons/skillButton/SkillButton";
 import SDiv from "components/skillsLayout/style";
 import { SErrorMessage } from "components/UI/textField/style";
+import { useGetInfoQuery } from "services/categoriesAndSkills/categoriesAndSkills";
 
 function SkillsLayout({
-  options,
-  control,
   errors,
+  options,
+  setValue,
 }: {
-  options: string[];
-  control: Control;
   errors: FieldErrorsImpl;
+  options: { id: number }[];
+  setValue: any;
 }) {
-  const { append, remove } = useFieldArray({ control, name: "skills" });
+  const { data } = useGetInfoQuery("skill");
+  const queriedActiveSkills = options.map(({ id }) => id);
+
+  const [activeSkills, setActiveSkills] = useState(queriedActiveSkills);
+
+  useEffect(() => {
+    setValue("skills", activeSkills);
+    // eslint-disable-next-line
+  }, [activeSkills]);
+
+  const changeHandler = (id: number) => {
+    if (activeSkills.includes(id)) {
+      setActiveSkills((state) => state.filter((e) => e !== id));
+    } else {
+      setActiveSkills((state) =>
+        state.indexOf(id) >= 0 ? state : [...state, id]
+      );
+    }
+  };
 
   return (
     <SDiv>
-      {options.map((buttonText) => (
-        <Controller
-          key={buttonText}
-          name={`skills.${buttonText}`}
-          control={control}
-          render={() => (
-            <SkillButton append={append} remove={remove} text={buttonText} />
-          )}
-        />
-      ))}
+      {!!data &&
+        data.map(({ id, name }) => {
+          return (
+            <SkillButton
+              key={id}
+              id={id}
+              toggleActive={changeHandler}
+              text={name}
+              isActive={activeSkills.includes(id)}
+            />
+          );
+        })}
       {!!errors.skills?.message && (
         <SErrorMessage>{errors.skills?.message?.toString()}</SErrorMessage>
       )}

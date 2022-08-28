@@ -26,11 +26,11 @@ const userApi = createApi({
   }),
   endpoints: (builder) => ({
     getUser: builder.query<IUser, string>({
-      query: (id) => `/settings-info/${id}`,
+      query: (id) => `/${process.env.REACT_APP_USER_CONTACT_INFO_URL}/${id}`,
     }),
     updateUser: builder.mutation<IUser, IUser>({
       query: ({ id, ...userInfo }: IUser) => ({
-        url: `/settings-info/${id}`,
+        url: `/${process.env.REACT_APP_USER_CONTACT_INFO_URL}/${id}`,
         method: "PATCH",
         body: {
           ...userInfo,

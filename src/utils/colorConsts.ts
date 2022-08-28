@@ -1,5 +1,6 @@
 export const LIGHT_GRAY = "#ddd";
 export const BLUE = "#065b90";
+export const BLACK = "#22272e";
 export const LIGHT_BLUE = "#c4d9ec";
 export const DARK_BLUE = "#0d375e";
 export const WHITE = "#ffffff";
@@ -8,3 +9,4 @@ export const DISABLED = "#898989";
 export const ERROR = "#FF0000";
 export const GOOGLE_BTN_BACKGROUND = "#4285f4";
 export const TEXT_GRAY = "#898989";
+export const BOX_BACKGROUND = "#f0f6ff";

@@ -3,9 +3,9 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";
 
 interface UserState {
-  authToken?: string | undefined;
-  email?: string | undefined;
-  role?: "freelancer" | "client" | undefined;
+  authToken?: string;
+  email?: string;
+  role?: "freelancer" | "client";
 }
 
 const initialState: UserState = {
