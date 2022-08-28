@@ -21,6 +21,7 @@ const propsDataCollection: ILayoutElementWithoutControl[] = [
     element: "numberInput",
     formFieldName: "rate",
     containerWidth: "half",
+    rate: true,
     helperText: i18next.ProfileEditForm.rate.helperText,
   },
   {
