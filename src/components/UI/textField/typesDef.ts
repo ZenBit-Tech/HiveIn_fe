@@ -1,7 +1,7 @@
 import { Control, FieldErrorsImpl } from "react-hook-form";
 
 export interface ITextFieldProps {
-  type: "number" | "text";
+  type: "number" | "text" | "textarea";
   width: "full" | "half";
   formFieldName?: string;
   control?: Control;
@@ -11,4 +11,10 @@ export interface ITextFieldProps {
   maxLength?: number;
   errors?: FieldErrorsImpl;
   disabled?: boolean;
+  rate?: boolean;
+}
+
+export interface ILengthCheckProps {
+  characters?: number;
+  maxLength?: number;
 }
