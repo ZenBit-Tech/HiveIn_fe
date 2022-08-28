@@ -3,13 +3,12 @@ import { ILayoutElementWithTitleProps } from "./typesDef";
 
 export const SWrapper = styled("div")`
   display: flex;
-  align-items: flex-start;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin: 15px auto;
 `;
 
 export const SH = styled("h3")`
-  width: 180px;
+  min-width: 180px;
+  max-width: 700px;
 `;
 
 export const SDiv = styled("div")`

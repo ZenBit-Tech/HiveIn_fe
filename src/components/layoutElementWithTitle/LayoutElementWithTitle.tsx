@@ -21,6 +21,8 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     skillsOptions,
     control,
     errors,
+    direction,
+    rate,
   } = props;
 
   const renderTextInput = () => (
@@ -44,6 +46,7 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
       width="half"
       type="number"
       helperText={helperText}
+      rate={rate}
     />
   );
 
@@ -53,10 +56,10 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
       control={control}
       formFieldName={formFieldName}
       maxLength={maxLength}
-      rows={2}
+      rows={4}
       multiline
       width="full"
-      type="text"
+      type="textarea"
       helperText={helperText}
     />
   );
@@ -154,7 +157,7 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
   };
 
   return (
-    <SWrapper>
+    <SWrapper style={{ flexDirection: direction }}>
       <SH>{title}</SH>
       <SDiv width={containerWidth}>{renderElement(element)}</SDiv>
     </SWrapper>

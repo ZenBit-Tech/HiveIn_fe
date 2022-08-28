@@ -25,6 +25,8 @@ export interface ILayoutElementWithoutControl {
   skillsOptions?: string[];
   helperText?: string;
   maxLength?: number;
+  direction?: "column" | "row";
+  rate?: boolean;
 }
 
 export interface ILayoutElementWithTitleProps
