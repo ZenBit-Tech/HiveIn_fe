@@ -49,7 +49,7 @@
     "401": "Invalid email and/or password",
     "409": "Email already registered. Please login with your password or your Google account.",
     "500": "Server error, please try again",
-    "FETCH_ERROR" : "Server error, please try again" 
+    "FETCH_ERROR": "Server error, please try again"
   },
   "ForgotPassword": {
     "title": "Forgot your password?",
@@ -78,6 +78,92 @@
   "Welcome": {
     "title": "Welcome",
     "link": "Create my profile"
+  },
+  "JobPost": {
+    "title": "Create a job post",
+    "postTitle": {
+      "title": "Write a title for your post",
+      "placeholder": "Add title"
+    },
+    "duration": {
+      "title": "Write a duration of your project",
+      "placeholder": "input a number"
+    },
+    "period": {
+      "title": "weeks/months",
+      "options": ["weeks", "months"]
+    },
+    "category": {
+      "title": "Category",
+      "options": [
+        "Legal",
+        "IT",
+        "Sales",
+        "Finance",
+        "Construction",
+        "Accounting",
+        "Design",
+        "Security",
+        "Healthcare",
+        "Marketing"
+      ]
+    },
+    "rate": {
+      "title": "Enter the charge per hour",
+      "placeholder": "Input a number"
+    },
+    "skills": {
+      "title": "Please, mark at least 3 skills",
+      "options": [
+        "Business analyst",
+        "Consulting",
+        "Estimate",
+        "Recruiting",
+        "SMM",
+        "Copyrighting",
+        "UI/UX",
+        "Quality control",
+        "Taxation",
+        "Coaching",
+        "Fullstack",
+        "Administration",
+        "Communication",
+        "Javascript",
+        "QA automation",
+        "ReactJS",
+        "Python",
+        "Game dev",
+        "Flutter",
+        "Node.js",
+        "DevOps",
+        "Scrum master",
+        "Agile coach",
+        "Project manager"
+      ]
+    },
+    "englishLevel": {
+      "title": "Please, choose only one level of English",
+      "options": ["Pre-Intermediate", "Intermediate", "Upper-Intermediate"]
+    },
+    "description": {
+      "title": "Write job description (Project start and end dates; description of the work you want performed; deliverables you wish to receive and deadlines if applicable; budget)",
+      "placeholder": "Description",
+      "errors": [
+        "Note! Description is required",
+        "Note! Must be more than 50 characters"
+      ]
+    },
+    "file": "Attach a file",
+    "save": "Review and save your post",
+    "post": "Now post your job",
+    "validation": {
+      "title": "enter position",
+      "category": "choose category",
+      "rate": "should be greater than 0",
+      "skills": "select at least 3 options",
+      "englishLevel": "choose your english level",
+      "description": "write short description"
+    }
   },
   "ProfileEditForm": {
     "formTitle": "Profile",
@@ -116,10 +202,10 @@
         "Quality control",
         "Taxation",
         "Coaching",
-        "Full stack",
+        "Fullstack",
         "Administration",
         "Communication",
-        "Java Script",
+        "Javascript",
         "QA automation",
         "ReactJS",
         "Python",
@@ -197,6 +283,11 @@
     },
     "errorMessages": {
       "userNotFound": "userNotFound"
+    }
+  },
+  "UI": {
+    "description": {
+      "length": "characters left"
     }
   }
 }
