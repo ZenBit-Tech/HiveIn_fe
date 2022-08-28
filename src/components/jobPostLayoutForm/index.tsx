@@ -5,6 +5,7 @@ import FileUpload from "components/UI/fileUpload";
 import i18next from "localization/en/en.json";
 import { FieldValues, useForm } from "react-hook-form";
 import schema from "validation/jobPostFormValidation";
+import { Modal } from "antd";
 import S from "./style";
 import propsDataCollection from "./staticData";
 
@@ -28,8 +29,13 @@ function JobPostLayoutForm() {
   });
 
   const onSubmit = (data: any) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+    Modal.info({
+      title: i18next.JobPost.modal,
+      onOk() {
+        // eslint-disable-next-line no-console
+        console.log(data);
+      },
+    });
   };
 
   return (
@@ -43,7 +49,9 @@ function JobPostLayoutForm() {
         />
       ))}
       <FileUpload />
-      <S.SaveBtn type="link">{i18next.JobPost.save}</S.SaveBtn>
+      <S.SaveBtn type="link" htmlType="submit">
+        {i18next.JobPost.save}
+      </S.SaveBtn>
       <FormSubmitButton text={i18next.JobPost.post} />
     </form>
   );
