@@ -26,7 +26,7 @@ function TextField(props: ITextFieldProps) {
 
   const endAdornment =
     type === inputNumberType ? (
-      <InputAdornment position="end">$</InputAdornment>
+      <InputAdornment position="end">{rate ? "$" : ""}</InputAdornment>
     ) : undefined;
 
   return (
