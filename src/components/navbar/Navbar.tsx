@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import jwt_decode from "jwt-decode";
 import NavLink from "components/UI/navlink/NavLink";
 import NavbarStyles, { NavBarButtons } from "components/navbar/NavbarStyles";
 import logo from "components/navbar/imgs/logo.svg";
@@ -35,22 +34,11 @@ interface NavLinkType {
   to: string;
 }
 
-interface TokenType {
-  role: string;
-}
-
 function Navbar() {
-  const { authToken, signOut } = useAuth();
-  const [role, setRole] = useState("");
+  const { authToken, signOut, role } = useAuth();
   const [navLinks, setNavLinks] = useState<NavLinkType[]>([]);
   const { t } = useTranslation();
   const { screenWidth } = useViewport();
-
-  useEffect(() => {
-    if (!authToken) return;
-    const decoded: TokenType = jwt_decode(authToken);
-    setRole(decoded.role);
-  }, [authToken]);
 
   useEffect(() => {
     if (role === "freelancer") {
