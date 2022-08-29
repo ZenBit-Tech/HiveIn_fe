@@ -10,60 +10,75 @@ export default function Discover() {
     {
       photoUrl: "https://joeschmoe.io/api/v1/random",
       jobPosition: "Frontend developer",
-      rate: 10,
+      rate: 300,
     },
-    {
-      photoUrl: "https://joeschmoe.io/api/v1/random",
-      jobPosition: "Full-stack developer",
-      rate: 40,
-    },
+    // {
+    //   photoUrl: "https://joeschmoe.io/api/v1/random",
+    //   jobPosition: "Full-stack developer",
+    //   rate: 40,
+    // },
+    // {
+    //   photoUrl: "https://joeschmoe.io/api/v1/random",
+    //   jobPosition: "Frontend developer",
+    //   rate: 10,
+    // },
+    // {
+    //   photoUrl: "https://joeschmoe.io/api/v1/random",
+    //   jobPosition: "Full-stack developer",
+    //   rate: 40,
+    // },
+    // {
+    //   photoUrl: "https://joeschmoe.io/api/v1/random",
+    //   jobPosition: "Frontend developer",
+    //   rate: 10,
+    // },
+    // {
+    //   photoUrl: "https://joeschmoe.io/api/v1/random",
+    //   jobPosition: "Full-stack developer",
+    //   rate: 40,
+    // },
+    // {
+    //   photoUrl: "https://joeschmoe.io/api/v1/random",
+    //   jobPosition: "Full-stack developer",
+    //   rate: 40,
+    // },
+    // {
+    //   photoUrl: "https://joeschmoe.io/api/v1/random",
+    //   jobPosition: "Frontend developer",
+    //   rate: 10,
+    // },
+    // {
+    //   photoUrl: "https://joeschmoe.io/api/v1/random",
+    //   jobPosition: "Full-stack developer",
+    //   rate: 40,
+    // },
     {
       photoUrl: "https://joeschmoe.io/api/v1/random",
       jobPosition: "Frontend developer",
       rate: 10,
-    },
-    {
-      photoUrl: "https://joeschmoe.io/api/v1/random",
-      jobPosition: "Full-stack developer",
-      rate: 40,
-    },
-    {
-      photoUrl: "https://joeschmoe.io/api/v1/random",
-      jobPosition: "Frontend developer",
-      rate: 10,
-    },
-    {
-      photoUrl: "https://joeschmoe.io/api/v1/random",
-      jobPosition: "Full-stack developer",
-      rate: 40,
-    },
-    {
-      photoUrl: "https://joeschmoe.io/api/v1/random",
-      jobPosition: "Full-stack developer",
-      rate: 40,
-    },
-    {
-      photoUrl: "https://joeschmoe.io/api/v1/random",
-      jobPosition: "Frontend developer",
-      rate: 10,
-    },
-    {
-      photoUrl: "https://joeschmoe.io/api/v1/random",
-      jobPosition: "Full-stack developer",
-      rate: 40,
-    },
-    {
-      photoUrl: "https://joeschmoe.io/api/v1/random",
-      jobPosition: "Frontend developer",
-      rate: 10,
-    },
-    {
-      photoUrl: "https://joeschmoe.io/api/v1/random",
-      jobPosition: "Full-stack developer",
-      rate: 40,
     },
   ];
   const recentlyViewedCandidates: IFreelancer[] = [
+    {
+      photoUrl: "https://joeschmoe.io/api/v1/random",
+      jobPosition: "Frontend developer",
+      rate: 10,
+    },
+    {
+      photoUrl: "https://joeschmoe.io/api/v1/random",
+      jobPosition: "Full-stack developer",
+      rate: 40,
+    },
+    {
+      photoUrl: "https://joeschmoe.io/api/v1/random",
+      jobPosition: "Frontend developer",
+      rate: 10,
+    },
+    {
+      photoUrl: "https://joeschmoe.io/api/v1/random",
+      jobPosition: "Full-stack developer",
+      rate: 40,
+    },
     {
       photoUrl: "https://joeschmoe.io/api/v1/random",
       jobPosition: "Frontend developer",
@@ -107,17 +122,13 @@ export default function Discover() {
             <Empty description="No result" />
           </Col>
         )}
-        {foundCandidatesShowAll
-          ? foundCandidates.map((freelancer) => (
-              <Col xl={6} lg={8} sm={12}>
-                <CandidateCard {...freelancer} />
-              </Col>
-            ))
-          : foundCandidates.slice(0, 4).map((freelancer) => (
-              <Col xl={6} lg={8} sm={12}>
-                <CandidateCard {...freelancer} />
-              </Col>
-            ))}
+        {foundCandidates
+          .slice(0, foundCandidatesShowAll ? undefined : 4)
+          .map((freelancer: IFreelancer) => (
+            <Col xl={6} lg={8} sm={12} key={freelancer.rate}>
+              <CandidateCard {...freelancer} />
+            </Col>
+          ))}
       </Row>
       <Row style={{ margin: 20 }}>
         <Col span={21}>
@@ -137,17 +148,13 @@ export default function Discover() {
         </Col>
       </Row>
       <Row gutter={[16, { xs: 4, sm: 8, md: 16, lg: 24 }]}>
-        {recentlyViewedCandidatesShowAll
-          ? recentlyViewedCandidates.map((freelancer) => (
-              <Col xl={6} lg={8} sm={12}>
-                <CandidateCard {...freelancer} />
-              </Col>
-            ))
-          : recentlyViewedCandidates.slice(0, 4).map((freelancer) => (
-              <Col xl={6} lg={8} sm={12}>
-                <CandidateCard {...freelancer} />
-              </Col>
-            ))}
+        {recentlyViewedCandidates
+          .slice(0, !recentlyViewedCandidatesShowAll ? undefined : 4)
+          .map((freelancer) => (
+            <Col xl={6} lg={8} sm={12} key={freelancer.rate}>
+              <CandidateCard {...freelancer} />
+            </Col>
+          ))}
       </Row>
     </>
   );

@@ -1,6 +1,5 @@
 import React from "react";
 import { Col, Row } from "antd";
-import ContactInfoForm from "components/contactInfoForm/ContactInfoForm";
 import { useLocation } from "react-router-dom";
 import {
   DISCOVER_ROUTE,
@@ -11,6 +10,8 @@ import {
 import Discover from "./Discover/Index";
 import TalentBar from "./TalentBar";
 import SavedTalent from "./SavedTalents/Index";
+import YourHires from "./YourHires/Index";
+import RecentlyViewed from "./RecentlyViewed/Index";
 
 function Talent() {
   const { pathname } = useLocation();
@@ -20,11 +21,11 @@ function Talent() {
       case DISCOVER_ROUTE:
         return <Discover />;
       case YOUR_HIRES_ROUTE:
-        return <ContactInfoForm />;
+        return <YourHires />;
       case SAVED_TALENT_ROUTE:
         return <SavedTalent />;
       case RECENTLY_VIEWED_ROUTE:
-        return <ContactInfoForm />;
+        return <RecentlyViewed />;
       default:
         return null;
     }

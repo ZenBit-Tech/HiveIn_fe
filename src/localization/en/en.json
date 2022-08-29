@@ -197,7 +197,10 @@
       "foundCandidates": "Found candidates",
       "recentlyViewed": "Recently viewed",
       "seeAll": "See all",
-      "seeLess": "See less"
+      "seeLess": "See less",
+      "search": "Search",
+      "hideFilters": "Hide filters",
+      "showFilters": "Show filters"
     },
     "YourHires": {
       "tabName": "Your hires"

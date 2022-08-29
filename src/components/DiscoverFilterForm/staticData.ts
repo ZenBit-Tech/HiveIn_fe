@@ -5,7 +5,7 @@ const propsDataCollection: ILayoutElementWithoutControl[] = [
   {
     title: "Talent.Discover.keyWords",
     element: "textInput",
-    formFieldName: "position",
+    formFieldName: "keyWords",
     containerWidth: "half",
     maxLength: 25,
   },
