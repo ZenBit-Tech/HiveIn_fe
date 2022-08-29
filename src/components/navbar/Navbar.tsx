@@ -16,7 +16,7 @@ import {
   SEARCH_WORK_ROUTE,
   HOME_PAGE_ROUTE,
   PROPOSALS_ROUTE,
-  MY_CONTRACTS_ROUTE,
+  MY_JOBS_ROUTE,
   CHAT_ROUTE,
   SETTINGS_ROUTE,
   PROFILE_ROUTE,
@@ -24,6 +24,7 @@ import {
   SIGN_IN_ROUTE,
   CLIENT_PROFILE,
   CLIENT_HOME,
+  MY_CONTRACTS_ROUTE,
 } from "utils/routeConsts";
 import useAuth from "hooks/useAuth";
 import { MOBILE_SCREEN_SIZE } from "utils/navBarConsts";
@@ -61,6 +62,10 @@ function Navbar() {
         {
           to: PROPOSALS_ROUTE,
           title: t("Proposals.title"),
+        },
+        {
+          title: t("MyJobs.title"),
+          to: MY_JOBS_ROUTE,
         },
         {
           to: MY_CONTRACTS_ROUTE,
