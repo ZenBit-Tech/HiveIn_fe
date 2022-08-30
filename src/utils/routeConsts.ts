@@ -14,4 +14,5 @@ export const SIGN_IN_ROUTE = "/login";
 export const FORGOT_PASSWORD_ROUTE = "/forgot-password";
 export const RESTORE_PASSWORD_ROUTE = "/restore-password";
 export const WELCOME_ROUTE = "/welcome";
-export const DASHBOARD_ROUTE = "/dashboard";
+export const CLIENT_PROFILE = "/client-profile";
+export const CLIENT_HOME = "/client-home";

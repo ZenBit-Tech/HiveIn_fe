@@ -1,22 +1,13 @@
-import React from "react";
 import { Button, Divider, Typography } from "antd";
 import JobPost from "components/JobPost/Index";
-import TextField from "components/UI/textField/TextField";
-import { useForm } from "react-hook-form";
+import useGoogleAuth from "hooks/useGoogleAuth";
 import { useTranslation } from "react-i18next";
 import { BLUE } from "utils/colorConsts";
-import { yupResolver } from "@hookform/resolvers/yup";
 import S from "./style";
-import resolver from "./schema";
 
-export default function Dashboard() {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(resolver),
-  });
+export default function ClientHome() {
+  useGoogleAuth();
+
   const { Title } = Typography;
 
   const mockPosts = [
@@ -43,44 +34,8 @@ export default function Dashboard() {
     t("Dashboard.createJobTutorial.list.item4"),
   ];
 
-  function onSubmit(evt: any) {
-    return evt;
-  }
-
   return (
     <S.Container>
-      <S.Form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ width: "50%" }}>
-          <S.InputBox>
-            <TextField
-              errors={errors}
-              formFieldName="name"
-              type="text"
-              width="full"
-              helperText="Name*"
-              control={control}
-            />
-          </S.InputBox>
-          <S.InputBox>
-            <TextField
-              errors={errors}
-              formFieldName="description"
-              multiline
-              type="text"
-              width="full"
-              helperText="Description of your company"
-              rows={5}
-              control={control}
-            />
-          </S.InputBox>
-          <Button htmlType="submit" shape="round" size="large" type="primary">
-            {t("Dashboard.buttons.save")}
-          </Button>
-        </div>
-        <Button shape="round" size="large" type="primary">
-          {t("Dashboard.buttons.createPosts")}
-        </Button>
-      </S.Form>
       <S.Box>
         <Divider />
         <S.TitleContainer>
