@@ -188,28 +188,19 @@
     }
   },
   "Talent": {
-    "Discover": {
-      "tabName": "Discover",
-      "title": "Find the best candidate",
-      "keyWords": "Key words:",
-      "category": "Choose a category:",
-      "skills": "Choose at least 3 skills from the following:",
-      "foundCandidates": "Found candidates",
-      "recentlyViewed": "Recently viewed",
-      "seeAll": "See all",
-      "seeLess": "See less",
-      "search": "Search",
-      "hideFilters": "Hide filters",
-      "showFilters": "Show filters"
-    },
-    "YourHires": {
-      "tabName": "Your hires"
-    },
-    "RecentlyViewed": {
-      "tabName": "Recently viewed"
-    },
-    "SavedTalent": {
-      "tabName": "Saved talent"
-    }
+    "discover": "Discover",
+    "yourHires": "Your hires",
+    "recentlyViewed": "Recently viewed",
+    "savedTalent": "Saved talent",
+    "title": "Find the best candidate",
+    "keyWords": "Key words:",
+    "category": "Choose a category:",
+    "skills": "Choose at least 3 skills from the following:",
+    "foundCandidates": "Found candidates",
+    "seeAll": "See more",
+    "seeLess": "See less",
+    "search": "Search",
+    "hideFilters": "Hide filters",
+    "showFilters": "Show filters"
   }
 }

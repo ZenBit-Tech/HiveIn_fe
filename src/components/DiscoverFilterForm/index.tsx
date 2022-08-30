@@ -39,14 +39,12 @@ function DiscoverFilterForm() {
             />
           ))}
           <CustomButton block type="primary" htmlType="submit">
-            {t("Talent.Discover.search")}
+            {t("Talent.search")}
           </CustomButton>
         </Form>
       )}
       <CustomButton block type="ghost" onClick={changeIsFiltersOpen}>
-        {isFiltersOpen
-          ? t("Talent.Discover.hideFilters")
-          : t("Talent.Discover.showFilters")}
+        {isFiltersOpen ? t("Talent.hideFilters") : t("Talent.showFilters")}
       </CustomButton>
     </>
   );

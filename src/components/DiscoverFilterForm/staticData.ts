@@ -3,21 +3,21 @@ import { ILayoutElementWithoutControl } from "components/layoutElementWithTitle/
 
 const propsDataCollection: ILayoutElementWithoutControl[] = [
   {
-    title: "Talent.Discover.keyWords",
+    title: "Talent.keyWords",
     element: "textInput",
     formFieldName: "keyWords",
     containerWidth: "half",
     maxLength: 25,
   },
   {
-    title: "Talent.Discover.category",
+    title: "Talent.category",
     element: "select",
     formFieldName: "category",
     containerWidth: "half",
     selectOptions: i18next.ProfileEditForm.category.options,
   },
   {
-    title: "Talent.Discover.skills",
+    title: "Talent.skills",
     element: "skillsLayout",
     formFieldName: "skills",
     containerWidth: "full",

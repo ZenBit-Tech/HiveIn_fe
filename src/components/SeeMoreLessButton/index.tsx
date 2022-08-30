@@ -19,7 +19,7 @@ function SeeMoreLessButton({
   const { t } = useTranslation();
   return (
     <SButton type="link" onClick={changeShowAll} show={isShow}>
-      {isShowAll ? t("Talent.Discover.seeLess") : t("Talent.Discover.seeAll")}
+      {isShowAll ? t("Talent.seeAll") : t("Talent.seeLess")}
     </SButton>
   );
 }
