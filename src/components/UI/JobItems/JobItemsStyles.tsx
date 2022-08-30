@@ -11,11 +11,13 @@ const JobTitle = styled.div`
 export const JobDescription = styled.div`
   color: ${TEXT_GRAY};
   padding-block: 10px;
+  overflow-wrap: break-word;
 `;
 
 export const RouterLink = styled(Link)`
   color: ${BLACK};
   font-weight: 800;
+  overflow: hidden;
   &:hover {
     color: ${BLUE};
   }

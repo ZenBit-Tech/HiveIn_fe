@@ -23,7 +23,7 @@ function JobItem({ description, payout, skills }: Props) {
         {t("MyJobs.skills")}
       </JobTitle>
       {skills.map((skill) => (
-        <SkillTag>{skill}</SkillTag>
+        <SkillTag key={skill}>{skill}</SkillTag>
       ))}
     </>
   );

@@ -1,3 +1,4 @@
+import { Skeleton } from "antd";
 import LinkButton from "components/UI/buttons/LinkButton/LinkButton";
 import JobItem from "components/UI/JobItems/JobItems";
 import useAuth from "hooks/useAuth";
@@ -9,17 +10,14 @@ import PageContainer, {
   TitleText,
 } from "pages/MyJobs/ClientJobs/ClientJobsStyles";
 import { useTranslation } from "react-i18next";
+import { useGetJobPostQuery } from "services/jobPosts/setJobPostsAPI";
 import { SEARCH_WORK_ROUTE } from "utils/routeConsts";
-
-// Testing without backend connected
-const jobPosts: any[] | undefined = [
-  { id: "1", title: "Freelancing website", description: "Description" },
-  { id: "2", title: "Landing page design", description: "Description" },
-];
 
 function ClientJobs() {
   const { email } = useAuth();
   const { t } = useTranslation();
+
+  const { data: jobPosts, isLoading, isSuccess } = useGetJobPostQuery();
 
   return (
     <PageContainer>
@@ -35,16 +33,20 @@ function ClientJobs() {
           <TitleText font_sz="1.5em" pd="5px" pd_bottom="10%">
             {t("MyJobs.allPostings")}
           </TitleText>
-          {jobPosts?.map(({ id, title, description }) => (
-            <JobItem
-              key={id}
-              title={title}
-              description={description}
-              link={id}
-            />
-          ))}
 
-          {jobPosts ? "" : t("MyJobs.nothingToShow")}
+          {isLoading ? <Skeleton avatar paragraph={{ rows: 4 }} /> : ""}
+
+          {isSuccess &&
+            jobPosts.map(({ id, title, jobDescription }) => (
+              <JobItem
+                key={id}
+                title={title!}
+                description={jobDescription!}
+                link={id!.toString()}
+              />
+            ))}
+
+          {!isLoading && !jobPosts ? t("MyJobs.nothingToShow") : ""}
         </Card>
       </Section>
     </PageContainer>
