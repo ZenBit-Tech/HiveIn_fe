@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IFreelancer } from "services/profileInfo/typesDef";
-import { REACT_APP_FREELANCER_PROFILE_INFO_URL } from "../../utils/brakepointConsts";
+import { REACT_APP_FREELANCER_PROFILE_INFO_URL } from "utils/brakepointConsts";
 
 export const getProfileInfoApi = createApi({
   reducerPath: "profileInfoApi",

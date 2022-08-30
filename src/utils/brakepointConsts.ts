@@ -6,3 +6,4 @@ export const SIGN_UP = "sign-up";
 export const GOOGLE = "google/success";
 export const FORGOT_PASSWORD = "forgot-password";
 export const RESTORE_PASSWORD = "restore-password";
+export const JOB_POST = "job-post";
