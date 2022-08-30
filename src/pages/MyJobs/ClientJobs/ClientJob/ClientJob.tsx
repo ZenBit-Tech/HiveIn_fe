@@ -9,7 +9,7 @@ import PageContainer, {
 import JobItem from "components/UI/JobItem/JobItem";
 import { useFetchDetailsQuery } from "services/jobs/jobs.api";
 import { useTranslation } from "react-i18next";
-import { format } from "date-fns";
+import { formatToStandardDate } from "utils/formatDateFunctions";
 
 function ClientJob(): JSX.Element {
   const { jobId } = useParams();
@@ -25,7 +25,7 @@ function ClientJob(): JSX.Element {
           {data?.title || t("NotFound.notFound")} {jobId}
           <TitleText font_sz="0.4em" pd="5px" pd_bottom="1%">
             {data?.createdAt
-              ? format(new Date(data?.createdAt), "dd/MM/yyyy")
+              ? formatToStandardDate(new Date(data?.createdAt))
               : t("NotFound.notFound")}
           </TitleText>
         </TitleText>
