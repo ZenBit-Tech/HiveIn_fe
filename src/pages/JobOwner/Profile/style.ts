@@ -23,23 +23,8 @@ const Form = styled.form`
   margin: 10px 0;
 `;
 
-const Box = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-evenly;
-  width: 70%;
-`;
-
 const InputBox = styled.div`
   margin: 20px 0;
 `;
 
-const TitleContainer = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export default { Container, Form, InputBox, TitleContainer, Box };
+export default { Container, Form, InputBox };
