@@ -99,7 +99,9 @@ function Navbar() {
       ) : (
         <>
           {navLinks.map(({ title, to }) => (
-            <NavLink path={to}>{title}</NavLink>
+            <NavLink key={to} path={to}>
+              {title}
+            </NavLink>
           ))}
         </>
       )}
@@ -124,21 +126,15 @@ function Navbar() {
             </NavLink>
           </>
         ) : (
-          <>
-            <NavLink path={CLIENT_PROFILE}>
-              <NavBarButton
-                icon={<UserOutlined />}
-                title={t("Profile.title")}
-              />
-            </NavLink>
-            <NavBarButton
-              icon={<LogoutOutlined />}
-              title={t("SignIn.signOut")}
-              onClick={signOut}
-            />
-          </>
+          <NavLink path={CLIENT_PROFILE}>
+            <NavBarButton icon={<UserOutlined />} title={t("Profile.title")} />
+          </NavLink>
         )}
-
+        <NavBarButton
+          icon={<LogoutOutlined />}
+          title={t("SignIn.signOut")}
+          onClick={signOut}
+        />
         {screenWidth < MOBILE_SCREEN_SIZE ? <MenuDrawer /> : ""}
       </NavBarButtons>
     </NavbarStyles>
