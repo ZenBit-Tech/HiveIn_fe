@@ -33,7 +33,7 @@ const jobPostsAPI = createApi({
   }),
   endpoints: (builder) => ({
     getJobPost: builder.query<IJobPost[], void>({
-      query: () => `/job-post`,
+      query: () => `${process.env.REACT_APP_JOB_POSTS_URL}`,
     }),
   }),
 });

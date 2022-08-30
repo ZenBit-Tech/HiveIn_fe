@@ -7,6 +7,7 @@ import JobTitle, {
   DeatailedInfo,
   RouterLink,
 } from "components/UI/JobItems/JobItemsStyles";
+import { useTranslation } from "react-i18next";
 
 dayjs.extend(relativeTime);
 interface Props {
@@ -24,11 +25,17 @@ function JobItems({
   hourlyRate,
   publishDate,
 }: Props) {
+  const { t } = useTranslation();
+
   return (
     <>
       <JobTitle>
         <RouterLink to={link}>{title}</RouterLink>
-        <DeatailedInfo>${hourlyRate}/hour</DeatailedInfo>
+        <DeatailedInfo>
+          {t("MyJobs.currency")}
+          {hourlyRate}
+          {t("MyJobs.perHour")}
+        </DeatailedInfo>
         <LongMenu />
       </JobTitle>
       <DeatailedInfo>{dayjs(publishDate).fromNow()}</DeatailedInfo>

@@ -19,7 +19,9 @@
     "allPostings": "Your Postings",
     "nothingToShow": "No active job posts",
     "info": "About the project",
-    "skills": "Necessary Skills"
+    "skills": "Necessary Skills",
+    "currency": "$",
+    "perHour": "/hour"
   },
   "Chat": {
     "title": "Chat"
