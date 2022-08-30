@@ -1,3 +1,4 @@
+import { Pagination } from "antd";
 import styled from "styled-components";
 import { BLACK, TEXT_GRAY } from "utils/colorConsts";
 import { WRAP_SCREEN_SIZE } from "utils/mediaQueryConsts";
@@ -34,11 +35,11 @@ export const Header = styled.div<BoxSizing>`
 
 export const TitleText = styled.div<ITitle>`
   display: flex;
-  font-size: ${(props) => props.font_sz || "2.5em"};
+  font-size: ${(props) => props.font_sz || "2.0em"};
   flex-direction: column;
   color: ${BLACK};
-  padding: ${(props) => props.pd || "20px"};
-  padding-bottom: ${(props) => props.pd_bottom || "5%"};
+  padding: ${(props) => props.pd || "10px"};
+  padding-bottom: ${(props) => props.pd_bottom || "3%"};
   font-weight: 400;
 `;
 
@@ -67,5 +68,7 @@ export const Card = styled.div<BoxSizing>`
     width: 100%;
   }
 `;
+
+export const StyledPagination = styled(Pagination)``;
 
 export default PageContainer;
