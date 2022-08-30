@@ -6,7 +6,7 @@ export interface ITextFieldProps {
   formFieldName?: string;
   control?: Control;
   helperText?: string;
-  multiline: boolean;
+  multiline?: boolean;
   rows?: number;
   maxLength?: number;
   errors?: FieldErrorsImpl;

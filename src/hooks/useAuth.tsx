@@ -1,24 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
-import { SignInResponse } from "services/auth/signInAPI";
-import { setSignIn, setSignOut } from "store/slices/userSlice";
+import { AuthResponse } from "services/auth/setAuthAPI";
+import { setSignOut, setUser } from "store/slices/userSlice";
 import { RootState, userPersistor } from "store/store";
 
 const useAuth = () => {
-  const { authToken, email, id, role } = useSelector(
+  const { authToken, email, role } = useSelector(
     (state: RootState) => state.user
   );
 
   const dispatch = useDispatch();
 
-  const signIn = (res: SignInResponse) => {
+  const signIn = (res: AuthResponse) => {
     // Requesting authToken to the backend and saving it
     // in localStorage with Redux Persist
 
     dispatch(
-      setSignIn({
+      setUser({
         authToken: res.token,
         email: res.email,
-        id: res.id,
         role: res.role,
       })
     );
@@ -30,7 +29,7 @@ const useAuth = () => {
     await userPersistor.purge();
   };
 
-  return { authToken, email, id, role, signIn, signOut };
+  return { authToken, email, role, signIn, signOut };
 };
 
 export default useAuth;

@@ -15,13 +15,13 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     title,
     formFieldName,
     containerWidth,
-    selectOptions,
     helperText,
     toggleButtonOptions,
     maxLength,
-    skillsOptions,
     control,
     errors,
+    freelancerInfo,
+    setValue,
   } = props;
 
   const renderTextInput = () => (
@@ -77,15 +77,9 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     />
   );
 
-  const renderSelect = () =>
-    selectOptions ? (
-      <Select
-        errors={errors}
-        formFieldName={formFieldName}
-        control={control}
-        options={selectOptions}
-      />
-    ) : null;
+  const renderSelect = () => (
+    <Select errors={errors} formFieldName={formFieldName} control={control} />
+  );
 
   const renderToggleButton = () =>
     toggleButtonOptions ? (
@@ -110,8 +104,12 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
   );
 
   const renderSkillsLayout = () =>
-    skillsOptions ? (
-      <SkillsLayout errors={errors} control={control} options={skillsOptions} />
+    freelancerInfo ? (
+      <SkillsLayout
+        options={freelancerInfo?.skills}
+        errors={errors}
+        setValue={setValue}
+      />
     ) : null;
 
   const elementTypes: { [propName: string]: typeof element } = {
