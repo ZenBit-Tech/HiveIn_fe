@@ -205,5 +205,8 @@
         "item4": "Hire the freelancer"
       }
     }
+  },
+  "NotFound": {
+    "notFound": "Not found"
   }
 }
