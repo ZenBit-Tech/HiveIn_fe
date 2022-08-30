@@ -14,7 +14,7 @@ interface Props {
   title: string;
   description: string;
   link: string;
-  hourlyRate: string;
+  hourlyRate: number;
   publishDate: string;
 }
 

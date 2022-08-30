@@ -1,20 +1,29 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IUser } from "services/user/setUserAPI";
 import { RootState } from "store/store";
 
+interface Skills {
+  id: number;
+  name: string;
+}
+
+interface QueryParam {
+  id: number;
+}
 export interface IJobPost {
-  id?: number;
-  title?: string;
-  duration?: string;
-  durationType?: string;
-  rate?: string;
-  isDraft?: boolean;
-  englishLevel?: string;
-  jobDescription?: string;
-  createdAt?: string;
-  updatedAt?: string;
-  category?: string;
-  skills?: string;
-  user?: string;
+  id: number;
+  title: string;
+  duration: number;
+  durationType: string;
+  rate: number;
+  isDraft: boolean;
+  englishLevel: string;
+  jobDescription: string;
+  createdAt: string;
+  updatedAt: string;
+  category: string;
+  skills: Skills[];
+  user: IUser[];
 }
 
 const jobPostsAPI = createApi({
@@ -35,9 +44,15 @@ const jobPostsAPI = createApi({
     getJobPost: builder.query<IJobPost[], void>({
       query: () => `${process.env.REACT_APP_JOB_POSTS_URL}`,
     }),
+    getOneJobPost: builder.query<IJobPost, QueryParam>({
+      query: ({ id }) => ({
+        url: `${process.env.REACT_APP_JOB_POSTS_URL}/${id}`,
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useGetJobPostQuery } = jobPostsAPI;
+export const { useGetJobPostQuery, useGetOneJobPostQuery } = jobPostsAPI;
 
 export default jobPostsAPI;
