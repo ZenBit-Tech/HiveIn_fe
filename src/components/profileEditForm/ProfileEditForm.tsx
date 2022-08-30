@@ -30,6 +30,7 @@ function ProfileEditForm() {
         ...data,
         skills: data.skills.map(({ id }) => id),
         category: data.categoryId,
+        description: data?.user.description,
       });
     }
   }, [data, isSuccess]);
@@ -81,10 +82,13 @@ function ProfileEditForm() {
       rate: formData.rate,
       userId: formData.userId,
       id: formData.id,
-      description: formData.description,
       skillsIds: formData.skills,
       educations: parseData(formData.education, data?.education!),
       experiences: parseData(formData.experience, data?.experience!),
+      user: {
+        ...data?.user,
+        description: formData.description,
+      },
     };
 
     updateProfile(objectToQuery);

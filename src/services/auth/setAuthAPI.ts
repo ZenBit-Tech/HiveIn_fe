@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { AUTH, GOOGLE, SIGN_IN, SIGN_UP } from "utils/brakepointConsts";
 
 interface AuthFields {
   email: string;
@@ -18,7 +19,7 @@ const authApi = createApi({
   endpoints: (builder) => ({
     signIn: builder.mutation<AuthResponse, AuthFields>({
       query: ({ email, password }) => ({
-        url: "/auth/sign-in",
+        url: `/${AUTH}/${SIGN_IN}`,
         method: "POST",
         body: {
           email,
@@ -29,7 +30,7 @@ const authApi = createApi({
     }),
     signUp: builder.mutation<AuthResponse, AuthFields>({
       query: ({ email, password }) => ({
-        url: "/auth/sign-up",
+        url: `/${AUTH}/${SIGN_UP}`,
         method: "POST",
         body: {
           email,
@@ -40,7 +41,7 @@ const authApi = createApi({
     }),
     googleOAuthSignIn: builder.query<AuthResponse, void>({
       query: () => ({
-        url: "/auth/google/success",
+        url: `/${AUTH}/${GOOGLE}`,
         credentials: "include",
       }),
     }),

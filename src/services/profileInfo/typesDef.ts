@@ -1,3 +1,5 @@
+import { IUser } from "../user/setUserAPI";
+
 interface IMutualEdEx {
   city: string;
   id: number;
@@ -25,4 +27,5 @@ export interface IFreelancer {
   rate: string;
   skills: { id: number }[];
   userId: number;
+  user: IUser;
 }

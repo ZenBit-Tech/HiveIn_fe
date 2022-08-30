@@ -50,9 +50,14 @@ function ContactInfoForm() {
   }, [reset, initialState]);
 
   useEffect(() => {
-    if (submitSuccess) toast.success("changes saved");
-    //  @ts-ignore
-    if (submitError) toast.error(error.data.message[0]);
+    if (submitSuccess) toast.success(i18next.profileSuccessSubmitMessage);
+    if (submitError) {
+      toast.error(
+        // @ts-ignore
+        error?.data?.message[0] ||
+          i18next.contactInfoForm.errorMessages.somethingWrong
+      );
+    }
     if (getUserError)
       toast.error(i18next.contactInfoForm.errorMessages.userNotFound);
     // eslint-disable-next-line
@@ -63,8 +68,9 @@ function ContactInfoForm() {
 
     if (isSuccess)
       updateUser({
-        id: sub,
+        ...data,
         ...formData,
+        id: sub,
         phone,
       });
 
