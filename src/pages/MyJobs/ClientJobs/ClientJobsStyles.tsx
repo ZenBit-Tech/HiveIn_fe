@@ -63,7 +63,7 @@ export const Card = styled.div<BoxSizing>`
   border: 1px solid ${TEXT_GRAY};
   padding: 25px;
   border-radius: 10px;
-  width: ${(props) => props.wd || "60%"};
+  width: ${(props) => props.wd || "70%"};
   @media (max-width: ${WRAP_SCREEN_SIZE}) {
     width: 100%;
   }

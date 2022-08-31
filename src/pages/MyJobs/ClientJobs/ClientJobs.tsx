@@ -14,12 +14,13 @@ import PageContainer, {
 import { useTranslation } from "react-i18next";
 import { useGetJobPostQuery } from "services/jobPosts/setJobPostsAPI";
 import { SEARCH_WORK_ROUTE } from "utils/routeConsts";
+import { POSTS_PER_PAGE as PPG } from "utils/jobListConsts";
 
 function ClientJobs() {
   const { email } = useAuth();
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(3);
+  const [postsPerPage, setPostsPerPage] = useState(PPG);
 
   const { data: jobPosts, isLoading, isSuccess } = useGetJobPostQuery();
 
@@ -57,10 +58,13 @@ function ClientJobs() {
 
           {isSuccess && (
             <StyledPagination
+              showSizeChanger
+              onShowSizeChange={(_page, pageSize) => setPostsPerPage(pageSize)}
               current={currentPage}
               onChange={(page) => setCurrentPage(page)}
               pageSize={postsPerPage}
               total={jobPosts.length}
+              pageSizeOptions={[PPG, PPG * 2, PPG * 3]}
             />
           )}
           {!isLoading && !jobPosts ? t("MyJobs.nothingToShow") : ""}
