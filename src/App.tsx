@@ -7,13 +7,14 @@ import Navbar from "components/navbar/Navbar";
 import { store, userPersistor } from "store/store";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import FallBackSpin from "components/UI/spinners/FallbackSpin";
 
 const Content = React.lazy(() => import("./components/content/Content"));
 
 function App() {
   return (
     <>
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={<FallBackSpin />}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={userPersistor}>
             <Layout style={{ minHeight: "100vh" }}>

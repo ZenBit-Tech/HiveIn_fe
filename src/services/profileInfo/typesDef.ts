@@ -19,6 +19,7 @@ export interface IExperience extends IMutualEdEx {
 }
 
 export interface IFreelancer {
+  id: number;
   categoryId: number;
   education: IEducation[];
   englishLevel: "intermediate" | "pre-intermediate" | "upper-intermediate";

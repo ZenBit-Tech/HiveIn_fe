@@ -7,14 +7,14 @@ import PageContainer, {
   TitleText,
 } from "pages/MyJobs/ClientJobs/ClientJobsStyles";
 import JobItem from "components/UI/JobItem/JobItem";
-import { useFetchDetailsQuery } from "services/jobs/jobs.api";
+import { useGetOneJobPostQuery } from "services/jobPosts/setJobPostsAPI";
 import { useTranslation } from "react-i18next";
 import { formatToStandardDate } from "utils/formatDateFunctions";
 
 function ClientJob(): JSX.Element {
   const { jobId } = useParams();
   const { t } = useTranslation();
-  const { data } = useFetchDetailsQuery({
+  const { data } = useGetOneJobPostQuery({
     id: Number(jobId),
   });
 
@@ -22,7 +22,7 @@ function ClientJob(): JSX.Element {
     <PageContainer>
       <Header wd="70%">
         <TitleText font_sz="2.5em" pd="20px" pd_bottom="5%">
-          {data?.title || t("NotFound.notFound")} {jobId}
+          {data?.title || t("NotFound.notFound")}
           <TitleText font_sz="0.4em" pd="5px" pd_bottom="1%">
             {data?.createdAt
               ? formatToStandardDate(new Date(data?.createdAt))
