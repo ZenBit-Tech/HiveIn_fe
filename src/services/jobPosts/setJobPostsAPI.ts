@@ -10,6 +10,7 @@ interface Skills {
 
 interface QueryParam {
   id: number;
+  isDraft?: boolean;
 }
 
 export interface IJobPost {
@@ -52,9 +53,18 @@ const jobPostsAPI = createApi({
         credentials: "include",
       }),
     }),
+    getHomePosts: builder.query<IJobPost[], QueryParam>({
+      query: (path) => ({
+        url: `${JOB_POST}/home/${path.id}/${path.isDraft}`,
+      }),
+    }),
   }),
 });
 
-export const { useGetJobPostQuery, useGetOneJobPostQuery } = jobPostsAPI;
+export const {
+  useGetJobPostQuery,
+  useGetOneJobPostQuery,
+  useGetHomePostsQuery,
+} = jobPostsAPI;
 
 export default jobPostsAPI;

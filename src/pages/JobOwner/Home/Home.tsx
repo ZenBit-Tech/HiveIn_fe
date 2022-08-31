@@ -3,7 +3,7 @@ import JobPost from "components/JobPost/Index";
 import useAuth from "hooks/useAuth";
 import useGoogleAuth from "hooks/useGoogleAuth";
 import { useTranslation } from "react-i18next";
-import { useFetchHomePostsQuery } from "services/jobs/jobs.api";
+import { useGetHomePostsQuery } from "services/jobPosts/setJobPostsAPI";
 import { BLUE } from "utils/colorConsts";
 import S from "./style";
 
@@ -13,12 +13,12 @@ export default function ClientHome() {
   const { id } = useAuth();
   const { Title } = Typography;
 
-  const { data: drafts } = useFetchHomePostsQuery({
+  const { data: drafts } = useGetHomePostsQuery({
     id: id || 0,
     isDraft: true,
   });
 
-  const { data: posts } = useFetchHomePostsQuery({
+  const { data: posts } = useGetHomePostsQuery({
     id: id || 0,
     isDraft: false,
   });
