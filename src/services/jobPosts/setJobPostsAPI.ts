@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IUser } from "services/user/setUserAPI";
 import { RootState } from "store/store";
+import { JOB_POST } from "utils/brakepointConsts";
 
 interface Skills {
   id: number;
@@ -10,6 +11,7 @@ interface Skills {
 interface QueryParam {
   id: number;
 }
+
 export interface IJobPost {
   id: number;
   title: string;
@@ -42,11 +44,11 @@ const jobPostsAPI = createApi({
   }),
   endpoints: (builder) => ({
     getJobPost: builder.query<IJobPost[], void>({
-      query: () => `${process.env.REACT_APP_JOB_POSTS_URL}`,
+      query: () => `${JOB_POST}`,
     }),
     getOneJobPost: builder.query<IJobPost, QueryParam>({
       query: ({ id }) => ({
-        url: `${process.env.REACT_APP_JOB_POSTS_URL}/${id}`,
+        url: `${JOB_POST}/${id}`,
         credentials: "include",
       }),
     }),

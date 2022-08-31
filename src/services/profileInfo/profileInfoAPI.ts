@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IFreelancer } from "services/profileInfo/typesDef";
+import { REACT_APP_FREELANCER_PROFILE_INFO_URL } from "utils/brakepointConsts";
 
 export const getProfileInfoApi = createApi({
   reducerPath: "profileInfoApi",
@@ -8,12 +9,11 @@ export const getProfileInfoApi = createApi({
   }),
   endpoints: (builder) => ({
     getProfile: builder.query<IFreelancer | null, number>({
-      query: (id) =>
-        `${process.env.REACT_APP_FREELANCER_PROFILE_INFO_URL}/${id}`,
+      query: (id) => `${REACT_APP_FREELANCER_PROFILE_INFO_URL}/${id}`,
     }),
     updateProfile: builder.mutation({
       query: (arg) => ({
-        url: `${process.env.REACT_APP_FREELANCER_PROFILE_INFO_URL}/${arg.id}`,
+        url: `${REACT_APP_FREELANCER_PROFILE_INFO_URL}/${arg.id}`,
         method: "PATCH",
         body: {
           ...arg,

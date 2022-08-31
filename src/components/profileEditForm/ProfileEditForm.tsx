@@ -14,6 +14,7 @@ import {
 } from "services/profileInfo/profileInfoAPI";
 import useJwtDecoder from "hooks/useJwtDecoder";
 import { IEducation, IExperience } from "services/profileInfo/typesDef";
+import { TFreelancerForProfileForm } from "components/profileEditForm/typesDef";
 
 function ProfileEditForm() {
   const { sub } = useJwtDecoder();
@@ -22,7 +23,7 @@ function ProfileEditForm() {
   const [updateProfile, { isSuccess: submitSuccess, isError: submitError }] =
     useUpdateProfileMutation();
 
-  const [initialState, setInitialState] = useState<typeof data | any>();
+  const [initialState, setInitialState] = useState<TFreelancerForProfileForm>();
 
   useEffect(() => {
     if (isSuccess && data) {
@@ -30,6 +31,7 @@ function ProfileEditForm() {
         ...data,
         skills: data.skills.map(({ id }) => id),
         category: data.categoryId,
+        description: data?.user.description,
       });
     }
   }, [data, isSuccess]);
@@ -73,7 +75,7 @@ function ProfileEditForm() {
     return [...current, ...shouldBeDeleted];
   };
 
-  const onSubmit = (formData: any) => {
+  const onSubmit = (formData: TFreelancerForProfileForm | FieldValues) => {
     const objectToQuery = {
       categoryId: Number(formData.category),
       englishLevel: formData.englishLevel,
@@ -81,10 +83,13 @@ function ProfileEditForm() {
       rate: formData.rate,
       userId: formData.userId,
       id: formData.id,
-      description: formData.description,
       skillsIds: formData.skills,
       educations: parseData(formData.education, data?.education!),
       experiences: parseData(formData.experience, data?.experience!),
+      user: {
+        ...data?.user,
+        description: formData.description,
+      },
     };
 
     updateProfile(objectToQuery);

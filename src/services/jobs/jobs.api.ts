@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { RootState } from "store/store";
+import { JOB_POST } from "utils/brakepointConsts";
 
 interface Skills {
   id: number;
@@ -34,7 +35,7 @@ const jobsApi = createApi({
   endpoints: (builder) => ({
     fetchDetails: builder.query<Job, QueryParam>({
       query: (path) => ({
-        url: `job-post/${path.id}`,
+        url: `${JOB_POST}/${path.id}`,
         credentials: "include",
       }),
     }),
