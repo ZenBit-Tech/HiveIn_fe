@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Wrapper, {
   RoleRadio,
   TitleText,
@@ -10,7 +10,6 @@ import Wrapper, {
 import useGoogleAuth from "hooks/useGoogleAuth";
 import useJwtDecoder from "hooks/useJwtDecoder";
 import { useTranslation } from "react-i18next";
-import { RadioChangeEvent } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "store/store";
 import { setUser } from "store/slices/userSlice";
@@ -20,6 +19,7 @@ import { useUpdateUserMutation } from "services/user/setUserAPI";
 import { toast } from "react-toastify";
 
 export default function CompleteRegistration() {
+  const [radioOption, setRadioOption] = useState();
   const { role } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
   const { sub } = useJwtDecoder();
@@ -40,18 +40,15 @@ export default function CompleteRegistration() {
       return;
     }
     if (!isLoading && isSuccess) {
+      dispatch(
+        setUser({
+          role: radioOption,
+        })
+      );
       navigate(WELCOME_ROUTE);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
-
-  const setRole = (e: RadioChangeEvent) => {
-    dispatch(
-      setUser({
-        role: e.target.value,
-      })
-    );
-  };
 
   const sendToDB = () => {
     updateRole({
@@ -64,7 +61,10 @@ export default function CompleteRegistration() {
     <Wrapper>
       <FormBox>
         <TitleText level={3}>{t("CompleteRegistration.title")}</TitleText>
-        <RadioGroup onChange={setRole} value={role}>
+        <RadioGroup
+          onChange={({ target }) => setRadioOption(target.value)}
+          value={radioOption}
+        >
           <RoleRadio value="client">
             <ButtonText level={5}>
               {t("CompleteRegistration.client")}
@@ -77,7 +77,7 @@ export default function CompleteRegistration() {
             </ButtonText>
           </RoleRadio>
         </RadioGroup>
-        <ApplyButton role={role} onClick={sendToDB}>
+        <ApplyButton role={radioOption} onClick={sendToDB}>
           {t("CompleteRegistration.button")}
         </ApplyButton>
       </FormBox>

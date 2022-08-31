@@ -13,8 +13,6 @@ import {
 } from "@ant-design/icons";
 import {
   SEARCH_WORK_ROUTE,
-  PROPOSALS_ROUTE,
-  MY_JOBS_ROUTE,
   CHAT_ROUTE,
   SETTINGS_ROUTE,
   PROFILE_ROUTE,
@@ -22,54 +20,21 @@ import {
   SIGN_IN_ROUTE,
   CLIENT_PROFILE,
   CLIENT_HOME,
-  MY_CONTRACTS_ROUTE,
 } from "utils/routeConsts";
 import useAuth from "hooks/useAuth";
 import { MOBILE_SCREEN_SIZE } from "utils/navBarConsts";
 import { useEffect, useState } from "react";
-
-interface NavLinkType {
-  title: string;
-  to: string;
-}
+import navLinksPerRole, { NavRoleOptions } from "components/navbar/NavLinks";
 
 function Navbar() {
   const { authToken, signOut, role } = useAuth();
-  const [navLinks, setNavLinks] = useState<NavLinkType[]>([]);
+  const [navLinks, setNavLinks] = useState<NavRoleOptions[]>([]);
   const { t } = useTranslation();
   const { screenWidth } = useViewport();
 
   useEffect(() => {
-    if (role === "freelancer") {
-      setNavLinks([
-        {
-          to: SEARCH_WORK_ROUTE,
-          title: t("SearchWork.title"),
-        },
-        {
-          to: PROPOSALS_ROUTE,
-          title: t("Proposals.title"),
-        },
-        {
-          to: MY_CONTRACTS_ROUTE,
-          title: t("MyContracts.title"),
-        },
-      ]);
-    }
-    if (role === "client") {
-      setNavLinks([
-        {
-          to: MY_JOBS_ROUTE,
-          title: t("MyJobs.title"),
-        },
-        {
-          to: CLIENT_HOME,
-          title: "Talent",
-        },
-      ]);
-    }
-    // eslint-disable-next-line
-  }, [role, authToken]);
+    if (role) setNavLinks(navLinksPerRole[role]);
+  }, [role]);
 
   if (!authToken) {
     return (
@@ -125,12 +90,16 @@ function Navbar() {
             <NavBarButton icon={<UserOutlined />} title={t("Profile.title")} />
           </NavLink>
         )}
-        <NavBarButton
-          icon={<LogoutOutlined />}
-          title={t("SignIn.signOut")}
-          onClick={signOut}
-        />
-        {screenWidth < MOBILE_SCREEN_SIZE ? <MenuDrawer /> : ""}
+
+        {screenWidth < MOBILE_SCREEN_SIZE ? (
+          <MenuDrawer drawerLinks={navLinks} />
+        ) : (
+          <NavBarButton
+            icon={<LogoutOutlined />}
+            title={t("SignIn.signOut")}
+            onClick={signOut}
+          />
+        )}
       </NavBarButtons>
     </NavbarStyles>
   );
