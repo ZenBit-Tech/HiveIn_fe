@@ -9,10 +9,11 @@ interface CheckRoleProps {
 }
 
 function CheckRole({ guardRole, route, children }: CheckRoleProps) {
-  const { role } = useAuth();
+  const { role, signOut } = useAuth();
   const location = useLocation();
 
   if (!role) {
+    signOut();
     return <Navigate to={SIGN_IN_ROUTE} state={{ from: location }} replace />;
   }
 

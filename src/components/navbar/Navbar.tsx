@@ -13,7 +13,6 @@ import {
 } from "@ant-design/icons";
 import {
   SEARCH_WORK_ROUTE,
-  HOME_PAGE_ROUTE,
   PROPOSALS_ROUTE,
   MY_JOBS_ROUTE,
   CHAT_ROUTE,
@@ -75,7 +74,7 @@ function Navbar() {
   if (!authToken) {
     return (
       <NavbarStyles>
-        <NavLink path={HOME_PAGE_ROUTE}>
+        <NavLink path={SIGN_UP_ROUTE}>
           <img height="50px" alt="logo" src={logo} />
         </NavLink>
         <NavLink path={SIGN_UP_ROUTE}>{t("SignUp.title")}</NavLink>
@@ -86,7 +85,7 @@ function Navbar() {
 
   return (
     <NavbarStyles>
-      <NavLink path={role === "freelancer" ? HOME_PAGE_ROUTE : CLIENT_HOME}>
+      <NavLink path={role === "freelancer" ? SEARCH_WORK_ROUTE : CLIENT_HOME}>
         <img height="50px" alt="logo" src={logo} />
       </NavLink>
 
