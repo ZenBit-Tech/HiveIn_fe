@@ -18,7 +18,9 @@
     "allPostings": "Your Postings",
     "nothingToShow": "No active job posts",
     "info": "About the project",
-    "skills": "Necessary Skills"
+    "skills": "Necessary Skills",
+    "currency": "$",
+    "perHour": "/hour"
   },
   "Chat": {
     "title": "Chat"
@@ -175,7 +177,7 @@
     }
   },
   "Dashboard": {
-    "title": "Dashboard",
+    "title": "Profile",
     "titles": {
       "posts": "Your postings",
       "drafts": "Your drafts"
@@ -200,6 +202,9 @@
         "item4": "Hire the freelancer"
       }
     }
+  },
+  "NotFound": {
+    "notFound": "Not found"
   },
   "Talent": {
     "discover": "Discover",

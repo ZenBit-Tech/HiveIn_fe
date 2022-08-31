@@ -12,6 +12,7 @@ import setUserApi from "services/user/setUserAPI";
 import authApi from "services/auth/setAuthAPI";
 import counterReducer from "store/slices/counterSlice";
 import userPersistedReducer from "store/slices/userSlice";
+import setJobPostsAPI from "services/jobPosts/setJobPostsAPI";
 import { getProfileInfoApi } from "services/profileInfo/profileInfoAPI";
 import { getSkillsOrCategory } from "services/categoriesAndSkills/categoriesAndSkills";
 
@@ -22,6 +23,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [getProfileInfoApi.reducerPath]: getProfileInfoApi.reducer,
     [getSkillsOrCategory.reducerPath]: getSkillsOrCategory.reducer,
+    [setJobPostsAPI.reducerPath]: setJobPostsAPI.reducer,
     user: userPersistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -32,6 +34,7 @@ export const store = configureStore({
     })
       .concat(setUserApi.middleware)
       .concat(authApi.middleware)
+      .concat(setJobPostsAPI.middleware)
       .prepend(getProfileInfoApi.middleware)
       .prepend(getSkillsOrCategory.middleware),
 });
