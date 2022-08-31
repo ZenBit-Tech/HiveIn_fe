@@ -6,7 +6,7 @@ import Wrapper, {
   ApplyButton,
   ButtonText,
   RadioGroup,
-} from "pages/CompleteRegistration/CompleteRegistrationStyles";
+} from "pages/Auth/CompleteRegistration/CompleteRegistrationStyles";
 import useGoogleAuth from "hooks/useGoogleAuth";
 import useJwtDecoder from "hooks/useJwtDecoder";
 import { useTranslation } from "react-i18next";

@@ -52,10 +52,6 @@ function Navbar() {
           title: t("Proposals.title"),
         },
         {
-          title: t("MyJobs.title"),
-          to: MY_JOBS_ROUTE,
-        },
-        {
           to: MY_CONTRACTS_ROUTE,
           title: t("MyContracts.title"),
         },
@@ -64,8 +60,8 @@ function Navbar() {
     if (role === "client") {
       setNavLinks([
         {
-          to: CLIENT_HOME,
-          title: "Jobs",
+          to: MY_JOBS_ROUTE,
+          title: t("MyJobs.title"),
         },
         {
           to: CLIENT_HOME,

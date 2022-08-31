@@ -5,7 +5,7 @@ import PageContainer, {
   Card,
   Header,
   TitleText,
-} from "pages/MyJobs/ClientJobs/ClientJobsStyles";
+} from "pages/JobOwner/MyJobs/ClientJobsStyles";
 import JobItem from "components/UI/JobItem/JobItem";
 import { useGetOneJobPostQuery } from "services/jobPosts/setJobPostsAPI";
 import { useTranslation } from "react-i18next";

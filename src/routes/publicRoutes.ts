@@ -2,8 +2,8 @@ import {
   COMPLETE_REGISTRATION_ROUTE,
   HOME_PAGE_ROUTE,
 } from "utils/routeConsts";
-import Home from "pages/Home";
-import CompleteRegistration from "pages/CompleteRegistration/CompleteRegistration";
+import Home from "pages/Freelancer/Home";
+import CompleteRegistration from "pages/Auth/CompleteRegistration/CompleteRegistration";
 
 export interface RoutesType {
   path: string;

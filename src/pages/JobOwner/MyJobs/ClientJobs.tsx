@@ -10,7 +10,7 @@ import PageContainer, {
   Section,
   TitleText,
   StyledPagination,
-} from "pages/MyJobs/ClientJobs/ClientJobsStyles";
+} from "pages/JobOwner/MyJobs/ClientJobsStyles";
 import { useTranslation } from "react-i18next";
 import { useGetJobPostQuery } from "services/jobPosts/setJobPostsAPI";
 import { SEARCH_WORK_ROUTE } from "utils/routeConsts";
