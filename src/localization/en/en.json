@@ -184,7 +184,9 @@
     "title": "Profile",
     "titles": {
       "posts": "Your postings",
-      "drafts": "Your drafts"
+      "drafts": "Your drafts",
+      "noPosts": "There are no posts",
+      "noDrafts": "There are no drafts"
     },
     "buttons": {
         "save": "Save changes",

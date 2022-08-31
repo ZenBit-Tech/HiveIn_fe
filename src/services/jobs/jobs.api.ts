@@ -21,6 +21,7 @@ interface Job {
 
 interface QueryParam {
   id: number;
+  isDraft?: boolean;
 }
 
 const jobsApi = createApi({
@@ -39,9 +40,14 @@ const jobsApi = createApi({
         credentials: "include",
       }),
     }),
+    fetchHomePosts: builder.query<Job[], QueryParam>({
+      query: (path) => ({
+        url: `${JOB_POST}/home/${path.id}/${path.isDraft}`,
+      }),
+    }),
   }),
 });
 
-export const { useFetchDetailsQuery } = jobsApi;
+export const { useFetchDetailsQuery, useFetchHomePostsQuery } = jobsApi;
 
 export default jobsApi;

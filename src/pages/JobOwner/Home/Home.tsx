@@ -1,31 +1,28 @@
 import { Button, Divider, Typography } from "antd";
 import JobPost from "components/JobPost/Index";
+import useAuth from "hooks/useAuth";
 import useGoogleAuth from "hooks/useGoogleAuth";
 import { useTranslation } from "react-i18next";
+import { useFetchHomePostsQuery } from "services/jobs/jobs.api";
 import { BLUE } from "utils/colorConsts";
 import S from "./style";
 
 export default function ClientHome() {
   useGoogleAuth();
 
+  const { id } = useAuth();
   const { Title } = Typography;
 
-  const mockPosts = [
-    {
-      name: "Full stack developer",
-      hired: 0,
-      messages: 15,
-      proposals: 8,
-      createdAt: new Date(),
-    },
-    {
-      name: "Frontend developer",
-      hired: 0,
-      messages: 10,
-      proposals: 13,
-      createdAt: new Date(),
-    },
-  ];
+  const { data: drafts } = useFetchHomePostsQuery({
+    id: id || 0,
+    isDraft: true,
+  });
+
+  const { data: posts } = useFetchHomePostsQuery({
+    id: id || 0,
+    isDraft: false,
+  });
+
   const { t } = useTranslation();
   const stepsList = [
     t("Dashboard.createJobTutorial.list.item1"),
@@ -44,17 +41,21 @@ export default function ClientHome() {
             {t("Dashboard.buttons.seePosts")}
           </Button>
         </S.TitleContainer>
-        {mockPosts.map(({ createdAt, hired, messages, name, proposals }) => (
-          <div key={name} style={{ margin: "15px 0", width: "100%" }}>
-            <JobPost
-              createdAt={createdAt}
-              name={name}
-              hired={hired}
-              messages={messages}
-              proposals={proposals}
-            />
-          </div>
-        ))}
+        {posts ? (
+          posts.map(({ createdAt, title }) => (
+            <div key={title} style={{ margin: "15px 0", width: "100%" }}>
+              <JobPost
+                createdAt={new Date(createdAt)}
+                name={title}
+                hired={0}
+                messages={0}
+                proposals={0}
+              />
+            </div>
+          ))
+        ) : (
+          <Title level={4}>{t("Dashboard.titles.noPosts")}</Title>
+        )}
       </S.Box>
       <S.Box>
         <Divider />
@@ -64,11 +65,15 @@ export default function ClientHome() {
             {t("Dashboard.buttons.seeDrafts")}
           </Button>
         </S.TitleContainer>
-        {mockPosts.map(({ createdAt, name }) => (
-          <div key={name} style={{ margin: "15px 0", width: "100%" }}>
-            <JobPost createdAt={createdAt} name={name} />
-          </div>
-        ))}
+        {drafts ? (
+          drafts.map(({ createdAt, title }) => (
+            <div key={title} style={{ margin: "15px 0", width: "100%" }}>
+              <JobPost isDraft createdAt={new Date(createdAt)} name={title} />
+            </div>
+          ))
+        ) : (
+          <Title level={4}>{t("Dashboard.titles.noDrafts")}</Title>
+        )}
         <Divider />
       </S.Box>
       <S.Box>
