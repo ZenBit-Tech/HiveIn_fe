@@ -1,4 +1,3 @@
-import i18next from "localization/en/en.json";
 import { ILayoutElementWithoutControl } from "components/layoutElementWithTitle/typesDef";
 
 const propsDataCollection: ILayoutElementWithoutControl[] = [
@@ -14,14 +13,12 @@ const propsDataCollection: ILayoutElementWithoutControl[] = [
     element: "select",
     formFieldName: "category",
     containerWidth: "half",
-    selectOptions: i18next.ProfileEditForm.category.options,
   },
   {
     title: "Talent.skills",
     element: "skillsLayout",
     formFieldName: "skills",
     containerWidth: "full",
-    skillsOptions: i18next.ProfileEditForm.skills.skillsOptions,
   },
 ];
 

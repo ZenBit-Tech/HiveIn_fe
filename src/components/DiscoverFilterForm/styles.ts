@@ -2,8 +2,8 @@ import { LIGHT_GRAY } from "utils/colorConsts";
 import styled from "styled-components";
 import { Button } from "antd";
 
-export const CustomButton = styled(Button)`
-  margin-top: 5px;
+const CustomButton = styled(Button)`
+  margin: 10px 0;
 `;
 
 const Form = styled("form")`
@@ -12,4 +12,4 @@ const Form = styled("form")`
   background-color: ${LIGHT_GRAY};
 `;
 
-export default Form;
+export default { Form, CustomButton };

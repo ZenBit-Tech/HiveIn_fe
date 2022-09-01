@@ -24,6 +24,7 @@ import {
   CLIENT_PROFILE,
   CLIENT_HOME,
   MY_CONTRACTS_ROUTE,
+  TALENT_ROUTE,
 } from "utils/routeConsts";
 import useAuth from "hooks/useAuth";
 import { MOBILE_SCREEN_SIZE } from "utils/navBarConsts";
@@ -68,7 +69,7 @@ function Navbar() {
           title: "Jobs",
         },
         {
-          to: CLIENT_HOME,
+          to: TALENT_ROUTE,
           title: "Talent",
         },
       ]);

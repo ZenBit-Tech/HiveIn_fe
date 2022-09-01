@@ -1,32 +1,27 @@
 import { HeartOutlined, HeartTwoTone } from "@ant-design/icons";
-import { Avatar, Button, Card, Col, Row, Tooltip } from "antd";
+import { Avatar, Button, Col, Row, Tooltip } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { StyledCol } from "./styles";
+import S from "./styles";
 
 export interface IFreelancer {
   photoUrl: string;
   jobPosition: string;
+  link: string;
   rate: number;
 }
 
-function CandidateCard({ photoUrl, jobPosition, rate }: IFreelancer) {
+function CandidateCard({ photoUrl, jobPosition, rate, link }: IFreelancer) {
   const [saved, setSaved] = useState(false);
 
   const navigate = useNavigate();
   return (
-    <Card size="default">
+    <S.Card size="default">
       <Row>
-        <StyledCol
-          span={6}
-          onClick={() => navigate("https://joeschmoe.io/api/v1/random")}
-        >
+        <S.StyledCol span={6} onClick={() => navigate(link)}>
           <Avatar size={50} src={photoUrl} />
-        </StyledCol>
-        <StyledCol
-          span={15}
-          onClick={() => navigate("https://joeschmoe.io/api/v1/random")}
-        >
+        </S.StyledCol>
+        <S.StyledCol span={15} onClick={() => navigate(link)}>
           <Row>
             <h3>{jobPosition}</h3>
           </Row>
@@ -34,7 +29,7 @@ function CandidateCard({ photoUrl, jobPosition, rate }: IFreelancer) {
             <Col span={8}>Rate: </Col>
             <Col span={16}>{rate}$</Col>
           </Row>
-        </StyledCol>
+        </S.StyledCol>
         <Col span={3}>
           <Tooltip title="Save">
             <Button
@@ -46,7 +41,7 @@ function CandidateCard({ photoUrl, jobPosition, rate }: IFreelancer) {
           </Tooltip>
         </Col>
       </Row>
-    </Card>
+    </S.Card>
   );
 }
 

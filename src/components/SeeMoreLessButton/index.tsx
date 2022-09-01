@@ -1,26 +1,18 @@
+import { Button } from "antd";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { SButton } from "./styles";
 
 export interface ISeeMoreLessButton {
-  cardCount: number;
-  cardInRow: number;
   isShowAll: boolean;
   changeShowAll: () => void;
 }
 
-function SeeMoreLessButton({
-  cardCount,
-  cardInRow,
-  isShowAll,
-  changeShowAll,
-}: ISeeMoreLessButton) {
-  const isShow = cardCount > cardInRow;
+function SeeMoreLessButton({ isShowAll, changeShowAll }: ISeeMoreLessButton) {
   const { t } = useTranslation();
   return (
-    <SButton type="link" onClick={changeShowAll} show={isShow}>
+    <Button shape="round" size="large" type="primary" onClick={changeShowAll}>
       {isShowAll ? t("Talent.seeAll") : t("Talent.seeLess")}
-    </SButton>
+    </Button>
   );
 }
 

@@ -5,7 +5,7 @@ import LayoutElementWithTitle from "components/layoutElementWithTitle/LayoutElem
 import schema from "components/DiscoverFilterForm/schema";
 import { useTranslation } from "react-i18next";
 import propsDataCollection from "./staticData";
-import Form, { CustomButton } from "./styles";
+import S from "./styles";
 
 function DiscoverFilterForm() {
   const {
@@ -29,7 +29,7 @@ function DiscoverFilterForm() {
   return (
     <>
       {isFiltersOpen && (
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <S.Form onSubmit={handleSubmit(onSubmit)}>
           {propsDataCollection.map((propsData) => (
             <LayoutElementWithTitle
               errors={errors}
@@ -38,14 +38,14 @@ function DiscoverFilterForm() {
               {...propsData}
             />
           ))}
-          <CustomButton block type="primary" htmlType="submit">
+          <S.CustomButton block type="primary" htmlType="submit">
             {t("Talent.search")}
-          </CustomButton>
-        </Form>
+          </S.CustomButton>
+        </S.Form>
       )}
-      <CustomButton block type="ghost" onClick={changeIsFiltersOpen}>
+      <S.CustomButton block type="ghost" onClick={changeIsFiltersOpen}>
         {isFiltersOpen ? t("Talent.hideFilters") : t("Talent.showFilters")}
-      </CustomButton>
+      </S.CustomButton>
     </>
   );
 }

@@ -8,6 +8,7 @@ import Profile from "pages/Profile";
 import Proposals from "pages/Proposals";
 import SearchWork from "pages/SearchWork";
 import Settings from "pages/Settings/Settings";
+import Talent from "pages/Talent/Index";
 import Welcome from "pages/Welcome";
 import { RoutesType } from "routes/publicRoutes";
 import {
@@ -23,6 +24,7 @@ import {
   MY_JOB_ROUTE,
   CLIENT_PROFILE,
   CLIENT_HOME,
+  TALENT_ROUTE,
 } from "utils/routeConsts";
 
 const protectedRoutes: RoutesType[] = [
@@ -73,6 +75,10 @@ const protectedRoutes: RoutesType[] = [
   {
     path: CLIENT_HOME,
     component: ClientHome,
+  },
+  {
+    path: TALENT_ROUTE,
+    component: Talent,
   },
 ];
 
