@@ -4,7 +4,7 @@ import { setSignOut, setUser } from "store/slices/userSlice";
 import { RootState, userPersistor } from "store/store";
 
 const useAuth = () => {
-  const { authToken, email, role, id } = useSelector(
+  const { authToken, email, role } = useSelector(
     (state: RootState) => state.user
   );
 
@@ -18,7 +18,6 @@ const useAuth = () => {
       setUser({
         authToken: res.token,
         email: res.email,
-        id: res.id,
         role: res.role,
       })
     );
@@ -30,7 +29,7 @@ const useAuth = () => {
     await userPersistor.purge();
   };
 
-  return { authToken, email, role, signIn, signOut, id };
+  return { authToken, email, role, signIn, signOut };
 };
 
 export default useAuth;

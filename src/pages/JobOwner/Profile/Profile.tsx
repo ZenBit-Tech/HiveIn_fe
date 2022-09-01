@@ -9,11 +9,11 @@ import {
   useGetUserQuery,
   useUpdateUserMutation,
 } from "services/user/setUserAPI";
-import useAuth from "hooks/useAuth";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUser } from "store/slices/userSlice";
 import { store } from "store/store";
+import useJwtDecoder from "hooks/useJwtDecoder";
 import S from "./style";
 import resolver from "./schema";
 
@@ -27,19 +27,22 @@ export default function ClientProfile() {
     control,
     handleSubmit,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm<ClientForm>({
     resolver: yupResolver(resolver),
   });
   const { t } = useTranslation();
 
-  const { id } = useAuth();
-  const [
-    runMutation,
-    { isError, isLoading, isSuccess, data: mutationResponse },
-  ] = useUpdateUserMutation();
+  const { sub: id } = useJwtDecoder();
+  const [runMutation, { isError, isLoading, isSuccess }] =
+    useUpdateUserMutation();
 
-  const { data } = useGetUserQuery(String(id));
+  const {
+    data,
+    isLoading: queryLoad,
+    isSuccess: querySuccess,
+  } = useGetUserQuery(String(id));
   const dispatch = useDispatch();
   const { getState } = store;
   const { user } = getState();
@@ -61,10 +64,12 @@ export default function ClientProfile() {
   useEffect(() => {
     if (user.firstName) {
       setValuesByStoredData();
-      return;
     }
-    setValuesByQueryData();
-  }, [user, data]);
+  }, []);
+
+  useEffect(() => {
+    if (!queryLoad && querySuccess && !user.firstName) setValuesByQueryData();
+  }, [queryLoad]);
 
   useEffect(() => {
     if (!isLoading && isError) toast.error("Something went wrong");
@@ -72,8 +77,8 @@ export default function ClientProfile() {
       toast.success("Profile uploaded");
       dispatch(
         setUser({
-          firstName: mutationResponse?.firstName,
-          description: mutationResponse?.description,
+          firstName: getValues("name"),
+          description: getValues("description"),
         })
       );
     }

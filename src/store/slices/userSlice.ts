@@ -5,7 +5,6 @@ import { persistReducer } from "redux-persist";
 interface UserState {
   authToken?: string;
   email?: string;
-  id?: number;
   firstName?: string;
   description?: string;
   role?: "freelancer" | "client";
@@ -14,7 +13,6 @@ interface UserState {
 const initialState: UserState = {
   authToken: undefined,
   email: undefined,
-  id: undefined,
   role: undefined,
   firstName: undefined,
   description: undefined,

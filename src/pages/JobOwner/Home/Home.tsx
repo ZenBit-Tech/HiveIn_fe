@@ -1,7 +1,7 @@
 import { Button, Divider, Typography } from "antd";
 import JobPost from "components/JobPost/Index";
-import useAuth from "hooks/useAuth";
 import useGoogleAuth from "hooks/useGoogleAuth";
+import useJwtDecoder from "hooks/useJwtDecoder";
 import { useTranslation } from "react-i18next";
 import { useGetHomePostsQuery } from "services/jobPosts/setJobPostsAPI";
 import { BLUE } from "utils/colorConsts";
@@ -10,16 +10,16 @@ import S from "./style";
 export default function ClientHome() {
   useGoogleAuth();
 
-  const { id } = useAuth();
+  const { sub: id } = useJwtDecoder();
   const { Title } = Typography;
 
   const { data: drafts } = useGetHomePostsQuery({
-    id: id || 0,
+    id: Number(id) || 0,
     isDraft: true,
   });
 
   const { data: posts } = useGetHomePostsQuery({
-    id: id || 0,
+    id: Number(id) || 0,
     isDraft: false,
   });
 
@@ -42,8 +42,8 @@ export default function ClientHome() {
           </Button>
         </S.TitleContainer>
         {posts ? (
-          posts.map(({ createdAt, title }) => (
-            <div key={title} style={{ margin: "15px 0", width: "100%" }}>
+          posts.map(({ createdAt, title, ...post }) => (
+            <div key={post.id} style={{ margin: "15px 0", width: "100%" }}>
               <JobPost
                 createdAt={new Date(createdAt)}
                 name={title}
@@ -66,8 +66,8 @@ export default function ClientHome() {
           </Button>
         </S.TitleContainer>
         {drafts ? (
-          drafts.map(({ createdAt, title }) => (
-            <div key={title} style={{ margin: "15px 0", width: "100%" }}>
+          drafts.map(({ createdAt, title, ...draft }) => (
+            <div key={draft.id} style={{ margin: "15px 0", width: "100%" }}>
               <JobPost isDraft createdAt={new Date(createdAt)} name={title} />
             </div>
           ))
