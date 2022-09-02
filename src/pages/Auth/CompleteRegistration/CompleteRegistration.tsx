@@ -10,8 +10,7 @@ import Wrapper, {
 import useGoogleAuth from "hooks/useGoogleAuth";
 import useJwtDecoder from "hooks/useJwtDecoder";
 import { useTranslation } from "react-i18next";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "store/store";
+import { useDispatch } from "react-redux";
 import { setUser } from "store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { WELCOME_ROUTE } from "utils/routeConsts";
@@ -19,41 +18,36 @@ import { useUpdateUserMutation } from "services/user/setUserAPI";
 import { toast } from "react-toastify";
 
 export default function CompleteRegistration() {
+  useGoogleAuth();
   const [radioOption, setRadioOption] = useState();
-  const { role } = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
-  const { sub } = useJwtDecoder();
+  const { sub: id } = useJwtDecoder();
 
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [updateRole, { isSuccess, isError, isLoading, error }] =
-    useUpdateUserMutation();
-
-  useGoogleAuth();
+  const [updateRole, { isError, isLoading, error }] = useUpdateUserMutation();
 
   useEffect(() => {
     if (!isLoading && isError) {
       if ("status" in error!) {
         toast.error(t("CompleteRegistration.error"));
       }
-      return;
-    }
-    if (!isLoading && isSuccess) {
-      dispatch(
-        setUser({
-          role: radioOption,
-        })
-      );
-      navigate(WELCOME_ROUTE);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
-  const sendToDB = () => {
-    updateRole({
-      id: sub,
-      role,
+  const sendToDB = async () => {
+    navigate(WELCOME_ROUTE);
+    dispatch(
+      setUser({
+        role: radioOption,
+      })
+    );
+
+    await updateRole({
+      id,
+      role: radioOption,
     });
   };
 

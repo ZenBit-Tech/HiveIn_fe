@@ -85,7 +85,9 @@ export default function ClientHome() {
           </span>
           <ol>
             {stepsList.map((item) => (
-              <li style={{ padding: "5px 0" }}>{item}</li>
+              <li key={item} style={{ padding: "5px 0" }}>
+                {item}
+              </li>
             ))}
           </ol>
         </div>
