@@ -4,9 +4,13 @@ import jwtDecode, { JwtPayload } from "jwt-decode";
 const useJwtDecoder = () => {
   const { authToken } = useAuth();
 
-  const { sub, exp } = jwtDecode<JwtPayload>(authToken!);
+  if (authToken) {
+    const { sub, exp } = jwtDecode<JwtPayload>(authToken);
 
-  return { sub, exp };
+    return { sub, exp };
+  }
+
+  return { sub: "0", exp: "0" };
 };
 
 export default useJwtDecoder;
