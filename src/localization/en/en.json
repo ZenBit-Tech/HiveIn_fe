@@ -67,7 +67,7 @@
     "newPassword": "New password",
     "confirmNewPassword": "Confirm new password",
     "successfullyTitle": "Change password success",
-    "successfullyText": "You have successfully logged in"
+    "successfullyText": "You have successfully change password"
   },
   "CompleteRegistration": {
     "client": "I'm a client, hiring for a project",
