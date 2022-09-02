@@ -8,7 +8,7 @@ import Profile from "pages/Profile";
 import Proposals from "pages/Proposals";
 import SearchWork from "pages/SearchWork";
 import Settings from "pages/Settings/Settings";
-import Talent from "pages/Talent/Index";
+import Talent from "pages/Talent";
 import Welcome from "pages/Welcome";
 import { RoutesType } from "routes/publicRoutes";
 import {

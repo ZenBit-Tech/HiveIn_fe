@@ -1,4 +1,3 @@
-import { Link } from "react-scroll";
 import styled from "styled-components";
 import { BOX_BACKGROUND, WHITE } from "utils/colorConsts";
 
@@ -22,7 +21,7 @@ const TitleContainer = styled.div`
   align-items: center;
 `;
 
-const SButton = styled(Link)<{ underline: string }>`
+const SButton = styled.p<{ underline: string }>`
   display: block;
   cursor: pointer;
   text-decoration: ${(props) => props.underline};
