@@ -6,6 +6,7 @@ import S from "./style";
 interface JobPostProps {
   name: string;
   createdAt: Date;
+  isDraft?: boolean;
   proposals?: number;
   messages?: number;
   hired?: number;
@@ -19,6 +20,7 @@ export default function JobPost({
   messages,
   proposals,
   createdBy,
+  isDraft = false,
 }: JobPostProps) {
   const { Title, Text } = Typography;
   return (
@@ -30,20 +32,22 @@ export default function JobPost({
             createdBy || "you"
           }`}</Text>
         </S.TextBox>
-        <S.TextContainer>
-          <S.TextBox>
-            <Text>{proposals}</Text>
-            <Text>Proposals</Text>
-          </S.TextBox>
-          <S.TextBox>
-            <Text>{messages}</Text>
-            <Text>Messages</Text>
-          </S.TextBox>
-          <S.TextBox>
-            <Text>{hired}</Text>
-            <Text>Hired</Text>
-          </S.TextBox>
-        </S.TextContainer>
+        {!isDraft ? (
+          <S.TextContainer>
+            <S.TextBox>
+              <Text>{proposals}</Text>
+              <Text>Proposals</Text>
+            </S.TextBox>
+            <S.TextBox>
+              <Text>{messages}</Text>
+              <Text>Messages</Text>
+            </S.TextBox>
+            <S.TextBox>
+              <Text>{hired}</Text>
+              <Text>Hired</Text>
+            </S.TextBox>
+          </S.TextContainer>
+        ) : null}
       </S.Footer>
     </S.Box>
   );
@@ -54,4 +58,5 @@ JobPost.defaultProps = {
   messages: 0,
   proposals: 0,
   createdBy: "",
+  isDraft: false,
 };
