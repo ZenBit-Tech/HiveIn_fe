@@ -15,6 +15,7 @@ export interface NavRoleOptions {
 export interface NavLinkRoles {
   freelancer: NavRoleOptions[];
   client: NavRoleOptions[];
+  none: [];
 }
 
 const navLinksPerRole: NavLinkRoles = {
@@ -42,6 +43,7 @@ const navLinksPerRole: NavLinkRoles = {
       title: "Talent",
     },
   ],
+  none: [],
 };
 
 export default navLinksPerRole;

@@ -1,6 +1,7 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import useAuth from "hooks/useAuth";
 import { SIGN_IN_ROUTE } from "utils/routeConsts";
+import { useEffect } from "react";
 
 interface CheckRoleProps {
   children: JSX.Element;
@@ -10,16 +11,17 @@ interface CheckRoleProps {
 
 function CheckRole({ guardRole, route, children }: CheckRoleProps) {
   const { role, signOut } = useAuth();
-  const location = useLocation();
+  const navigate = useNavigate();
 
-  if (!role) {
-    signOut();
-    return <Navigate to={SIGN_IN_ROUTE} state={{ from: location }} replace />;
-  }
+  useEffect(() => {
+    if (!role) {
+      signOut();
+      navigate(SIGN_IN_ROUTE);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  if (role !== guardRole) {
-    return <Navigate to={route} />;
-  }
+  if (role !== guardRole) return <Navigate to={route} />;
 
   return children;
 }

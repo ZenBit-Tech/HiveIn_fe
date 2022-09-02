@@ -34,6 +34,7 @@ function Navbar() {
 
   useEffect(() => {
     if (role) setNavLinks(navLinksPerRole[role]);
+    else setNavLinks(navLinksPerRole.none);
   }, [role]);
 
   if (!authToken) {
