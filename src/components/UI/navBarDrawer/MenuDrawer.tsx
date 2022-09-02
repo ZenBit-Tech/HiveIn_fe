@@ -7,6 +7,7 @@ import NavLink from "components/UI/navlink/NavLink";
 import NavBarButton from "components/UI/navBarButton/NavBarButton";
 import useAuth from "hooks/useAuth";
 import { NavRoleOptions } from "components/navbar/NavLinks";
+import { SIGN_IN_ROUTE } from "utils/routeConsts";
 
 interface MenuDrawerProps {
   drawerLinks: NavRoleOptions[];
@@ -52,7 +53,7 @@ function MenuDrawer({ drawerLinks }: MenuDrawerProps) {
           ))}
           <Row>
             <Col span={12}>
-              <NavLink path="/login" onClick={signOut}>
+              <NavLink path={SIGN_IN_ROUTE} onClick={signOut}>
                 {t("SignIn.signOut")}
               </NavLink>
             </Col>
