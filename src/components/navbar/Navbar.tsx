@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-
 import NavLink from "components/UI/navlink/NavLink";
 import NavbarStyles, { NavBarButtons } from "components/navbar/NavbarStyles";
 import logo from "components/navbar/imgs/logo.svg";
@@ -16,20 +15,66 @@ import {
   SEARCH_WORK_ROUTE,
   HOME_PAGE_ROUTE,
   PROPOSALS_ROUTE,
-  MY_CONTRACTS_ROUTE,
+  MY_JOBS_ROUTE,
   CHAT_ROUTE,
   SETTINGS_ROUTE,
   PROFILE_ROUTE,
   SIGN_UP_ROUTE,
   SIGN_IN_ROUTE,
+  CLIENT_PROFILE,
+  CLIENT_HOME,
+  MY_CONTRACTS_ROUTE,
 } from "utils/routeConsts";
 import useAuth from "hooks/useAuth";
 import { MOBILE_SCREEN_SIZE } from "utils/navBarConsts";
+import { useEffect, useState } from "react";
+
+interface NavLinkType {
+  title: string;
+  to: string;
+}
 
 function Navbar() {
-  const { authToken, signOut } = useAuth();
+  const { authToken, signOut, role } = useAuth();
+  const [navLinks, setNavLinks] = useState<NavLinkType[]>([]);
   const { t } = useTranslation();
   const { screenWidth } = useViewport();
+
+  useEffect(() => {
+    if (role === "freelancer") {
+      setNavLinks([
+        {
+          to: SEARCH_WORK_ROUTE,
+          title: t("SearchWork.title"),
+        },
+        {
+          to: PROPOSALS_ROUTE,
+          title: t("Proposals.title"),
+        },
+        {
+          title: t("MyJobs.title"),
+          to: MY_JOBS_ROUTE,
+        },
+        {
+          to: MY_CONTRACTS_ROUTE,
+          title: t("MyContracts.title"),
+        },
+      ]);
+    }
+    if (role === "client") {
+      setNavLinks([
+        {
+          to: CLIENT_HOME,
+          title: "Jobs",
+        },
+        {
+          to: CLIENT_HOME,
+          title: "Talent",
+        },
+      ]);
+    }
+    // eslint-disable-next-line
+  }, [role, authToken]);
 
   if (!authToken) {
     return (
@@ -45,7 +90,7 @@ function Navbar() {
 
   return (
     <NavbarStyles>
-      <NavLink path={HOME_PAGE_ROUTE}>
+      <NavLink path={role === "freelancer" ? HOME_PAGE_ROUTE : CLIENT_HOME}>
         <img height="50px" alt="logo" src={logo} />
       </NavLink>
 
@@ -53,9 +98,11 @@ function Navbar() {
         ""
       ) : (
         <>
-          <NavLink path={SEARCH_WORK_ROUTE}>{t("SearchWork.title")}</NavLink>
-          <NavLink path={PROPOSALS_ROUTE}>{t("Proposals.title")}</NavLink>
-          <NavLink path={MY_CONTRACTS_ROUTE}>{t("MyContracts.title")}</NavLink>
+          {navLinks.map(({ title, to }) => (
+            <NavLink key={to} path={to}>
+              {title}
+            </NavLink>
+          ))}
         </>
       )}
 
@@ -63,18 +110,31 @@ function Navbar() {
         <NavLink path={CHAT_ROUTE}>
           <NavBarButton icon={<MessageFilled />} title={t("Chat.title")} />
         </NavLink>
-        <NavLink path={SETTINGS_ROUTE}>
-          <NavBarButton icon={<SettingFilled />} title={t("Settings.title")} />
-        </NavLink>
-        <NavLink path={PROFILE_ROUTE}>
-          <NavBarButton icon={<UserOutlined />} title={t("Profile.title")} />
-        </NavLink>
+        {role === "freelancer" ? (
+          <>
+            <NavLink path={SETTINGS_ROUTE}>
+              <NavBarButton
+                icon={<SettingFilled />}
+                title={t("Settings.title")}
+              />
+            </NavLink>
+            <NavLink path={PROFILE_ROUTE}>
+              <NavBarButton
+                icon={<UserOutlined />}
+                title={t("Profile.title")}
+              />
+            </NavLink>
+          </>
+        ) : (
+          <NavLink path={CLIENT_PROFILE}>
+            <NavBarButton icon={<UserOutlined />} title={t("Profile.title")} />
+          </NavLink>
+        )}
         <NavBarButton
           icon={<LogoutOutlined />}
           title={t("SignIn.signOut")}
           onClick={signOut}
         />
-
         {screenWidth < MOBILE_SCREEN_SIZE ? <MenuDrawer /> : ""}
       </NavBarButtons>
     </NavbarStyles>
