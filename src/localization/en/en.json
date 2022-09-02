@@ -57,9 +57,9 @@
     "errorGoogleOAuth": "Server error, please try again"
   },
   "ServerErrors": {
-    "404": "Email not found, please sign up",
+    "404": "Invalid email and/or password",
     "401": "Invalid email and/or password",
-    "409": "Email already registered. Please login with your password or your Google account.",
+    "409": "Email already registered. Please login with your Google account.",
     "500": "Server error, please try again",
     "FETCH_ERROR": "Server error, please try again"
   },
