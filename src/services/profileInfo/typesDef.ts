@@ -1,3 +1,5 @@
+import { IUser } from "../user/setUserAPI";
+
 interface IMutualEdEx {
   city: string;
   id: number;
@@ -17,6 +19,7 @@ export interface IExperience extends IMutualEdEx {
 }
 
 export interface IFreelancer {
+  id: number;
   categoryId: number;
   education: IEducation[];
   englishLevel: "intermediate" | "pre-intermediate" | "upper-intermediate";
@@ -25,4 +28,5 @@ export interface IFreelancer {
   rate: string;
   skills: { id: number }[];
   userId: number;
+  user: IUser;
 }

@@ -1,13 +1,16 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "store/store";
+import { REACT_APP_USER_CONTACT_INFO_URL } from "utils/brakepointConsts";
 
 export interface IUser {
-  id?: string | undefined;
-  email?: string | undefined;
-  role?: string | undefined;
-  firstName?: string | undefined;
-  lastName?: string | undefined;
-  phone?: string | undefined;
+  id?: string;
+  email?: string;
+  role?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  description?: string;
+  avatarURL?: string;
 }
 
 const userApi = createApi({
@@ -26,11 +29,11 @@ const userApi = createApi({
   }),
   endpoints: (builder) => ({
     getUser: builder.query<IUser, string>({
-      query: (id) => `/${process.env.REACT_APP_USER_CONTACT_INFO_URL}/${id}`,
+      query: (id) => `/${REACT_APP_USER_CONTACT_INFO_URL}/${id}`,
     }),
     updateUser: builder.mutation<IUser, IUser>({
       query: ({ id, ...userInfo }: IUser) => ({
-        url: `/${process.env.REACT_APP_USER_CONTACT_INFO_URL}/${id}`,
+        url: `/${REACT_APP_USER_CONTACT_INFO_URL}/${id}`,
         method: "PATCH",
         body: {
           ...userInfo,

@@ -1,4 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  AUTH,
+  FORGOT_PASSWORD,
+  RESTORE_PASSWORD,
+} from "utils/brakepointConsts";
 
 interface ForgotPassword {
   email: string;
@@ -15,7 +20,7 @@ const forgotPassApi = createApi({
   endpoints: (builder) => ({
     forgotPassword: builder.mutation<boolean, ForgotPassword>({
       query: ({ email }) => ({
-        url: "/auth/forgot-password",
+        url: `/${AUTH}/${FORGOT_PASSWORD}`,
         method: "POST",
         body: {
           email,
@@ -26,7 +31,7 @@ const forgotPassApi = createApi({
 
     restorePassword: builder.mutation<boolean, RestorePassword>({
       query: ({ password, token }) => ({
-        url: "/auth/restore-password",
+        url: `/${AUTH}/${RESTORE_PASSWORD}`,
         method: "PATCH",
         body: {
           token,
