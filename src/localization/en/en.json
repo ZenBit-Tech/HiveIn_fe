@@ -10,7 +10,6 @@
   },
   "MyContracts": {
     "title": "My Contracts"
-    
   },
   "MyJobs": {
     "title": "My Jobs",
@@ -65,11 +64,11 @@
   },
   "ForgotPassword": {
     "title": "Forgot your password?",
-    "subtitle": "Enter your email. We'll email instructions on how to reset your password.",
+    "subtitle": "Enter your email. We'll e-mail instructions on how to reset your password.",
     "resetPassword": "Reset password",
     "rememberPassword": "Just remembered password?",
     "signIn": "Sign In",
-    "checkMailBox": "We send you a recovery e-mail with instructions. Please check your e-mail."
+    "checkMailBox": "If your e-mail is correct, we just send you a recovery e-mail with instructions. Please check your e-mail."
   },
   "RestorePassword": {
     "title": "Change password?",
@@ -78,7 +77,7 @@
     "newPassword": "New password",
     "confirmNewPassword": "Confirm new password",
     "successfullyTitle": "Change password success",
-    "successfullyText": "You have successfully logged in"
+    "successfullyText": "You have successfully change password"
   },
   "CompleteRegistration": {
     "client": "I'm a client, hiring for a project",
@@ -108,11 +107,7 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": [
-        "pre-intermediate",
-        "intermediate",
-        "upper-intermediate"
-      ]
+      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
     },
     "description": {
       "title": "Description",
@@ -191,11 +186,11 @@
       "noDrafts": "There are no drafts"
     },
     "buttons": {
-        "save": "Save changes",
-        "createPosts": "Post a job",
-        "seePosts": "See all posts",
-        "seeDrafts": "See all drafts"
-      },
+      "save": "Save changes",
+      "createPosts": "Post a job",
+      "seePosts": "See all posts",
+      "seeDrafts": "See all drafts"
+    },
     "createJobTutorial": {
       "title": "What is there for you in a Talent?",
       "subtitle": {
