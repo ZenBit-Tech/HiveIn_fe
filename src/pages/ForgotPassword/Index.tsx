@@ -33,17 +33,9 @@ export default function ForgotPassword() {
     });
   };
 
-  const error = () => {
-    Modal.error({
-      title: t("ForgotPassword.emailNotFound"),
-      centered: true,
-    });
-  };
-
   async function onSubmit({ email }: ForgotPasswordForm) {
-    const { data } = (await forgotPassword({ email })) as { data: boolean };
-    if (data) success();
-    else error();
+    await forgotPassword({ email });
+    success();
   }
 
   const goToLogin = () => {
