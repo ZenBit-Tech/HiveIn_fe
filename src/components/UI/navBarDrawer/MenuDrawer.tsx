@@ -6,7 +6,7 @@ import { Col, Divider, Drawer, Row } from "antd";
 import NavLink from "components/UI/navlink/NavLink";
 import NavBarButton from "components/UI/navBarButton/NavBarButton";
 import useAuth from "hooks/useAuth";
-import { NavRoleOptions } from "components/navbar/NavLinks";
+import { NavRoleOptions } from "components/navbar/NavLinksPerRole";
 import { SIGN_IN_ROUTE } from "utils/routeConsts";
 
 interface MenuDrawerProps {
@@ -43,7 +43,7 @@ function MenuDrawer({ drawerLinks }: MenuDrawerProps) {
         key="bottom"
       >
         <>
-          {drawerLinks.map(({ title, to }) => (
+          {drawerLinks?.map(({ title, to }) => (
             <Row key={to}>
               <Col span={12}>
                 <NavLink path={to}>{title}</NavLink>

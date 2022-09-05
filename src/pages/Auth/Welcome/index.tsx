@@ -2,7 +2,7 @@ import useAuth from "hooks/useAuth";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { CLIENT_PROFILE, PROFILE_ROUTE } from "utils/routeConsts";
-import S from "./style";
+import S from "pages/Auth/Welcome/style";
 
 const createProfileRoute = {
   freelancer: PROFILE_ROUTE,
