@@ -5,6 +5,8 @@ import { persistReducer } from "redux-persist";
 interface UserState {
   authToken?: string;
   email?: string;
+  firstName?: string;
+  description?: string;
   role?: "freelancer" | "client";
 }
 
@@ -12,6 +14,8 @@ const initialState: UserState = {
   authToken: undefined,
   email: undefined,
   role: undefined,
+  firstName: undefined,
+  description: undefined,
 };
 
 const userSlice = createSlice({

@@ -1,24 +1,95 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import { Button } from "antd";
 import TextField from "components/UI/textField/TextField";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
+import {
+  useGetUserQuery,
+  useUpdateUserMutation,
+} from "services/user/setUserAPI";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setUser } from "store/slices/userSlice";
+import { store } from "store/store";
+import useJwtDecoder from "hooks/useJwtDecoder";
 import S from "./style";
 import resolver from "./schema";
+
+interface ClientForm extends FieldValues {
+  name: string;
+  description?: string;
+}
 
 export default function ClientProfile() {
   const {
     control,
     handleSubmit,
+    setValue,
+    getValues,
     formState: { errors },
-  } = useForm({
+  } = useForm<ClientForm>({
     resolver: yupResolver(resolver),
   });
   const { t } = useTranslation();
 
-  function onSubmit(evt: any) {
-    return evt;
+  const { sub: id } = useJwtDecoder();
+  const [runMutation, { isError, isLoading, isSuccess }] =
+    useUpdateUserMutation();
+
+  const {
+    data,
+    isLoading: queryLoad,
+    isSuccess: querySuccess,
+  } = useGetUserQuery(String(id));
+  const dispatch = useDispatch();
+  const { getState } = store;
+  const { user } = getState();
+
+  function setValuesByQueryData() {
+    if (data && data.firstName) {
+      setValue("name", data?.firstName);
+      setValue("description", data.description);
+    }
+  }
+
+  function setValuesByStoredData() {
+    if (user && user.firstName) {
+      setValue("name", user?.firstName);
+      setValue("description", user.description);
+    }
+  }
+
+  useEffect(() => {
+    if (user.firstName) {
+      setValuesByStoredData();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!queryLoad && querySuccess && !user.firstName) setValuesByQueryData();
+  }, [queryLoad]);
+
+  useEffect(() => {
+    if (!isLoading && isError) toast.error("Something went wrong");
+    if (!isLoading && isSuccess) {
+      toast.success("Profile uploaded");
+      dispatch(
+        setUser({
+          firstName: getValues("name"),
+          description: getValues("description"),
+        })
+      );
+    }
+  }, [isError, isLoading, isSuccess]);
+
+  async function onSubmit({ name, description }: ClientForm) {
+    await runMutation({
+      id: String(id),
+      firstName: name,
+      description,
+    });
   }
   return (
     <S.Container>
