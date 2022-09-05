@@ -1,29 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import LayoutElementWithTitle from "components/layoutElementWithTitle/LayoutElementWithTitle";
 import schema from "components/DiscoverFilterForm/schema";
 import { useTranslation } from "react-i18next";
-import { useGetProfileQuery } from "services/profileInfo/profileInfoAPI";
 import useJwtDecoder from "hooks/useJwtDecoder";
 import { IFreelancer } from "services/profileInfo/typesDef";
+import { Divider, Skeleton } from "antd";
+import TalentPart from "components/TalentPart/TalentPart";
+import { IFilters, useFilterQuery } from "services/jobOwner/talentAPI";
 import propsDataCollection from "./staticData";
 import S from "./styles";
 
 function DiscoverFilterForm() {
   const { sub } = useJwtDecoder();
-  const { data, isSuccess } = useGetProfileQuery(Number(sub!));
-  const [initialState, setInitialState] = useState<typeof data | any>();
-
-  useEffect(() => {
-    if (isSuccess && data) {
-      setInitialState({
-        ...data,
-        skills: data.skills.map(({ id }) => id),
-        category: data.categoryId,
-      });
-    }
-  }, [data, isSuccess]);
 
   const {
     handleSubmit,
@@ -32,13 +22,20 @@ function DiscoverFilterForm() {
     formState: { errors },
   } = useForm<FieldValues>({
     resolver: yupResolver(schema),
-    defaultValues: initialState,
   });
 
   const [isFiltersOpen, setIsFiltersOpen] = useState(true);
+  const [filters, setFilters] = useState<IFilters | any>({});
+
+  const {
+    data: filteredFreelancers,
+    isSuccess,
+    isLoading,
+  } = useFilterQuery({ userId: Number(sub!), ...filters });
 
   const changeIsFiltersOpen = () => setIsFiltersOpen(!isFiltersOpen);
-  const onSubmit = () => {
+  const onSubmit = (filtersForm: FieldValues) => {
+    setFilters(filtersForm);
     changeIsFiltersOpen();
   };
 
@@ -66,6 +63,16 @@ function DiscoverFilterForm() {
       <S.CustomButton block type="ghost" onClick={changeIsFiltersOpen}>
         {isFiltersOpen ? t("Talent.hideFilters") : t("Talent.showFilters")}
       </S.CustomButton>
+      {isLoading && <Skeleton active />}
+      {isSuccess && filteredFreelancers && (
+        <TalentPart
+          freelancers={filteredFreelancers!}
+          title=""
+          isSuccess={isSuccess}
+          isLoading={isLoading}
+        />
+      )}
+      <Divider />
     </>
   );
 }

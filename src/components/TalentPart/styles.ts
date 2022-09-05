@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Empty } from "antd";
 import { BOX_BACKGROUND, WHITE } from "utils/colorConsts";
 
 export const LeftDiv = styled.div`
@@ -42,9 +43,22 @@ const Box = styled.div`
   padding: 15px;
 `;
 
+const EmptyBox = styled(Empty)`
+  grid-column-start: 1;
+  grid-column-end: 4;
+`;
+
 const Area = styled.div`
   margin: 10px 2%;
   width: 96%;
 `;
 
-export default { RightDiv, SButton, LeftDiv, TitleContainer, Box, Area };
+export default {
+  RightDiv,
+  SButton,
+  LeftDiv,
+  TitleContainer,
+  Box,
+  Area,
+  EmptyBox,
+};

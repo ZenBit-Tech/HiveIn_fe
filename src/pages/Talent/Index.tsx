@@ -1,7 +1,6 @@
 import { Divider, Typography } from "antd";
-import { IFreelancer } from "components/CandidateCard/CandidateCard";
-import DiscoverFilterForm from "components/DiscoverFilterForm/Index";
-import TalentPart from "components/TalentPart/TalentPart";
+import DiscoverFilterForm from "components/DiscoverFilterForm";
+import TalentPart, { ITalentPart } from "components/TalentPart/TalentPart";
 import useJwtDecoder from "hooks/useJwtDecoder";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,49 +12,46 @@ import {
 import S from "./styles";
 
 function Talent() {
-  const foundCandidates: IFreelancer[] = [
-    {
-      saved: true,
-      userId: 1,
-      user: {
-        avatarURL: "https://joeschmoe.io/api/v1/random",
-      },
-      position: "Frontend developer 1",
-      rate: 300,
-    },
-  ];
-
   const [active, setActive] = useState("Talent.discover");
 
   const { t } = useTranslation();
   const { Title } = Typography;
 
   const { sub } = useJwtDecoder();
-  const savedFreelancers = useGetSavedFreelancersQuery(Number(sub!));
-  const hiredFreelancers = useGetHiredFreelancersQuery(Number(sub!));
-  const recentlyViewedFreelancers = useGetRecentlyViewedFreelancersQuery(
-    Number(sub!)
-  );
+  const {
+    data: savedFreelancers,
+    isSuccess: isSaveSuccess,
+    isLoading: isSaveLoading,
+  } = useGetSavedFreelancersQuery(Number(sub!));
+  const {
+    data: hiredFreelancers,
+    isSuccess: isHireSuccess,
+    isLoading: isHireLoading,
+  } = useGetHiredFreelancersQuery(Number(sub!));
+  const {
+    data: viewedFreelancers,
+    isSuccess: isViewSuccess,
+    isLoading: isViewLoading,
+  } = useGetRecentlyViewedFreelancersQuery(Number(sub!));
 
-  const talentPart: {
-    title: string;
-    freelancers: IFreelancer[];
-  }[] = [
-    {
-      title: "Talent.discover",
-      freelancers: foundCandidates,
-    },
+  const talentPart: ITalentPart[] = [
     {
       title: "Talent.savedTalent",
-      freelancers: savedFreelancers.data ?? [],
+      freelancers: savedFreelancers ?? [],
+      isSuccess: isSaveSuccess,
+      isLoading: isSaveLoading,
     },
     {
       title: "Talent.yourHires",
-      freelancers: hiredFreelancers.data ?? [],
+      freelancers: hiredFreelancers ?? [],
+      isSuccess: isHireSuccess,
+      isLoading: isHireLoading,
     },
     {
       title: "Talent.recentlyViewed",
-      freelancers: recentlyViewedFreelancers.data ?? [],
+      freelancers: viewedFreelancers ?? [],
+      isSuccess: isViewSuccess,
+      isLoading: isViewLoading,
     },
   ];
   return (
@@ -83,7 +79,12 @@ function Talent() {
         <DiscoverFilterForm />
         {talentPart.map(({ title, freelancers }) => (
           <>
-            <TalentPart id={title} freelancers={freelancers} title={title} />
+            <TalentPart
+              freelancers={freelancers}
+              title={title}
+              isSuccess={isSaveSuccess}
+              isLoading={isSaveLoading}
+            />
             <Divider />
           </>
         ))}
