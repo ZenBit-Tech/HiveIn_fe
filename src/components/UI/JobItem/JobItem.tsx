@@ -4,13 +4,13 @@ import JobTitle, {
 } from "components/UI/JobItem/JobItemStyles";
 import { useTranslation } from "react-i18next";
 
-interface Props {
+interface IJobItemProps {
   description: string;
   hourlyRate: string;
   skills: string[];
 }
 
-function JobItem({ description, hourlyRate, skills }: Props) {
+function JobItem({ description, hourlyRate, skills }: IJobItemProps) {
   const { t } = useTranslation();
 
   return (
