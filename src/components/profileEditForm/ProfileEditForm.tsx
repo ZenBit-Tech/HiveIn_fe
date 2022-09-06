@@ -9,16 +9,15 @@ import schema from "validation/profileEditFormValidationSchema";
 import FormSubmitButton from "components/UI/buttons/formSubmitButton/FormSubmitButton";
 import { SButtonWrapper } from "components/profileEditForm/styles";
 import {
-  useGetProfileQuery,
+  useGetOwnProfileQuery,
   useUpdateProfileMutation,
 } from "services/profileInfo/profileInfoAPI";
-import useJwtDecoder from "hooks/useJwtDecoder";
+
 import { IEducation, IExperience } from "services/profileInfo/typesDef";
 import { TFreelancerForProfileForm } from "components/profileEditForm/typesDef";
 
 function ProfileEditForm() {
-  const { sub } = useJwtDecoder();
-  const { data, isSuccess, isError } = useGetProfileQuery(Number(sub!));
+  const { data, isSuccess, isError } = useGetOwnProfileQuery();
 
   const [updateProfile, { isSuccess: submitSuccess, isError: submitError }] =
     useUpdateProfileMutation();

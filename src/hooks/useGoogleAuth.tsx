@@ -4,7 +4,8 @@ import { useGoogleOAuthSignInQuery } from "services/auth/setAuthAPI";
 
 const useGoogleAuth = () => {
   // Google Authentication
-  const { signIn } = useAuth();
+  const { signIn, authToken } = useAuth();
+
   const {
     data: signInResponse,
     isLoading,
@@ -12,6 +13,8 @@ const useGoogleAuth = () => {
   } = useGoogleOAuthSignInQuery();
 
   useEffect(() => {
+    if (authToken) return;
+
     if (!isLoading && isSuccess) {
       signIn(signInResponse);
     }

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Wrapper, {
   RoleRadio,
   TitleText,
@@ -6,13 +6,10 @@ import Wrapper, {
   ApplyButton,
   ButtonText,
   RadioGroup,
-} from "pages/CompleteRegistration/CompleteRegistrationStyles";
+} from "pages/Auth/CompleteRegistration/CompleteRegistrationStyles";
 import useGoogleAuth from "hooks/useGoogleAuth";
-import useJwtDecoder from "hooks/useJwtDecoder";
 import { useTranslation } from "react-i18next";
-import { RadioChangeEvent } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "store/store";
+import { useDispatch } from "react-redux";
 import { setUser } from "store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import { WELCOME_ROUTE } from "utils/routeConsts";
@@ -20,43 +17,34 @@ import { useUpdateUserMutation } from "services/user/setUserAPI";
 import { toast } from "react-toastify";
 
 export default function CompleteRegistration() {
-  const { role } = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
-  const { sub } = useJwtDecoder();
+  useGoogleAuth();
+  const [radioOption, setRadioOption] = useState();
 
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const [updateRole, { isSuccess, isError, isLoading, error }] =
-    useUpdateUserMutation();
-
-  useGoogleAuth();
+  const [updateRole, { isError, isLoading, error }] = useUpdateUserMutation();
 
   useEffect(() => {
     if (!isLoading && isError) {
       if ("status" in error!) {
         toast.error(t("CompleteRegistration.error"));
       }
-      return;
-    }
-    if (!isLoading && isSuccess) {
-      navigate(WELCOME_ROUTE);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
-  const setRole = (e: RadioChangeEvent) => {
+  const sendToDB = async () => {
+    navigate(WELCOME_ROUTE);
     dispatch(
       setUser({
-        role: e.target.value,
+        role: radioOption,
       })
     );
-  };
 
-  const sendToDB = () => {
-    updateRole({
-      id: sub,
-      role,
+    await updateRole({
+      role: radioOption,
     });
   };
 
@@ -64,7 +52,10 @@ export default function CompleteRegistration() {
     <Wrapper>
       <FormBox>
         <TitleText level={3}>{t("CompleteRegistration.title")}</TitleText>
-        <RadioGroup onChange={setRole} value={role}>
+        <RadioGroup
+          onChange={({ target }) => setRadioOption(target.value)}
+          value={radioOption}
+        >
           <RoleRadio value="client">
             <ButtonText level={5}>
               {t("CompleteRegistration.client")}
@@ -77,7 +68,7 @@ export default function CompleteRegistration() {
             </ButtonText>
           </RoleRadio>
         </RadioGroup>
-        <ApplyButton role={role} onClick={sendToDB}>
+        <ApplyButton role={radioOption} onClick={sendToDB}>
           {t("CompleteRegistration.button")}
         </ApplyButton>
       </FormBox>
