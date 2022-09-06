@@ -15,14 +15,16 @@ import { useTranslation } from "react-i18next";
 import { useGetJobPostQuery } from "services/jobPosts/setJobPostsAPI";
 import { SEARCH_WORK_ROUTE } from "utils/routeConsts";
 import { POSTS_PER_PAGE as PPG } from "utils/jobListConsts";
+import useJwtDecoder from "hooks/useJwtDecoder";
 
 function ClientJobs() {
   const { email } = useAuth();
+  const { sub } = useJwtDecoder();
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(PPG);
 
-  const { data: jobPosts, isLoading, isSuccess } = useGetJobPostQuery();
+  const { data: jobPosts, isLoading, isSuccess } = useGetJobPostQuery(sub!);
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
@@ -42,32 +44,37 @@ function ClientJobs() {
             {t("MyJobs.allPostings")}
           </TitleText>
           {isLoading ? <Skeleton active paragraph={{ rows: 4 }} /> : ""}
-          {isSuccess &&
-            jobPosts
-              .slice(firstPostIndex, lastPostIndex)
-              .map(({ id, title, jobDescription, rate, createdAt }) => (
-                <JobItem
-                  key={id}
-                  title={title!}
-                  description={jobDescription!}
-                  link={id!.toString()}
-                  publishDate={createdAt!}
-                  hourlyRate={rate!}
-                />
-              ))}
 
-          {isSuccess && (
-            <StyledPagination
-              showSizeChanger
-              onShowSizeChange={(_page, pageSize) => setPostsPerPage(pageSize)}
-              current={currentPage}
-              onChange={(page) => setCurrentPage(page)}
-              pageSize={postsPerPage}
-              total={jobPosts.length}
-              pageSizeOptions={[PPG, PPG * 2, PPG * 3]}
-            />
+          {isSuccess && !jobPosts?.length ? (
+            t("MyJobs.nothingToShow")
+          ) : (
+            <>
+              {jobPosts
+                ?.slice(firstPostIndex, lastPostIndex)
+                .map(({ id, title, jobDescription, rate, createdAt }) => (
+                  <JobItem
+                    key={id}
+                    title={title!}
+                    description={jobDescription!}
+                    link={id!.toString()}
+                    publishDate={createdAt!}
+                    hourlyRate={rate!}
+                  />
+                ))}
+
+              <StyledPagination
+                showSizeChanger
+                onShowSizeChange={(_page, pageSize) =>
+                  setPostsPerPage(pageSize)
+                }
+                current={currentPage}
+                onChange={(page) => setCurrentPage(page)}
+                pageSize={postsPerPage}
+                total={jobPosts?.length}
+                pageSizeOptions={[PPG, PPG * 2, PPG * 3]}
+              />
+            </>
           )}
-          {!isLoading && !jobPosts ? t("MyJobs.nothingToShow") : ""}
         </Card>
       </Section>
     </PageContainer>

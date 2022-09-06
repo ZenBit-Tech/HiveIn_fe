@@ -44,8 +44,8 @@ const jobPostsAPI = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getJobPost: builder.query<IJobPost[], void>({
-      query: () => `${JOB_POST}`,
+    getJobPost: builder.query<IJobPost[], string>({
+      query: (id) => `${JOB_POST}/user/${id}`,
     }),
     getOneJobPost: builder.query<IJobPost, QueryParam>({
       query: ({ id }) => ({
