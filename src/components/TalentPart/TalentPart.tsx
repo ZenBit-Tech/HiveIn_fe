@@ -5,7 +5,7 @@ import CandidateCard, {
 import SeeMoreLessButton from "components/SeeMoreLessButton";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import S from "./styles";
+import S from "components/TalentPart/styles";
 
 export interface ITalentPart {
   freelancers: IFreelancer[];
@@ -38,7 +38,7 @@ function TalentPart({ freelancers, title, isSuccess, isLoading }: ITalentPart) {
       </S.TitleContainer>
       <S.Box>
         {isSuccess && freelancers.length === 0 && (
-          <S.EmptyBox description="No result" />
+          <S.EmptyBox description={t("Talent.noResult")} />
         )}
         {isLoading &&
           Array(...Array(freelancersPerRow)).map(() => <Skeleton active />)}

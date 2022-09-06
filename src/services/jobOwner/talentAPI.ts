@@ -1,6 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IFreelancer } from "components/CandidateCard/CandidateCard";
 import { RootState } from "store/store";
+import {
+  FILTER_FREELANCER,
+  HIRED_FREELANCER,
+  SAVED_FREELANCERS,
+  SAVE_FREELANCER,
+  VIEWED_FREELANCER,
+} from "utils/brakepointConsts";
 
 export interface IFilters {
   keyWords: string;
@@ -32,29 +39,29 @@ const getTalentApi = createApi({
   endpoints: (builder) => ({
     filter: builder.query<IFreelancer[], IFilters>({
       query: ({ keyWords, category, skills, userId }) => ({
-        url: `/client/filter/${userId}/${keyWords}/${category}/${skills}`,
+        url: `${FILTER_FREELANCER}/${userId}/${keyWords}/${category}/${skills}`,
         method: "GET",
       }),
       providesTags: () => ["Freelancers"],
     }),
 
     getSavedFreelancers: builder.query<IFreelancer[], number>({
-      query: (userId) => `/client/saved-freelancers/${userId}`,
+      query: (userId) => `${SAVED_FREELANCERS}/${userId}`,
       providesTags: () => ["Freelancers"],
     }),
     saveFreelancers: builder.mutation<IFreelancer[], ISaveFreelancer>({
       query: ({ userId, freelancerId }) => ({
-        url: `/client/save/${userId}/${freelancerId}`,
+        url: `${SAVE_FREELANCER}/${userId}/${freelancerId}`,
         method: "POST",
       }),
       invalidatesTags: ["Freelancers"],
     }),
     getHiredFreelancers: builder.query<IFreelancer[], number>({
-      query: (userId) => `/client/hired-freelancers/${userId}`,
+      query: (userId) => `${HIRED_FREELANCER}/${userId}`,
       providesTags: () => ["Freelancers"],
     }),
     getRecentlyViewedFreelancers: builder.query<IFreelancer[], number>({
-      query: (userId) => `/client/recently-viewed/${userId}`,
+      query: (userId) => `${VIEWED_FREELANCER}/${userId}`,
       providesTags: () => ["Freelancers"],
     }),
   }),

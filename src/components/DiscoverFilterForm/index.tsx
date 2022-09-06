@@ -9,8 +9,8 @@ import { IFreelancer } from "services/profileInfo/typesDef";
 import { Divider, Skeleton } from "antd";
 import TalentPart from "components/TalentPart/TalentPart";
 import { IFilters, useFilterQuery } from "services/jobOwner/talentAPI";
-import propsDataCollection from "./staticData";
-import S from "./styles";
+import S from "components/DiscoverFilterForm/styles";
+import propsDataCollection from "components/DiscoverFilterForm/staticData";
 
 function DiscoverFilterForm() {
   const { sub } = useJwtDecoder();

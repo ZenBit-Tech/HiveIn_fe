@@ -9,7 +9,7 @@ import {
   useGetRecentlyViewedFreelancersQuery,
   useGetSavedFreelancersQuery,
 } from "services/jobOwner/talentAPI";
-import S from "./styles";
+import S from "pages/Talent/styles";
 
 function Talent() {
   const [active, setActive] = useState("Talent.discover");

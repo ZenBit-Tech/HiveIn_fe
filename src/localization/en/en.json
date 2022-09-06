@@ -223,6 +223,8 @@
     "seeLess": "See less",
     "search": "Search",
     "hideFilters": "Hide filters",
-    "showFilters": "Show filters"
+    "showFilters": "Show filters",
+    "save": "Save",
+    "noResult": "No result"
   }
 }

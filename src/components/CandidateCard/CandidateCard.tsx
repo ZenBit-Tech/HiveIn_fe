@@ -3,7 +3,9 @@ import { Avatar, Button, Col, Row, Tooltip } from "antd";
 import useJwtDecoder from "hooks/useJwtDecoder";
 import { useNavigate } from "react-router-dom";
 import { useSaveFreelancersMutation } from "services/jobOwner/talentAPI";
-import S from "./styles";
+import S from "components/CandidateCard/styles";
+import { useTranslation } from "react-i18next";
+import { BLUE } from "utils/colorConsts";
 
 export interface IFreelancer {
   userId: number;
@@ -17,6 +19,8 @@ export interface IFreelancer {
 
 function CandidateCard({ user, position, rate, userId, saved }: IFreelancer) {
   const { sub } = useJwtDecoder();
+
+  const { t } = useTranslation();
 
   const [saveFreelancer] = useSaveFreelancersMutation();
 
@@ -41,12 +45,12 @@ function CandidateCard({ user, position, rate, userId, saved }: IFreelancer) {
           </Row>
         </S.StyledCol>
         <Col span={3}>
-          <Tooltip title="Save">
+          <Tooltip title={t("Talent.save")}>
             <Button
               style={{ position: "absolute" }}
               onClick={() => setSaved()}
               type="text"
-              icon={saved ? <HeartTwoTone color="blue" /> : <HeartOutlined />}
+              icon={saved ? <HeartTwoTone color={BLUE} /> : <HeartOutlined />}
             />
           </Tooltip>
         </Col>
