@@ -6,14 +6,13 @@ import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
 import {
-  useGetUserQuery,
+  useGetOwnUserQuery,
   useUpdateUserMutation,
 } from "services/user/setUserAPI";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUser } from "store/slices/userSlice";
 import { store } from "store/store";
-import useJwtDecoder from "hooks/useJwtDecoder";
 import S from "./style";
 import resolver from "./schema";
 
@@ -34,7 +33,6 @@ export default function ClientProfile() {
   });
   const { t } = useTranslation();
 
-  const { sub: id } = useJwtDecoder();
   const [runMutation, { isError, isLoading, isSuccess }] =
     useUpdateUserMutation();
 
@@ -42,7 +40,7 @@ export default function ClientProfile() {
     data,
     isLoading: queryLoad,
     isSuccess: querySuccess,
-  } = useGetUserQuery(String(id));
+  } = useGetOwnUserQuery();
   const dispatch = useDispatch();
   const { getState } = store;
   const { user } = getState();
@@ -86,7 +84,6 @@ export default function ClientProfile() {
 
   async function onSubmit({ name, description }: ClientForm) {
     await runMutation({
-      id: String(id),
       firstName: name,
       description,
     });

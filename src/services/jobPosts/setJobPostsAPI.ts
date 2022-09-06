@@ -9,7 +9,7 @@ interface Skills {
 }
 
 interface QueryParam {
-  id: number;
+  id?: number;
   isDraft?: boolean;
 }
 
@@ -44,8 +44,8 @@ const jobPostsAPI = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getJobPost: builder.query<IJobPost[], string>({
-      query: (id) => `${JOB_POST}/user/${id}`,
+    getOwnJobPosts: builder.query<IJobPost[], void>({
+      query: () => `${JOB_POST}/self`,
     }),
     getOneJobPost: builder.query<IJobPost, QueryParam>({
       query: ({ id }) => ({
@@ -55,14 +55,14 @@ const jobPostsAPI = createApi({
     }),
     getHomePosts: builder.query<IJobPost[], QueryParam>({
       query: (path) => ({
-        url: `${JOB_POST}/home/${path.id}/${path.isDraft}`,
+        url: `${JOB_POST}/home/self/${path.isDraft}`,
       }),
     }),
   }),
 });
 
 export const {
-  useGetJobPostQuery,
+  useGetOwnJobPostsQuery,
   useGetOneJobPostQuery,
   useGetHomePostsQuery,
 } = jobPostsAPI;

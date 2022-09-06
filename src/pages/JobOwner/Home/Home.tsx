@@ -1,7 +1,6 @@
 import { Button, Divider, Typography } from "antd";
 import JobPost from "components/JobPost/Index";
 import useGoogleAuth from "hooks/useGoogleAuth";
-import useJwtDecoder from "hooks/useJwtDecoder";
 import { useTranslation } from "react-i18next";
 import { useGetHomePostsQuery } from "services/jobPosts/setJobPostsAPI";
 import { BLUE } from "utils/colorConsts";
@@ -10,16 +9,13 @@ import S from "./style";
 export default function ClientHome() {
   useGoogleAuth();
 
-  const { sub: id } = useJwtDecoder();
   const { Title } = Typography;
 
   const { data: drafts } = useGetHomePostsQuery({
-    id: Number(id) || 0,
     isDraft: true,
   });
 
   const { data: posts } = useGetHomePostsQuery({
-    id: Number(id) || 0,
     isDraft: false,
   });
 

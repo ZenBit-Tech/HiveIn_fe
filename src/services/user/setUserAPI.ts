@@ -28,12 +28,12 @@ const userApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getUser: builder.query<IUser, string>({
-      query: (id) => `/${REACT_APP_USER_CONTACT_INFO_URL}/${id}`,
+    getOwnUser: builder.query<IUser, void>({
+      query: () => `/${REACT_APP_USER_CONTACT_INFO_URL}/self`,
     }),
     updateUser: builder.mutation<IUser, IUser>({
-      query: ({ id, ...userInfo }: IUser) => ({
-        url: `/${REACT_APP_USER_CONTACT_INFO_URL}/${id}`,
+      query: ({ ...userInfo }: IUser) => ({
+        url: `/${REACT_APP_USER_CONTACT_INFO_URL}/self`,
         method: "PATCH",
         body: {
           ...userInfo,
@@ -44,6 +44,6 @@ const userApi = createApi({
   }),
 });
 
-export const { useUpdateUserMutation, useGetUserQuery } = userApi;
+export const { useUpdateUserMutation, useGetOwnUserQuery } = userApi;
 
 export default userApi;

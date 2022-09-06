@@ -12,19 +12,17 @@ import PageContainer, {
   StyledPagination,
 } from "pages/JobOwner/MyJobs/ClientJobsStyles";
 import { useTranslation } from "react-i18next";
-import { useGetJobPostQuery } from "services/jobPosts/setJobPostsAPI";
+import { useGetOwnJobPostsQuery } from "services/jobPosts/setJobPostsAPI";
 import { SEARCH_WORK_ROUTE } from "utils/routeConsts";
 import { POSTS_PER_PAGE as PPG } from "utils/jobListConsts";
-import useJwtDecoder from "hooks/useJwtDecoder";
 
 function ClientJobs() {
   const { email } = useAuth();
-  const { sub } = useJwtDecoder();
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(PPG);
 
-  const { data: jobPosts, isLoading, isSuccess } = useGetJobPostQuery(sub!);
+  const { data: jobPosts, isLoading, isSuccess } = useGetOwnJobPostsQuery();
 
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;

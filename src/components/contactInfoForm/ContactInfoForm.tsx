@@ -10,16 +10,14 @@ import { SButtonWrapper } from "components/profileEditForm/styles";
 import contactEditFormValidationSchema from "validation/contactEditFormValidationSchema";
 import {
   IUser,
-  useGetUserQuery,
+  useGetOwnUserQuery,
   useUpdateUserMutation,
 } from "services/user/setUserAPI";
-import useJwtDecoder from "hooks/useJwtDecoder";
 
 function ContactInfoForm() {
   const [initialState, setInitialState] = useState<IUser>();
 
-  const { sub } = useJwtDecoder();
-  const { data, isSuccess, isError: getUserError } = useGetUserQuery(sub!);
+  const { data, isSuccess, isError: getUserError } = useGetOwnUserQuery();
   const [
     updateUser,
     { error, isError: submitError, isSuccess: submitSuccess },
@@ -70,7 +68,6 @@ function ContactInfoForm() {
       updateUser({
         ...data,
         ...formData,
-        id: sub,
         phone,
       });
 

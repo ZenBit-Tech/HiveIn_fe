@@ -8,7 +8,6 @@ import Wrapper, {
   RadioGroup,
 } from "pages/Auth/CompleteRegistration/CompleteRegistrationStyles";
 import useGoogleAuth from "hooks/useGoogleAuth";
-import useJwtDecoder from "hooks/useJwtDecoder";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { setUser } from "store/slices/userSlice";
@@ -20,7 +19,6 @@ import { toast } from "react-toastify";
 export default function CompleteRegistration() {
   useGoogleAuth();
   const [radioOption, setRadioOption] = useState();
-  const { sub: id } = useJwtDecoder();
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -46,7 +44,6 @@ export default function CompleteRegistration() {
     );
 
     await updateRole({
-      id,
       role: radioOption,
     });
   };
