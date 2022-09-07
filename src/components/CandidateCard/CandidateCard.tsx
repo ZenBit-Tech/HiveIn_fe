@@ -45,7 +45,7 @@ function CandidateCard({ user, position, rate, userId, saved }: IFreelancer) {
           <Tooltip title={t("Talent.save")}>
             <Button
               style={{ position: "absolute" }}
-              onClick={() => setSaved()}
+              onClick={setSaved}
               type="text"
               icon={saved ? <HeartTwoTone color={BLUE} /> : <HeartOutlined />}
             />
