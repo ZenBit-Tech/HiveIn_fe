@@ -13,6 +13,7 @@
     
   },
   "MyJobs": {
+    "jobs": "Jobs",
     "title": "My Jobs",
     "subTitle": "Your Projects",
     "postJob": "Post a Job",
@@ -163,7 +164,7 @@
     "submitButtonText": "save changes",
     "fieldsData": {
       "email": {
-        "title": "email"
+        "title": "Email"
       },
       "firstName": {
         "title": "First name",
