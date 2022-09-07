@@ -1,9 +1,5 @@
-import {
-  COMPLETE_REGISTRATION_ROUTE,
-  HOME_PAGE_ROUTE,
-} from "utils/routeConsts";
-import Home from "pages/Home";
-import CompleteRegistration from "pages/CompleteRegistration/CompleteRegistration";
+import { HOME_PAGE_ROUTE } from "utils/routeConsts";
+import Home from "pages/Freelancer/Home";
 
 export interface RoutesType {
   path: string;
@@ -14,10 +10,6 @@ const publicRoutes: RoutesType[] = [
   {
     path: HOME_PAGE_ROUTE,
     component: Home,
-  },
-  {
-    path: COMPLETE_REGISTRATION_ROUTE,
-    component: CompleteRegistration,
   },
 ];
 

@@ -10,11 +10,9 @@
   },
   "MyContracts": {
     "title": "My Contracts"
-    
   },
   "MyJobs": {
-    "jobs": "Jobs",
-    "title": "My Jobs",
+    "title": "Jobs",
     "subTitle": "Your Projects",
     "postJob": "Post a Job",
     "allPostings": "Your Postings",
@@ -58,19 +56,19 @@
     "errorGoogleOAuth": "Server error, please try again"
   },
   "ServerErrors": {
-    "404": "Email not found, please sign up",
+    "404": "Invalid email and/or password",
     "401": "Invalid email and/or password",
-    "409": "Email already registered. Please login with your password or your Google account.",
+    "409": "Email already registered. Please login with your password or Google account.",
     "500": "Server error, please try again",
     "FETCH_ERROR": "Server error, please try again"
   },
   "ForgotPassword": {
     "title": "Forgot your password?",
-    "subtitle": "Enter your email. We'll email instructions on how to reset your password.",
+    "subtitle": "Enter your email. We'll e-mail instructions on how to reset your password.",
     "resetPassword": "Reset password",
     "rememberPassword": "Just remembered password?",
     "signIn": "Sign In",
-    "checkMailBox": "We send you a recovery e-mail with instructions. Please check your e-mail."
+    "checkMailBox": "If your e-mail is correct, we just send you a recovery e-mail with instructions. Please check your e-mail."
   },
   "RestorePassword": {
     "title": "Change password?",
@@ -79,7 +77,7 @@
     "newPassword": "New password",
     "confirmNewPassword": "Confirm new password",
     "successfullyTitle": "Change password success",
-    "successfullyText": "You have successfully logged in"
+    "successfullyText": "You have successfully change password"
   },
   "CompleteRegistration": {
     "client": "I'm a client, hiring for a project",
@@ -109,11 +107,7 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": [
-        "pre-intermediate",
-        "intermediate",
-        "upper-intermediate"
-      ]
+      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
     },
     "description": {
       "title": "Description",
@@ -192,11 +186,11 @@
       "noDrafts": "There are no drafts"
     },
     "buttons": {
-        "save": "Save changes",
-        "createPosts": "Post a job",
-        "seePosts": "See all posts",
-        "seeDrafts": "See all drafts"
-      },
+      "save": "Save changes",
+      "createPosts": "Post a job",
+      "seePosts": "See all posts",
+      "seeDrafts": "See all drafts"
+    },
     "createJobTutorial": {
       "title": "What is there for you in a Talent?",
       "subtitle": {

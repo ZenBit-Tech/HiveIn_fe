@@ -26,7 +26,6 @@ const forgotPassApi = createApi({
           email,
         },
       }),
-      transformResponse: (response: boolean) => response,
     }),
 
     restorePassword: builder.mutation<boolean, RestorePassword>({
