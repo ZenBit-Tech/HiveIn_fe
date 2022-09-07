@@ -10,7 +10,7 @@ import JobTitle, {
 import { useTranslation } from "react-i18next";
 
 dayjs.extend(relativeTime);
-interface Props {
+interface IJobItemsProps {
   title: string;
   description: string;
   link: string;
@@ -24,7 +24,7 @@ function JobItems({
   link,
   hourlyRate,
   publishDate,
-}: Props) {
+}: IJobItemsProps) {
   const { t } = useTranslation();
 
   return (

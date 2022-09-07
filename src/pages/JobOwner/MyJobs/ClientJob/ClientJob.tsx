@@ -5,11 +5,14 @@ import PageContainer, {
   Card,
   Header,
   TitleText,
-} from "pages/MyJobs/ClientJobs/ClientJobsStyles";
+} from "pages/JobOwner/MyJobs/ClientJobsStyles";
 import JobItem from "components/UI/JobItem/JobItem";
 import { useGetOneJobPostQuery } from "services/jobPosts/setJobPostsAPI";
 import { useTranslation } from "react-i18next";
-import { formatToStandardDate } from "utils/formatDateFunctions";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 function ClientJob(): JSX.Element {
   const { jobId } = useParams();
@@ -25,7 +28,7 @@ function ClientJob(): JSX.Element {
           {data?.title || t("NotFound.notFound")}
           <TitleText font_sz="0.4em" pd="5px" pd_bottom="1%">
             {data?.createdAt
-              ? formatToStandardDate(new Date(data?.createdAt))
+              ? dayjs(data?.createdAt).fromNow()
               : t("NotFound.notFound")}
           </TitleText>
         </TitleText>
@@ -34,7 +37,7 @@ function ClientJob(): JSX.Element {
         <Card>
           <JobItem
             description={data?.jobDescription || t("NotFound.notFound")}
-            payout={String(data?.rate || t("NotFound.notFound"))}
+            hourlyRate={String(data?.rate || t("NotFound.notFound"))}
             skills={data?.skills.map((item) => item.name) || [""]}
           />
         </Card>

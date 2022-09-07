@@ -1,14 +1,16 @@
 import {
+  COMPLETE_REGISTRATION_ROUTE,
+  FORGOT_PASSWORD_ROUTE,
   RESTORE_PASSWORD_ROUTE,
   SIGN_IN_ROUTE,
   SIGN_UP_ROUTE,
 } from "utils/routeConsts";
 import { RoutesType } from "routes/publicRoutes";
-import SignUp from "pages/SignUp/Index";
-import SignIn from "pages/SignIn/Index";
-import ForgotPassword from "pages/ForgotPassword/Index";
-import RestorePassword from "pages/RestorePassword/Index";
-import { FORGOT_PASSWORD_ROUTE } from "../utils/routeConsts";
+import SignUp from "pages/Auth/SignUp/Index";
+import SignIn from "pages/Auth/SignIn/Index";
+import ForgotPassword from "pages/Auth/ForgotPassword/Index";
+import RestorePassword from "pages/Auth/RestorePassword/Index";
+import CompleteRegistration from "pages/Auth/CompleteRegistration/CompleteRegistration";
 
 const authenticationRoutes: RoutesType[] = [
   {
@@ -26,6 +28,10 @@ const authenticationRoutes: RoutesType[] = [
   {
     path: RESTORE_PASSWORD_ROUTE,
     component: RestorePassword,
+  },
+  {
+    path: COMPLETE_REGISTRATION_ROUTE,
+    component: CompleteRegistration,
   },
 ];
 

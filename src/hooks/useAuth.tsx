@@ -11,9 +11,7 @@ const useAuth = () => {
   const dispatch = useDispatch();
 
   const signIn = (res: AuthResponse) => {
-    // Requesting authToken to the backend and saving it
-    // in localStorage with Redux Persist
-
+    // Saving in localStorage with Redux Persist
     dispatch(
       setUser({
         authToken: res.token,
