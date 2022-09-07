@@ -1,6 +1,5 @@
 import { HeartOutlined, HeartTwoTone } from "@ant-design/icons";
 import { Avatar, Button, Col, Row, Tooltip } from "antd";
-import useJwtDecoder from "hooks/useJwtDecoder";
 import { useNavigate } from "react-router-dom";
 import { useSaveFreelancersMutation } from "services/jobOwner/talentAPI";
 import S from "components/CandidateCard/styles";
@@ -18,14 +17,12 @@ export interface IFreelancer {
 }
 
 function CandidateCard({ user, position, rate, userId, saved }: IFreelancer) {
-  const { sub } = useJwtDecoder();
-
   const { t } = useTranslation();
 
   const [saveFreelancer] = useSaveFreelancersMutation();
 
   const setSaved = () => {
-    saveFreelancer({ userId: Number(sub!), freelancerId: userId });
+    saveFreelancer(userId);
   };
 
   const navigate = useNavigate();

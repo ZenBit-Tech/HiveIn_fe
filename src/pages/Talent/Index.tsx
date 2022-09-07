@@ -1,7 +1,6 @@
 import { Divider, Typography } from "antd";
 import DiscoverFilterForm from "components/DiscoverFilterForm";
 import TalentPart, { ITalentPart } from "components/TalentPart/TalentPart";
-import useJwtDecoder from "hooks/useJwtDecoder";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -17,22 +16,21 @@ function Talent() {
   const { t } = useTranslation();
   const { Title } = Typography;
 
-  const { sub } = useJwtDecoder();
   const {
     data: savedFreelancers,
     isSuccess: isSaveSuccess,
     isLoading: isSaveLoading,
-  } = useGetSavedFreelancersQuery(Number(sub!));
+  } = useGetSavedFreelancersQuery();
   const {
     data: hiredFreelancers,
     isSuccess: isHireSuccess,
     isLoading: isHireLoading,
-  } = useGetHiredFreelancersQuery(Number(sub!));
+  } = useGetHiredFreelancersQuery();
   const {
     data: viewedFreelancers,
     isSuccess: isViewSuccess,
     isLoading: isViewLoading,
-  } = useGetRecentlyViewedFreelancersQuery(Number(sub!));
+  } = useGetRecentlyViewedFreelancersQuery();
 
   const talentPart: ITalentPart[] = [
     {

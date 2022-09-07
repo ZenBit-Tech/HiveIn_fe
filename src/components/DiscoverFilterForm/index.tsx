@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import LayoutElementWithTitle from "components/layoutElementWithTitle/LayoutElementWithTitle";
 import schema from "components/DiscoverFilterForm/schema";
 import { useTranslation } from "react-i18next";
-import useJwtDecoder from "hooks/useJwtDecoder";
 import { IFreelancer } from "services/profileInfo/typesDef";
 import { Divider, Skeleton } from "antd";
 import TalentPart from "components/TalentPart/TalentPart";
@@ -13,8 +12,6 @@ import S from "components/DiscoverFilterForm/styles";
 import propsDataCollection from "components/DiscoverFilterForm/staticData";
 
 function DiscoverFilterForm() {
-  const { sub } = useJwtDecoder();
-
   const {
     handleSubmit,
     control,
@@ -31,7 +28,7 @@ function DiscoverFilterForm() {
     data: filteredFreelancers,
     isSuccess,
     isLoading,
-  } = useFilterQuery({ userId: Number(sub!), ...filters });
+  } = useFilterQuery({ ...filters });
 
   const changeIsFiltersOpen = () => setIsFiltersOpen(!isFiltersOpen);
   const onSubmit = (filtersForm: FieldValues) => {
