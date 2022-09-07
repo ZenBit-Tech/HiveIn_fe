@@ -7,6 +7,7 @@ import ToggleButton from "components/UI/buttons/toggleButton/ToggleButton";
 import EducationLayout from "components/educationLayout/EducationLayout";
 import SkillsLayout from "components/skillsLayout/SkillsLayout";
 import PhoneInput from "components/UI/phoneInput/PhoneInput";
+import { useTranslation } from "react-i18next";
 
 function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
   const {
@@ -151,9 +152,11 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     }
   };
 
+  const { t } = useTranslation();
+
   return (
     <SWrapper>
-      <SH>{title}</SH>
+      <SH>{t(title)}</SH>
       <SDiv width={containerWidth}>{renderElement(element)}</SDiv>
     </SWrapper>
   );

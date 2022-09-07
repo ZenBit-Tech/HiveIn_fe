@@ -10,6 +10,7 @@ import {
   PROPOSALS_ROUTE,
   SEARCH_WORK_ROUTE,
   SETTINGS_ROUTE,
+  TALENT_ROUTE,
 } from "utils/routeConsts";
 
 export type NavRoleOptions = {
@@ -71,7 +72,7 @@ const navLinksPerRole: NavLinkRoles = {
         title: i18next.MyJobs.title,
       },
       {
-        to: CLIENT_HOME,
+        to: TALENT_ROUTE,
         title: "Talent",
       },
     ],

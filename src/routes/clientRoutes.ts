@@ -1,3 +1,4 @@
+import Talent from "pages/Talent";
 import ClientHome from "pages/JobOwner/Home/Home";
 import ClientProfile from "pages/JobOwner/Profile/Profile";
 import ClientJob from "pages/JobOwner/MyJobs/ClientJob/ClientJob";
@@ -8,6 +9,7 @@ import {
   MY_JOB_ROUTE,
   CLIENT_PROFILE,
   CLIENT_HOME,
+  TALENT_ROUTE,
 } from "utils/routeConsts";
 
 const clientRoutes: RoutesType[] = [
@@ -26,6 +28,10 @@ const clientRoutes: RoutesType[] = [
   {
     path: CLIENT_HOME,
     component: ClientHome,
+  },
+  {
+    path: TALENT_ROUTE,
+    component: Talent,
   },
 ];
 
