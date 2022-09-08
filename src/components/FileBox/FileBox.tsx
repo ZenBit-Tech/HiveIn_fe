@@ -4,7 +4,7 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import DescriptionIcon from "@mui/icons-material/Description";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { SDiv, SP } from "./styles";
+import { SDiv, SP } from "components/FileBox/styles";
 
 type TProps = {
   file: File;

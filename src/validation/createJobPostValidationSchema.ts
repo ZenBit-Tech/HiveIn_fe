@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import i18next from "localization/en/en.json";
-import { regexpGreaterThanZero } from "./profileEditFormValidationSchema";
+import { regexpGreaterThanZero } from "validation/profileEditFormValidationSchema";
 
 export const jobPostsDraftSchema = yup.object({
   title: yup.string().required(i18next.PostJob.required),
