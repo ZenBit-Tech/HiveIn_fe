@@ -182,7 +182,7 @@ function CreateJobPostForm() {
             />
           </Button>
         )}
-        {getUserError && (
+        {!getUserError && (
           <SButtonsGroup>
             <LoadingButton
               loading={postDraftLoading || postJobLoading}
