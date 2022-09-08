@@ -1,10 +1,11 @@
 import i18next from "localization/en/en.json";
 import React from "react";
 import {
+  CHAT_ROUTE,
   CLIENT_HOME,
-  CLIENT_PROFILE,
   MY_CONTRACTS_ROUTE,
   MY_JOBS_ROUTE,
+  NOTIFICATIONS_ROUTE,
   PROPOSALS_ROUTE,
   SEARCH_WORK_ROUTE,
   SETTINGS_CONTACT_INFO_ROUTE,
@@ -78,6 +79,19 @@ const navLinksPerRole: NavLinkRoles = {
           },
         ],
       },
+      {
+        title: i18next.Chat.title,
+        links: [
+          {
+            to: CHAT_ROUTE,
+            title: i18next.Chat.title,
+          },
+          {
+            to: NOTIFICATIONS_ROUTE,
+            title: i18next.Notifications.title,
+          },
+        ],
+      },
     ],
     home: SEARCH_WORK_ROUTE,
   },
@@ -97,11 +111,15 @@ const navLinksPerRole: NavLinkRoles = {
         ],
       },
       {
-        title: i18next.Profile.title,
+        title: i18next.Chat.title,
         links: [
           {
-            to: CLIENT_PROFILE,
-            title: i18next.Profile.title,
+            to: CHAT_ROUTE,
+            title: i18next.Chat.title,
+          },
+          {
+            to: NOTIFICATIONS_ROUTE,
+            title: i18next.Notifications.title,
           },
         ],
       },

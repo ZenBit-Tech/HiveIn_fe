@@ -5,8 +5,12 @@ import logo from "components/navbar/imgs/logo.svg";
 import useViewport from "hooks/useViewport";
 import NavBarButton from "components/UI/navBarButton/NavBarButton";
 import MenuDrawer from "components/UI/navBarDrawer/MenuDrawer";
-import { LogoutOutlined, UserOutlined } from "@ant-design/icons";
-import { SIGN_UP_ROUTE, SIGN_IN_ROUTE, CHAT_ROUTE } from "utils/routeConsts";
+import { BellOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  SIGN_UP_ROUTE,
+  SIGN_IN_ROUTE,
+  CLIENT_PROFILE,
+} from "utils/routeConsts";
 import useAuth from "hooks/useAuth";
 import { MOBILE_SCREEN_SIZE } from "utils/navBarConsts";
 import { useEffect, useState } from "react";
@@ -40,6 +44,17 @@ function Navbar() {
     );
   }
 
+  function verifyMenuItemIcon(itemTitle: string) {
+    switch (itemTitle) {
+      case t("Profile.title"):
+        return <UserOutlined />;
+      case t("Chat.title"):
+        return <BellOutlined />;
+      default:
+        return undefined;
+    }
+  }
+
   return (
     <NavbarStyles>
       <NavLink path={navItens?.home ?? ""}>
@@ -50,11 +65,16 @@ function Navbar() {
         mode="horizontal"
         style={{ width: "100%" }}
       >
+        {role === "client" ? (
+          <Menu.Item key={t("Profile.title")}>
+            <Link to={CLIENT_PROFILE}>{t("Profile.title")}</Link>
+          </Menu.Item>
+        ) : null}
         {navItens?.options.map(({ links, title }) => (
           <Menu.SubMenu
-            icon={title === t("Profile.title") ? <UserOutlined /> : undefined}
+            icon={verifyMenuItemIcon(title)}
             key={title}
-            title={title}
+            title={title === t("Chat.title") ? "" : title}
           >
             {links.map((link) => (
               <Menu.Item key={link.to}>
@@ -63,9 +83,6 @@ function Navbar() {
             ))}
           </Menu.SubMenu>
         ))}
-        <Menu.Item key={t("Chat.title")}>
-          <Link to={CHAT_ROUTE}>{t("Chat.title")}</Link>
-        </Menu.Item>
       </Menu>
       <NavBarButtons>
         {screenWidth < MOBILE_SCREEN_SIZE ? (

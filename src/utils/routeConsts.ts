@@ -16,3 +16,4 @@ export const RESTORE_PASSWORD_ROUTE = "/restore-password";
 export const WELCOME_ROUTE = "/welcome";
 export const CLIENT_PROFILE = "/client-profile";
 export const CLIENT_HOME = "/client-home";
+export const NOTIFICATIONS_ROUTE = "/notifications";

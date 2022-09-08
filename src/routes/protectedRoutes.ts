@@ -1,7 +1,12 @@
 import Chat from "pages/Chat";
 import Welcome from "pages/Auth/Welcome";
 import { RoutesType } from "routes/publicRoutes";
-import { CHAT_ROUTE, WELCOME_ROUTE } from "utils/routeConsts";
+import {
+  CHAT_ROUTE,
+  NOTIFICATIONS_ROUTE,
+  WELCOME_ROUTE,
+} from "utils/routeConsts";
+import Notifications from "pages/Notifications";
 
 const protectedRoutes: RoutesType[] = [
   {
@@ -11,6 +16,10 @@ const protectedRoutes: RoutesType[] = [
   {
     path: WELCOME_ROUTE,
     component: Welcome,
+  },
+  {
+    path: NOTIFICATIONS_ROUTE,
+    component: Notifications,
   },
 ];
 

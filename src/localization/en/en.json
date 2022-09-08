@@ -208,5 +208,8 @@
   },
   "NotFound": {
     "notFound": "Not found"
+  },
+  "Notifications": {
+    "title": "Notifications"
   }
 }
