@@ -12,7 +12,7 @@ import {
   CLIENT_HOME,
   TALENT_ROUTE,
   CREATE_JOB_POST,
-} from "utils/routeConsts";
+} from "utils/consts/routeConsts";
 
 const clientRoutes: RoutesType[] = [
   {

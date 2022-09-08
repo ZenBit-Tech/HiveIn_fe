@@ -13,8 +13,8 @@ import PageContainer, {
 } from "pages/JobOwner/MyJobs/ClientJobsStyles";
 import { useTranslation } from "react-i18next";
 import { useGetOwnJobPostsQuery } from "services/jobPosts/setJobPostsAPI";
-import { CREATE_JOB_POST } from "utils/routeConsts";
-import { POSTS_PER_PAGE as PPG } from "utils/jobListConsts";
+import { CREATE_JOB_POST } from "utils/consts/routeConsts";
+import { POSTS_PER_PAGE as PPG } from "utils/consts/jobListConsts";
 
 function ClientJobs() {
   const { email } = useAuth();

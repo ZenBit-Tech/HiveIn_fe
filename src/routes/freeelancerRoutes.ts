@@ -11,7 +11,7 @@ import {
   PROFILE_ROUTE,
   SETTINGS_ROUTE,
   SETTINGS_CONTACT_INFO_ROUTE,
-} from "utils/routeConsts";
+} from "utils/consts/routeConsts";
 
 const freelancerRoutes: RoutesType[] = [
   {

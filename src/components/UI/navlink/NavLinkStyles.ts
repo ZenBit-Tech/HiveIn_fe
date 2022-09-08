@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { SECONDARY_GRAY, PRIMARY_BLUE } from "utils/navBarConsts";
+import { SECONDARY_GRAY, PRIMARY_BLUE } from "utils/consts/navBarConsts";
 
 const NavLinkStyles = styled(Link)`
   color: ${SECONDARY_GRAY};

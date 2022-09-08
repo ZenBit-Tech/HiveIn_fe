@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IUser } from "services/user/setUserAPI";
 import { RootState } from "store/store";
-import { JOB_POST } from "utils/brakepointConsts";
+import { JOB_POST } from "utils/consts/brakepointConsts";
 
 interface Skills {
   id: number;

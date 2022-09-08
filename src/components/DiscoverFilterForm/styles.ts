@@ -1,4 +1,4 @@
-import { LIGHT_GRAY } from "utils/colorConsts";
+import { LIGHT_GRAY } from "utils/consts/colorConsts";
 import styled from "styled-components";
 import { Button } from "antd";
 

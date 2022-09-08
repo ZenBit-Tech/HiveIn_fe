@@ -3,7 +3,7 @@ import JobPost from "components/JobPost/Index";
 import useGoogleAuth from "hooks/useGoogleAuth";
 import { useTranslation } from "react-i18next";
 import { useGetHomePostsQuery } from "services/jobPosts/setJobPostsAPI";
-import { BLUE } from "utils/colorConsts";
+import { BLUE } from "utils/consts/colorConsts";
 import S from "./style";
 
 export default function ClientHome() {

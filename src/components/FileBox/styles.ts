@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BLUE_MUI_PRIMARY } from "utils/colorConsts";
+import { BLUE_MUI_PRIMARY } from "utils/consts/colorConsts";
 
 export const SDiv = styled("div")`
   width: 350px;

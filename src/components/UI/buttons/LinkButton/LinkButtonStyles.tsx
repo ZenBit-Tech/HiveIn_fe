@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { BLUE, WHITE, DARK_BLUE } from "utils/colorConsts";
-import { LINK_BUTTON_WRAP_SIZE } from "utils/mediaQueryConsts";
+import { BLUE, WHITE, DARK_BLUE } from "utils/consts/colorConsts";
+import { LINK_BUTTON_WRAP_SIZE } from "utils/consts/mediaQueryConsts";
 
 const Button = styled.div`
   border-radius: 50px;

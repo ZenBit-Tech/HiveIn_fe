@@ -12,7 +12,7 @@ import {
   SEARCH_WORK_ROUTE,
   SETTINGS_ROUTE,
   TALENT_ROUTE,
-} from "utils/routeConsts";
+} from "utils/consts/routeConsts";
 
 export type NavRoleOptions = {
   title: string;
