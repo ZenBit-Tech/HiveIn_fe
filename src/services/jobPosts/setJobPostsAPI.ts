@@ -58,6 +58,22 @@ const jobPostsAPI = createApi({
         url: `${JOB_POST}/home/self/${path.isDraft}`,
       }),
     }),
+    postJobPost: builder.mutation({
+      query: (arg) => ({
+        url: `${JOB_POST}`,
+        method: "POST",
+        body: arg,
+      }),
+    }),
+    postDraft: builder.mutation({
+      query: (arg) => ({
+        url: `${JOB_POST}/draft`,
+        method: "POST",
+        body: {
+          ...arg,
+        },
+      }),
+    }),
   }),
 });
 
@@ -65,6 +81,8 @@ export const {
   useGetOwnJobPostsQuery,
   useGetOneJobPostQuery,
   useGetHomePostsQuery,
+  usePostJobPostMutation,
+  usePostDraftMutation,
 } = jobPostsAPI;
 
 export default jobPostsAPI;

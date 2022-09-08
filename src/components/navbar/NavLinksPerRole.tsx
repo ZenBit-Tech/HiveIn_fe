@@ -4,6 +4,7 @@ import React from "react";
 import {
   CLIENT_HOME,
   CLIENT_PROFILE,
+  CREATE_JOB_POST,
   MY_CONTRACTS_ROUTE,
   MY_JOBS_ROUTE,
   PROFILE_ROUTE,
@@ -74,6 +75,10 @@ const navLinksPerRole: NavLinkRoles = {
       {
         to: TALENT_ROUTE,
         title: "Talent",
+      },
+      {
+        to: CREATE_JOB_POST,
+        title: "Create Job Post",
       },
     ],
     buttons: [

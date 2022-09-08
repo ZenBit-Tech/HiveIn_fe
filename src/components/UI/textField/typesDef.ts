@@ -11,4 +11,5 @@ export interface ITextFieldProps {
   maxLength?: number;
   errors?: FieldErrorsImpl;
   disabled?: boolean;
+  withoutAdornment?: boolean;
 }

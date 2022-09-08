@@ -1,14 +1,13 @@
 import * as yup from "yup";
 import i18next from "localization/en/en.json";
+import { regexpGreaterThanZero } from "./profileEditFormValidationSchema";
 
-export const regexpGreaterThanZero = /^[1-9][0-9]*$/;
+export const jobPostsDraftSchema = yup.object({
+  title: yup.string().required(i18next.PostJob.required),
+});
 
-const profileEditFormValidationSchema = yup.object().shape({
-  position: yup
-    .string()
-    .trim()
-    .required(i18next.profileFormErrorMessages.positionEmpty),
-  category: yup
+export const createJobPostValidationSchema = jobPostsDraftSchema.shape({
+  categoryId: yup
     .string()
     .required(i18next.profileFormErrorMessages.categoryNotChosen),
   rate: yup
@@ -25,11 +24,16 @@ const profileEditFormValidationSchema = yup.object().shape({
   englishLevel: yup
     .string()
     .required(i18next.profileFormErrorMessages.englishLevelNotChosen),
-  description: yup
+  jobDescription: yup
     .string()
     .trim()
     .min(30, i18next.profileFormErrorMessages.descriptionEmpty)
-    .required(),
+    .required(i18next.profileFormErrorMessages.descriptionEmpty),
+  duration: yup
+    .string()
+    .matches(
+      regexpGreaterThanZero,
+      i18next.profileFormErrorMessages.rateSmallerThenZero
+    )
+    .required(i18next.PostJob.required),
 });
-
-export default profileEditFormValidationSchema;

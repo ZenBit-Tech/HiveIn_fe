@@ -19,13 +19,15 @@ export interface ILayoutElementWithoutControl {
     | "experienceColumn"
     | "skillsLayout"
     | "text"
-    | "phoneInput";
+    | "phoneInput"
+    | "durationPicker";
   containerWidth: "full" | "half";
   formFieldName: string;
   toggleButtonOptions?: string[];
   helperText?: string;
   maxLength?: number;
   freelancerInfo?: IFreelancer;
+  rowsOfTextArea?: number;
 }
 
 export interface ILayoutElementWithTitleProps

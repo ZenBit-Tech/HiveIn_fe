@@ -13,7 +13,7 @@ import PageContainer, {
 } from "pages/JobOwner/MyJobs/ClientJobsStyles";
 import { useTranslation } from "react-i18next";
 import { useGetOwnJobPostsQuery } from "services/jobPosts/setJobPostsAPI";
-import { SEARCH_WORK_ROUTE } from "utils/routeConsts";
+import { CREATE_JOB_POST } from "utils/routeConsts";
 import { POSTS_PER_PAGE as PPG } from "utils/jobListConsts";
 
 function ClientJobs() {
@@ -34,7 +34,7 @@ function ClientJobs() {
           {t("MyJobs.subTitle")}
           <NameText>{email}</NameText>
         </TitleText>
-        <LinkButton link={SEARCH_WORK_ROUTE}>{t("MyJobs.postJob")}</LinkButton>
+        <LinkButton link={CREATE_JOB_POST}>{t("MyJobs.postJob")}</LinkButton>
       </Header>
       <Section>
         <Card>

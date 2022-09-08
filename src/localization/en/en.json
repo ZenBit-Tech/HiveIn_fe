@@ -107,7 +107,11 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
+      "options": [
+        "pre-intermediate",
+        "intermediate",
+        "upper-intermediate"
+      ]
     },
     "description": {
       "title": "Description",
@@ -226,5 +230,36 @@
     "showFilters": "Show filters",
     "save": "Save",
     "noResult": "No result"
+  },
+  "PostJob": {
+    "required": "required",
+    "formFieldsInfo": {
+      "title": {
+        "title": "Title",
+        "helperText": "Write a title for your post"
+      },
+      "duration": {
+        "title": "Duration",
+        "week": "week",
+        "month": "month"
+      },
+      "description": {
+        "title": "Enter the charge per hour",
+        "helperText": "Max 5000 symbols"
+      }
+    },
+    "messages": {
+      "draftSuccess": "draft saved",
+      "draftError": "draft not posted",
+      "postSuccess": "job posted",
+      "postError": "job not posted",
+      "bigFileSize": "file's size is too big",
+      "unsupportedFile": "unsupported file type"
+    },
+    "buttonsText": {
+      "fileUpload": "Upload file",
+      "postDraft": " Save to draft",
+      "postJob": "Post job"
+    }
   }
 }
