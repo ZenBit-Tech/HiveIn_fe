@@ -48,7 +48,7 @@ function CreateJobPostForm() {
     },
   ] = usePostDraftMutation();
   const [selectedFile, setSelectedFile] = useState<null | File>(null);
-  const [isDraft, setIsDraft] = useState(true);
+  const [isDraft, setIsDraft] = useState<boolean>(true);
   const { t } = useTranslation();
   const {
     handleSubmit,
