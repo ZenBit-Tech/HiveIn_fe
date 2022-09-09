@@ -6,8 +6,10 @@ import JobTitle, {
   JobDescription,
   DeatailedInfo,
   RouterLink,
+  ContractStatus,
 } from "components/UI/JobItems/JobItemsStyles";
 import { useTranslation } from "react-i18next";
+import ContractStatusEnum from "utils/enums";
 
 dayjs.extend(relativeTime);
 interface IJobItemsProps {
@@ -16,6 +18,7 @@ interface IJobItemsProps {
   link: string;
   hourlyRate: number;
   publishDate: string;
+  contractStatus: ContractStatusEnum;
 }
 
 function JobItems({
@@ -24,6 +27,7 @@ function JobItems({
   link,
   hourlyRate,
   publishDate,
+  contractStatus,
 }: IJobItemsProps) {
   const { t } = useTranslation();
 
@@ -32,6 +36,7 @@ function JobItems({
       <JobTitle>
         <RouterLink to={link}>{title}</RouterLink>
         <DeatailedInfo>
+          <ContractStatus>{contractStatus || "Pending"}</ContractStatus>
           {t("MyJobs.currency")}
           {hourlyRate}
           {t("MyJobs.perHour")}

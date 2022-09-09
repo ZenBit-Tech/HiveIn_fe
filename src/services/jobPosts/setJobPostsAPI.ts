@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IUser } from "services/user/setUserAPI";
 import { RootState } from "store/store";
 import { JOB_POST } from "utils/brakepointConsts";
+import ContractStatusEnum from "utils/enums";
 
 interface Skills {
   id: number;
@@ -27,6 +28,9 @@ export interface IJobPost {
   category: string;
   skills: Skills[];
   user: IUser[];
+  contract: {
+    status: ContractStatusEnum;
+  };
 }
 
 const jobPostsAPI = createApi({

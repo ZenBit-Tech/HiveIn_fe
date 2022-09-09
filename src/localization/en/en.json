@@ -20,7 +20,10 @@
     "info": "About the project",
     "skills": "Necessary Skills",
     "currency": "$",
-    "perHour": "/hour"
+    "perHour": "/hour",
+    "contractStatusTitle": "Contract status:",
+    "endContractMessage": "This contract will be ended. Do you want to continue?",
+    "endContractTitle": "End a contract"
   },
   "Chat": {
     "title": "Chat"
