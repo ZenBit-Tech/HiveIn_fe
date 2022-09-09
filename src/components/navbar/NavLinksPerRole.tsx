@@ -74,11 +74,11 @@ const navLinksPerRole: NavLinkRoles = {
       },
       {
         to: TALENT_ROUTE,
-        title: "Talent",
+        title: i18next.Talent.pageTitle,
       },
       {
         to: CREATE_JOB_POST,
-        title: "Create Job Post",
+        title: i18next.PostJob.title,
       },
     ],
     buttons: [

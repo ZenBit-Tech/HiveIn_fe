@@ -5,6 +5,7 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { SDiv, SP } from "components/FileBox/styles";
+import { createJobAttachmentFileTypes } from "utils/consts/fileTypes";
 
 type TProps = {
   file: File;
@@ -12,25 +13,16 @@ type TProps = {
 };
 
 function FileBox({ file, handlerRemove }: TProps) {
-  const fileTypes = {
-    jpeg: "image/jpeg",
-    jpg: "image/jpg",
-    png: "image/png",
-    pdf: "application/pdf",
-    word: "application/msword",
-    txt: "text/plain",
-  };
-
   const renderIcon = (): JSX.Element | null => {
     switch (file.type) {
-      case fileTypes.jpeg:
-      case fileTypes.jpg:
-      case fileTypes.png:
+      case createJobAttachmentFileTypes.jpeg:
+      case createJobAttachmentFileTypes.jpg:
+      case createJobAttachmentFileTypes.png:
         return <ImageIcon />;
-      case fileTypes.pdf:
+      case createJobAttachmentFileTypes.pdf:
         return <PictureAsPdfIcon />;
-      case fileTypes.word:
-      case fileTypes.txt:
+      case createJobAttachmentFileTypes.word:
+      case createJobAttachmentFileTypes.txt:
         return <DescriptionIcon />;
       default:
         return null;

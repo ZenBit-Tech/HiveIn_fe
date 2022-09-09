@@ -214,6 +214,7 @@
     "notFound": "Not found"
   },
   "Talent": {
+    "pageTitle": "Talent",
     "discover": "Discover",
     "yourHires": "Your hires",
     "recentlyViewed": "Recently viewed",
@@ -232,6 +233,7 @@
     "noResult": "No result"
   },
   "PostJob": {
+    "title": "Create Job Post",
     "required": "required",
     "formFieldsInfo": {
       "title": {

@@ -7,6 +7,11 @@ import {
 } from "react-hook-form";
 import { IFreelancer } from "services/profileInfo/typesDef";
 
+export type TEnglishLevel =
+  | "pre-intermediate"
+  | "intermediate"
+  | "upper-intermediate";
+
 export interface ILayoutElementWithoutControl {
   title: string;
   element:
@@ -23,7 +28,7 @@ export interface ILayoutElementWithoutControl {
     | "durationPicker";
   containerWidth: "full" | "half";
   formFieldName: string;
-  toggleButtonOptions?: string[];
+  toggleButtonOptions?: string[] | TEnglishLevel[];
   helperText?: string;
   maxLength?: number;
   freelancerInfo?: IFreelancer;

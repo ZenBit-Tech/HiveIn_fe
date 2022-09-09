@@ -26,6 +26,7 @@ import {
 } from "validation/createJobPostValidationSchema";
 import createDataForResolver from "utils/functions/createDataForResolver";
 import { SButtonsGroup, SWrapper } from "components/CreateJobPostForm/styles";
+import { createJobAttachmentFileTypes } from "utils/consts/fileTypes";
 
 function CreateJobPostForm() {
   const { data: userData, isError: getUserError } = useGetOwnUserQuery();
@@ -67,14 +68,7 @@ function CreateJobPostForm() {
       };
     },
   });
-  const fileTypes: string[] = [
-    "application/pdf",
-    "image/jpeg",
-    "image/jpg",
-    "image/png",
-    "application/msword",
-    "text/plain",
-  ];
+  const fileTypes: string[] = Object.values(createJobAttachmentFileTypes);
   const MAX_FILE_SIZE = 5e6;
 
   useEffect(() => {
