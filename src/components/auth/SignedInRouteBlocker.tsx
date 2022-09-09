@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import useAuth from "hooks/useAuth";
-import { CLIENT_HOME, SEARCH_WORK_ROUTE } from "utils/routeConsts";
+import { CLIENT_HOME, SEARCH_WORK_ROUTE } from "utils/consts/routeConsts";
 
 const homeRoute = {
   freelancer: SEARCH_WORK_ROUTE,

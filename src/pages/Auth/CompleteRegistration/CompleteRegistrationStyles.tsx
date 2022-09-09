@@ -7,8 +7,8 @@ import {
   LIGHT_BLUE,
   TEXT_GRAY,
   WHITE,
-} from "utils/colorConsts";
-import { WRAP_SCREEN_SIZE } from "utils/mediaQueryConsts";
+} from "utils/consts/colorConsts";
+import { WRAP_SCREEN_SIZE } from "utils/consts/mediaQueryConsts";
 
 const Wrapper = styled.div`
   width: 100%;

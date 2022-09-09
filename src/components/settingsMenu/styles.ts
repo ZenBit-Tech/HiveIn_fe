@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PRIMARY } from "utils/colorConsts";
+import { PRIMARY } from "utils/consts/colorConsts";
 
 /* eslint-disable import/prefer-default-export */
 export const SButton = styled("button")`

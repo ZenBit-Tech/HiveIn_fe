@@ -4,7 +4,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useLocation, useNavigate } from "react-router-dom";
 import Field from "components/DefaultField/Index";
-import { SIGN_IN_ROUTE } from "utils/routeConsts";
+import { SIGN_IN_ROUTE } from "utils/consts/routeConsts";
 import { useTranslation } from "react-i18next";
 import api from "services/auth/forgotPassword";
 import S from "./style";

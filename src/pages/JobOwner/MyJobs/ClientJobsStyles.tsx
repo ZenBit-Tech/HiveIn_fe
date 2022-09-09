@@ -1,7 +1,7 @@
 import { Pagination } from "antd";
 import styled from "styled-components";
-import { BLACK, TEXT_GRAY } from "utils/colorConsts";
-import { WRAP_SCREEN_SIZE } from "utils/mediaQueryConsts";
+import { BLACK, TEXT_GRAY } from "utils/consts/colorConsts";
+import { WRAP_SCREEN_SIZE } from "utils/consts/mediaQueryConsts";
 
 interface ITitle {
   pd?: string;

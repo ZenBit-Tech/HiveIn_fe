@@ -7,7 +7,7 @@ import clientRoutes from "routes/clientRoutes";
 import freelancerRoutes from "routes/freeelancerRoutes";
 import protectedRoutes from "routes/protectedRoutes";
 import publicRoutes from "routes/publicRoutes";
-import { CLIENT_HOME, SEARCH_WORK_ROUTE } from "utils/routeConsts";
+import { CLIENT_HOME, SEARCH_WORK_ROUTE } from "utils/consts/routeConsts";
 
 function Router() {
   return (
