@@ -42,7 +42,7 @@ const forgotPassApi = createApi({
   }),
 });
 
-export default {
-  useForgotPasswordMutation: forgotPassApi.useForgotPasswordMutation,
-  useRestorePasswordMutation: forgotPassApi.useRestorePasswordMutation,
-} = forgotPassApi;
+export const { useForgotPasswordMutation, useRestorePasswordMutation } =
+  forgotPassApi;
+
+export default forgotPassApi;

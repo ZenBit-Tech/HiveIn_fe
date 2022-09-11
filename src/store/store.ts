@@ -16,12 +16,14 @@ import setJobPostsAPI from "services/jobPosts/setJobPostsAPI";
 import { getProfileInfoApi } from "services/profileInfo/profileInfoAPI";
 import { getSkillsOrCategory } from "services/categoriesAndSkills/categoriesAndSkills";
 import getTalentApi from "services/jobOwner/talentAPI";
+import forgotPassword from "services/auth/forgotPassword";
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     [setUserApi.reducerPath]: setUserApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
+    [forgotPassword.reducerPath]: forgotPassword.reducer,
     [getProfileInfoApi.reducerPath]: getProfileInfoApi.reducer,
     [getSkillsOrCategory.reducerPath]: getSkillsOrCategory.reducer,
     [setJobPostsAPI.reducerPath]: setJobPostsAPI.reducer,
@@ -36,6 +38,7 @@ export const store = configureStore({
     })
       .concat(setUserApi.middleware)
       .concat(authApi.middleware)
+      .concat(forgotPassword.middleware)
       .concat(setJobPostsAPI.middleware)
       .concat(getTalentApi.middleware)
       .prepend(getProfileInfoApi.middleware)
