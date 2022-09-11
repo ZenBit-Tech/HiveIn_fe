@@ -1,5 +1,5 @@
 import { DollarCircleFilled, ThunderboltFilled } from "@ant-design/icons";
-import { Drawer, Modal, Space, Typography } from "antd";
+import { Drawer, Space, Typography } from "antd";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
 import { SkillTag } from "components/UI/JobItem/JobItemStyles";
 import {
@@ -14,6 +14,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useState } from "react";
 import { BLUE, BOX_BACKGROUND } from "utils/colorConsts";
+import SubmitProposalModal from "components/UI/modals/SubmitProposalModal";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
@@ -60,6 +61,7 @@ function SearchWorkDrawer({
           <Header>
             <Title level={3}>{title}</Title>
           </Header>
+
           <ContentBox>
             <Space direction="vertical">
               <DrawerText strong color={BLUE}>
@@ -109,16 +111,10 @@ function SearchWorkDrawer({
             <SendButton onClick={() => setIsModalOpen(true)}>
               Send Proposal
             </SendButton>
-            <Modal
-              title="Basic Modal"
+            <SubmitProposalModal
               visible={isModalOpen}
-              onOk={() => setIsModalOpen(false)}
-              onCancel={() => setIsModalOpen(false)}
-            >
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-            </Modal>
+              closeModal={() => setIsModalOpen(false)}
+            />
           </SideContent>
         </Grid>
       </Wrapper>

@@ -1,4 +1,9 @@
-import { Input, InputProps, Typography } from "antd";
+import { InputProps, Typography } from "antd";
+import {
+  FieldInput,
+  FieldTextArea,
+  Wrapper,
+} from "components/DefaultField/DefaultFieldStyles";
 import { Control, Controller } from "react-hook-form";
 
 const { Text } = Typography;
@@ -6,25 +11,44 @@ interface FieldProps extends InputProps {
   control: Control<any>;
   name: string;
   label?: string;
+  textArea?: boolean;
+  maxLength?: number;
 }
 
-export default function Field({ control, name, label, ...props }: FieldProps) {
+export default function Field({
+  textArea,
+  maxLength,
+  control,
+  name,
+  label,
+  ...props
+}: FieldProps) {
   return (
     <Controller
       control={control}
       name={name}
       render={({ field: { onChange, value }, fieldState: { error } }) => (
-        <div style={{ width: "100%" }}>
+        <Wrapper>
           <Typography>{label}</Typography>
-          <Input
-            onChange={onChange}
-            value={value}
-            status={error ? "error" : undefined}
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            {...props}
-          />
+          {textArea ? (
+            <FieldTextArea
+              onChange={onChange}
+              value={value}
+              status={error ? "error" : undefined}
+              showCount
+              maxLength={maxLength}
+            />
+          ) : (
+            <FieldInput
+              onChange={onChange}
+              value={value}
+              status={error ? "error" : undefined}
+              // eslint-disable-next-line react/jsx-props-no-spreading
+              {...props}
+            />
+          )}
           <Text type="danger">{error ? error.message : ""}</Text>
-        </div>
+        </Wrapper>
       )}
     />
   );
@@ -32,4 +56,6 @@ export default function Field({ control, name, label, ...props }: FieldProps) {
 
 Field.defaultProps = {
   label: "",
+  textArea: false,
+  maxLength: 0,
 };
