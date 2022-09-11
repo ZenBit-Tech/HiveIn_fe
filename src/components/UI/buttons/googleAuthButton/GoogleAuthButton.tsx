@@ -3,8 +3,8 @@ import React from "react";
 import GoogleButton, {
   Text,
   Image,
-} from "components/UI/googleAuthButton/GoogleAuthButtonStyles";
-import google from "components/UI/googleAuthButton/imgs/google.svg";
+} from "components/UI/buttons/googleAuthButton/GoogleAuthButtonStyles";
+import google from "components/UI/buttons/googleAuthButton/imgs/google.svg";
 
 interface GoogleAuthButtonProps {
   children: React.ReactNode;

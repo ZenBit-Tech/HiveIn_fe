@@ -7,7 +7,7 @@ import Field from "components/DefaultField/Index";
 import { useTranslation } from "react-i18next";
 import useAuth from "hooks/useAuth";
 import { useSignInMutation } from "services/auth/setAuthAPI";
-import GoogleAuthButton from "components/UI/googleAuthButton/GoogleAuthButton";
+import GoogleAuthButton from "components/UI/buttons/googleAuthButton/GoogleAuthButton";
 import {
   FORGOT_PASSWORD_ROUTE,
   PROFILE_ROUTE,

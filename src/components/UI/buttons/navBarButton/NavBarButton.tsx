@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Tooltip } from "antd";
-import ButtonStyle from "components/UI/navBarButton/navBarButtonStyles";
+import ButtonStyle from "components/UI/buttons/navBarButton/navBarButtonStyles";
 
 interface NavBarButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   icon: ReactNode;

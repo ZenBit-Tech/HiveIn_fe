@@ -9,7 +9,7 @@ import {
   Header,
   SideContent,
   Wrapper,
-} from "components/UI/SearchWorkDrawer/SearchWorkDrawerStyles";
+} from "components/UI/drawers/SearchWorkDrawer/SearchWorkDrawerStyles";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useState } from "react";

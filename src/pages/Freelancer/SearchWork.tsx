@@ -1,5 +1,5 @@
 import { Button } from "antd";
-import SearchWorkDrawer from "components/UI/SearchWorkDrawer/SearchWorkDrawer";
+import SearchWorkDrawer from "components/UI/drawers/SearchWorkDrawer/SearchWorkDrawer";
 import { useState } from "react";
 
 function SearchWork() {

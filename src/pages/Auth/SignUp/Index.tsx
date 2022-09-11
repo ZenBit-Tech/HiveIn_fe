@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Field from "components/DefaultField/Index";
 import { COMPLETE_REGISTRATION_ROUTE } from "utils/routeConsts";
-import GoogleAuthButton from "components/UI/googleAuthButton/GoogleAuthButton";
+import GoogleAuthButton from "components/UI/buttons/googleAuthButton/GoogleAuthButton";
 import { useSignUpMutation } from "services/auth/setAuthAPI";
 import { toast } from "react-toastify";
 import useAuth from "hooks/useAuth";
