@@ -3,7 +3,7 @@ import { LIGHT_GRAY } from "utils/colorConsts";
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;

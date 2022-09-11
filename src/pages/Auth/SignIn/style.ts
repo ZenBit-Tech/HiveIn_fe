@@ -11,7 +11,7 @@ const Container = styled.div`
 `;
 
 const FormBox = styled.div`
-  width: 45%;
+  width: 35%;
   height: 100%;
   display: flex;
   flex-direction: column;

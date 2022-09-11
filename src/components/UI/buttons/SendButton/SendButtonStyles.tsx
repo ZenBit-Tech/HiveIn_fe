@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { BLUE, WHITE, DARK_BLUE } from "utils/colorConsts";
 
-const SendButtonStyle = styled.div`
+const SendButtonStyle = styled.button`
+  border: none;
+  width: 100%;
   border-radius: 50px;
   cursor: pointer;
   display: flex;
