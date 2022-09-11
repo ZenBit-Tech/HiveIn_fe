@@ -3,7 +3,7 @@ import { Button, Typography, Modal } from "antd";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import Field from "components/DefaultField/Index";
+import Field from "components/DefaultField/DefaultField";
 import { useTranslation } from "react-i18next";
 import useAuth from "hooks/useAuth";
 import { useSignInMutation } from "services/auth/setAuthAPI";

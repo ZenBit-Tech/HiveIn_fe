@@ -1,7 +1,7 @@
-import React from "react";
 import { Input, InputProps, Typography } from "antd";
 import { Control, Controller } from "react-hook-form";
 
+const { Text } = Typography;
 interface FieldProps extends InputProps {
   control: Control<any>;
   name: string;
@@ -9,7 +9,6 @@ interface FieldProps extends InputProps {
 }
 
 export default function Field({ control, name, label, ...props }: FieldProps) {
-  const { Text } = Typography;
   return (
     <Controller
       control={control}
