@@ -15,6 +15,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { useState } from "react";
 import { BLUE, BOX_BACKGROUND } from "utils/colorConsts";
 import SubmitProposalModal from "components/UI/modals/SubmitProposalModal";
+import { useTranslation } from "react-i18next";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
@@ -44,6 +45,7 @@ function SearchWorkDrawer({
   englishLevel,
   publishDate,
 }: SearchWorkDrawerProps) {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -60,14 +62,15 @@ function SearchWorkDrawer({
         <Grid grow={3}>
           <Header>
             <Title level={3}>{title}</Title>
+            <DrawerText>{dayjs(publishDate).fromNow()}</DrawerText>
           </Header>
 
           <ContentBox>
+            <Title level={5}>{t("SearchWork.category")}</Title>
             <Space direction="vertical">
               <DrawerText strong color={BLUE}>
                 {category}
               </DrawerText>
-              <DrawerText>{dayjs(publishDate).fromNow()}</DrawerText>
             </Space>
           </ContentBox>
 
@@ -76,26 +79,34 @@ function SearchWorkDrawer({
           </ContentBox>
 
           <ContentBox>
-            <Title level={5}>Price and length</Title>
+            <Title level={5}>{t("SearchWork.price")}</Title>
             <Space direction="vertical">
               <DrawerText>
-                <DollarCircleFilled /> ${hourlyRate} per week
+                <DollarCircleFilled
+                  style={{ color: `${BLUE}`, padding: "5px" }}
+                />
+                {t("MyJobs.currency")}
+                {hourlyRate}
+                {t("MyJobs.perHour")}
               </DrawerText>
               <DrawerText>
-                <ThunderboltFilled /> {projectLenght}
+                <ThunderboltFilled
+                  style={{ color: `${BLUE}`, padding: "5px" }}
+                />
+                {projectLenght}
               </DrawerText>
             </Space>
           </ContentBox>
 
           <ContentBox>
-            <Title level={5}>Skills and Habilities</Title>
+            <Title level={5}>{t("SearchWork.habilities")}</Title>
             <Space size={30} style={{ padding: "10px" }}>
               <Space direction="vertical">
-                <DrawerText strong>English level</DrawerText>
+                <DrawerText strong>{t("SearchWork.english")}</DrawerText>
                 <DrawerText>{englishLevel}</DrawerText>
               </Space>
               <Space direction="vertical" style={{ marginLeft: "30px" }}>
-                <DrawerText strong>Skills</DrawerText>
+                <DrawerText strong>{t("SearchWork.skills")}</DrawerText>
                 <Space>
                   {skills.map((skill) => (
                     <SkillTag key={skill}>{skill}</SkillTag>
@@ -109,11 +120,12 @@ function SearchWorkDrawer({
         <Grid>
           <SideContent>
             <SendButton onClick={() => setIsModalOpen(true)}>
-              Send Proposal
+              {t("SearchWork.send")}
             </SendButton>
             <SubmitProposalModal
               visible={isModalOpen}
               closeModal={() => setIsModalOpen(false)}
+              clientBudget={hourlyRate}
             />
           </SideContent>
         </Grid>
