@@ -1,6 +1,12 @@
 import { Typography } from "antd";
 import styled from "styled-components";
-import { BLACK, BOX_BORDER, WHITE } from "utils/consts/colorConsts";
+import {
+  BLACK,
+  BOX_BORDER,
+  LIGHT_GRAY,
+  TEXT_GRAY,
+  WHITE,
+} from "utils/consts/colorConsts";
 
 const { Text } = Typography;
 
@@ -45,4 +51,23 @@ export const SideContent = styled.section`
 
 export const DrawerText = styled(Text)<IText>`
   color: ${(props) => props.color || BLACK}; ;
+`;
+
+export const AttachmentLink = styled.a`
+  border-radius: 5px;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  column-gap: 5px;
+  font-size: 1em;
+  font-weight: 400;
+  align-items: center;
+  justify-content: center;
+  background-color: ${LIGHT_GRAY};
+  padding: 5px;
+  color: ${TEXT_GRAY};
+  &:hover {
+    color: ${WHITE};
+    background-color: ${TEXT_GRAY};
+  }
 `;

@@ -14,6 +14,12 @@ interface Category {
   name: string;
 }
 
+interface IFile {
+  id: number;
+  filename: string;
+  path: string;
+}
+
 interface QueryParam {
   id?: number;
   isDraft?: boolean;
@@ -33,6 +39,7 @@ export interface IJobPost {
   category: Category;
   skills: Skills[];
   user: IUser;
+  file?: IFile;
 }
 
 const jobPostsAPI = createApi({

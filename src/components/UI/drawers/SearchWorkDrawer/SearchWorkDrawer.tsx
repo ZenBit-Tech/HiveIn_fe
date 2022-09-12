@@ -1,8 +1,13 @@
-import { DollarCircleFilled, ThunderboltFilled } from "@ant-design/icons";
+import {
+  DollarCircleFilled,
+  PaperClipOutlined,
+  ThunderboltFilled,
+} from "@ant-design/icons";
 import { Drawer, Space, Typography } from "antd";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
 import { SkillTag } from "components/UI/JobItem/JobItemStyles";
 import {
+  AttachmentLink,
   ContentBox,
   DrawerText,
   Grid,
@@ -17,6 +22,7 @@ import { BLUE, BOX_BACKGROUND, TEXT_GRAY } from "utils/consts/colorConsts";
 import SubmitProposalModal from "components/UI/modals/SubmitProposalModal";
 import { useTranslation } from "react-i18next";
 import { IJobPost } from "services/jobPosts/setJobPostsAPI";
+import { JOB_POST_FILE } from "utils/consts/breakepointConsts";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
@@ -40,6 +46,7 @@ function SearchWorkDrawer({
   englishLevel,
   createdAt,
   user,
+  file,
 }: SearchWorkDrawerProps) {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -111,6 +118,20 @@ function SearchWorkDrawer({
               </Space>
             </Space>
           </ContentBox>
+
+          {file && (
+            <ContentBox>
+              <Title level={5}>{t("SearchWork.img")}</Title>
+              <Space direction="vertical">
+                <AttachmentLink
+                  href={`${process.env.REACT_APP_API_URL}/${JOB_POST_FILE}/${file.id}`}
+                >
+                  <PaperClipOutlined />
+                  {file.filename}
+                </AttachmentLink>
+              </Space>
+            </ContentBox>
+          )}
         </Grid>
 
         <Grid>

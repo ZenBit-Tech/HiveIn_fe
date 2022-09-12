@@ -6,7 +6,7 @@ import { useGetOneJobPostQuery } from "services/jobPosts/setJobPostsAPI";
 function SearchWork() {
   const [open, setOpen] = useState(false);
   const { data, isSuccess } = useGetOneJobPostQuery({
-    id: 9,
+    id: 43,
   });
 
   return (
