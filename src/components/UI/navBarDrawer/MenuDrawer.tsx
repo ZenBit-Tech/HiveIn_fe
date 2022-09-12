@@ -7,7 +7,7 @@ import NavLink from "components/UI/navlink/NavLink";
 import NavBarButton from "components/UI/navBarButton/NavBarButton";
 import useAuth from "hooks/useAuth";
 import { NavRoleOptions } from "components/navbar/NavLinksPerRole";
-import { SIGN_IN_ROUTE } from "utils/routeConsts";
+import { SIGN_IN_ROUTE } from "utils/consts/routeConsts";
 
 interface MenuDrawerProps {
   drawerLinks: NavRoleOptions[];

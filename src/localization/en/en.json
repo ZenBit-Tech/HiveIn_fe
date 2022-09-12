@@ -20,7 +20,11 @@
     "info": "About the project",
     "skills": "Necessary Skills",
     "currency": "$",
-    "perHour": "/hour"
+    "perHour": "/hour",
+    "contractStatusTitle": "Contract status:",
+    "endContractMessage": "This contract will be ended. Do you want to continue?",
+    "endContractTitle": "End a contract",
+    "continueText": "Continue"
   },
   "Chat": {
     "title": "Chat"
@@ -107,7 +111,11 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
+      "options": [
+        "pre-intermediate",
+        "intermediate",
+        "upper-intermediate"
+      ]
     },
     "description": {
       "title": "Description",
@@ -208,6 +216,57 @@
   },
   "NotFound": {
     "notFound": "Not found"
+  },
+  "Talent": {
+    "pageTitle": "Talent",
+    "discover": "Discover",
+    "yourHires": "Your hires",
+    "recentlyViewed": "Recently viewed",
+    "savedTalent": "Saved talent",
+    "title": "Find the best candidate",
+    "keyWords": "Key words:",
+    "category": "Choose a category:",
+    "skills": "Choose at least 3 skills from the following:",
+    "foundCandidates": "Found candidates",
+    "seeAll": "See more",
+    "seeLess": "See less",
+    "search": "Search",
+    "hideFilters": "Hide filters",
+    "showFilters": "Show filters",
+    "save": "Save",
+    "noResult": "No result"
+  },
+  "PostJob": {
+    "title": "Create Job Post",
+    "required": "required",
+    "formFieldsInfo": {
+      "title": {
+        "title": "Title",
+        "helperText": "Write a title for your post"
+      },
+      "duration": {
+        "title": "Duration",
+        "week": "week",
+        "month": "month"
+      },
+      "description": {
+        "title": "Enter the charge per hour",
+        "helperText": "Max 5000 symbols"
+      }
+    },
+    "messages": {
+      "draftSuccess": "draft saved",
+      "draftError": "draft not posted",
+      "postSuccess": "job posted",
+      "postError": "job not posted",
+      "bigFileSize": "file's size is too big",
+      "unsupportedFile": "unsupported file type"
+    },
+    "buttonsText": {
+      "fileUpload": "Upload file",
+      "postDraft": " Save to draft",
+      "postJob": "Post job"
+    }
   },
   "Notifications": {
     "title": "Notifications"

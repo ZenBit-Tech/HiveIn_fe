@@ -1,7 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IUser } from "services/user/setUserAPI";
 import { RootState } from "store/store";
-import { JOB_POST } from "utils/brakepointConsts";
+import { JOB_POST } from "utils/consts/brakepointConsts";
+import { IDraftRequestObject } from "components/CreateJobPostForm/typesDef";
+import ContractStatusEnum from "utils/enums";
 
 interface Skills {
   id: number;
@@ -27,6 +29,9 @@ export interface IJobPost {
   category: string;
   skills: Skills[];
   user: IUser[];
+  contract: {
+    status: ContractStatusEnum;
+  };
 }
 
 const jobPostsAPI = createApi({
@@ -58,6 +63,22 @@ const jobPostsAPI = createApi({
         url: `${JOB_POST}/home/self/${path.isDraft}`,
       }),
     }),
+    postJobPost: builder.mutation<IJobPost, FormData>({
+      query: (arg) => ({
+        url: `${JOB_POST}`,
+        method: "POST",
+        body: arg,
+      }),
+    }),
+    postDraft: builder.mutation<IJobPost, IDraftRequestObject>({
+      query: (arg) => ({
+        url: `${JOB_POST}/draft`,
+        method: "POST",
+        body: {
+          ...arg,
+        },
+      }),
+    }),
   }),
 });
 
@@ -65,6 +86,8 @@ export const {
   useGetOwnJobPostsQuery,
   useGetOneJobPostQuery,
   useGetHomePostsQuery,
+  usePostJobPostMutation,
+  usePostDraftMutation,
 } = jobPostsAPI;
 
 export default jobPostsAPI;

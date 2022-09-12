@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BOX_BACKGROUND } from "utils/colorConsts";
+import { BOX_BACKGROUND } from "utils/consts/colorConsts";
 
 const Container = styled.div`
   display: flex;

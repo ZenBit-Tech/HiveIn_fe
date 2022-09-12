@@ -3,6 +3,7 @@ import React from "react";
 import {
   CHAT_ROUTE,
   CLIENT_HOME,
+  CREATE_JOB_POST,
   MY_CONTRACTS_ROUTE,
   MY_JOBS_ROUTE,
   NOTIFICATIONS_ROUTE,
@@ -10,16 +11,8 @@ import {
   SEARCH_WORK_ROUTE,
   SETTINGS_CONTACT_INFO_ROUTE,
   SETTINGS_ROUTE,
-} from "utils/routeConsts";
-
-interface LinkType {
-  title: string;
-  to: string;
-}
-interface NavLinkType {
-  title: string;
-  links: LinkType[];
-}
+  TALENT_ROUTE,
+} from "utils/consts/routeConsts";
 
 export type NavRoleOptions = {
   title: string;
@@ -105,23 +98,19 @@ const navLinksPerRole: NavLinkRoles = {
             title: "Jobs",
           },
           {
-            to: CLIENT_HOME,
-            title: "Talent",
+            to: TALENT_ROUTE,
+            title: i18next.Talent.pageTitle,
+          },
+          {
+            to: CREATE_JOB_POST,
+            title: i18next.PostJob.title,
           },
         ],
       },
       {
-        title: i18next.Chat.title,
-        links: [
-          {
-            to: CHAT_ROUTE,
-            title: i18next.Chat.title,
-          },
-          {
-            to: NOTIFICATIONS_ROUTE,
-            title: i18next.Notifications.title,
-          },
-        ],
+        path: CLIENT_PROFILE,
+        title: i18next.Profile.title,
+        icon: <UserOutlined />,
       },
     ],
     home: CLIENT_HOME,

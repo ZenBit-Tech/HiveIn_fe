@@ -10,9 +10,9 @@ import {
   SIGN_UP_ROUTE,
   SIGN_IN_ROUTE,
   CLIENT_PROFILE,
-} from "utils/routeConsts";
+} from "utils/consts/routeConsts";
 import useAuth from "hooks/useAuth";
-import { MOBILE_SCREEN_SIZE } from "utils/navBarConsts";
+import { MOBILE_SCREEN_SIZE } from "utils/consts/navBarConsts";
 import { useEffect, useState } from "react";
 import { Menu } from "antd";
 import { Link } from "react-router-dom";

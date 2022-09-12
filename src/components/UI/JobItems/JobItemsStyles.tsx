@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { BLACK, BLUE, TEXT_GRAY } from "utils/colorConsts";
+import { BLACK, BLUE, TEXT_GRAY } from "utils/consts/colorConsts";
 
 const JobTitle = styled.div`
   display: flex;
@@ -30,6 +30,12 @@ export const RouterLink = styled(Link)`
   &:hover {
     color: ${BLUE};
   }
+`;
+
+export const ContractStatus = styled("span")`
+  color: ${BLACK};
+  overflow: hidden;
+  margin-right: 10px;
 `;
 
 export default JobTitle;

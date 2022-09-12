@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { ILayoutElementWithTitleProps } from "components/layoutElementWithTitle/typesDef";
 import { SH, SDiv, SWrapper } from "components/layoutElementWithTitle/style";
 import TextField from "components/UI/textField/TextField";
@@ -7,6 +8,7 @@ import ToggleButton from "components/UI/buttons/toggleButton/ToggleButton";
 import EducationLayout from "components/educationLayout/EducationLayout";
 import SkillsLayout from "components/skillsLayout/SkillsLayout";
 import PhoneInput from "components/UI/phoneInput/PhoneInput";
+import InputAndSelectCombined from "components/UI/InputAndSelectCombined/InputAndSelectCombined";
 
 function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
   const {
@@ -21,11 +23,15 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     errors,
     freelancerInfo,
     setValue,
+    rowsOfTextArea,
   } = props;
+
+  const { t } = useTranslation();
 
   const renderTextInput = () => (
     <TextField
       errors={errors}
+      helperText={helperText}
       control={control}
       formFieldName={formFieldName}
       maxLength={maxLength}
@@ -53,7 +59,7 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
       control={control}
       formFieldName={formFieldName}
       maxLength={maxLength}
-      rows={2}
+      rows={rowsOfTextArea || 2}
       multiline
       width="full"
       type="text"
@@ -111,6 +117,10 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
       />
     ) : null;
 
+  const renderDurationPicker = () => (
+    <InputAndSelectCombined control={control} errors={errors} />
+  );
+
   const elementTypes: { [propName: string]: typeof element } = {
     textInput: "textInput",
     numberInput: "numberInput",
@@ -122,6 +132,7 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     skillsLayout: "skillsLayout",
     phoneInput: "phoneInput",
     text: "text",
+    durationPicker: "durationPicker",
   };
 
   const renderElement = (type: typeof element): JSX.Element | null => {
@@ -142,10 +153,12 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
         return renderExperienceColumn();
       case elementTypes.skillsLayout:
         return renderSkillsLayout();
-      case "phoneInput":
+      case elementTypes.phoneInput:
         return renderPhoneInput();
-      case "text":
+      case elementTypes.text:
         return renderText();
+      case elementTypes.durationPicker:
+        return renderDurationPicker();
       default:
         return null;
     }
@@ -153,7 +166,7 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
 
   return (
     <SWrapper>
-      <SH>{title}</SH>
+      <SH>{t(title)}</SH>
       <SDiv width={containerWidth}>{renderElement(element)}</SDiv>
     </SWrapper>
   );

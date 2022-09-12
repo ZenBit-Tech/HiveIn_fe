@@ -1,7 +1,7 @@
 import { Pagination } from "antd";
 import styled from "styled-components";
-import { BLACK, TEXT_GRAY } from "utils/colorConsts";
-import { WRAP_SCREEN_SIZE } from "utils/mediaQueryConsts";
+import { BLACK, TEXT_GRAY } from "utils/consts/colorConsts";
+import { WRAP_SCREEN_SIZE } from "utils/consts/mediaQueryConsts";
 
 interface ITitle {
   pd?: string;
@@ -63,10 +63,16 @@ export const Card = styled.div<BoxSizing>`
   border: 1px solid ${TEXT_GRAY};
   padding: 25px;
   border-radius: 10px;
-  width: ${(props) => props.wd || "70%"};
+  width: ${(props) => props.wd || "100%"};
   @media (max-width: ${WRAP_SCREEN_SIZE}) {
     width: 100%;
   }
+`;
+
+export const ContractStatus = styled("div")`
+  color: ${BLACK};
+  overflow: hidden;
+  font-size: 16px;
 `;
 
 export const StyledPagination = styled(Pagination)``;
