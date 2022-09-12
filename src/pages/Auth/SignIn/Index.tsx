@@ -12,8 +12,8 @@ import {
   FORGOT_PASSWORD_ROUTE,
   PROFILE_ROUTE,
   SIGN_UP_ROUTE,
-} from "utils/routeConsts";
-import { PRIMARY } from "utils/colorConsts";
+} from "utils/consts/routeConsts";
+import { PRIMARY } from "utils/consts/colorConsts";
 import S from "./style";
 import signInSchema from "./schema";
 

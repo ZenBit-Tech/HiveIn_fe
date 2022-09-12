@@ -6,9 +6,13 @@ import useViewport from "hooks/useViewport";
 import NavBarButton from "components/UI/buttons/navBarButton/NavBarButton";
 import MenuDrawer from "components/UI/drawers/navBarDrawer/MenuDrawer";
 import { MessageFilled, LogoutOutlined } from "@ant-design/icons";
-import { CHAT_ROUTE, SIGN_UP_ROUTE, SIGN_IN_ROUTE } from "utils/routeConsts";
+import {
+  CHAT_ROUTE,
+  SIGN_UP_ROUTE,
+  SIGN_IN_ROUTE,
+} from "utils/consts/routeConsts";
 import useAuth from "hooks/useAuth";
-import { MOBILE_SCREEN_SIZE } from "utils/navBarConsts";
+import { MOBILE_SCREEN_SIZE } from "utils/consts/navBarConsts";
 import { useEffect, useState } from "react";
 import navLinksPerRole, {
   NavLinkOptions,

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSaveFreelancersMutation } from "services/jobOwner/talentAPI";
 import S from "components/CandidateCard/styles";
 import { useTranslation } from "react-i18next";
-import { BLUE } from "utils/colorConsts";
+import { BLUE } from "utils/consts/colorConsts";
 
 export interface IFreelancer {
   userId: number;

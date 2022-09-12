@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BOX_BORDER } from "utils/colorConsts";
+import { BOX_BORDER } from "utils/consts/colorConsts";
 
 const Container = styled.div`
   width: 100%;

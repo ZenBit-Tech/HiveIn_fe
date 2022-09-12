@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { LIGHT_GRAY } from "utils/colorConsts";
+import { LIGHT_GRAY } from "utils/consts/colorConsts";
 
 const Container = styled.div`
   width: 100%;

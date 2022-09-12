@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "store/store";
-import { REACT_APP_USER_CONTACT_INFO_URL } from "utils/breakepointConsts";
+import { REACT_APP_USER_CONTACT_INFO_URL } from "utils/consts/breakepointConsts";
 
 export interface IUser {
   id?: string;

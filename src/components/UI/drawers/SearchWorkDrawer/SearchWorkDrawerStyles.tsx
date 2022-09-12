@@ -1,6 +1,6 @@
 import { Typography } from "antd";
 import styled from "styled-components";
-import { BLACK, BOX_BORDER, WHITE } from "utils/colorConsts";
+import { BLACK, BOX_BORDER, WHITE } from "utils/consts/colorConsts";
 
 const { Text } = Typography;
 

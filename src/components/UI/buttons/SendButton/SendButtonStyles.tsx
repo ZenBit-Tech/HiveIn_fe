@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BLUE, WHITE, DARK_BLUE } from "utils/colorConsts";
+import { BLUE, WHITE, DARK_BLUE } from "utils/consts/colorConsts";
 
 const SendButtonStyle = styled.button`
   border: none;

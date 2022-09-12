@@ -1,6 +1,6 @@
 import { Col, Card as C } from "antd";
 import styled from "styled-components";
-import { LIGHT_BLUE } from "utils/colorConsts";
+import { LIGHT_BLUE } from "utils/consts/colorConsts";
 
 const Avatar = styled.img`
   width: 40px;

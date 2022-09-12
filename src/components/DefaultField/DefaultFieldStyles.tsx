@@ -1,6 +1,6 @@
 import { Input } from "antd";
 import styled from "styled-components";
-import { BLUE } from "utils/colorConsts";
+import { BLUE } from "utils/consts/colorConsts";
 
 const { TextArea } = Input;
 

@@ -4,7 +4,7 @@ import {
   RESTORE_PASSWORD_ROUTE,
   SIGN_IN_ROUTE,
   SIGN_UP_ROUTE,
-} from "utils/routeConsts";
+} from "utils/consts/routeConsts";
 import { RoutesType } from "routes/publicRoutes";
 import SignUp from "pages/Auth/SignUp/Index";
 import SignIn from "pages/Auth/SignIn/Index";

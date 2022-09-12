@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "store/store";
-import { PROPOSALS } from "utils/breakepointConsts";
+import { PROPOSALS } from "utils/consts/breakepointConsts";
 
 interface ProposalFields {
   coverLetter: string;

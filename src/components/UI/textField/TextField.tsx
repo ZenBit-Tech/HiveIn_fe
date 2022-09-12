@@ -20,6 +20,7 @@ function TextField(props: ITextFieldProps) {
     control,
     errors,
     disabled,
+    withoutAdornment,
   } = props;
 
   const inputNumberType = "number";
@@ -49,8 +50,8 @@ function TextField(props: ITextFieldProps) {
               label={helperText}
               size="small"
               InputProps={{
-                endAdornment,
                 rows,
+                endAdornment: !withoutAdornment && endAdornment,
                 inputProps: { maxLength },
               }}
             />
@@ -65,8 +66,9 @@ function TextField(props: ITextFieldProps) {
           type={type}
           size="small"
           sx={helperText ? undefined : sxProps}
+          label={helperText}
           InputProps={{
-            endAdornment,
+            endAdornment: !withoutAdornment && endAdornment,
             rows,
             inputProps: { maxLength },
           }}

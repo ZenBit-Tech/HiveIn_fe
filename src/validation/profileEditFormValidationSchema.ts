@@ -1,7 +1,7 @@
 import * as yup from "yup";
 import i18next from "localization/en/en.json";
 
-const regexpGreaterThanZero = /^[1-9][0-9]*$/;
+export const regexpGreaterThanZero = /^[1-9][0-9]*$/;
 
 const profileEditFormValidationSchema = yup.object().shape({
   position: yup
