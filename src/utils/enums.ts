@@ -1,6 +1,6 @@
 enum ContractStatusEnum {
-  PENDING = "Pending",
-  ACTIVE = "Active",
-  CLOSED = "Closed",
+  PENDING = "pending",
+  ACTIVE = "active",
+  CLOSED = "closed",
 }
 export default ContractStatusEnum;
