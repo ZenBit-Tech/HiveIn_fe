@@ -1,9 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IUser } from "services/user/setUserAPI";
 import { RootState } from "store/store";
-import { JOB_POST } from "utils/brakepointConsts";
+import { JOB_POST } from "utils/breakepointConsts";
 
 interface Skills {
+  id: number;
+  name: string;
+}
+
+interface Category {
   id: number;
   name: string;
 }
@@ -24,9 +29,9 @@ export interface IJobPost {
   jobDescription: string;
   createdAt: string;
   updatedAt: string;
-  category: string;
+  category: Category;
   skills: Skills[];
-  user: IUser[];
+  user: IUser;
 }
 
 const jobPostsAPI = createApi({

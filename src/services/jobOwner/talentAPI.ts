@@ -7,7 +7,7 @@ import {
   SAVED_FREELANCERS,
   SAVE_FREELANCER,
   VIEWED_FREELANCER,
-} from "utils/brakepointConsts";
+} from "utils/breakepointConsts";
 
 export interface IFilters {
   keyWords: string;

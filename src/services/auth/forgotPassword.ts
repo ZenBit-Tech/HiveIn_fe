@@ -3,7 +3,7 @@ import {
   AUTH,
   FORGOT_PASSWORD,
   RESTORE_PASSWORD,
-} from "utils/brakepointConsts";
+} from "utils/breakepointConsts";
 
 interface ForgotPassword {
   email: string;

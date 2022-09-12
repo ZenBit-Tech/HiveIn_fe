@@ -13,37 +13,33 @@ import {
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useState } from "react";
-import { BLUE, BOX_BACKGROUND } from "utils/colorConsts";
+import { BLUE, BOX_BACKGROUND, TEXT_GRAY } from "utils/colorConsts";
 import SubmitProposalModal from "components/UI/modals/SubmitProposalModal";
 import { useTranslation } from "react-i18next";
+import { IJobPost } from "services/jobPosts/setJobPostsAPI";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
 
-interface SearchWorkDrawerProps {
+interface SearchWorkDrawerProps extends IJobPost {
   visible: boolean;
   onClose: () => void;
-  title: string;
-  category: string;
-  description: string;
-  hourlyRate: number;
-  skills: string[];
-  projectLenght: string;
-  englishLevel: string;
-  publishDate: string;
 }
 
 function SearchWorkDrawer({
   visible,
   onClose,
+  id,
   title,
   category,
-  description,
-  hourlyRate,
+  jobDescription,
+  rate,
   skills,
-  projectLenght,
+  duration,
+  durationType,
   englishLevel,
-  publishDate,
+  createdAt,
+  user,
 }: SearchWorkDrawerProps) {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -62,20 +58,20 @@ function SearchWorkDrawer({
         <Grid grow={3}>
           <Header>
             <Title level={3}>{title}</Title>
-            <DrawerText>{dayjs(publishDate).fromNow()}</DrawerText>
+            <DrawerText>{dayjs(createdAt).fromNow()}</DrawerText>
           </Header>
 
           <ContentBox>
             <Title level={5}>{t("SearchWork.category")}</Title>
             <Space direction="vertical">
               <DrawerText strong color={BLUE}>
-                {category}
+                {category.name}
               </DrawerText>
             </Space>
           </ContentBox>
 
           <ContentBox>
-            <DrawerText>{description}</DrawerText>
+            <DrawerText>{jobDescription}</DrawerText>
           </ContentBox>
 
           <ContentBox>
@@ -86,14 +82,14 @@ function SearchWorkDrawer({
                   style={{ color: `${BLUE}`, padding: "5px" }}
                 />
                 {t("MyJobs.currency")}
-                {hourlyRate}
+                {rate}
                 {t("MyJobs.perHour")}
               </DrawerText>
               <DrawerText>
                 <ThunderboltFilled
                   style={{ color: `${BLUE}`, padding: "5px" }}
                 />
-                {projectLenght}
+                {duration} {durationType}
               </DrawerText>
             </Space>
           </ContentBox>
@@ -109,7 +105,7 @@ function SearchWorkDrawer({
                 <DrawerText strong>{t("SearchWork.skills")}</DrawerText>
                 <Space>
                   {skills.map((skill) => (
-                    <SkillTag key={skill}>{skill}</SkillTag>
+                    <SkillTag key={skill.id}>{skill.name}</SkillTag>
                   ))}
                 </Space>
               </Space>
@@ -119,14 +115,25 @@ function SearchWorkDrawer({
 
         <Grid>
           <SideContent>
-            <SendButton onClick={() => setIsModalOpen(true)}>
-              {t("SearchWork.send")}
-            </SendButton>
-            <SubmitProposalModal
-              visible={isModalOpen}
-              closeModal={() => setIsModalOpen(false)}
-              clientBudget={hourlyRate}
-            />
+            <Header>
+              <SendButton onClick={() => setIsModalOpen(true)}>
+                {t("SearchWork.send")}
+              </SendButton>
+              <SubmitProposalModal
+                idJobPost={id}
+                visible={isModalOpen}
+                closeModal={() => setIsModalOpen(false)}
+                clientBudget={rate}
+              />
+            </Header>
+
+            <ContentBox>
+              <Space direction="vertical">
+                <DrawerText strong>About the client</DrawerText>
+                <DrawerText color={TEXT_GRAY}>{user.email}</DrawerText>
+                <DrawerText color={TEXT_GRAY}>{user.description}</DrawerText>
+              </Space>
+            </ContentBox>
           </SideContent>
         </Grid>
       </Wrapper>

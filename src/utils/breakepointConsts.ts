@@ -7,6 +7,7 @@ export const GOOGLE = "google/success";
 export const FORGOT_PASSWORD = "forgot-password";
 export const RESTORE_PASSWORD = "restore-password";
 export const JOB_POST = "job-post";
+export const PROPOSALS = "proposal";
 export const FILTER_FREELANCER = "client/filter";
 export const SAVE_FREELANCER = "client/save";
 export const SAVED_FREELANCERS = "client/saved-freelancers";

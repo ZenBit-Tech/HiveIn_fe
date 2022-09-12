@@ -14,9 +14,8 @@
     "profileRate": "Profile Rate: $",
     "modalTitle": "Additional Information",
     "bid": "Your bid",
-    "coverLetter": "Your cover letter"
-
-
+    "coverLetter": "Your cover letter",
+    "success": "Proposal sent!"
   },
   "Proposals": {
     "title": "Proposals"

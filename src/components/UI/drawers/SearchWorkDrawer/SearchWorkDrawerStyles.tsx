@@ -22,6 +22,7 @@ export const Wrapper = styled.div`
 export const Grid = styled.div<IGrid>`
   display: flex;
   flex-direction: column;
+  max-width: 700px;
   flex-grow: ${(props) => props.grow || 1};
 `;
 
@@ -35,9 +36,11 @@ export const ContentBox = styled.section`
 `;
 
 export const SideContent = styled.section`
+  display: flex;
   border-left: 1px solid ${BOX_BORDER};
-  padding: 30px;
   height: 100%;
+  flex-direction: column;
+  row-gap: 26px;
 `;
 
 export const DrawerText = styled(Text)<IText>`
