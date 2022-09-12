@@ -14,10 +14,15 @@ import {
   TALENT_ROUTE,
 } from "utils/consts/routeConsts";
 
-export type NavRoleOptions = {
+export type LinkType = {
   title: string;
   to: string;
 };
+
+interface NavLinkType {
+  title: string;
+  links: LinkType[];
+}
 
 export type NavButtonOptions = {
   path: string;
@@ -106,11 +111,6 @@ const navLinksPerRole: NavLinkRoles = {
             title: i18next.PostJob.title,
           },
         ],
-      },
-      {
-        path: CLIENT_PROFILE,
-        title: i18next.Profile.title,
-        icon: <UserOutlined />,
       },
     ],
     home: CLIENT_HOME,
