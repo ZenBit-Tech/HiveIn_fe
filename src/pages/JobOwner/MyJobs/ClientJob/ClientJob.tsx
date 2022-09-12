@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Button, Modal } from "antd";
-import { useModalHandler } from "hooks/use-modal-handler";
+import useModalHandler from "hooks/use-modal-handler";
 
 dayjs.extend(relativeTime);
 

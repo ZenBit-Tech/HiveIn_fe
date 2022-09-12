@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-// eslint-disable-next-line import/prefer-default-export
-export const useModalHandler = (initialValue?: boolean) => {
+const useModalHandler = (initialValue?: boolean) => {
   const [modal, setModal] = useState<boolean>(initialValue || false);
 
   const toggleModal = () => {
@@ -10,3 +9,4 @@ export const useModalHandler = (initialValue?: boolean) => {
 
   return { modal, toggleModal };
 };
+export default useModalHandler;
