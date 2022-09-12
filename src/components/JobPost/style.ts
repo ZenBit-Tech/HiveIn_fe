@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { WHITE } from "utils/colorConsts";
+import { WHITE } from "utils/consts/colorConsts";
 
 const Box = styled.div`
   width: 100%;

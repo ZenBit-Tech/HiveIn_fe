@@ -1,6 +1,6 @@
 import { Link } from "react-scroll";
 import styled from "styled-components";
-import { BOX_BACKGROUND, WHITE } from "utils/colorConsts";
+import { BOX_BACKGROUND, WHITE } from "utils/consts/colorConsts";
 
 export const LeftDiv = styled.div`
   position: fixed;

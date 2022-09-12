@@ -1,6 +1,6 @@
 import { Navigate, useNavigate } from "react-router-dom";
 import useAuth from "hooks/useAuth";
-import { SIGN_IN_ROUTE } from "utils/routeConsts";
+import { SIGN_IN_ROUTE } from "utils/consts/routeConsts";
 import { useEffect } from "react";
 
 interface CheckRoleProps {

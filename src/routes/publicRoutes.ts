@@ -1,4 +1,4 @@
-import { HOME_PAGE_ROUTE, SEARCH_WORK } from "utils/routeConsts";
+import { HOME_PAGE_ROUTE, SEARCH_WORK } from "utils/consts/routeConsts";
 import Home from "pages/Freelancer/Home";
 import SearchWork from "../pages/Freelancer/SearchWork/Index";
 

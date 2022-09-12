@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { PRIMARY } from "utils/colorConsts";
+import { PRIMARY } from "utils/consts/colorConsts";
 
 const Title = styled.h1`
   margin: 0;

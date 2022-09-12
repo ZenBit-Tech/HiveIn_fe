@@ -1,6 +1,6 @@
 import { Tag } from "antd";
 import styled from "styled-components";
-import { DARK_BLUE, LIGHT_BLUE, TEXT_GRAY } from "utils/colorConsts";
+import { DARK_BLUE, LIGHT_BLUE, TEXT_GRAY } from "utils/consts/colorConsts";
 
 interface ITitle {
   font_sz?: string;
