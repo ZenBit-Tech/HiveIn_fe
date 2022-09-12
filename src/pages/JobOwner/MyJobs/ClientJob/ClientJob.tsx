@@ -1,11 +1,10 @@
-// import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import PageContainer, {
-  Section,
   Card,
-  Header,
-  TitleText,
   ContractStatus,
+  Header,
+  Section,
+  TitleText,
 } from "pages/JobOwner/MyJobs/ClientJobsStyles";
 import JobItem from "components/UI/JobItem/JobItem";
 import { useGetOneJobPostQuery } from "services/jobPosts/setJobPostsAPI";
@@ -14,6 +13,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Button, Modal } from "antd";
 import useModalHandler from "hooks/use-modal-handler";
+import ContractStatusEnum from "utils/enums";
 
 dayjs.extend(relativeTime);
 
@@ -33,7 +33,7 @@ function ClientJob(): JSX.Element {
         title={t("MyJobs.endContractTitle")}
         onOk={toggleModal}
         onCancel={toggleModal}
-        okText="Continue"
+        okText={t("MyJobs.continueText")}
       >
         <p> {t("MyJobs.endContractMessage")}</p>
       </Modal>
@@ -51,7 +51,7 @@ function ClientJob(): JSX.Element {
             {t("MyJobs.contractStatusTitle")}
           </span>
           <span style={{ marginRight: "5px" }}>
-            {data?.contract?.status || "Pending"}
+            {data?.contract?.status || ContractStatusEnum.PENDING}
           </span>
           <Button
             size="small"

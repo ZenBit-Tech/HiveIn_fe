@@ -23,7 +23,8 @@
     "perHour": "/hour",
     "contractStatusTitle": "Contract status:",
     "endContractMessage": "This contract will be ended. Do you want to continue?",
-    "endContractTitle": "End a contract"
+    "endContractTitle": "End a contract",
+    "continueText": "Continue"
   },
   "Chat": {
     "title": "Chat"
