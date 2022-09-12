@@ -5,7 +5,7 @@ import {
   CHAT_ROUTE,
   NOTIFICATIONS_ROUTE,
   WELCOME_ROUTE,
-} from "utils/routeConsts";
+} from "utils/consts/routeConsts";
 import Notifications from "pages/Notifications";
 
 const protectedRoutes: RoutesType[] = [
