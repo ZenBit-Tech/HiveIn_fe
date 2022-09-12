@@ -2,7 +2,7 @@ import React from "react";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import TextFieldM from "@mui/material/TextField";
 import { Control, Controller } from "react-hook-form";
-import { INPUT_DATE_FORMAT_PRIMARY } from "utils/inputPropsConsts";
+import { INPUT_DATE_FORMAT_PRIMARY } from "utils/consts/inputPropsConsts";
 
 function DatePicker(props: {
   label: string;

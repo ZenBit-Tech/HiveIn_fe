@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { setUser } from "store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
-import { WELCOME_ROUTE } from "utils/routeConsts";
+import { WELCOME_ROUTE } from "utils/consts/routeConsts";
 import { useUpdateUserMutation } from "services/user/setUserAPI";
 import { toast } from "react-toastify";
 

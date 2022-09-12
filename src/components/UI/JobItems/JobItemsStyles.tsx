@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { BLACK, BLUE, TEXT_GRAY } from "utils/colorConsts";
+import { BLACK, BLUE, TEXT_GRAY } from "utils/consts/colorConsts";
 
 const JobTitle = styled.div`
   display: flex;

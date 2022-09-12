@@ -4,6 +4,7 @@ import React from "react";
 import {
   CLIENT_HOME,
   CLIENT_PROFILE,
+  CREATE_JOB_POST,
   MY_CONTRACTS_ROUTE,
   MY_JOBS_ROUTE,
   PROFILE_ROUTE,
@@ -11,7 +12,7 @@ import {
   SEARCH_WORK_ROUTE,
   SETTINGS_ROUTE,
   TALENT_ROUTE,
-} from "utils/routeConsts";
+} from "utils/consts/routeConsts";
 
 export type NavRoleOptions = {
   title: string;
@@ -73,7 +74,11 @@ const navLinksPerRole: NavLinkRoles = {
       },
       {
         to: TALENT_ROUTE,
-        title: "Talent",
+        title: i18next.Talent.pageTitle,
+      },
+      {
+        to: CREATE_JOB_POST,
+        title: i18next.PostJob.title,
       },
     ],
     buttons: [

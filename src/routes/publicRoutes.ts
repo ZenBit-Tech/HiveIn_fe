@@ -1,4 +1,4 @@
-import { HOME_PAGE_ROUTE } from "utils/routeConsts";
+import { HOME_PAGE_ROUTE } from "utils/consts/routeConsts";
 import Home from "pages/Freelancer/Home";
 
 export interface RoutesType {

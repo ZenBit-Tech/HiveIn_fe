@@ -1,7 +1,7 @@
 import Chat from "pages/Chat";
 import Welcome from "pages/Auth/Welcome";
 import { RoutesType } from "routes/publicRoutes";
-import { CHAT_ROUTE, WELCOME_ROUTE } from "utils/routeConsts";
+import { CHAT_ROUTE, WELCOME_ROUTE } from "utils/consts/routeConsts";
 
 const protectedRoutes: RoutesType[] = [
   {
