@@ -49,16 +49,26 @@ function ClientJobs() {
             <>
               {jobPosts
                 ?.slice(firstPostIndex, lastPostIndex)
-                .map(({ id, title, jobDescription, rate, createdAt }) => (
-                  <JobItem
-                    key={id}
-                    title={title!}
-                    description={jobDescription!}
-                    link={id!.toString()}
-                    publishDate={createdAt!}
-                    hourlyRate={rate!}
-                  />
-                ))}
+                .map(
+                  ({
+                    id,
+                    title,
+                    jobDescription,
+                    rate,
+                    createdAt,
+                    contract,
+                  }) => (
+                    <JobItem
+                      key={id}
+                      title={title!}
+                      description={jobDescription!}
+                      link={id!.toString()}
+                      publishDate={createdAt!}
+                      hourlyRate={rate!}
+                      contractStatus={contract?.status || "Pending"}
+                    />
+                  )
+                )}
 
               <StyledPagination
                 showSizeChanger

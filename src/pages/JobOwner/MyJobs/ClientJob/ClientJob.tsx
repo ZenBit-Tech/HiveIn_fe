@@ -1,9 +1,9 @@
-// import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import PageContainer, {
-  Section,
   Card,
+  ContractStatus,
   Header,
+  Section,
   TitleText,
 } from "pages/JobOwner/MyJobs/ClientJobsStyles";
 import JobItem from "components/UI/JobItem/JobItem";
@@ -11,6 +11,9 @@ import { useGetOneJobPostQuery } from "services/jobPosts/setJobPostsAPI";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { Button, Modal } from "antd";
+import useModalHandler from "hooks/use-modal-handler";
+import ContractStatusEnum from "utils/enums";
 
 dayjs.extend(relativeTime);
 
@@ -21,8 +24,19 @@ function ClientJob(): JSX.Element {
     id: Number(jobId),
   });
 
+  const { modal, toggleModal } = useModalHandler();
+
   return (
     <PageContainer>
+      <Modal
+        visible={modal}
+        title={t("MyJobs.endContractTitle")}
+        onOk={toggleModal}
+        onCancel={toggleModal}
+        okText={t("MyJobs.continueText")}
+      >
+        <p> {t("MyJobs.endContractMessage")}</p>
+      </Modal>
       <Header wd="70%">
         <TitleText font_sz="2.5em" pd="20px" pd_bottom="5%">
           {data?.title || t("NotFound.notFound")}
@@ -32,6 +46,22 @@ function ClientJob(): JSX.Element {
               : t("NotFound.notFound")}
           </TitleText>
         </TitleText>
+        <ContractStatus>
+          <span style={{ marginRight: "10px" }}>
+            {t("MyJobs.contractStatusTitle")}
+          </span>
+          <span style={{ marginRight: "5px" }}>
+            {data?.contract?.status || ContractStatusEnum.PENDING}
+          </span>
+          <Button
+            size="small"
+            type="primary"
+            shape="circle"
+            onClick={toggleModal}
+          >
+            X
+          </Button>
+        </ContractStatus>
       </Header>
       <Section wd="70%">
         <Card>

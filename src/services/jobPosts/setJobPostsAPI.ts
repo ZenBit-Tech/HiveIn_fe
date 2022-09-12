@@ -3,6 +3,7 @@ import { IUser } from "services/user/setUserAPI";
 import { RootState } from "store/store";
 import { JOB_POST } from "utils/consts/brakepointConsts";
 import { IDraftRequestObject } from "components/CreateJobPostForm/typesDef";
+import ContractStatusEnum from "utils/enums";
 
 interface Skills {
   id: number;
@@ -28,6 +29,9 @@ export interface IJobPost {
   category: string;
   skills: Skills[];
   user: IUser[];
+  contract: {
+    status: ContractStatusEnum;
+  };
 }
 
 const jobPostsAPI = createApi({
