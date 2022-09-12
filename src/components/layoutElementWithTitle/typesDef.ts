@@ -18,6 +18,7 @@ export interface ILayoutElementWithoutControl {
     | "educationColumn"
     | "experienceColumn"
     | "skillsLayout"
+    | "skillsLayoutSmall"
     | "text"
     | "phoneInput";
   containerWidth: "full" | "half";

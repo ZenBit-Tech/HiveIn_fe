@@ -112,6 +112,16 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
       />
     ) : null;
 
+  const renderSkillsLayoutSmall = () =>
+    freelancerInfo ? (
+      <SkillsLayout
+        showSmall
+        options={freelancerInfo?.skills}
+        errors={errors}
+        setValue={setValue}
+      />
+    ) : null;
+
   const elementTypes: { [propName: string]: typeof element } = {
     textInput: "textInput",
     numberInput: "numberInput",
@@ -121,6 +131,7 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     educationColumn: "educationColumn",
     experienceColumn: "experienceColumn",
     skillsLayout: "skillsLayout",
+    skillsLayoutSmall: "skillsLayoutSmall",
     phoneInput: "phoneInput",
     text: "text",
   };
@@ -143,6 +154,8 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
         return renderExperienceColumn();
       case elementTypes.skillsLayout:
         return renderSkillsLayout();
+      case elementTypes.skillsLayoutSmall:
+        return renderSkillsLayoutSmall();
       case "phoneInput":
         return renderPhoneInput();
       case "text":

@@ -3,7 +3,13 @@
     "title": "Home"
   },
   "SearchWork": {
-    "title": "Search Work"
+    "title": "Search Work",
+    "subTitle": "Jobs on GetJob",
+    "byCategory": "Search by category",
+    "bySkills": "Search by skills",
+    "byPrice": "Search by price per hour",
+    "byTime": "Search by time available per day/hour",
+    "byEnglish": "Search by English level (choose one)"
   },
   "Proposals": {
     "title": "Proposals"

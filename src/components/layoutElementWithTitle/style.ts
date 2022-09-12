@@ -4,6 +4,7 @@ import { ILayoutElementWithTitleProps } from "./typesDef";
 export const SWrapper = styled("div")`
   display: flex;
   align-items: flex-start;
+  flex-direction: column;
   margin-top: 15px;
   margin-bottom: 15px;
 `;
