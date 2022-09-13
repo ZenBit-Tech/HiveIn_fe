@@ -1,10 +1,12 @@
-export type TProfileEditFormFields = {
-  position: string;
-  category: string;
-  rate: any;
-  skills: string[];
-  englishLevel: string;
-  description: string;
-  education: any[];
-  experience: any[];
-};
+import { IFreelancer } from "services/profileInfo/typesDef";
+
+type Modify<T, R> = Omit<T, keyof R> & R;
+
+export type TFreelancerForProfileForm = Modify<
+  IFreelancer,
+  {
+    skills: number[];
+    category: number;
+    description?: string;
+  }
+>;

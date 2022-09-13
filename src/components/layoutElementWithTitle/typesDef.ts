@@ -3,7 +3,14 @@ import {
   DeepRequired,
   FieldErrorsImpl,
   FieldValues,
+  UseFormSetValue,
 } from "react-hook-form";
+import { IFreelancer } from "services/profileInfo/typesDef";
+
+export type TEnglishLevel =
+  | "pre-intermediate"
+  | "intermediate"
+  | "upper-intermediate";
 
 export interface ILayoutElementWithoutControl {
   title: string;
@@ -15,18 +22,22 @@ export interface ILayoutElementWithoutControl {
     | "toggleButton"
     | "educationColumn"
     | "experienceColumn"
-    | "skillsLayout";
+    | "skillsLayout"
+    | "text"
+    | "phoneInput"
+    | "durationPicker";
   containerWidth: "full" | "half";
   formFieldName: string;
-  selectOptions?: string[];
-  toggleButtonOptions?: string[];
-  skillsOptions?: string[];
+  toggleButtonOptions?: string[] | TEnglishLevel[];
   helperText?: string;
   maxLength?: number;
+  freelancerInfo?: IFreelancer;
+  rowsOfTextArea?: number;
 }
 
 export interface ILayoutElementWithTitleProps
   extends ILayoutElementWithoutControl {
   control: Control;
   errors: FieldErrorsImpl<DeepRequired<FieldValues>>;
+  setValue?: UseFormSetValue<FieldValues>;
 }

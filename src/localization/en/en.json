@@ -11,6 +11,21 @@
   "MyContracts": {
     "title": "My Contracts"
   },
+  "MyJobs": {
+    "title": "Jobs",
+    "subTitle": "Your Projects",
+    "postJob": "Post a Job",
+    "allPostings": "Your Postings",
+    "nothingToShow": "No active job posts",
+    "info": "About the project",
+    "skills": "Necessary Skills",
+    "currency": "$",
+    "perHour": "/hour",
+    "contractStatusTitle": "Contract status:",
+    "endContractMessage": "This contract will be ended. Do you want to continue?",
+    "endContractTitle": "End a contract",
+    "continueText": "Continue"
+  },
   "Chat": {
     "title": "Chat"
   },
@@ -26,6 +41,8 @@
   "SignUp": {
     "title": "Sign Up",
     "signUpGoogle": "Sign Up with Google",
+    "successfulSignUp": "You have been successfully registered",
+    "alreadyRegistered": "Email already registered. Please sign in",
     "register": "Register",
     "or": "or",
     "useEmail": "Use your email"
@@ -34,15 +51,48 @@
     "title": "Get Job",
     "subtitle": "THE BEST WAY TO FIND YOUR JOB",
     "signIn": "Sign In",
+    "signInGoogle": "Sign In with Google",
     "signOut": "Sign Out",
     "dontHaveAccount": "Don't have an account yet?",
     "forgotPass": "Forgot your password?",
     "register": "Register now",
     "successLogin": "You have successfully logged in",
-    "errorLogin": "Invalid email and/or password"
+    "errorGoogleOAuth": "Server error, please try again"
+  },
+  "ServerErrors": {
+    "404": "Invalid email and/or password",
+    "401": "Invalid email and/or password",
+    "409": "Email already registered. Please login with your password or Google account.",
+    "500": "Server error, please try again",
+    "FETCH_ERROR": "Server error, please try again"
+  },
+  "ForgotPassword": {
+    "title": "Forgot your password?",
+    "subtitle": "Enter your email. We'll e-mail instructions on how to reset your password.",
+    "resetPassword": "Reset password",
+    "rememberPassword": "Just remembered password?",
+    "signIn": "Sign In",
+    "checkMailBox": "If your e-mail is correct, we just send you a recovery e-mail with instructions. Please check your e-mail."
+  },
+  "RestorePassword": {
+    "title": "Change password?",
+    "subtitle": "Choose a new password with this account.",
+    "signIn": "Sign In",
+    "newPassword": "New password",
+    "confirmNewPassword": "Confirm new password",
+    "successfullyTitle": "Change password success",
+    "successfullyText": "You have successfully change password"
   },
   "CompleteRegistration": {
-    "helloWorld": "Hello complete registration page!"
+    "client": "I'm a client, hiring for a project",
+    "freelancer": "I'm a freelancer, looking for work",
+    "title": "Join as a client or freelancer",
+    "button": "Create My Account",
+    "error": "Server error, please try again"
+  },
+  "Welcome": {
+    "title": "Welcome",
+    "link": "Create my profile"
   },
   "ProfileEditForm": {
     "formTitle": "Profile",
@@ -50,59 +100,21 @@
       "title": "Position"
     },
     "category": {
-      "title": "Category",
-      "options": [
-        "Legal",
-        "IT",
-        "Sales",
-        "Finance",
-        "Construction",
-        "Accounting",
-        "Design",
-        "Security",
-        "Healthcare",
-        "Marketing"
-      ]
+      "title": "Category"
     },
     "rate": {
       "title": "Rate",
       "helperText": "Charge per hour"
     },
     "skills": {
-      "title": "Skills",
-      "skillsOptions": [
-        "Business analyst",
-        "Consulting",
-        "Estimate",
-        "Recruiting",
-        "SMM",
-        "Copyrighting",
-        "UI/UX",
-        "Quality control",
-        "Taxation",
-        "Coaching",
-        "Full stack",
-        "Administration",
-        "Communication",
-        "Java Script",
-        "QA automation",
-        "ReactJS",
-        "Python",
-        "Game dev",
-        "Flutter",
-        "Node.js",
-        "DevOps",
-        "Scrum master",
-        "Agile coach",
-        "Project manager"
-      ]
+      "title": "Skills"
     },
     "englishLevel": {
       "title": "English level",
       "options": [
-        "Pre-Intermediate",
-        "Intermediate",
-        "Upper-Intermediate"
+        "pre-intermediate",
+        "intermediate",
+        "upper-intermediate"
       ]
     },
     "description": {
@@ -134,12 +146,127 @@
     "rateSmallerThenZero": "should be greater than 0",
     "skillsNotChosen": "select at least 3 options",
     "englishLevelNotChosen": "choose your english level",
-    "descriptionEmpty": "write short description"
+    "descriptionEmpty": "write short description",
+    "userNotFound": "sorry, user not found",
+    "defaultError": "sorry, something went wrong",
+    "requiredEducation": "all fields must be filled in if you want to save changes"
   },
+  "profileSuccessSubmitMessage": "changes saved",
   "profileEditFormButtonsNames": {
     "submit": "Save changes",
     "addEducation": "+ add education",
     "addEmployment": "+ add employment"
+  },
+  "settingMenuButtonsNames": {
+    "profile": "Edit profile",
+    "contacts": "Edit Contacts"
+  },
+  "contactInfoForm": {
+    "title": "Contact Info",
+    "submitButtonText": "save changes",
+    "fieldsData": {
+      "email": {
+        "title": "email"
+      },
+      "firstName": {
+        "title": "First name",
+        "errorMessage": "please enter your name"
+      },
+      "lastName": {
+        "title": "Last name",
+        "errorMessage": "please enter your last name"
+      },
+      "phoneNumber": {
+        "title": "Phone number"
+      }
+    },
+    "errorMessages": {
+      "userNotFound": "userNotFound",
+      "somethingWrong": "something went wrong"
+    }
+  },
+  "Dashboard": {
+    "title": "Profile",
+    "titles": {
+      "posts": "Your postings",
+      "drafts": "Your drafts",
+      "noPosts": "There are no posts",
+      "noDrafts": "There are no drafts"
+    },
+    "buttons": {
+      "save": "Save changes",
+      "createPosts": "Post a job",
+      "seePosts": "See all posts",
+      "seeDrafts": "See all drafts"
+    },
+    "createJobTutorial": {
+      "title": "What is there for you in a Talent?",
+      "subtitle": {
+        "start": "A huge community with millions of talented professionals within",
+        "focus": "4 steps",
+        "end": "away"
+      },
+      "list": {
+        "item1": "Post a job at a GetJobs jobs marketplace",
+        "item2": "Find the best freelancer",
+        "item3": "Send the message in Chat",
+        "item4": "Hire the freelancer"
+      }
+    }
+  },
+  "NotFound": {
+    "notFound": "Not found"
+  },
+  "Talent": {
+    "pageTitle": "Talent",
+    "discover": "Discover",
+    "yourHires": "Your hires",
+    "recentlyViewed": "Recently viewed",
+    "savedTalent": "Saved talent",
+    "title": "Find the best candidate",
+    "keyWords": "Key words:",
+    "category": "Choose a category:",
+    "skills": "Choose at least 3 skills from the following:",
+    "foundCandidates": "Found candidates",
+    "seeAll": "See more",
+    "seeLess": "See less",
+    "search": "Search",
+    "hideFilters": "Hide filters",
+    "showFilters": "Show filters",
+    "save": "Save",
+    "noResult": "No result"
+  },
+  "PostJob": {
+    "title": "Create Job Post",
+    "required": "required",
+    "formFieldsInfo": {
+      "title": {
+        "title": "Title",
+        "helperText": "Write a title for your post"
+      },
+      "duration": {
+        "title": "Duration",
+        "week": "week",
+        "month": "month"
+      },
+      "description": {
+        "title": "Enter the charge per hour",
+        "helperText": "Max 5000 symbols"
+      }
+    },
+    "messages": {
+      "draftSuccess": "draft saved",
+      "draftError": "draft not posted",
+      "postSuccess": "job posted",
+      "postError": "job not posted",
+      "bigFileSize": "file's size is too big",
+      "unsupportedFile": "unsupported file type"
+    },
+    "buttonsText": {
+      "fileUpload": "Upload file",
+      "postDraft": " Save to draft",
+      "postJob": "Post job"
+    }
   },
   "profileUploadPhoto": {
     "title": "Profile photo",

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { ILayoutElementWithTitleProps } from "components/layoutElementWithTitle/typesDef";
 import { SH, SDiv, SWrapper } from "components/layoutElementWithTitle/style";
 import TextField from "components/UI/textField/TextField";
@@ -6,6 +7,8 @@ import Select from "components/UI/select/Select";
 import ToggleButton from "components/UI/buttons/toggleButton/ToggleButton";
 import EducationLayout from "components/educationLayout/EducationLayout";
 import SkillsLayout from "components/skillsLayout/SkillsLayout";
+import PhoneInput from "components/UI/phoneInput/PhoneInput";
+import InputAndSelectCombined from "components/UI/InputAndSelectCombined/InputAndSelectCombined";
 
 function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
   const {
@@ -13,18 +16,22 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     title,
     formFieldName,
     containerWidth,
-    selectOptions,
     helperText,
     toggleButtonOptions,
     maxLength,
-    skillsOptions,
     control,
     errors,
+    freelancerInfo,
+    setValue,
+    rowsOfTextArea,
   } = props;
+
+  const { t } = useTranslation();
 
   const renderTextInput = () => (
     <TextField
       errors={errors}
+      helperText={helperText}
       control={control}
       formFieldName={formFieldName}
       maxLength={maxLength}
@@ -52,7 +59,7 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
       control={control}
       formFieldName={formFieldName}
       maxLength={maxLength}
-      rows={2}
+      rows={rowsOfTextArea || 2}
       multiline
       width="full"
       type="text"
@@ -60,15 +67,24 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     />
   );
 
-  const renderSelect = () =>
-    selectOptions ? (
-      <Select
-        errors={errors}
-        formFieldName={formFieldName}
-        control={control}
-        options={selectOptions}
-      />
-    ) : null;
+  const renderPhoneInput = () => (
+    <PhoneInput name={formFieldName} control={control} />
+  );
+
+  const renderText = () => (
+    <TextField
+      disabled
+      control={control}
+      formFieldName={formFieldName}
+      multiline={false}
+      width="full"
+      type="text"
+    />
+  );
+
+  const renderSelect = () => (
+    <Select errors={errors} formFieldName={formFieldName} control={control} />
+  );
 
   const renderToggleButton = () =>
     toggleButtonOptions ? (
@@ -93,9 +109,17 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
   );
 
   const renderSkillsLayout = () =>
-    skillsOptions ? (
-      <SkillsLayout errors={errors} control={control} options={skillsOptions} />
+    freelancerInfo ? (
+      <SkillsLayout
+        options={freelancerInfo?.skills}
+        errors={errors}
+        setValue={setValue}
+      />
     ) : null;
+
+  const renderDurationPicker = () => (
+    <InputAndSelectCombined control={control} errors={errors} />
+  );
 
   const elementTypes: { [propName: string]: typeof element } = {
     textInput: "textInput",
@@ -106,6 +130,9 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     educationColumn: "educationColumn",
     experienceColumn: "experienceColumn",
     skillsLayout: "skillsLayout",
+    phoneInput: "phoneInput",
+    text: "text",
+    durationPicker: "durationPicker",
   };
 
   const renderElement = (type: typeof element): JSX.Element | null => {
@@ -126,6 +153,12 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
         return renderExperienceColumn();
       case elementTypes.skillsLayout:
         return renderSkillsLayout();
+      case elementTypes.phoneInput:
+        return renderPhoneInput();
+      case elementTypes.text:
+        return renderText();
+      case elementTypes.durationPicker:
+        return renderDurationPicker();
       default:
         return null;
     }
@@ -133,7 +166,7 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
 
   return (
     <SWrapper>
-      <SH>{title}</SH>
+      <SH>{t(title)}</SH>
       <SDiv width={containerWidth}>{renderElement(element)}</SDiv>
     </SWrapper>
   );

@@ -47,6 +47,7 @@ function PhotoUpload() {
       <ImgCrop>
         <Upload
           name="avatar"
+          action="http://localhost:4000/avatar/upload"
           listType="picture-card"
           maxCount={1}
           showUploadList={false}

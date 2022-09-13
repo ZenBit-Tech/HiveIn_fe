@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import styled from "styled-components";
-import { PRIMARY_BLUE, STRONGER_BLUE } from "utils/navBarConsts";
+import { PRIMARY_BLUE, STRONGER_BLUE } from "utils/consts/navBarConsts";
 
 const ButtonStyle = styled(Button)`
   color: ${PRIMARY_BLUE};

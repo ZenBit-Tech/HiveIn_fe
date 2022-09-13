@@ -1,11 +1,12 @@
 import * as yup from "yup";
 import i18next from "localization/en/en.json";
 
-const regexpGreaterThanZero = /^[1-9][0-9]*$/;
+export const regexpGreaterThanZero = /^[1-9][0-9]*$/;
 
 const profileEditFormValidationSchema = yup.object().shape({
   position: yup
     .string()
+    .trim()
     .required(i18next.profileFormErrorMessages.positionEmpty),
   category: yup
     .string()
@@ -26,6 +27,7 @@ const profileEditFormValidationSchema = yup.object().shape({
     .required(i18next.profileFormErrorMessages.englishLevelNotChosen),
   description: yup
     .string()
+    .trim()
     .min(30, i18next.profileFormErrorMessages.descriptionEmpty)
     .required(),
 });

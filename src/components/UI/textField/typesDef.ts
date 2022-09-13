@@ -4,10 +4,12 @@ export interface ITextFieldProps {
   type: "number" | "text";
   width: "full" | "half";
   formFieldName?: string;
-  control?: Control;
+  control?: Control<any>;
   helperText?: string;
-  multiline: boolean;
+  multiline?: boolean;
   rows?: number;
   maxLength?: number;
   errors?: FieldErrorsImpl;
+  disabled?: boolean;
+  withoutAdornment?: boolean;
 }

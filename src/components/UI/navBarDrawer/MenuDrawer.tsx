@@ -5,8 +5,16 @@ import { useTranslation } from "react-i18next";
 import { Col, Divider, Drawer, Row } from "antd";
 import NavLink from "components/UI/navlink/NavLink";
 import NavBarButton from "components/UI/navBarButton/NavBarButton";
+import useAuth from "hooks/useAuth";
+import { NavRoleOptions } from "components/navbar/NavLinksPerRole";
+import { SIGN_IN_ROUTE } from "utils/consts/routeConsts";
 
-function MenuDrawer() {
+interface MenuDrawerProps {
+  drawerLinks: NavRoleOptions[];
+}
+
+function MenuDrawer({ drawerLinks }: MenuDrawerProps) {
+  const { signOut } = useAuth();
   const { t } = useTranslation();
   const [visible, setVisible] = useState(false);
 
@@ -34,24 +42,24 @@ function MenuDrawer() {
         visible={visible}
         key="bottom"
       >
-        <Row>
-          <Col span={12}>
-            <NavLink path="/search-work">{t("SearchWork.title")}</NavLink>
-          </Col>
-          <Divider />
-        </Row>
-        <Row>
-          <Col span={12}>
-            <NavLink path="/proposals">{t("Proposals.title")}</NavLink>
-          </Col>
-          <Divider />
-        </Row>
-        <Row>
-          <Col span={12}>
-            <NavLink path="/my-contracts">{t("MyContracts.title")}</NavLink>
-          </Col>
-          <Divider />
-        </Row>
+        <>
+          {drawerLinks?.map(({ title, to }) => (
+            <Row key={to}>
+              <Col span={12}>
+                <NavLink path={to}>{title}</NavLink>
+              </Col>
+              <Divider />
+            </Row>
+          ))}
+          <Row>
+            <Col span={12}>
+              <NavLink path={SIGN_IN_ROUTE} onClick={signOut}>
+                {t("SignIn.signOut")}
+              </NavLink>
+            </Col>
+            <Divider />
+          </Row>
+        </>
       </Drawer>
     </>
   );

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setSignIn, setSignOut } from "store/slices/userSlice";
+import { AuthResponse } from "services/auth/setAuthAPI";
+import { setSignOut, setUser } from "store/slices/userSlice";
 import { RootState, userPersistor } from "store/store";
 
 const useAuth = () => {
@@ -9,26 +10,19 @@ const useAuth = () => {
 
   const dispatch = useDispatch();
 
-  const signIn = () => {
-    // Requesting authToken to the backend and saving it
-    // in localStorage with Redux Persist
+  const signIn = (res: AuthResponse) => {
+    // Saving in localStorage with Redux Persist
     dispatch(
-      setSignIn({
-        authToken: "test",
-        email: "test",
-        role: "test",
+      setUser({
+        authToken: res.token,
+        email: res.email,
+        role: res.role,
       })
     );
   };
 
   const signOut = async () => {
-    dispatch(
-      setSignOut({
-        authToken: undefined,
-        email: undefined,
-        role: undefined,
-      })
-    );
+    dispatch(setSignOut());
 
     await userPersistor.purge();
   };
