@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Divider } from "antd";
-import LongMenu from "components/UI/DropdownMenus/LongMenu";
+import LongMenu from "components/UI/DropdownMenus/LongMenu/LongMenu";
 import JobTitle, {
   JobDescription,
   DeatailedInfo,
@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import ContractStatusEnum from "utils/enums";
 
 dayjs.extend(relativeTime);
+
 interface IJobItemsProps {
   title: string;
   description: string;
@@ -19,6 +20,7 @@ interface IJobItemsProps {
   hourlyRate: number;
   publishDate: string;
   contractStatus: ContractStatusEnum;
+  id: number;
 }
 
 function JobItems({
@@ -28,6 +30,7 @@ function JobItems({
   hourlyRate,
   publishDate,
   contractStatus,
+  id,
 }: IJobItemsProps) {
   const { t } = useTranslation();
 
@@ -43,7 +46,7 @@ function JobItems({
           {hourlyRate}
           {t("MyJobs.perHour")}
         </DeatailedInfo>
-        <LongMenu />
+        <LongMenu id={id} link={link} />
       </JobTitle>
       <DeatailedInfo>{dayjs(publishDate).fromNow()}</DeatailedInfo>
       <JobDescription>{description}</JobDescription>

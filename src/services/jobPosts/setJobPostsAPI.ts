@@ -34,6 +34,13 @@ export interface IJobPost {
   };
 }
 
+export interface IUpdateParams {
+  jobDescription?: string;
+  rate?: number;
+  userId: string;
+  postId: number;
+}
+
 const jobPostsAPI = createApi({
   reducerPath: "setJobPostsAPI",
   baseQuery: fetchBaseQuery({
@@ -79,6 +86,21 @@ const jobPostsAPI = createApi({
         },
       }),
     }),
+    updatePost: builder.mutation<IJobPost, IUpdateParams>({
+      query: ({ postId, ...objToRequest }) => ({
+        url: `${JOB_POST}/${postId}`,
+        method: "PATCH",
+        body: {
+          ...objToRequest,
+        },
+      }),
+    }),
+    deletePost: builder.mutation<null, number>({
+      query: (id) => ({
+        url: `${JOB_POST}/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -88,6 +110,8 @@ export const {
   useGetHomePostsQuery,
   usePostJobPostMutation,
   usePostDraftMutation,
+  useUpdatePostMutation,
+  useDeletePostMutation,
 } = jobPostsAPI;
 
 export default jobPostsAPI;

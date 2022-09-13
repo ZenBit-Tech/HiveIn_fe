@@ -60,6 +60,7 @@ function ClientJobs() {
                   }) => (
                     <JobItem
                       key={id}
+                      id={id}
                       title={title!}
                       description={jobDescription!}
                       link={id!.toString()}
