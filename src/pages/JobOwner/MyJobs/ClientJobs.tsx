@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import { useGetOwnJobPostsQuery } from "services/jobPosts/setJobPostsAPI";
 import { CREATE_JOB_POST } from "utils/consts/routeConsts";
 import { POSTS_PER_PAGE as PPG } from "utils/consts/jobListConsts";
+import { ContractStatusEnum } from "utils/enums";
 
 function ClientJobs() {
   const { email } = useAuth();
@@ -49,16 +50,30 @@ function ClientJobs() {
             <>
               {jobPosts
                 ?.slice(firstPostIndex, lastPostIndex)
-                .map(({ id, title, jobDescription, rate, createdAt }) => (
-                  <JobItem
-                    key={id}
-                    title={title!}
-                    description={jobDescription!}
-                    link={id!.toString()}
-                    publishDate={createdAt!}
-                    hourlyRate={rate!}
-                  />
-                ))}
+                .map(
+                  ({
+                    id,
+                    title,
+                    jobDescription,
+                    rate,
+                    createdAt,
+                    contract,
+                  }) => (
+                    <JobItem
+                      key={id}
+                      title={title!}
+                      description={jobDescription!}
+                      link={id!.toString()}
+                      publishDate={createdAt!}
+                      hourlyRate={rate!}
+                      contractStatus={
+                        contract?.endDate
+                          ? ContractStatusEnum.CLOSED
+                          : ContractStatusEnum.ACTIVE
+                      }
+                    />
+                  )
+                )}
 
               <StyledPagination
                 showSizeChanger

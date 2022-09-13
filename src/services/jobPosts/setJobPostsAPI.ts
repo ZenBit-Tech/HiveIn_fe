@@ -40,6 +40,10 @@ export interface IJobPost {
   skills: Skills[];
   user: IUser;
   file?: IFile;
+  contract: {
+    startDate: Date;
+    endDate: Date;
+  };
 }
 
 const jobPostsAPI = createApi({
