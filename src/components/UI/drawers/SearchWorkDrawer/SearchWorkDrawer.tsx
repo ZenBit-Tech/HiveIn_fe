@@ -19,7 +19,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useState } from "react";
 import { BLUE, BOX_BACKGROUND, TEXT_GRAY } from "utils/consts/colorConsts";
-import SubmitProposalModal from "components/UI/modals/SubmitProposalModal";
+import SubmitProposalModal from "components/UI/ModalWindows/SubmitProposalModal/SubmitProposalModal";
 import { useTranslation } from "react-i18next";
 import { IJobPost } from "services/jobPosts/setJobPostsAPI";
 import { JOB_POST_FILE } from "utils/consts/breakepointConsts";

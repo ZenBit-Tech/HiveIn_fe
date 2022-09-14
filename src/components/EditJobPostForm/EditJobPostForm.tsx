@@ -9,6 +9,7 @@ import { useUpdatePostMutation } from "services/jobPosts/setJobPostsAPI";
 import { SDiv } from "components/EditJobPostForm/styles";
 import schema from "validation/editFormValidationSchema";
 import { useTranslation } from "react-i18next";
+import { MAX_LENGTH_OF_JOB_DESCRIPTION } from "utils/consts/numberConsts";
 
 interface IState {
   jobDescription: string;
@@ -92,7 +93,9 @@ function EditJobPostForm({ jobDescription, rate, postId, setIsOpen }: IProps) {
                 error={!!errors.jobDescription?.message}
                 multiline
                 rows={4}
-                InputProps={{ inputProps: { maxLength: 5000 } }}
+                InputProps={{
+                  inputProps: { maxLength: MAX_LENGTH_OF_JOB_DESCRIPTION },
+                }}
                 label={t("EditDeletePost.edit.descriptionLabel")}
                 {...field}
                 helperText={errors.jobDescription?.message}

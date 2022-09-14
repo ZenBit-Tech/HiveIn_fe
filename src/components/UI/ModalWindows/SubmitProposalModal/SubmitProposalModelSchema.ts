@@ -1,5 +1,6 @@
 import * as yup from "yup";
 import i18next from "localization/en/en.json";
+import { MAX_LENGTH_OF_COVER_LETTER } from "utils/consts/numberConsts";
 
 const submitProposalSchema = yup.object({
   bid: yup
@@ -10,7 +11,7 @@ const submitProposalSchema = yup.object({
   coverLetter: yup
     .string()
     .required(i18next.SendProposalErrors.coverLetterRequired)
-    .max(250, i18next.SendProposalErrors.coverLetterMax),
+    .max(MAX_LENGTH_OF_COVER_LETTER, i18next.SendProposalErrors.coverLetterMax),
 });
 
 export default submitProposalSchema;
