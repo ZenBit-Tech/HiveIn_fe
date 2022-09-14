@@ -58,7 +58,8 @@ function CreateJobPostForm(props: IProps) {
     handleSubmit,
     control,
     setValue,
-    formState: { errors: validationErrors },
+    reset,
+    formState: { errors: validationErrors, isSubmitSuccessful },
   } = useForm<IJobPostFormFields>({
     context: isDraft,
     defaultValues: existedDraftData,
@@ -97,12 +98,20 @@ function CreateJobPostForm(props: IProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFile]);
 
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      setSelectedFile(null);
+      reset();
+    }
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [isSubmitSuccessful]);
+
   const handlerSubmitForm = (data: IJobPostFormFields) => {
     const { skills: skillsId, jobDescription, rate, duration, ...rest } = data;
 
     const objToRequest = {
       ...rest,
-      skillsId: skillsId.length >= 3 ? skillsId : null,
+      skillsId: skillsId?.length >= 3 ? skillsId : null,
       jobDescription: jobDescription || null,
       rate: rate || null,
       duration: duration || undefined,
@@ -163,6 +172,7 @@ function CreateJobPostForm(props: IProps) {
         {propsDataCollection.map((propsData) => (
           <LayoutElementWithTitle
             key={propsData.title}
+            isSubmitSuccess={isSubmitSuccessful}
             control={control as unknown as Control}
             errors={validationErrors as unknown as FieldErrors}
             setValue={setValue as unknown as UseFormSetValue<any>}

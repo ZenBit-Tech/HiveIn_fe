@@ -40,4 +40,5 @@ export interface ILayoutElementWithTitleProps
   control: Control;
   errors: FieldErrorsImpl<DeepRequired<FieldValues>>;
   setValue?: UseFormSetValue<FieldValues>;
+  isSubmitSuccess?: boolean;
 }

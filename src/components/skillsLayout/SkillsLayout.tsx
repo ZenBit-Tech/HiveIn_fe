@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { FieldErrorsImpl } from "react-hook-form";
 import SkillButton from "components/UI/buttons/skillButton/SkillButton";
 import SDiv from "components/skillsLayout/style";
 import { SErrorMessage } from "components/UI/textField/style";
 import { useGetInfoQuery } from "services/categoriesAndSkills/categoriesAndSkills";
+import { ISkillsProps } from "./typesDef";
 
 function SkillsLayout({
   errors,
   options,
   setValue,
-}: {
-  errors: FieldErrorsImpl;
-  options: { id: number }[];
-  setValue: any;
-}) {
+  isSubmitSuccess,
+}: ISkillsProps) {
   const { data } = useGetInfoQuery("skill");
   const queriedActiveSkills = options.map(({ id }) => id);
-
   const [activeSkills, setActiveSkills] = useState(queriedActiveSkills);
 
   useEffect(() => {
+    if (isSubmitSuccess) setActiveSkills(queriedActiveSkills);
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [isSubmitSuccess]);
+
+  useEffect(() => {
     setValue("skills", activeSkills);
-    // eslint-disable-next-line
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [activeSkills]);
 
   const changeHandler = (id: number) => {
