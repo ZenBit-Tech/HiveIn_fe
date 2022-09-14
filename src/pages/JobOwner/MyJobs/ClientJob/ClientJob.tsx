@@ -15,7 +15,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { Button, Modal } from "antd";
 import useModalHandler from "hooks/use-modal-handler";
 import { ContractStatusEnum } from "utils/enums";
-import LongMenu from "../../../../components/UI/DropdownMenus/LongMenu/LongMenu";
+import LongMenu from "components/UI/DropdownMenus/LongMenu/LongMenu";
 
 dayjs.extend(relativeTime);
 
