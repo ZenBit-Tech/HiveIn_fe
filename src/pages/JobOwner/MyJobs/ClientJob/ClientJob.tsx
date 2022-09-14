@@ -14,7 +14,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Button, Modal } from "antd";
 import useModalHandler from "hooks/use-modal-handler";
-import ContractStatusEnum from "utils/enums";
+import { ContractStatusEnum } from "utils/enums";
 import LongMenu from "../../../../components/UI/DropdownMenus/LongMenu/LongMenu";
 
 dayjs.extend(relativeTime);
@@ -53,7 +53,9 @@ function ClientJob(): JSX.Element {
             {t("MyJobs.contractStatusTitle")}
           </span>
           <span style={{ marginRight: "5px" }}>
-            {data?.contract?.status || ContractStatusEnum.PENDING}
+            {data?.contract?.endDate
+              ? ContractStatusEnum.CLOSED
+              : ContractStatusEnum.ACTIVE}
           </span>
           <Button
             size="small"

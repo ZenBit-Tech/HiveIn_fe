@@ -3,13 +3,13 @@ import useAuth from "hooks/useAuth";
 import { SIGN_IN_ROUTE } from "utils/consts/routeConsts";
 import { useEffect } from "react";
 
-interface CheckRoleProps {
+interface ICheckRoleProps {
   children: JSX.Element;
   guardRole: "freelancer" | "client";
   route: string;
 }
 
-function CheckRole({ guardRole, route, children }: CheckRoleProps) {
+function CheckRole({ guardRole, route, children }: ICheckRoleProps) {
   const { role, signOut } = useAuth();
   const navigate = useNavigate();
 

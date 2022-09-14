@@ -1,14 +1,24 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IUser } from "services/user/setUserAPI";
 import { RootState } from "store/store";
-import { JOB_POST } from "utils/consts/brakepointConsts";
+import { JOB_POST } from "utils/consts/breakepointConsts";
 import { IDraftRequestObject } from "components/CreateJobPostForm/typesDef";
-import ContractStatusEnum from "utils/enums";
 import { TEnglishLevel } from "../../components/layoutElementWithTitle/typesDef";
 
 export interface ISkills {
   id: number;
   name: string;
+}
+
+interface ICategory {
+  id: number;
+  name: string;
+}
+
+interface IFile {
+  id: number;
+  filename: string;
+  path: string;
 }
 
 interface IQueryParam {
@@ -27,11 +37,13 @@ export interface IJobPost {
   jobDescription: string;
   createdAt: string;
   updatedAt: string;
-  category: { id: number };
+  category: ICategory;
   skills: ISkills[];
-  user: IUser[];
+  user: IUser;
+  file?: IFile;
   contract: {
-    status: ContractStatusEnum;
+    startDate: Date;
+    endDate: Date;
   };
 }
 
