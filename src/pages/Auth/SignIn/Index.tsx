@@ -3,19 +3,19 @@ import { Button, Typography, Modal } from "antd";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import Field from "components/DefaultField/Index";
+import Field from "components/DefaultField/DefaultField";
 import { useTranslation } from "react-i18next";
 import useAuth from "hooks/useAuth";
 import { useSignInMutation } from "services/auth/setAuthAPI";
-import GoogleAuthButton from "components/UI/googleAuthButton/GoogleAuthButton";
+import GoogleAuthButton from "components/UI/buttons/googleAuthButton/GoogleAuthButton";
 import {
   FORGOT_PASSWORD_ROUTE,
   PROFILE_ROUTE,
   SIGN_UP_ROUTE,
 } from "utils/consts/routeConsts";
 import { PRIMARY } from "utils/consts/colorConsts";
-import S from "./style";
-import signInSchema from "./schema";
+import S from "pages/Auth/SignIn/style";
+import signInSchema from "pages/Auth/SignIn/schema";
 
 interface SignInForm extends FieldValues {
   email: string;

@@ -3,13 +3,34 @@
     "title": "Home"
   },
   "SearchWork": {
-    "title": "Search Work"
+    "title": "Search Work",
+    "category": "Category",
+    "price": "Price and length",
+    "habilities": "Skills and Abilities",
+    "english": "English level",
+    "img": "Attachments",
+    "skills": "Skills",
+    "send": "Send Proposal",
+    "clientInfo": "About the client",
+    "clientBudget": "Client Budget: $",
+    "profileRate": "Profile Rate: $",
+    "modalTitle": "Additional Information",
+    "bid": "Your bid",
+    "coverLetter": "Your cover letter",
+    "success": "Proposal sent!"
   },
   "Proposals": {
     "title": "Proposals"
   },
   "MyContracts": {
     "title": "My Contracts"
+  },
+  "SendProposalErrors": {
+    "bidRequired": "Insert your bid",
+    "bidPositive": "Insert a valid number",
+    "bidTypeError": "You must specify a number",
+    "coverLetterRequired": "Insert your cover letter",
+    "coverLetterMax": "You've reached the character limit"
   },
   "MyJobs": {
     "title": "Jobs",

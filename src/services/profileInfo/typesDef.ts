@@ -1,4 +1,4 @@
-import { IUser } from "../user/setUserAPI";
+import { IUser } from "services/user/setUserAPI";
 
 interface IMutualEdEx {
   city: string;
