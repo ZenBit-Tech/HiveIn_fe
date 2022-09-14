@@ -4,6 +4,7 @@ import { RootState } from "store/store";
 import { JOB_POST } from "utils/consts/breakepointConsts";
 import { IDraftRequestObject } from "components/CreateJobPostForm/typesDef";
 import { TEnglishLevel } from "components/layoutElementWithTitle/typesDef";
+import { DurationTypeEnum } from "../../utils/enums";
 
 export interface ISkills {
   id: number;
@@ -30,7 +31,7 @@ export interface IJobPost {
   id: number;
   title: string;
   duration: number;
-  durationType: "week" | "month";
+  durationType: DurationTypeEnum;
   rate: number;
   isDraft: boolean;
   englishLevel: TEnglishLevel;
