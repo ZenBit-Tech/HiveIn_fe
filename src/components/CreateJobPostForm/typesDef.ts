@@ -1,7 +1,7 @@
 import { Dispatch } from "react";
 import { TEnglishLevel } from "components/layoutElementWithTitle/typesDef";
 import { ISkills } from "services/jobPosts/setJobPostsAPI";
-import { DurationTypeEnum } from "../../utils/enums";
+import { DurationTypeEnum } from "utils/enums";
 
 export interface IJobPostFormFields {
   categoryId: number;

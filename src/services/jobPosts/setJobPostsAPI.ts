@@ -4,7 +4,7 @@ import { RootState } from "store/store";
 import { JOB_POST } from "utils/consts/breakepointConsts";
 import { IDraftRequestObject } from "components/CreateJobPostForm/typesDef";
 import { TEnglishLevel } from "components/layoutElementWithTitle/typesDef";
-import { DurationTypeEnum } from "../../utils/enums";
+import { DurationTypeEnum } from "utils/enums";
 
 export interface ISkills {
   id: number;
