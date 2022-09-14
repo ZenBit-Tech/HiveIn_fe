@@ -1,7 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "store/store";
-import { CONTRACTS, FREELANCER_CONTRACTS } from "utils/consts/brakepointConsts";
 import { IContract } from "pages/Freelancer/MyContracts/Contract/interfaces";
+import {
+  CONTRACTS,
+  FREELANCER_CONTRACTS,
+} from "utils/consts/breakepointConsts";
 
 interface ICloseContract {
   freelancer?: number;

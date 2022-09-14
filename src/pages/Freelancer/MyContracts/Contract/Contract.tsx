@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import ContractStatusEnum, { DurationTypeEnum } from "utils/enums";
+import { ContractStatusEnum, DurationTypeEnum } from "utils/enums";
 import { DARK_BLUE } from "utils/consts/colorConsts";
 import { Button, Modal } from "antd";
 import { useTranslation } from "react-i18next";
