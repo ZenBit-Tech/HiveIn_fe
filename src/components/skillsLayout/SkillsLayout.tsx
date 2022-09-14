@@ -3,7 +3,7 @@ import SkillButton from "components/UI/buttons/skillButton/SkillButton";
 import SDiv from "components/skillsLayout/style";
 import { SErrorMessage } from "components/UI/textField/style";
 import { useGetInfoQuery } from "services/categoriesAndSkills/categoriesAndSkills";
-import { ISkillsProps } from "./typesDef";
+import { ISkillsProps } from "components/skillsLayout/typesDef";
 
 function SkillsLayout({
   errors,
