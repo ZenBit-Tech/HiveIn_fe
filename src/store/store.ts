@@ -16,6 +16,7 @@ import setJobPostsAPI from "services/jobPosts/setJobPostsAPI";
 import { getProfileInfoApi } from "services/profileInfo/profileInfoAPI";
 import { getSkillsOrCategory } from "services/categoriesAndSkills/categoriesAndSkills";
 import getTalentApi from "services/jobOwner/talentAPI";
+import contractApi from "services/contract/contractApi";
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export const store = configureStore({
     [getSkillsOrCategory.reducerPath]: getSkillsOrCategory.reducer,
     [setJobPostsAPI.reducerPath]: setJobPostsAPI.reducer,
     [getTalentApi.reducerPath]: getTalentApi.reducer,
+    [contractApi.reducerPath]: contractApi.reducer,
     user: userPersistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -38,6 +40,7 @@ export const store = configureStore({
       .concat(authApi.middleware)
       .concat(setJobPostsAPI.middleware)
       .concat(getTalentApi.middleware)
+      .concat(contractApi.middleware)
       .prepend(getProfileInfoApi.middleware)
       .prepend(getSkillsOrCategory.middleware),
 });

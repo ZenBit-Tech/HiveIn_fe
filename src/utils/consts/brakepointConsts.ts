@@ -12,3 +12,5 @@ export const SAVE_FREELANCER = "client/save";
 export const SAVED_FREELANCERS = "client/saved-freelancers";
 export const HIRED_FREELANCER = "client/hired-freelancers";
 export const VIEWED_FREELANCER = "client/recently-viewed";
+export const FREELANCER_CONTRACTS = "contracts/freelancer/my-contracts";
+export const CONTRACTS = "contracts";

@@ -1,162 +1,109 @@
-import ContractStatusEnum from "utils/enums";
+import { useState } from "react";
+import { Select } from "antd";
+import { useTranslation } from "react-i18next";
+import {
+  useCloseContractMutation,
+  useGetContractsQuery,
+} from "services/contract/contractApi";
+import { formatToStandardDate } from "utils/functions/formatDateFunctions";
+import { DurationTypeEnum, FilterEnum } from "utils/enums";
 import Contract from "./Contract/Contract";
+import { IContract } from "./Contract/interfaces";
 
-interface IForgotPassword {
-  id: number;
-  user: string;
-  link: string;
-}
-interface IFile {
-  id: number;
-  filename: string;
-  path: string;
-  mimetype: string;
-}
-interface IUser {
-  id: number;
-  email: string;
-  password: string;
-  role: "client" | "freelancer" | "";
-  googleId?: string;
-  firstName?: string;
-  lastName?: string;
-  phone?: string;
-  description?: string;
-  avatarURL?: string;
-  user?: string;
-  forgotPassword?: IForgotPassword[];
-  recentlyViewedFreelancers?: string[];
-  savedFreelancers?: string[];
-  hiredFreelancers?: string[];
-}
-interface IEducation {
-  id: number;
-  city: string;
-  degree: string;
-  description: string;
-  school: string;
-  startDate: Date;
-  endDate: Date;
-  createdAt: Date;
-  updatedAt: Date;
-  active: boolean;
-  freelancer: string;
-  freelancerId: number;
-}
-interface IExperience {
-  id: number;
-  city: string;
-  description: string;
-  employer: string;
-  jobTitle: string;
-  startDate: Date;
-  endDate: Date;
-  active: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-  freelancer: string;
-  freelancerId: number;
-}
-interface ISkills {
-  id: number;
-  name: string;
-  createdAt: Date;
-  UpdatedAt: Date;
-  freelancers: string[];
-  jobPosts: string[];
-}
-interface IJobPost {
-  id: number;
-  title: string;
-  duration: number;
-  durationType: "week" | "month";
-  category?: {
-    id: number;
-  };
-  user: IUser;
-  contract: string;
-  file?: IFile;
-  fileId?: number;
-  rate: number;
-  skills?: ISkills[];
-  isDraft: boolean;
-  englishLevel: "advanced" | "pre-intermediate" | "intermediate";
-  jobDescription: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
-interface IFreelancer {
-  id: number;
-  englishLevel: string;
-  position: string;
-  rate: string;
-  createdAt: Date;
-  updatedAt: Date;
-  category?: {
-    id: number;
-  };
-  user?: IUser;
-  education?: IEducation[];
-  experience?: IExperience[];
-  skills?: ISkills[];
-  userId: number;
-  categoryId?: number;
-}
-
-export interface IContract {
-  id: number;
-  jobPost?: IJobPost;
-  freelancer?: IFreelancer;
-  contractStatus: ContractStatusEnum;
-  startDate?: Date;
-  endDate?: Date;
-}
+const ZERO = 0;
+const dateFormat = "dd/MM/yyyy";
 
 function MyContracts() {
-  const contracts: IContract[] = [
-    {
-      id: 1,
-      contractStatus: ContractStatusEnum.ACTIVE,
-      startDate: new Date(),
+  const { t } = useTranslation();
+
+  const { Option } = Select;
+
+  const { data, refetch } = useGetContractsQuery();
+
+  const [closeContract] = useCloseContractMutation();
+
+  const [selectedValue, setSelectedValue] = useState<FilterEnum>(
+    FilterEnum.ALL
+  );
+
+  const onChangeHandler = (value: FilterEnum) => {
+    setSelectedValue(value);
+  };
+
+  const closeContractHandler = async (
+    contractId: number,
+    freelancerId: number
+  ) => {
+    await closeContract({
+      contractId,
       endDate: new Date(),
-    },
-    {
-      id: 2,
-      contractStatus: ContractStatusEnum.CLOSED,
-      startDate: new Date(),
-      endDate: new Date(),
-    },
-    {
-      id: 3,
-      contractStatus: ContractStatusEnum.PENDING,
-      startDate: new Date(),
-      endDate: new Date(),
-    },
-    {
-      id: 4,
-      contractStatus: ContractStatusEnum.PENDING,
-      startDate: new Date(),
-      endDate: new Date(),
-    },
-    {
-      id: 5,
-      contractStatus: ContractStatusEnum.PENDING,
-      startDate: new Date(),
-      endDate: new Date(),
-    },
-  ];
+      freelancer: freelancerId,
+    });
+    await refetch();
+  };
+
+  const dateCheck = (date?: string): string => {
+    if (date) {
+      return formatToStandardDate(new Date(date), dateFormat);
+    }
+    return t("MyContracts.empty");
+  };
+
+  const transformResponse = (contracts: IContract[]) => {
+    return contracts
+      .map((e) => ({
+        ...e,
+        status: e.endDate ? FilterEnum.CLOSED : FilterEnum.ACTIVE,
+      }))
+      .filter((e) => {
+        if (selectedValue !== FilterEnum.ALL) {
+          return e.status === selectedValue;
+        }
+        return e;
+      });
+  };
 
   return (
-    <div>
-      <h3>My Contracts</h3>
-      {contracts.map((c) => (
-        <Contract
-          key={c.id}
-          contractStatus={c.contractStatus}
-          startDate={c.startDate}
-          endDate={c.endDate}
-        />
-      ))}
+    <div style={{ display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex" }}>
+        <h3 style={{ margin: "0 10px" }}>{t("MyContracts.title")}</h3>
+        <Select
+          disabled={!data?.length}
+          style={{ width: "100px" }}
+          defaultValue={FilterEnum.ALL}
+          onChange={onChangeHandler}
+        >
+          <Option value={FilterEnum.ACTIVE}>
+            {t("MyContracts.filter.active")}
+          </Option>
+          <Option value={FilterEnum.CLOSED}>
+            {t("MyContracts.filter.closed")}
+          </Option>
+          <Option value={FilterEnum.ALL}>{t("MyContracts.filter.all")}</Option>
+        </Select>
+      </div>
+      {data?.length ? (
+        transformResponse(data).map((c) => (
+          <Contract
+            key={c.id}
+            contractId={c.id}
+            freelancerId={c.freelancer.id}
+            closeContract={closeContractHandler}
+            contractStatus={c.status}
+            startDate={dateCheck(c.startDate)}
+            endDate={dateCheck(c.endDate)}
+            duration={c.jobPost?.duration || ZERO}
+            durationType={c.jobPost?.durationType || DurationTypeEnum.WEEK}
+            title={c.jobPost?.title || t("MyContracts.empty")}
+            jobDescription={c.jobPost?.jobDescription || t("MyContracts.empty")}
+            rate={c.jobPost?.rate || ZERO}
+          />
+        ))
+      ) : (
+        <div style={{ margin: "0 auto", fontSize: "24px" }}>
+          {t("MyContracts.noContracts")}
+        </div>
+      )}
     </div>
   );
 }
