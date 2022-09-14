@@ -9,7 +9,7 @@ import JobTitle, {
   ContractStatus,
 } from "components/UI/JobItems/JobItemsStyles";
 import { useTranslation } from "react-i18next";
-import ContractStatusEnum from "utils/enums";
+import { ContractStatusEnum } from "utils/enums";
 
 dayjs.extend(relativeTime);
 interface IJobItemsProps {

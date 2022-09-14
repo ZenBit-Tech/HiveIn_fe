@@ -13,8 +13,8 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUser } from "store/slices/userSlice";
 import { store } from "store/store";
-import S from "./style";
-import resolver from "./schema";
+import S from "pages/JobOwner/Profile/style";
+import resolver from "pages/JobOwner/Profile/schema";
 
 interface ClientForm extends FieldValues {
   name: string;
