@@ -10,8 +10,8 @@ import GoogleAuthButton from "components/UI/buttons/googleAuthButton/GoogleAuthB
 import { useSignUpMutation } from "services/auth/setAuthAPI";
 import { toast } from "react-toastify";
 import useAuth from "hooks/useAuth";
-import S from "./style";
-import signUpSchema from "./schema";
+import S from "pages/Auth/SignUp/style";
+import signUpSchema from "pages/Auth/SignUp/schema";
 
 interface SignUpForm extends FieldValues {
   email: string;

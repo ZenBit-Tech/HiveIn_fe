@@ -27,7 +27,7 @@ import { JOB_POST_FILE } from "utils/consts/breakepointConsts";
 dayjs.extend(relativeTime);
 const { Title } = Typography;
 
-interface SearchWorkDrawerProps extends IJobPost {
+interface ISearchWorkDrawerProps extends IJobPost {
   visible: boolean;
   onClose: () => void;
 }
@@ -47,7 +47,7 @@ function SearchWorkDrawer({
   createdAt,
   user,
   file,
-}: SearchWorkDrawerProps) {
+}: ISearchWorkDrawerProps) {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -150,7 +150,7 @@ function SearchWorkDrawer({
 
             <ContentBox>
               <Space direction="vertical">
-                <DrawerText strong>About the client</DrawerText>
+                <DrawerText strong>{t("SearchWork.clientInfo")}</DrawerText>
                 <DrawerText color={TEXT_GRAY}>{user.email}</DrawerText>
                 <DrawerText color={TEXT_GRAY}>{user.description}</DrawerText>
               </Space>

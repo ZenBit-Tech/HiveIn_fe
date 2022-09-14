@@ -7,8 +7,8 @@ import Field from "components/DefaultField/DefaultField";
 import { SIGN_IN_ROUTE } from "utils/consts/routeConsts";
 import { useTranslation } from "react-i18next";
 import { useRestorePasswordMutation } from "services/auth/forgotPassword";
-import S from "./style";
-import RestorePasswordSchema from "./schema";
+import S from "pages/Auth/RestorePassword/style";
+import RestorePasswordSchema from "pages/Auth/RestorePassword/schema";
 
 interface RestorePasswordForm extends FieldValues {
   password: string;

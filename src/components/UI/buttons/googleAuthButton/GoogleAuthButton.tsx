@@ -6,11 +6,11 @@ import GoogleButton, {
 } from "components/UI/buttons/googleAuthButton/GoogleAuthButtonStyles";
 import google from "components/UI/buttons/googleAuthButton/imgs/google.svg";
 
-interface GoogleAuthButtonProps {
+interface IGoogleAuthButtonProps {
   children: React.ReactNode;
 }
 
-function GoogleAuthButton({ children }: GoogleAuthButtonProps) {
+function GoogleAuthButton({ children }: IGoogleAuthButtonProps) {
   const googleLogin = () => {
     window.open(`${process.env.REACT_APP_API_URL}/auth/google`, "_self");
   };

@@ -16,7 +16,7 @@ interface ISubmitProposalForm extends FieldValues {
   exampleRequired: string;
 }
 
-interface SubmitProposalModalProps {
+interface ISubmitProposalModalProps {
   idJobPost: number;
   visible: boolean;
   closeModal: () => void;
@@ -28,7 +28,7 @@ function SubmitProposalModal({
   visible,
   closeModal,
   clientBudget,
-}: SubmitProposalModalProps) {
+}: ISubmitProposalModalProps) {
   const { t } = useTranslation();
 
   const { control, handleSubmit, reset } = useForm<ISubmitProposalForm>({
@@ -67,6 +67,7 @@ function SubmitProposalModal({
       onOk={closeModal}
       onCancel={closeModal}
       footer={null}
+      confirmLoading={isLoading}
     >
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Space size="large">

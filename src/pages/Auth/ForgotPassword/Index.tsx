@@ -7,8 +7,8 @@ import { SIGN_IN_ROUTE } from "utils/consts/routeConsts";
 import { useTranslation } from "react-i18next";
 import { PRIMARY } from "utils/consts/colorConsts";
 import { useForgotPasswordMutation } from "services/auth/forgotPassword";
-import S from "./style";
-import ForgotPasswordSchema from "./schema";
+import S from "pages/Auth/ForgotPassword/style";
+import ForgotPasswordSchema from "pages/Auth/ForgotPassword/schema";
 
 interface ForgotPasswordForm extends FieldValues {
   email: string;

@@ -14,8 +14,8 @@ import {
   SIGN_UP_ROUTE,
 } from "utils/consts/routeConsts";
 import { PRIMARY } from "utils/consts/colorConsts";
-import S from "./style";
-import signInSchema from "./schema";
+import S from "pages/Auth/SignIn/style";
+import signInSchema from "pages/Auth/SignIn/schema";
 
 interface SignInForm extends FieldValues {
   email: string;

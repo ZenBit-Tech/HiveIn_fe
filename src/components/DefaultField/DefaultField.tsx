@@ -34,7 +34,7 @@ export default function Field({
             <FieldTextArea
               onChange={onChange}
               value={value}
-              status={error ? "error" : undefined}
+              status={error && "error"}
               showCount
               maxLength={maxLength}
             />
@@ -42,12 +42,12 @@ export default function Field({
             <FieldInput
               onChange={onChange}
               value={value}
-              status={error ? "error" : undefined}
+              status={error && "error"}
               // eslint-disable-next-line react/jsx-props-no-spreading
               {...props}
             />
           )}
-          <Text type="danger">{error ? error.message : ""}</Text>
+          <Text type="danger">{error && error.message}</Text>
         </Wrapper>
       )}
     />

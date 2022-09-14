@@ -4,12 +4,12 @@ import { RootState } from "store/store";
 import { JOB_POST } from "utils/consts/breakepointConsts";
 import { IDraftRequestObject } from "components/CreateJobPostForm/typesDef";
 
-interface Skills {
+interface ISkills {
   id: number;
   name: string;
 }
 
-interface Category {
+interface ICategory {
   id: number;
   name: string;
 }
@@ -20,7 +20,7 @@ interface IFile {
   path: string;
 }
 
-interface QueryParam {
+interface IQueryParam {
   id?: number;
   isDraft?: boolean;
 }
@@ -36,8 +36,8 @@ export interface IJobPost {
   jobDescription: string;
   createdAt: string;
   updatedAt: string;
-  category: Category;
-  skills: Skills[];
+  category: ICategory;
+  skills: ISkills[];
   user: IUser;
   file?: IFile;
   contract: {
@@ -64,13 +64,13 @@ const jobPostsAPI = createApi({
     getOwnJobPosts: builder.query<IJobPost[], void>({
       query: () => `${JOB_POST}/self`,
     }),
-    getOneJobPost: builder.query<IJobPost, QueryParam>({
+    getOneJobPost: builder.query<IJobPost, IQueryParam>({
       query: ({ id }) => ({
         url: `${JOB_POST}/${id}`,
         credentials: "include",
       }),
     }),
-    getHomePosts: builder.query<IJobPost[], QueryParam>({
+    getHomePosts: builder.query<IJobPost[], IQueryParam>({
       query: (path) => ({
         url: `${JOB_POST}/home/self/${path.isDraft}`,
       }),
