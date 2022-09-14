@@ -21,6 +21,8 @@ function LongMenu({ link, id }: { link?: string; id: number }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const open = Boolean(anchorEl);
+  const postRoute = `${MY_JOBS_ROUTE}/${id}`;
+
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -41,7 +43,7 @@ function LongMenu({ link, id }: { link?: string; id: number }) {
   const handleDelete = () => {
     setAnchorEl(null);
     setIsDeleteModalOpen(true);
-    if (pathname === `${MY_JOBS_ROUTE}/${id}`) navigate(MY_JOBS_ROUTE);
+    if (pathname === postRoute) navigate(MY_JOBS_ROUTE);
   };
 
   const handleChooseOption = (event: MouseEvent<HTMLLIElement>) => {
