@@ -1,3 +1,5 @@
+import i18next from "localization/en/en.json";
+
 type TOption = {
   value: number;
   text: string;
@@ -11,17 +13,17 @@ export const values = Object.freeze({
 
 export const linkItem: TOption = {
   value: values.seeFullInfo,
-  text: "See Post",
+  text: i18next.EditDeletePost.menuOptions.seeMore,
 };
 
 const options: TOption[] = [
   {
     value: values.editPost,
-    text: "Edit Post",
+    text: i18next.EditDeletePost.menuOptions.edit,
   },
   {
     value: values.deletePost,
-    text: "Delete",
+    text: i18next.EditDeletePost.menuOptions.delete,
   },
 ];
 

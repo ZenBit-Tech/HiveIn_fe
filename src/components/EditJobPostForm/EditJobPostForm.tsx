@@ -8,6 +8,7 @@ import { useGetOwnUserQuery } from "services/user/setUserAPI";
 import { useUpdatePostMutation } from "services/jobPosts/setJobPostsAPI";
 import { SDiv } from "components/EditJobPostForm/styles";
 import schema from "validation/editFormValidationSchema";
+import { useTranslation } from "react-i18next";
 
 interface IState {
   jobDescription: string;
@@ -39,15 +40,19 @@ function EditJobPostForm({ jobDescription, rate, postId, setIsOpen }: IProps) {
     },
     resolver: yupResolver(schema),
   });
+  const { t } = useTranslation();
 
   useEffect(() => {
-    if (isSuccess && !isLoading) toast.success("Post successfully update");
-    if (isError && !isLoading) toast.error("Error");
+    if (isSuccess && !isLoading)
+      toast.success(t("EditDeletePost.edit.updatedSuccessfully"));
+    if (isError && !isLoading)
+      toast.error(t("EditDeletePost.edit.updateError"));
     /* eslint-disable react-hooks/exhaustive-deps */
   }, [isSuccess, isError]);
 
   useEffect(() => {
-    if (isGetUserError && !isLoading) toast.error("User not found");
+    if (isGetUserError && !isLoading)
+      toast.error(t("EditDeletePost.edit.userNotFound"));
   }, [isGetUserError]);
 
   const onSubmit = (data: IState) => {
@@ -61,10 +66,10 @@ function EditJobPostForm({ jobDescription, rate, postId, setIsOpen }: IProps) {
 
   return (
     <>
-      <h2>Edit job post</h2>
+      <h2>{t("EditDeletePost.edit.title")}</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <SDiv>
-          <p>You can change only description or rate</p>
+          <p>{t("EditDeletePost.edit.text")}</p>
           <Controller
             control={control}
             name="rate"
@@ -74,7 +79,7 @@ function EditJobPostForm({ jobDescription, rate, postId, setIsOpen }: IProps) {
                 helperText={errors.rate?.message}
                 {...field}
                 type="number"
-                label="edit rate"
+                label={t("EditDeletePost.edit.labelRate")}
                 InputProps={{ endAdornment }}
               />
             )}
@@ -88,7 +93,7 @@ function EditJobPostForm({ jobDescription, rate, postId, setIsOpen }: IProps) {
                 multiline
                 rows={4}
                 InputProps={{ inputProps: { maxLength: 5000 } }}
-                label="edit description"
+                label={t("EditDeletePost.edit.descriptionLabel")}
                 {...field}
                 helperText={errors.jobDescription?.message}
               />
@@ -100,7 +105,7 @@ function EditJobPostForm({ jobDescription, rate, postId, setIsOpen }: IProps) {
               type="submit"
               variant="contained"
             >
-              Edit post
+              {t("EditDeletePost.edit.submitButtonText")}
             </LoadingButton>
           )}
         </SDiv>

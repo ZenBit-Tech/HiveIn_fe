@@ -3,13 +3,14 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import options, {
   linkItem,
   values,
 } from "components/UI/DropdownMenus/LongMenu/staticData";
 import ModalRemoveJobPost from "components/UI/ModalWindows/ModalRemoveJobPost/ModalRemoveJobPost";
 import EditJobPostDrawer from "components/UI/drawers/EditJobPostDrawer/EditJobPostDrawer";
+import { MY_JOBS_ROUTE } from "utils/consts/routeConsts";
 
 const ITEM_HEIGHT = 48;
 
@@ -18,8 +19,8 @@ function LongMenu({ link, id }: { link?: string; id: number }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
   const [isEditDrawerOpen, setIsEditDrawerOpen] = useState<boolean>(false);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const open = Boolean(anchorEl);
-
   const handleClick = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -40,6 +41,7 @@ function LongMenu({ link, id }: { link?: string; id: number }) {
   const handleDelete = () => {
     setAnchorEl(null);
     setIsDeleteModalOpen(true);
+    if (pathname === `${MY_JOBS_ROUTE}/${id}`) navigate(MY_JOBS_ROUTE);
   };
 
   const handleChooseOption = (event: MouseEvent<HTMLLIElement>) => {

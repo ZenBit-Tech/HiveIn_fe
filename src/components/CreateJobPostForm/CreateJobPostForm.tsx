@@ -154,7 +154,11 @@ function CreateJobPostForm(props: IProps) {
 
   return (
     <div>
-      <h2>Create a job post</h2>
+      <h2>
+        {existedDraftData
+          ? t("PostJob.titleForDraft")
+          : t("PostJob.titleForCreate")}
+      </h2>
       <form onSubmit={handleSubmit(handlerSubmitForm)}>
         {propsDataCollection.map((propsData) => (
           <LayoutElementWithTitle
