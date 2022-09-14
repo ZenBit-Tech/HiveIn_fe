@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, MouseEvent } from "react";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
@@ -6,17 +5,18 @@ import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { useNavigate } from "react-router-dom";
 import options, {
+  linkItem,
   values,
 } from "components/UI/DropdownMenus/LongMenu/staticData";
 import ModalRemoveJobPost from "components/UI/ModalWindows/ModalRemoveJobPost/ModalRemoveJobPost";
-import ModalEditPost from "components/UI/ModalWindows/ModalEditJobPost/ModalEditJobPost";
+import EditJobPostDrawer from "components/UI/drawers/EditJobPostDrawer/EditJobPostDrawer";
 
 const ITEM_HEIGHT = 48;
 
-function LongMenu({ link, id }: { link: string; id: number }) {
+function LongMenu({ link, id }: { link?: string; id: number }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+  const [isEditDrawerOpen, setIsEditDrawerOpen] = useState<boolean>(false);
   const navigate = useNavigate();
   const open = Boolean(anchorEl);
 
@@ -29,12 +29,12 @@ function LongMenu({ link, id }: { link: string; id: number }) {
   };
 
   const handleSeeFullInfo = () => {
-    navigate(link);
+    if (link) navigate(link);
   };
 
   const handleEdit = () => {
     setAnchorEl(null);
-    setIsEditModalOpen(true);
+    setIsEditDrawerOpen(true);
   };
 
   const handleDelete = () => {
@@ -45,6 +45,7 @@ function LongMenu({ link, id }: { link: string; id: number }) {
   const handleChooseOption = (event: MouseEvent<HTMLLIElement>) => {
     const { value } = event.target as HTMLLIElement;
 
+    // eslint-disable-next-line default-case
     switch (value) {
       case values.seeFullInfo:
         handleSeeFullInfo();
@@ -55,8 +56,6 @@ function LongMenu({ link, id }: { link: string; id: number }) {
       case values.deletePost:
         handleDelete();
         break;
-      default:
-        return;
     }
   };
 
@@ -88,6 +87,11 @@ function LongMenu({ link, id }: { link: string; id: number }) {
             },
           }}
         >
+          {link && (
+            <MenuItem value={linkItem.value} onClick={handleChooseOption}>
+              {linkItem.text}
+            </MenuItem>
+          )}
           {options.map(({ text, value }) => (
             <MenuItem key={value} value={value} onClick={handleChooseOption}>
               {text}
@@ -100,10 +104,10 @@ function LongMenu({ link, id }: { link: string; id: number }) {
         isOpen={isDeleteModalOpen}
         setIsOpen={setIsDeleteModalOpen}
       />
-      <ModalEditPost
+      <EditJobPostDrawer
         id={id}
-        isOpen={isEditModalOpen}
-        setIsOpen={setIsEditModalOpen}
+        isOpen={isEditDrawerOpen}
+        setIsOpen={setIsEditDrawerOpen}
       />
     </>
   );

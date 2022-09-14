@@ -9,11 +9,12 @@ export const values = Object.freeze({
   deletePost: 3,
 });
 
+export const linkItem: TOption = {
+  value: values.seeFullInfo,
+  text: "See Post",
+};
+
 const options: TOption[] = [
-  {
-    value: values.seeFullInfo,
-    text: "See Post",
-  },
   {
     value: values.editPost,
     text: "Edit Post",

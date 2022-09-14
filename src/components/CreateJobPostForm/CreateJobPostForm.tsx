@@ -12,8 +12,12 @@ import {
 import { useTranslation } from "react-i18next";
 import propsDataCollection from "components/CreateJobPostForm/staticData";
 import LayoutElementWithTitle from "components/layoutElementWithTitle/LayoutElementWithTitle";
-import { IJobPostFormFields } from "components/CreateJobPostForm/typesDef";
+import {
+  IJobPostFormFields,
+  IProps,
+} from "components/CreateJobPostForm/typesDef";
 import FileBox from "components/FileBox/FileBox";
+import { SButtonsGroup } from "components/CreateJobPostForm/styles";
 import { IFreelancer } from "services/profileInfo/typesDef";
 import { useGetOwnUserQuery } from "services/user/setUserAPI";
 import {
@@ -25,10 +29,10 @@ import {
   jobPostsDraftSchema,
 } from "validation/createJobPostValidationSchema";
 import createDataForResolver from "utils/functions/createDataForResolver";
-import { SButtonsGroup, SWrapper } from "components/CreateJobPostForm/styles";
 import { createJobAttachmentFileTypes } from "utils/consts/fileTypes";
 
-function CreateJobPostForm() {
+function CreateJobPostForm(props: IProps) {
+  const { existedDraftData, queriedSkills, setIsOpen } = props;
   const { data: userData, isError: getUserError } = useGetOwnUserQuery();
 
   const [
@@ -57,6 +61,7 @@ function CreateJobPostForm() {
     formState: { errors: validationErrors },
   } = useForm<IJobPostFormFields>({
     context: isDraft,
+    defaultValues: existedDraftData,
     resolver: (data, context) => {
       const { errorsMessages, validData } = context
         ? createDataForResolver(data, jobPostsDraftSchema)
@@ -107,6 +112,7 @@ function CreateJobPostForm() {
 
     if (isDraft) {
       postDraft(objToRequest);
+      if (setIsOpen) setIsOpen(false);
       return;
     }
 
@@ -124,6 +130,7 @@ function CreateJobPostForm() {
     });
 
     postJobPost(formData);
+    if (setIsOpen) setIsOpen(false);
   };
 
   const handlerPostDraft = () => setIsDraft(() => true);
@@ -146,7 +153,7 @@ function CreateJobPostForm() {
   };
 
   return (
-    <SWrapper>
+    <div>
       <h2>Create a job post</h2>
       <form onSubmit={handleSubmit(handlerSubmitForm)}>
         {propsDataCollection.map((propsData) => (
@@ -155,7 +162,11 @@ function CreateJobPostForm() {
             control={control as unknown as Control}
             errors={validationErrors as unknown as FieldErrors}
             setValue={setValue as unknown as UseFormSetValue<any>}
-            freelancerInfo={{ skills: [] } as unknown as IFreelancer}
+            freelancerInfo={
+              {
+                skills: queriedSkills || [],
+              } as unknown as IFreelancer
+            }
             {...propsData}
           />
         ))}
@@ -201,7 +212,7 @@ function CreateJobPostForm() {
           </SButtonsGroup>
         )}
       </form>
-    </SWrapper>
+    </div>
   );
 }
 

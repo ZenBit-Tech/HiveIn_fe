@@ -4,13 +4,14 @@ import { RootState } from "store/store";
 import { JOB_POST } from "utils/consts/brakepointConsts";
 import { IDraftRequestObject } from "components/CreateJobPostForm/typesDef";
 import ContractStatusEnum from "utils/enums";
+import { TEnglishLevel } from "../../components/layoutElementWithTitle/typesDef";
 
-interface Skills {
+export interface ISkills {
   id: number;
   name: string;
 }
 
-interface QueryParam {
+interface IQueryParam {
   id?: number;
   isDraft?: boolean;
 }
@@ -19,15 +20,15 @@ export interface IJobPost {
   id: number;
   title: string;
   duration: number;
-  durationType: string;
+  durationType: "week" | "month";
   rate: number;
   isDraft: boolean;
-  englishLevel: string;
+  englishLevel: TEnglishLevel;
   jobDescription: string;
   createdAt: string;
   updatedAt: string;
-  category: string;
-  skills: Skills[];
+  category: { id: number };
+  skills: ISkills[];
   user: IUser[];
   contract: {
     status: ContractStatusEnum;
@@ -55,20 +56,24 @@ const jobPostsAPI = createApi({
       return headers;
     },
   }),
+  tagTypes: ["Posts"],
   endpoints: (builder) => ({
     getOwnJobPosts: builder.query<IJobPost[], void>({
       query: () => `${JOB_POST}/self`,
+      providesTags: ["Posts"],
     }),
-    getOneJobPost: builder.query<IJobPost, QueryParam>({
+    getOneJobPost: builder.query<IJobPost, IQueryParam>({
       query: ({ id }) => ({
         url: `${JOB_POST}/${id}`,
         credentials: "include",
       }),
+      providesTags: ["Posts"],
     }),
-    getHomePosts: builder.query<IJobPost[], QueryParam>({
+    getHomePosts: builder.query<IJobPost[], IQueryParam>({
       query: (path) => ({
         url: `${JOB_POST}/home/self/${path.isDraft}`,
       }),
+      providesTags: ["Posts"],
     }),
     postJobPost: builder.mutation<IJobPost, FormData>({
       query: (arg) => ({
@@ -76,6 +81,7 @@ const jobPostsAPI = createApi({
         method: "POST",
         body: arg,
       }),
+      invalidatesTags: ["Posts"],
     }),
     postDraft: builder.mutation<IJobPost, IDraftRequestObject>({
       query: (arg) => ({
@@ -85,6 +91,7 @@ const jobPostsAPI = createApi({
           ...arg,
         },
       }),
+      invalidatesTags: ["Posts"],
     }),
     updatePost: builder.mutation<IJobPost, IUpdateParams>({
       query: ({ postId, ...objToRequest }) => ({
@@ -94,12 +101,14 @@ const jobPostsAPI = createApi({
           ...objToRequest,
         },
       }),
+      invalidatesTags: ["Posts"],
     }),
     deletePost: builder.mutation<null, number>({
       query: (id) => ({
         url: `${JOB_POST}/${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Posts"],
     }),
   }),
 });

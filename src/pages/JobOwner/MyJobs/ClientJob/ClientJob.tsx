@@ -4,6 +4,7 @@ import PageContainer, {
   ContractStatus,
   Header,
   Section,
+  SMenuWrapper,
   TitleText,
 } from "pages/JobOwner/MyJobs/ClientJobsStyles";
 import JobItem from "components/UI/JobItem/JobItem";
@@ -14,6 +15,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { Button, Modal } from "antd";
 import useModalHandler from "hooks/use-modal-handler";
 import ContractStatusEnum from "utils/enums";
+import LongMenu from "../../../../components/UI/DropdownMenus/LongMenu/LongMenu";
 
 dayjs.extend(relativeTime);
 
@@ -65,6 +67,11 @@ function ClientJob(): JSX.Element {
       </Header>
       <Section wd="70%">
         <Card>
+          {data && (
+            <SMenuWrapper>
+              <LongMenu id={data.id} />
+            </SMenuWrapper>
+          )}
           <JobItem
             description={data?.jobDescription || t("NotFound.notFound")}
             hourlyRate={String(data?.rate || t("NotFound.notFound"))}

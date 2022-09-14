@@ -1,4 +1,6 @@
+import { Dispatch } from "react";
 import { TEnglishLevel } from "components/layoutElementWithTitle/typesDef";
+import { ISkills } from "services/jobPosts/setJobPostsAPI";
 
 export interface IJobPostFormFields {
   categoryId: number;
@@ -23,4 +25,10 @@ export interface IDraftRequestObject {
   categoryId?: number;
   durationType: "week" | "month";
   englishLevel?: TEnglishLevel;
+}
+
+export interface IProps {
+  existedDraftData?: IJobPostFormFields;
+  queriedSkills?: ISkills[];
+  setIsOpen?: Dispatch<boolean>;
 }

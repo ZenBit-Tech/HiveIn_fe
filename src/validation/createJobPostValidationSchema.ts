@@ -27,7 +27,7 @@ export const createJobPostValidationSchema = jobPostsDraftSchema.shape({
   jobDescription: yup
     .string()
     .trim()
-    .min(30, i18next.profileFormErrorMessages.descriptionEmpty)
+    .min(10, i18next.profileFormErrorMessages.descriptionEmpty)
     .required(i18next.profileFormErrorMessages.descriptionEmpty),
   duration: yup
     .string()
