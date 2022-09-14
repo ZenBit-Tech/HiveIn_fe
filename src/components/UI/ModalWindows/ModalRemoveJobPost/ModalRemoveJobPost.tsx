@@ -19,6 +19,7 @@ function Modal({ isOpen, setIsOpen, id }: TProps) {
     if (isSuccess)
       toast.success(t("EditDeletePost.delete.deletedSuccessfully"));
     if (isError) toast.error(t("EditDeletePost.delete.deleteError"));
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [isSuccess, isError]);
 
   const handleOk = () => {
