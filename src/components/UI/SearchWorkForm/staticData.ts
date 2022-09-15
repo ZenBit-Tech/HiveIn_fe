@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ILayoutElementWithoutControl } from "components/layoutElementWithTitle/typesDef";
+import i18next from "localization/en/en.json";
 
 const propsDataCollection: ILayoutElementWithoutControl[] = [
   {
@@ -15,23 +17,23 @@ const propsDataCollection: ILayoutElementWithoutControl[] = [
   },
   {
     title: "SearchWork.byPrice",
-    element: "textInput",
-    formFieldName: "keyWords",
+    element: "numberInput",
+    formFieldName: "rate",
     containerWidth: "half",
-    maxLength: 25,
+    helperText: i18next.ProfileEditForm.rate.helperText,
   },
-
   {
     title: "SearchWork.byTime",
-    element: "textInput",
-    formFieldName: "fuy",
+    element: "durationPicker",
+    formFieldName: "",
     containerWidth: "half",
   },
   {
     title: "SearchWork.byEnglish",
-    element: "numberInput",
-    formFieldName: "erg",
+    element: "toggleButton",
+    formFieldName: "englishLevel",
     containerWidth: "half",
+    toggleButtonOptions: i18next.ProfileEditForm.englishLevel.options,
   },
 ];
 

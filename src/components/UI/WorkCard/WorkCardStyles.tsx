@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TEXT_GRAY } from "utils/colorConsts";
+import { TEXT_GRAY } from "utils/consts/colorConsts";
 
 interface ITitle {
   font_sz?: string;
@@ -8,7 +8,7 @@ interface ITitle {
 
 export const Card = styled.div`
   border: 1px solid ${TEXT_GRAY};
-  padding: 25px;
+  padding: 15px;
   border-radius: 10px;
   margin-bottom: 15px;
   width: 100%;

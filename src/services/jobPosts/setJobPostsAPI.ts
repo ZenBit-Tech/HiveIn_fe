@@ -3,6 +3,8 @@ import { IUser } from "services/user/setUserAPI";
 import { RootState } from "store/store";
 import { JOB_POST } from "utils/consts/brakepointConsts";
 import { IDraftRequestObject } from "components/CreateJobPostForm/typesDef";
+import { IWorkCardProps } from "components/UI/WorkCard/WorkCard";
+import { ISearchWorkFilters } from "components/UI/SearchWorkForm/typesDef";
 
 interface Skills {
   id: number;
@@ -75,6 +77,18 @@ const jobPostsAPI = createApi({
         },
       }),
     }),
+    filterJobPosts: builder.query<
+      { data: IWorkCardProps[]; totalCount: number },
+      ISearchWorkFilters
+    >({
+      query: (params) => ({
+        url: `${JOB_POST}/search-job/`,
+        params: {
+          ...params,
+          skills: params.skills?.map((skill) => skill.id).join("_"),
+        },
+      }),
+    }),
   }),
 });
 
@@ -84,6 +98,7 @@ export const {
   useGetHomePostsQuery,
   usePostJobPostMutation,
   usePostDraftMutation,
+  useFilterJobPostsQuery,
 } = jobPostsAPI;
 
 export default jobPostsAPI;

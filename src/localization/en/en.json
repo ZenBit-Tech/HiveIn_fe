@@ -9,7 +9,10 @@
     "bySkills": "Search by skills",
     "byPrice": "Search by price per hour",
     "byTime": "Search by time available per day/hour",
-    "byEnglish": "Search by English level (choose one)"
+    "byEnglish": "Search by English level (choose one)",
+    "search": "Search",
+    "clear": "Clear",
+    "noResult": "No result"
   },
   "Proposals": {
     "title": "Proposals"
@@ -113,11 +116,7 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": [
-        "pre-intermediate",
-        "intermediate",
-        "upper-intermediate"
-      ]
+      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
     },
     "description": {
       "title": "Description",

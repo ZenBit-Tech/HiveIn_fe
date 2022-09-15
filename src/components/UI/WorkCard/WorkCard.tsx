@@ -4,24 +4,29 @@ import JobTitle, {
   Card,
   JobDescription,
 } from "components/UI/WorkCard/WorkCardStyles";
+import dayjs from "dayjs";
 
-interface IWorkCardProps {
+export interface IWorkCardProps {
   id: number;
   title: string;
   createdAt: string;
-  description: string;
+  jobDescription: string;
 }
 
-function WorkCard({ description, title, createdAt, id }: IWorkCardProps) {
+function WorkCard({ jobDescription, title, createdAt, id }: IWorkCardProps) {
   const { t } = useTranslation();
 
   return (
     <Card>
       <JobTitle font_sz="1.5em">
         {title}
-        <JobTitle font_sz="0.7em">{createdAt}</JobTitle>
+        <JobTitle font_sz="0.7em">
+          {createdAt ? dayjs(createdAt).fromNow() : t("NotFound.notFound")}
+        </JobTitle>
       </JobTitle>
-      <JobDescription>{description.slice(0, 100)}...</JobDescription>
+      <JobDescription>
+        {jobDescription.split(" ").slice(0, 50).join(" ")}...
+      </JobDescription>
     </Card>
   );
 }

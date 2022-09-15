@@ -1,6 +1,6 @@
 import { Empty, Pagination } from "antd";
 import styled from "styled-components";
-import { BLACK, TEXT_GRAY } from "utils/colorConsts";
+import { BLACK, TEXT_GRAY } from "utils/consts/colorConsts";
 
 interface ITitle {
   pd?: string;
@@ -16,9 +16,7 @@ const PageContainer = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: center;
-  align-items: center;
+  grid-template-columns: 1fr 400px;
   column-gap: 10px;
 `;
 
@@ -48,10 +46,7 @@ export const NameText = styled.div`
 `;
 
 export const FilterSection = styled.div<BoxSizing>`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 400px;
 `;
 export const WorkSection = styled.div<BoxSizing>`
   width: 100%;
