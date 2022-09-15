@@ -1,6 +1,7 @@
 import * as yup from "yup";
 import i18next from "localization/en/en.json";
 import { regexpGreaterThanZero } from "validation/profileEditFormValidationSchema";
+import { MIN_LENGTH_OF_JOB_DESCRIPTION } from "utils/consts/numberConsts";
 
 export const jobPostsDraftSchema = yup.object({
   title: yup.string().required(i18next.PostJob.required),
@@ -27,7 +28,10 @@ export const createJobPostValidationSchema = jobPostsDraftSchema.shape({
   jobDescription: yup
     .string()
     .trim()
-    .min(30, i18next.profileFormErrorMessages.descriptionEmpty)
+    .min(
+      MIN_LENGTH_OF_JOB_DESCRIPTION,
+      i18next.profileFormErrorMessages.descriptionEmpty
+    )
     .required(i18next.profileFormErrorMessages.descriptionEmpty),
   duration: yup
     .string()

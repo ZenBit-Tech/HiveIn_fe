@@ -276,6 +276,8 @@
   },
   "PostJob": {
     "title": "Create Job Post",
+    "titleForCreate": "Create Job Post",
+    "titleForDraft": "Edit draft",
     "required": "required",
     "formFieldsInfo": {
       "title": {
@@ -288,7 +290,7 @@
         "month": "month"
       },
       "description": {
-        "title": "Enter the charge per hour",
+        "title": "Description",
         "helperText": "Max 5000 symbols"
       }
     },
@@ -304,6 +306,29 @@
       "fileUpload": "Upload file",
       "postDraft": " Save to draft",
       "postJob": "Post job"
+    }
+  },
+  "EditDeletePost": {
+    "delete": {
+      "deletedSuccessfully": "Deleted successfully",
+      "deleteError": "Something went wrong",
+      "title": "Delete job post",
+      "deleteConfirmation": "Confirm deletion of job post"
+    },
+    "edit": {
+      "updatedSuccessfully": "Post successfully updated",
+      "updateError": "Error, post not updated",
+      "userNotFound": "User not found",
+      "title": "Edit job post",
+      "text": "You can change only description or rate",
+      "labelRate": "Edit rate",
+      "descriptionLabel": "Edit description",
+      "submitButtonText": "Edit post"
+    },
+    "menuOptions": {
+      "seeMore": "See Post",
+      "edit": "Edit Post",
+      "delete": "Delete"
     }
   }
 }
