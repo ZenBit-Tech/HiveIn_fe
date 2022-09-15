@@ -11,27 +11,49 @@ import { useGetOneJobPostQuery } from "services/jobPosts/setJobPostsAPI";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Button, Modal } from "antd";
+import { Button, Modal, notification } from "antd";
 import useModalHandler from "hooks/use-modal-handler";
+import defineContractStatus from "utils/functions/defineContractStatus";
 import { ContractStatusEnum } from "utils/enums";
+import { useCloseContractMutation } from "services/contract/contractApi";
 
 dayjs.extend(relativeTime);
 
 function ClientJob(): JSX.Element {
   const { jobId } = useParams();
   const { t } = useTranslation();
-  const { data } = useGetOneJobPostQuery({
+  const { data, refetch } = useGetOneJobPostQuery({
     id: Number(jobId),
   });
 
+  const [closeContract] = useCloseContractMutation();
+
   const { modal, toggleModal } = useModalHandler();
+
+  const onModalOk = async () => {
+    if (data?.contract) {
+      try {
+        await closeContract({
+          contractId: data?.contract.id,
+          endDate: new Date(),
+        });
+        toggleModal();
+        refetch();
+      } catch (e: any) {
+        notification.error({
+          description: `${e.data.message}`,
+          message: `${e.status}`,
+        });
+      }
+    }
+  };
 
   return (
     <PageContainer>
       <Modal
         visible={modal}
         title={t("MyJobs.endContractTitle")}
-        onOk={toggleModal}
+        onOk={onModalOk}
         onCancel={toggleModal}
         okText={t("MyJobs.continueText")}
       >
@@ -50,18 +72,29 @@ function ClientJob(): JSX.Element {
           <span style={{ marginRight: "10px" }}>
             {t("MyJobs.contractStatusTitle")}
           </span>
-          <span style={{ marginRight: "5px" }}>
-            {data?.contract?.endDate
-              ? ContractStatusEnum.CLOSED
-              : ContractStatusEnum.ACTIVE}
-          </span>
           <Button
             size="small"
-            type="primary"
-            shape="circle"
+            type={
+              defineContractStatus(
+                data?.contract?.startDate,
+                data?.contract?.endDate
+              ) === ContractStatusEnum.ACTIVE
+                ? "primary"
+                : "dashed"
+            }
+            shape="round"
+            disabled={
+              defineContractStatus(
+                data?.contract?.startDate,
+                data?.contract?.endDate
+              ) !== ContractStatusEnum.ACTIVE
+            }
             onClick={toggleModal}
           >
-            X
+            {defineContractStatus(
+              data?.contract?.startDate,
+              data?.contract?.endDate
+            )}
           </Button>
         </ContractStatus>
       </Header>

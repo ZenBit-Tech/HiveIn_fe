@@ -4,18 +4,18 @@ import LinkButton from "components/UI/buttons/LinkButton/LinkButton";
 import JobItem from "components/UI/JobItems/JobItems";
 import useAuth from "hooks/useAuth";
 import PageContainer, {
-  Header,
   Card,
+  Header,
   NameText,
   Section,
-  TitleText,
   StyledPagination,
+  TitleText,
 } from "pages/JobOwner/MyJobs/ClientJobsStyles";
 import { useTranslation } from "react-i18next";
 import { useGetOwnJobPostsQuery } from "services/jobPosts/setJobPostsAPI";
 import { CREATE_JOB_POST } from "utils/consts/routeConsts";
 import { POSTS_PER_PAGE as PPG } from "utils/consts/jobListConsts";
-import { ContractStatusEnum } from "utils/enums";
+import defineContractStatus from "utils/functions/defineContractStatus";
 
 function ClientJobs() {
   const { email } = useAuth();
@@ -66,11 +66,10 @@ function ClientJobs() {
                       link={id!.toString()}
                       publishDate={createdAt!}
                       hourlyRate={rate!}
-                      contractStatus={
+                      contractStatus={defineContractStatus(
+                        contract?.startDate,
                         contract?.endDate
-                          ? ContractStatusEnum.CLOSED
-                          : ContractStatusEnum.ACTIVE
-                      }
+                      )}
                     />
                   )
                 )}
