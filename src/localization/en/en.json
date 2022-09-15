@@ -23,7 +23,24 @@
     "title": "Proposals"
   },
   "MyContracts": {
-    "title": "My Contracts"
+    "title": "My Contracts",
+    "filter": {
+      "all": "All",
+      "active": "Active",
+      "pending": "Pending",
+      "closed": "Closed"
+    },
+    "goToChatBtn": "Go to chat",
+    "seeJobPostBtn": "See the job post",
+    "rateString": "Rate",
+    "durationString": "Duration",
+    "titleString": "Title",
+    "descriptionString": "Description",
+    "contractStatusString": "Contract status",
+    "startDateString": "Start date",
+    "endDateString": "End date",
+    "empty": "Empty",
+    "noContracts": "You have no contracts"
   },
   "SendProposalErrors": {
     "bidRequired": "Insert your bid",
