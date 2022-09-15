@@ -1,10 +1,9 @@
 import React from "react";
-import styled from "styled-components";
 import { ContractStatusEnum, DurationTypeEnum } from "utils/enums";
-import { DARK_BLUE } from "utils/consts/colorConsts";
 import { Button, Modal } from "antd";
 import { useTranslation } from "react-i18next";
 import useModalHandler from "hooks/use-modal-handler";
+import { Box, Title, Block, Container, ModalMessage } from "./CotnractStyle";
 
 interface IContract {
   contractStatus: string;
@@ -19,31 +18,6 @@ interface IContract {
   freelancerId: number;
   closeContract: (contractId: number, freelancerId: number) => void;
 }
-
-const Container = styled.div`
-  max-width: 800px;
-  border: 1px solid ${DARK_BLUE};
-  padding: 10px;
-  margin: 5px;
-  border-radius: 10px;
-`;
-
-const Box = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Title = styled.span`
-  margin-right: 5px;
-  font-weight: 700;
-  text-decoration: underline;
-  &:after {
-    content: ":";
-  }
-`;
-const Block = styled.div`
-  margin: 5px 0;
-`;
 
 function Contract({
   contractStatus,
@@ -75,7 +49,7 @@ function Contract({
         visible={modal}
         title={t("MyJobs.endContractTitle")}
       >
-        <p style={{ fontSize: "20px" }}>{t("MyJobs.endContractMessage")}</p>
+        <ModalMessage>{t("MyJobs.endContractMessage")}</ModalMessage>
       </Modal>
       <Box>
         <div>
@@ -117,7 +91,7 @@ function Contract({
         </div>
       </Box>
       <Block>
-        <Block style={{ maxWidth: "500px" }}>
+        <Block>
           <Title>{t("MyContracts.descriptionString")}</Title>
           <span>{jobDescription}</span>
         </Block>

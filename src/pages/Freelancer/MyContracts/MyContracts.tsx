@@ -7,18 +7,24 @@ import {
 } from "services/contract/contractApi";
 import { formatToStandardDate } from "utils/functions/formatDateFunctions";
 import { DurationTypeEnum, FilterEnum } from "utils/enums";
-import Contract from "./Contract/Contract";
-import { IContract } from "./Contract/interfaces";
+import { INPUT_DATE_FORMAT_PRIMARY } from "utils/consts/inputPropsConsts";
+import Contract from "pages/Freelancer/MyContracts/Contract/Contract";
+import { IContract } from "pages/Freelancer/MyContracts/Contract/interfaces";
+import {
+  Block,
+  Container,
+  Plug,
+  Title,
+} from "pages/Freelancer/MyContracts/MyContractsStyle";
 
 const ZERO = 0;
-const dateFormat = "dd/MM/yyyy";
 
 function MyContracts() {
   const { t } = useTranslation();
 
   const { Option } = Select;
 
-  const { data, refetch } = useGetContractsQuery();
+  const { data } = useGetContractsQuery();
 
   const [closeContract] = useCloseContractMutation();
 
@@ -39,34 +45,33 @@ function MyContracts() {
       endDate: new Date(),
       freelancer: freelancerId,
     });
-    await refetch();
   };
 
   const dateCheck = (date?: string): string => {
     if (date) {
-      return formatToStandardDate(new Date(date), dateFormat);
+      return formatToStandardDate(new Date(date), INPUT_DATE_FORMAT_PRIMARY);
     }
     return t("MyContracts.empty");
   };
 
   const transformResponse = (contracts: IContract[]) => {
     return contracts
-      .map((e) => ({
-        ...e,
-        status: e.endDate ? FilterEnum.CLOSED : FilterEnum.ACTIVE,
+      .map((contract) => ({
+        ...contract,
+        status: contract.endDate ? FilterEnum.CLOSED : FilterEnum.ACTIVE,
       }))
-      .filter((e) => {
+      .filter((contract) => {
         if (selectedValue !== FilterEnum.ALL) {
-          return e.status === selectedValue;
+          return contract.status === selectedValue;
         }
-        return e;
+        return contract;
       });
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <div style={{ display: "flex" }}>
-        <h3 style={{ margin: "0 10px" }}>{t("MyContracts.title")}</h3>
+    <Container>
+      <Block>
+        <Title>{t("MyContracts.title")}</Title>
         <Select
           disabled={!data?.length}
           style={{ width: "100px" }}
@@ -81,30 +86,32 @@ function MyContracts() {
           </Option>
           <Option value={FilterEnum.ALL}>{t("MyContracts.filter.all")}</Option>
         </Select>
-      </div>
+      </Block>
       {data?.length ? (
-        transformResponse(data).map((c) => (
+        transformResponse(data).map((contract) => (
           <Contract
-            key={c.id}
-            contractId={c.id}
-            freelancerId={c.freelancer.id}
+            key={contract.id}
+            contractId={contract.id}
+            freelancerId={contract.freelancer.id}
             closeContract={closeContractHandler}
-            contractStatus={c.status}
-            startDate={dateCheck(c.startDate)}
-            endDate={dateCheck(c.endDate)}
-            duration={c.jobPost?.duration || ZERO}
-            durationType={c.jobPost?.durationType || DurationTypeEnum.WEEK}
-            title={c.jobPost?.title || t("MyContracts.empty")}
-            jobDescription={c.jobPost?.jobDescription || t("MyContracts.empty")}
-            rate={c.jobPost?.rate || ZERO}
+            contractStatus={contract.status}
+            startDate={dateCheck(contract.startDate)}
+            endDate={dateCheck(contract.endDate)}
+            duration={contract.jobPost?.duration || ZERO}
+            durationType={
+              contract.jobPost?.durationType || DurationTypeEnum.WEEK
+            }
+            title={contract.jobPost?.title || t("MyContracts.empty")}
+            jobDescription={
+              contract.jobPost?.jobDescription || t("MyContracts.empty")
+            }
+            rate={contract.jobPost?.rate || ZERO}
           />
         ))
       ) : (
-        <div style={{ margin: "0 auto", fontSize: "24px" }}>
-          {t("MyContracts.noContracts")}
-        </div>
+        <Plug>{t("MyContracts.noContracts")}</Plug>
       )}
-    </div>
+    </Container>
   );
 }
 

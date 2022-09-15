@@ -42,6 +42,7 @@ const contractApi = createApi({
         method: "PATCH",
         body: { freelancer, endDate },
       }),
+      invalidatesTags: () => ["Contract"],
     }),
   }),
 });

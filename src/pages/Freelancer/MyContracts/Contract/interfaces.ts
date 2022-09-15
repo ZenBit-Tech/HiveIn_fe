@@ -1,4 +1,5 @@
 import { DurationTypeEnum } from "utils/enums";
+import { TEnglishLevel } from "components/layoutElementWithTitle/typesDef";
 
 interface IForgotPassword {
   id: number;
@@ -79,7 +80,7 @@ interface IJobPost {
   rate: number;
   skills?: ISkills[];
   isDraft: boolean;
-  englishLevel: "advanced" | "pre-intermediate" | "intermediate";
+  englishLevel: TEnglishLevel;
   jobDescription: string;
   createdAt: Date;
   updatedAt: Date;
