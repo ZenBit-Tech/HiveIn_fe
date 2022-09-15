@@ -273,7 +273,7 @@
         "month": "month"
       },
       "description": {
-        "title": "Enter the charge per hour",
+        "title": "Description",
         "helperText": "Max 5000 symbols"
       }
     },
