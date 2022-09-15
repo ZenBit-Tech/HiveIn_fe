@@ -11,3 +11,5 @@ export const GOOGLE_BTN_BACKGROUND = "#4285f4";
 export const TEXT_GRAY = "#898989";
 export const BOX_BACKGROUND = "#f0f6ff";
 export const BLUE_MUI_PRIMARY = "#1976d2";
+export const BOX_SHADOW_LIGHT = "rgba(0, 0, 0, 0.12)";
+export const BOX_SHADOW_DARK = "rgba(0, 0, 0, 0.24)";
