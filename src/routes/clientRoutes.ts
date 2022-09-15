@@ -1,4 +1,4 @@
-import Talent from "pages/Talent/index";
+import Talent from "pages/JobOwner/Talent/Index";
 import ClientHome from "pages/JobOwner/Home/Home";
 import ClientProfile from "pages/JobOwner/Profile/Profile";
 import ClientJob from "pages/JobOwner/MyJobs/ClientJob/ClientJob";

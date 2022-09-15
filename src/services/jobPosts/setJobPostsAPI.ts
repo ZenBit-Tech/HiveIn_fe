@@ -1,17 +1,28 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IUser } from "services/user/setUserAPI";
 import { RootState } from "store/store";
-import { JOB_POST } from "utils/consts/brakepointConsts";
+import { JOB_POST } from "utils/consts/breakepointConsts";
 import { IDraftRequestObject } from "components/CreateJobPostForm/typesDef";
 import { IWorkCardProps } from "components/UI/WorkCard/WorkCard";
 import { ISearchWorkFilters } from "components/UI/SearchWorkForm/typesDef";
 
-interface Skills {
+interface ISkills {
   id: number;
   name: string;
 }
 
-interface QueryParam {
+interface ICategory {
+  id: number;
+  name: string;
+}
+
+interface IFile {
+  id: number;
+  filename: string;
+  path: string;
+}
+
+interface IQueryParam {
   id?: number;
   isDraft?: boolean;
 }
@@ -27,9 +38,14 @@ export interface IJobPost {
   jobDescription: string;
   createdAt: string;
   updatedAt: string;
-  category: string;
-  skills: Skills[];
-  user: IUser[];
+  category: ICategory;
+  skills: ISkills[];
+  user: IUser;
+  file?: IFile;
+  contract: {
+    startDate: Date;
+    endDate: Date;
+  };
 }
 
 const jobPostsAPI = createApi({
@@ -50,13 +66,13 @@ const jobPostsAPI = createApi({
     getOwnJobPosts: builder.query<IJobPost[], void>({
       query: () => `${JOB_POST}/self`,
     }),
-    getOneJobPost: builder.query<IJobPost, QueryParam>({
+    getOneJobPost: builder.query<IJobPost, IQueryParam>({
       query: ({ id }) => ({
         url: `${JOB_POST}/${id}`,
         credentials: "include",
       }),
     }),
-    getHomePosts: builder.query<IJobPost[], QueryParam>({
+    getHomePosts: builder.query<IJobPost[], IQueryParam>({
       query: (path) => ({
         url: `${JOB_POST}/home/self/${path.isDraft}`,
       }),

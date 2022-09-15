@@ -4,7 +4,7 @@ import useGoogleAuth from "hooks/useGoogleAuth";
 import { useTranslation } from "react-i18next";
 import { useGetHomePostsQuery } from "services/jobPosts/setJobPostsAPI";
 import { BLUE } from "utils/consts/colorConsts";
-import S from "./style";
+import S from "pages/JobOwner/Home/style";
 
 export default function ClientHome() {
   useGoogleAuth();

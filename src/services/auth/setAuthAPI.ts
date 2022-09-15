@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AUTH, GOOGLE, SIGN_IN, SIGN_UP } from "utils/consts/brakepointConsts";
+import { AUTH, GOOGLE, SIGN_IN, SIGN_UP } from "utils/consts/breakepointConsts";
 
 interface AuthFields {
   email: string;

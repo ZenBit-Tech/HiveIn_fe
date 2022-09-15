@@ -4,6 +4,20 @@
   },
   "SearchWork": {
     "title": "Search Work",
+    "category": "Category",
+    "price": "Price and length",
+    "habilities": "Skills and Abilities",
+    "english": "English level",
+    "img": "Attachments",
+    "skills": "Skills",
+    "send": "Send Proposal",
+    "clientInfo": "About the client",
+    "clientBudget": "Client Budget: $",
+    "profileRate": "Profile Rate: $",
+    "modalTitle": "Additional Information",
+    "bid": "Your bid",
+    "coverLetter": "Your cover letter",
+    "success": "Proposal sent!",
     "subTitle": "Jobs on GetJob",
     "byCategory": "Search by category",
     "bySkills": "Search by skills",
@@ -18,7 +32,31 @@
     "title": "Proposals"
   },
   "MyContracts": {
-    "title": "My Contracts"
+    "title": "My Contracts",
+    "filter": {
+      "all": "All",
+      "active": "Active",
+      "pending": "Pending",
+      "closed": "Closed"
+    },
+    "goToChatBtn": "Go to chat",
+    "seeJobPostBtn": "See the job post",
+    "rateString": "Rate",
+    "durationString": "Duration",
+    "titleString": "Title",
+    "descriptionString": "Description",
+    "contractStatusString": "Contract status",
+    "startDateString": "Start date",
+    "endDateString": "End date",
+    "empty": "Empty",
+    "noContracts": "You have no contracts"
+  },
+  "SendProposalErrors": {
+    "bidRequired": "Insert your bid",
+    "bidPositive": "Insert a valid number",
+    "bidTypeError": "You must specify a number",
+    "coverLetterRequired": "Insert your cover letter",
+    "coverLetterMax": "You've reached the character limit"
   },
   "MyJobs": {
     "title": "Jobs",
@@ -29,7 +67,11 @@
     "info": "About the project",
     "skills": "Necessary Skills",
     "currency": "$",
-    "perHour": "/hour"
+    "perHour": "/hour",
+    "contractStatusTitle": "Contract status:",
+    "endContractMessage": "This contract will be ended. Do you want to continue?",
+    "endContractTitle": "End a contract",
+    "continueText": "Continue"
   },
   "Chat": {
     "title": "Chat"

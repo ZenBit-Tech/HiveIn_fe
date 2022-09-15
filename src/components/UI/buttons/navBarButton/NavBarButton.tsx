@@ -1,13 +1,13 @@
 import { ReactNode } from "react";
 import { Tooltip } from "antd";
-import ButtonStyle from "components/UI/navBarButton/navBarButtonStyles";
+import ButtonStyle from "components/UI/buttons/navBarButton/navBarButtonStyles";
 
-interface NavBarButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+interface INavBarButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   icon: ReactNode;
   title: string;
 }
 
-function NavBarButton({ icon, title, onClick }: NavBarButtonProps) {
+function NavBarButton({ icon, title, onClick }: INavBarButtonProps) {
   return (
     <Tooltip title={title}>
       <ButtonStyle

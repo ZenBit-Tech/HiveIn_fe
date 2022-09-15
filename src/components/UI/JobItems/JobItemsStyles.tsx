@@ -32,4 +32,10 @@ export const RouterLink = styled(Link)`
   }
 `;
 
+export const ContractStatus = styled("span")`
+  color: ${BLACK};
+  overflow: hidden;
+  margin-right: 10px;
+`;
+
 export default JobTitle;
