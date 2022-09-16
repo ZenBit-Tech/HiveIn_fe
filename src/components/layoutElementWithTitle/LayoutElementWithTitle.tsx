@@ -24,6 +24,7 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     freelancerInfo,
     setValue,
     rowsOfTextArea,
+    isSubmitSuccess,
   } = props;
 
   const { t } = useTranslation();
@@ -114,6 +115,7 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
         options={freelancerInfo?.skills}
         errors={errors}
         setValue={setValue}
+        isSubmitSuccess={isSubmitSuccess}
       />
     ) : null;
 
