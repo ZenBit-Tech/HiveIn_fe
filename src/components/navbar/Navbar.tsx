@@ -10,20 +10,19 @@ import {
   CLIENT_PROFILE,
 } from "utils/consts/routeConsts";
 import useAuth from "hooks/useAuth";
-import { MOBILE_SCREEN_SIZE } from "utils/consts/navBarConsts";
 import { Badge, Menu } from "antd";
 import { Link } from "react-router-dom";
 import {
   useGetNotificationsQuery,
   getSocket,
 } from "services/notifications/setNotificationsAPI";
+import NavBarButton from "components/UI/buttons/navBarButton/NavBarButton";
 import navLinksPerRole, { NavLinkOptions } from "./NavLinksPerRole";
 
 function Navbar() {
   const { authToken, signOut, role } = useAuth();
   const { data, isError, isLoading } = useGetNotificationsQuery();
   const { t } = useTranslation();
-  const { screenWidth } = useViewport();
 
   const [navItens, setNavItens] = useState<NavLinkOptions | null>();
   const [countNotifications, setCountNotifications] = useState(0);
