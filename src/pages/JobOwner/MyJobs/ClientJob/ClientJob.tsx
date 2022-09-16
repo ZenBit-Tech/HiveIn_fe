@@ -16,6 +16,7 @@ import useModalHandler from "hooks/use-modal-handler";
 import defineContractStatus from "utils/functions/defineContractStatus";
 import { ContractStatusEnum } from "utils/enums";
 import { useCloseContractMutation } from "services/contract/contractApi";
+import { useEffect } from "react";
 
 dayjs.extend(relativeTime);
 
@@ -26,25 +27,35 @@ function ClientJob(): JSX.Element {
     id: Number(jobId),
   });
 
-  const [closeContract] = useCloseContractMutation();
+  const [closeContract, { isError, isSuccess, isLoading }] =
+    useCloseContractMutation();
+
+  useEffect(() => {
+    if (!isLoading && isError) {
+      notification.error({
+        description: `${t("MyContracts.server.tryAgain")}`,
+        message: `${t("MyContracts.server.error")}`,
+      });
+      return;
+    }
+    if (!isLoading && isSuccess) {
+      notification.success({
+        description: `${t("MyContracts.server.statusChanged")}`,
+        message: `${t("MyContracts.server.success")}`,
+      });
+      refetch();
+    }
+  }, [isLoading]);
 
   const { modal, toggleModal } = useModalHandler();
 
   const onModalOk = async () => {
     if (data?.contract) {
-      try {
-        await closeContract({
-          contractId: data?.contract.id,
-          endDate: new Date(),
-        });
-        toggleModal();
-        refetch();
-      } catch (e: any) {
-        notification.error({
-          description: `${e.data.message}`,
-          message: `${e.status}`,
-        });
-      }
+      await closeContract({
+        contractId: data?.contract.id,
+        endDate: new Date(),
+      });
+      toggleModal();
     }
   };
 

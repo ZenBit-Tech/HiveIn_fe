@@ -40,7 +40,13 @@
     "startDateString": "Start date",
     "endDateString": "End date",
     "empty": "Empty",
-    "noContracts": "You have no contracts"
+    "noContracts": "You have no contracts",
+    "server": {
+      "error": "Error",
+      "tryAgain": "Please, try again",
+      "success": "Success",
+      "statusChanged": "Contract status has been changed"
+    }
   },
   "SendProposalErrors": {
     "bidRequired": "Insert your bid",
