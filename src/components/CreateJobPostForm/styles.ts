@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
-export const SWrapper = styled("div")`
-  margin-left: 230px;
-`;
-
+// eslint-disable-next-line import/prefer-default-export
 export const SButtonsGroup = styled("div")`
   display: flex;
   flex-direction: column;

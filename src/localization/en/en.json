@@ -3,13 +3,51 @@
     "title": "Home"
   },
   "SearchWork": {
-    "title": "Search Work"
+    "title": "Search Work",
+    "category": "Category",
+    "price": "Price and length",
+    "habilities": "Skills and Abilities",
+    "english": "English level",
+    "img": "Attachments",
+    "skills": "Skills",
+    "send": "Send Proposal",
+    "clientInfo": "About the client",
+    "clientBudget": "Client Budget: $",
+    "profileRate": "Profile Rate: $",
+    "modalTitle": "Additional Information",
+    "bid": "Your bid",
+    "coverLetter": "Your cover letter",
+    "success": "Proposal sent!"
   },
   "Proposals": {
     "title": "Proposals"
   },
   "MyContracts": {
-    "title": "My Contracts"
+    "title": "My Contracts",
+    "filter": {
+      "all": "All",
+      "active": "Active",
+      "pending": "Pending",
+      "closed": "Closed"
+    },
+    "goToChatBtn": "Go to chat",
+    "seeJobPostBtn": "See the job post",
+    "rateString": "Rate",
+    "durationString": "Duration",
+    "titleString": "Title",
+    "descriptionString": "Description",
+    "contractStatusString": "Contract status",
+    "startDateString": "Start date",
+    "endDateString": "End date",
+    "empty": "Empty",
+    "noContracts": "You have no contracts"
+  },
+  "SendProposalErrors": {
+    "bidRequired": "Insert your bid",
+    "bidPositive": "Insert a valid number",
+    "bidTypeError": "You must specify a number",
+    "coverLetterRequired": "Insert your cover letter",
+    "coverLetterMax": "You've reached the character limit"
   },
   "MyJobs": {
     "title": "Jobs",
@@ -238,6 +276,8 @@
   },
   "PostJob": {
     "title": "Create Job Post",
+    "titleForCreate": "Create Job Post",
+    "titleForDraft": "Edit draft",
     "required": "required",
     "formFieldsInfo": {
       "title": {
@@ -250,7 +290,7 @@
         "month": "month"
       },
       "description": {
-        "title": "Enter the charge per hour",
+        "title": "Description",
         "helperText": "Max 5000 symbols"
       }
     },
@@ -266,6 +306,29 @@
       "fileUpload": "Upload file",
       "postDraft": " Save to draft",
       "postJob": "Post job"
+    }
+  },
+  "EditDeletePost": {
+    "delete": {
+      "deletedSuccessfully": "Deleted successfully",
+      "deleteError": "Something went wrong",
+      "title": "Delete job post",
+      "deleteConfirmation": "Confirm deletion of job post"
+    },
+    "edit": {
+      "updatedSuccessfully": "Post successfully updated",
+      "updateError": "Error, post not updated",
+      "userNotFound": "User not found",
+      "title": "Edit job post",
+      "text": "You can change only description or rate",
+      "labelRate": "Edit rate",
+      "descriptionLabel": "Edit description",
+      "submitButtonText": "Edit post"
+    },
+    "menuOptions": {
+      "seeMore": "See Post",
+      "edit": "Edit Post",
+      "delete": "Delete"
     }
   },
   "Notifications": {

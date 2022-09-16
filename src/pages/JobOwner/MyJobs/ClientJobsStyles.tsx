@@ -54,9 +54,15 @@ export const Section = styled.div<BoxSizing>`
   width: ${(props) => props.wd || "60%"};
   display: flex;
   align-items: center;
+  position: relative;
   @media (max-width: ${WRAP_SCREEN_SIZE}) {
     width: 100%;
   }
+`;
+
+export const SMenuWrapper = styled.div`
+  position: absolute;
+  right: 0;
 `;
 
 export const Card = styled.div<BoxSizing>`

@@ -2,13 +2,13 @@ import { Button, Typography, Modal } from "antd";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import Field from "components/DefaultField/Index";
+import Field from "components/DefaultField/DefaultField";
 import { SIGN_IN_ROUTE } from "utils/consts/routeConsts";
 import { useTranslation } from "react-i18next";
 import { PRIMARY } from "utils/consts/colorConsts";
-import api from "services/auth/forgotPassword";
-import S from "./style";
-import ForgotPasswordSchema from "./schema";
+import { useForgotPasswordMutation } from "services/auth/forgotPassword";
+import S from "pages/Auth/ForgotPassword/style";
+import ForgotPasswordSchema from "pages/Auth/ForgotPassword/schema";
 
 interface ForgotPasswordForm extends FieldValues {
   email: string;
@@ -21,8 +21,6 @@ export default function ForgotPassword() {
   });
   const { t } = useTranslation();
   const { Title, Text } = Typography;
-
-  const { useForgotPasswordMutation } = api;
 
   const [forgotPassword] = useForgotPasswordMutation();
 

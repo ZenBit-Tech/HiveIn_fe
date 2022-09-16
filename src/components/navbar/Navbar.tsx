@@ -2,7 +2,6 @@ import { useTranslation } from "react-i18next";
 import NavLink from "components/UI/navlink/NavLink";
 import NavbarStyles, { NavBarButtons } from "components/navbar/NavbarStyles";
 import logo from "components/navbar/imgs/logo.svg";
-import NavBarButton from "components/UI/navBarButton/NavBarButton";
 import { BellOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import {
   SIGN_UP_ROUTE,
@@ -13,6 +12,7 @@ import useAuth from "hooks/useAuth";
 import { useEffect, useState } from "react";
 import { Menu } from "antd";
 import { Link } from "react-router-dom";
+import NavBarButton from "components/UI/buttons/navBarButton/NavBarButton";
 import navLinksPerRole, { NavLinkOptions } from "./NavLinksPerRole";
 
 function Navbar() {
