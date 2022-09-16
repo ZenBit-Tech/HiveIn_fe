@@ -1,8 +1,10 @@
 import React, { Dispatch, useEffect } from "react";
 import { Modal as ModalANTD } from "antd";
 import { toast } from "react-toastify";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDeletePostMutation } from "services/jobPosts/setJobPostsAPI";
 import { useTranslation } from "react-i18next";
+import { MY_JOBS_ROUTE } from "utils/consts/routeConsts";
 
 type TProps = {
   isOpen: boolean;
@@ -14,6 +16,9 @@ function Modal({ isOpen, setIsOpen, id }: TProps) {
   const [deletePost, { isSuccess, isError, isLoading }] =
     useDeletePostMutation();
   const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const postRoute = `${MY_JOBS_ROUTE}/${id}`;
 
   useEffect(() => {
     if (isSuccess)
@@ -24,6 +29,7 @@ function Modal({ isOpen, setIsOpen, id }: TProps) {
 
   const handleOk = () => {
     deletePost(id);
+    if (pathname === postRoute) navigate(MY_JOBS_ROUTE);
     setIsOpen(false);
   };
 
