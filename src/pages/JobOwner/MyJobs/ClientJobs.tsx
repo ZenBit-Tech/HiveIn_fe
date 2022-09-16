@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import { useGetOwnJobPostsQuery } from "services/jobPosts/setJobPostsAPI";
 import { CREATE_JOB_POST } from "utils/consts/routeConsts";
 import { POSTS_PER_PAGE as PPG } from "utils/consts/jobListConsts";
+import { ContractStatusEnum } from "utils/enums";
 
 function ClientJobs() {
   const { email } = useAuth();
@@ -60,12 +61,17 @@ function ClientJobs() {
                   }) => (
                     <JobItem
                       key={id}
+                      id={id}
                       title={title!}
                       description={jobDescription!}
                       link={id!.toString()}
                       publishDate={createdAt!}
                       hourlyRate={rate!}
-                      contractStatus={contract?.status || "Pending"}
+                      contractStatus={
+                        contract?.endDate
+                          ? ContractStatusEnum.CLOSED
+                          : ContractStatusEnum.ACTIVE
+                      }
                     />
                   )
                 )}

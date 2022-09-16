@@ -1,9 +1,8 @@
 import { Typography } from "antd";
-import React from "react";
 import { formatDistance } from "date-fns";
-import S from "./style";
+import S from "components/JobPost/style";
 
-interface JobPostProps {
+interface IJobPostProps {
   name: string;
   createdAt: Date;
   isDraft?: boolean;
@@ -21,7 +20,7 @@ export default function JobPost({
   proposals,
   createdBy,
   isDraft = false,
-}: JobPostProps) {
+}: IJobPostProps) {
   const { Title, Text } = Typography;
   return (
     <S.Box>

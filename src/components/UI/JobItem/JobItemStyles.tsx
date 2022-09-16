@@ -12,6 +12,8 @@ const JobTitle = styled.div<ITitle>`
   font-size: ${(props) => props.font_sz || "1em"};
   justify-content: space-between;
   padding-bottom: ${(props) => props.font_sz || "25px"};
+  margin-right: 10px;
+  margin-top: 3px;
 `;
 
 export const SkillTag = styled(Tag)`

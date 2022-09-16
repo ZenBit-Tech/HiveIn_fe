@@ -3,9 +3,6 @@ import { useTranslation } from "react-i18next";
 import NavLink from "components/UI/navlink/NavLink";
 import NavbarStyles, { NavBarButtons } from "components/navbar/NavbarStyles";
 import logo from "components/navbar/imgs/logo.svg";
-import useViewport from "hooks/useViewport";
-import NavBarButton from "components/UI/navBarButton/NavBarButton";
-import MenuDrawer from "components/UI/navBarDrawer/MenuDrawer";
 import { BellOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import {
   SIGN_UP_ROUTE,
@@ -108,17 +105,11 @@ function Navbar() {
         ))}
       </Menu>
       <NavBarButtons>
-        {screenWidth < MOBILE_SCREEN_SIZE ? (
-          <MenuDrawer
-            drawerLinks={navItens?.options.map(({ links }) => links)[0] ?? []}
-          />
-        ) : (
-          <NavBarButton
-            icon={<LogoutOutlined />}
-            title={t("SignIn.signOut")}
-            onClick={signOut}
-          />
-        )}
+        <NavBarButton
+          icon={<LogoutOutlined />}
+          title={t("SignIn.signOut")}
+          onClick={signOut}
+        />
       </NavBarButtons>
     </NavbarStyles>
   );

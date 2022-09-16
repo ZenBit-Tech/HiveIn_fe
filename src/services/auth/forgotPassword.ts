@@ -3,7 +3,7 @@ import {
   AUTH,
   FORGOT_PASSWORD,
   RESTORE_PASSWORD,
-} from "utils/consts/brakepointConsts";
+} from "utils/consts/breakepointConsts";
 
 interface ForgotPassword {
   email: string;
@@ -42,7 +42,7 @@ const forgotPassApi = createApi({
   }),
 });
 
-export default {
-  useForgotPasswordMutation: forgotPassApi.useForgotPasswordMutation,
-  useRestorePasswordMutation: forgotPassApi.useRestorePasswordMutation,
-} = forgotPassApi;
+export const { useForgotPasswordMutation, useRestorePasswordMutation } =
+  forgotPassApi;
+
+export default forgotPassApi;

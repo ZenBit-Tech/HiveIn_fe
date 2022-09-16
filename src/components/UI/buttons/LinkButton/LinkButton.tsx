@@ -2,12 +2,12 @@ import Button from "components/UI/buttons/LinkButton/LinkButtonStyles";
 import { ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 
-interface Props {
+interface IProps {
   link: string;
   children: ReactNode;
 }
 
-function LinkButton({ link, children }: Props): JSX.Element {
+function LinkButton({ link, children }: IProps): JSX.Element {
   const navigate = useNavigate();
 
   const goToThisPage = () => {

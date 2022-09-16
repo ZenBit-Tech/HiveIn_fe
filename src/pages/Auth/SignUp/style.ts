@@ -1,22 +1,24 @@
 import styled from "styled-components";
-import { LIGHT_GRAY } from "utils/consts/colorConsts";
+import { BOX_BORDER } from "utils/consts/colorConsts";
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const FormBox = styled.div`
-  width: 45%;
-  height: 70%;
-  background: ${LIGHT_GRAY};
+  width: 35%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  border-radius: 10px;
+  background-color: ${BOX_BORDER};
+  border: 1px solid ${BOX_BORDER};
 `;
 
 const Form = styled.form`
