@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { Menu } from "antd";
 import { Link } from "react-router-dom";
 import NavBarButton from "components/UI/buttons/navBarButton/NavBarButton";
+import { CLIENT_ROLE } from "utils/consts/navBarConsts";
 import navLinksPerRole, { NavLinkOptions } from "./NavLinksPerRole";
 
 function Navbar() {
@@ -61,7 +62,7 @@ function Navbar() {
         mode="horizontal"
         style={{ width: "100%" }}
       >
-        {role === "client" ? (
+        {role === CLIENT_ROLE ? (
           <Menu.Item key={t("Profile.title")}>
             <Link to={CLIENT_PROFILE}>{t("Profile.title")}</Link>
           </Menu.Item>
