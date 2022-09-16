@@ -210,7 +210,7 @@
     "submitButtonText": "save changes",
     "fieldsData": {
       "email": {
-        "title": "email"
+        "title": "Email"
       },
       "firstName": {
         "title": "First name",
@@ -336,5 +336,8 @@
       "edit": "Edit Post",
       "delete": "Delete"
     }
+  },
+  "Notifications": {
+    "title": "Notifications"
   }
 }

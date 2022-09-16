@@ -1,23 +1,28 @@
-import { SettingFilled, UserOutlined } from "@ant-design/icons";
 import i18next from "localization/en/en.json";
 import React from "react";
 import {
+  CHAT_ROUTE,
   CLIENT_HOME,
-  CLIENT_PROFILE,
   CREATE_JOB_POST,
   MY_CONTRACTS_ROUTE,
   MY_JOBS_ROUTE,
-  PROFILE_ROUTE,
+  NOTIFICATIONS_ROUTE,
   PROPOSALS_ROUTE,
   SEARCH_WORK_ROUTE,
+  SETTINGS_CONTACT_INFO_ROUTE,
   SETTINGS_ROUTE,
   TALENT_ROUTE,
 } from "utils/consts/routeConsts";
 
-export type NavRoleOptions = {
+export type LinkType = {
   title: string;
   to: string;
 };
+
+interface NavLinkType {
+  title: string;
+  links: LinkType[];
+}
 
 export type NavButtonOptions = {
   path: string;
@@ -26,8 +31,7 @@ export type NavButtonOptions = {
 };
 
 export type NavLinkOptions = {
-  links: NavRoleOptions[];
-  buttons: NavButtonOptions[];
+  options: NavLinkType[];
   home: string;
 };
 
@@ -38,54 +42,75 @@ export interface NavLinkRoles {
 
 const navLinksPerRole: NavLinkRoles = {
   freelancer: {
-    links: [
+    options: [
       {
-        to: SEARCH_WORK_ROUTE,
-        title: i18next.SearchWork.title,
+        title: i18next.MyJobs.title,
+        links: [
+          {
+            to: SEARCH_WORK_ROUTE,
+            title: i18next.SearchWork.title,
+          },
+          {
+            to: PROPOSALS_ROUTE,
+            title: i18next.Proposals.title,
+          },
+          {
+            title: i18next.MyJobs.title,
+            to: MY_JOBS_ROUTE,
+          },
+          {
+            to: MY_CONTRACTS_ROUTE,
+            title: i18next.MyContracts.title,
+          },
+        ],
       },
       {
-        to: PROPOSALS_ROUTE,
-        title: i18next.Proposals.title,
-      },
-      {
-        to: MY_CONTRACTS_ROUTE,
-        title: i18next.MyContracts.title,
-      },
-    ],
-    buttons: [
-      {
-        path: SETTINGS_ROUTE,
-        title: i18next.Settings.title,
-        icon: <SettingFilled />,
-      },
-      {
-        path: PROFILE_ROUTE,
         title: i18next.Profile.title,
-        icon: <UserOutlined />,
+        links: [
+          {
+            to: SETTINGS_CONTACT_INFO_ROUTE,
+            title: i18next.Profile.title,
+          },
+          {
+            to: SETTINGS_ROUTE,
+            title: i18next.Settings.title,
+          },
+        ],
+      },
+      {
+        title: i18next.Chat.title,
+        links: [
+          {
+            to: CHAT_ROUTE,
+            title: i18next.Chat.title,
+          },
+          {
+            to: NOTIFICATIONS_ROUTE,
+            title: i18next.Notifications.title,
+          },
+        ],
       },
     ],
     home: SEARCH_WORK_ROUTE,
   },
   client: {
-    links: [
+    options: [
       {
-        to: MY_JOBS_ROUTE,
         title: i18next.MyJobs.title,
-      },
-      {
-        to: TALENT_ROUTE,
-        title: i18next.Talent.pageTitle,
-      },
-      {
-        to: CREATE_JOB_POST,
-        title: i18next.PostJob.title,
-      },
-    ],
-    buttons: [
-      {
-        path: CLIENT_PROFILE,
-        title: i18next.Profile.title,
-        icon: <UserOutlined />,
+        links: [
+          {
+            to: MY_JOBS_ROUTE,
+            title: "Jobs",
+          },
+          {
+            to: TALENT_ROUTE,
+            title: i18next.Talent.pageTitle,
+          },
+          {
+            to: CREATE_JOB_POST,
+            title: i18next.PostJob.title,
+          },
+        ],
       },
     ],
     home: CLIENT_HOME,

@@ -117,4 +117,8 @@ function LongMenu({ link, id }: { link?: string; id: number }) {
   );
 }
 
+LongMenu.defaultProps = {
+  link: "",
+};
+
 export default LongMenu;
