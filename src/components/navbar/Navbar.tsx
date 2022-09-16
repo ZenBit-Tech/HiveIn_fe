@@ -2,9 +2,7 @@ import { useTranslation } from "react-i18next";
 import NavLink from "components/UI/navlink/NavLink";
 import NavbarStyles, { NavBarButtons } from "components/navbar/NavbarStyles";
 import logo from "components/navbar/imgs/logo.svg";
-import useViewport from "hooks/useViewport";
 import NavBarButton from "components/UI/navBarButton/NavBarButton";
-import MenuDrawer from "components/UI/navBarDrawer/MenuDrawer";
 import { BellOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import {
   SIGN_UP_ROUTE,
@@ -12,7 +10,6 @@ import {
   CLIENT_PROFILE,
 } from "utils/consts/routeConsts";
 import useAuth from "hooks/useAuth";
-import { MOBILE_SCREEN_SIZE } from "utils/consts/navBarConsts";
 import { useEffect, useState } from "react";
 import { Menu } from "antd";
 import { Link } from "react-router-dom";
@@ -22,7 +19,6 @@ function Navbar() {
   const { authToken, signOut, role } = useAuth();
   const [navItens, setNavItens] = useState<NavLinkOptions | null>();
   const { t } = useTranslation();
-  const { screenWidth } = useViewport();
 
   useEffect(() => {
     if (role) setNavItens(navLinksPerRole[role]);
@@ -85,17 +81,11 @@ function Navbar() {
         ))}
       </Menu>
       <NavBarButtons>
-        {screenWidth < MOBILE_SCREEN_SIZE ? (
-          <MenuDrawer
-            drawerLinks={navItens?.options.map(({ links }) => links)[0] ?? []}
-          />
-        ) : (
-          <NavBarButton
-            icon={<LogoutOutlined />}
-            title={t("SignIn.signOut")}
-            onClick={signOut}
-          />
-        )}
+        <NavBarButton
+          icon={<LogoutOutlined />}
+          title={t("SignIn.signOut")}
+          onClick={signOut}
+        />
       </NavBarButtons>
     </NavbarStyles>
   );
