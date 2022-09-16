@@ -45,6 +45,7 @@ export interface IJobPost {
   contract: {
     startDate: Date;
     endDate: Date;
+    id: number;
   };
 }
 
