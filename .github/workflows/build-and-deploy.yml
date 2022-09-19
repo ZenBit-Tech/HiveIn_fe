@@ -7,12 +7,13 @@ on:
   push:
     branches:
       - master
+      - dev
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
       version:
-        description: 'Image version'
+        description: "Image version"
         required: true
 #2
 env:
@@ -23,7 +24,7 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the repo 
+      - name: Checkout the repo
         uses: actions/checkout@v2
 
       - name: Make envfile
@@ -32,11 +33,11 @@ jobs:
           envkey_REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
           file_name: .env.production
           fail_on_empty: false
-      
+
       - name: Check .env file
         run: |
           cat .env.production
-        
+
       - name: Build container image
         run: docker build -t $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7) .
 
@@ -44,20 +45,20 @@ jobs:
         uses: digitalocean/action-doctl@v2
         with:
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-    
+
       - name: Log in to DigitalOcean Container Registry with short-lived credentials
         run: doctl registry login --expiry-seconds 600
-      
+
       - name: Remove all old images
         run: if [ ! -z "$(doctl registry repository list | grep "$(echo $IMAGE_NAME)")" ]; then doctl registry repository delete-manifest $(echo $IMAGE_NAME) $(doctl registry repository list-tags $(echo $IMAGE_NAME) | grep -o "sha.*") --force; else echo "No repository"; fi
 
       - name: Push image to DigitalOcean Container Registry
         run: docker push $(echo $REGISTRY)/$(echo $IMAGE_NAME):$(echo $GITHUB_SHA | head -c7)
-        
+
   deploy:
     runs-on: ubuntu-latest
     needs: build_and_push
-    
+
     steps:
       - name: Deploy to Digital Ocean droplet via SSH action
         uses: appleboy/ssh-action@v0.1.3
