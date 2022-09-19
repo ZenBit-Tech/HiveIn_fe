@@ -5,18 +5,23 @@ import { IFreelancer } from "services/profileInfo/typesDef";
 import S from "components/UI/SearchWorkForm/styles";
 import propsDataCollection from "components/UI/SearchWorkForm/staticData";
 import { Typography } from "antd";
-import { useState } from "react";
-import { ISearchWorkFilters } from "./typesDef";
+import { ISearchWorkFilters } from "components/UI/SearchWorkForm/typesDef";
+import { DurationTypeEnum } from "utils/enums";
 
 interface ISearchWorkFormProps {
   filters: ISearchWorkFilters;
   setFilters: (filters: ISearchWorkFilters) => void;
+  setDefaultPage: () => void;
 }
 
 const defaultCategoryId = 1;
-const defaultDurationType = "week";
+const defaultDurationType = DurationTypeEnum.WEEK;
 
-function SearchWorkForm({ filters, setFilters }: ISearchWorkFormProps) {
+function SearchWorkForm({
+  filters,
+  setFilters,
+  setDefaultPage,
+}: ISearchWorkFormProps) {
   const { Title } = Typography;
 
   const {
@@ -28,10 +33,14 @@ function SearchWorkForm({ filters, setFilters }: ISearchWorkFormProps) {
   } = useForm<FieldValues>({
     defaultValues: filters,
   });
-
-  const [skills, setSkills] = useState(filters.skills);
   const onSubmit = (filtersForm: FieldValues) => {
-    setFilters(filtersForm);
+    setFilters({
+      ...filtersForm,
+      skills: filtersForm.skills.map((skill: number) => {
+        return { id: skill };
+      }),
+    });
+    setDefaultPage();
   };
 
   const { t } = useTranslation();
@@ -39,9 +48,10 @@ function SearchWorkForm({ filters, setFilters }: ISearchWorkFormProps) {
   return (
     <S.Form onSubmit={handleSubmit(onSubmit)}>
       <Title level={3}>Filters</Title>
+
       {propsDataCollection.map((propsData) => (
         <LayoutElementWithTitle
-          freelancerInfo={{ skills } as unknown as IFreelancer}
+          freelancerInfo={{ skills: filters.skills } as unknown as IFreelancer}
           setValue={setValue}
           errors={errors}
           key={propsData.title}
@@ -63,7 +73,6 @@ function SearchWorkForm({ filters, setFilters }: ISearchWorkFormProps) {
             durationType: defaultDurationType,
             englishLevel: undefined,
           });
-          setSkills([]);
           setValue("skills", []);
         }}
       >

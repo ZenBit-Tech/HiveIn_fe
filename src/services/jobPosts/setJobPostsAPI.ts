@@ -48,6 +48,11 @@ export interface IJobPost {
   };
 }
 
+export interface IFilterReturnType {
+  data: IWorkCardProps[];
+  totalCount: number;
+}
+
 const jobPostsAPI = createApi({
   reducerPath: "setJobPostsAPI",
   baseQuery: fetchBaseQuery({
@@ -93,10 +98,7 @@ const jobPostsAPI = createApi({
         },
       }),
     }),
-    filterJobPosts: builder.query<
-      { data: IWorkCardProps[]; totalCount: number },
-      ISearchWorkFilters
-    >({
+    filterJobPosts: builder.query<IFilterReturnType, ISearchWorkFilters>({
       query: (params) => ({
         url: `${JOB_POST}/search-job/`,
         params: {

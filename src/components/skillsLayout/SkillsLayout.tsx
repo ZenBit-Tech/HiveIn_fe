@@ -9,13 +9,10 @@ function SkillsLayout({
   errors,
   options,
   setValue,
-  showSmall = false,
 }: {
   errors: FieldErrorsImpl;
   options: { id: number }[];
   setValue: any;
-  // eslint-disable-next-line react/require-default-props
-  showSmall?: boolean;
 }) {
   const { data } = useGetInfoQuery("skill");
   const queriedActiveSkills = options.map(({ id }) => id);
@@ -38,7 +35,7 @@ function SkillsLayout({
   };
 
   return (
-    <SDiv showSmall={showSmall}>
+    <SDiv>
       {!!data &&
         data.map(({ id, name }) => {
           return (

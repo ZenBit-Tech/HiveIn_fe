@@ -14,6 +14,7 @@ import WorkCard, { IWorkCardProps } from "components/UI/WorkCard/WorkCard";
 import SearchWorkForm from "components/UI/SearchWorkForm";
 import { useGetOwnProfileQuery } from "services/profileInfo/profileInfoAPI";
 import { ISearchWorkFilters } from "components/UI/SearchWorkForm/typesDef";
+import { Element, scroller } from "react-scroll";
 
 const workPerPage = 10;
 const defaultPage = 1;
@@ -28,46 +29,59 @@ function SearchWork() {
 
   const [filters, setFilters] = useState<ISearchWorkFilters>({});
 
-  const { data, isSuccess, isLoading } = useFilterJobPostsQuery({
+  const { data, isSuccess, isLoading, isFetching } = useFilterJobPostsQuery({
     ...filters,
+    skip: (currentPage - 1) * postsPerPage,
+    take: postsPerPage,
   });
 
   const [jobs, setJobs] = useState<IWorkCardProps[]>();
   const [totalCountJobs, setTotalCountJobs] = useState(data?.totalCount);
 
+  const titleElementName = "title-element";
+
   useEffect(() => {
-    setJobs(data?.data);
-    setTotalCountJobs(data?.totalCount);
-  }, [isSuccess, isLoading, data]);
+    if (isSuccess && !isFetching) {
+      setJobs(data?.data);
+      setTotalCountJobs(data?.totalCount);
+    }
+  }, [isSuccess, data, isFetching]);
 
   useEffect(() => {
     setFilters({
       category: freelancerInfo?.categoryId,
       skills: freelancerInfo?.skills ? freelancerInfo?.skills : [],
     });
-  }, [
-    freelancerInfo?.categoryId,
-    freelancerInfo?.skills,
-    isUserInformationSuccess,
-  ]);
+  }, [isUserInformationSuccess]);
 
-  const lastPostIndex = currentPage * postsPerPage;
-  const firstPostIndex = lastPostIndex - postsPerPage;
+  useEffect(() => {
+    scroller.scrollTo(titleElementName, {
+      duration: 800,
+      smooth: true,
+    });
+  }, [isSuccess]);
 
+  const setDefaultPage = () => {
+    setCurrentPage(defaultPage);
+  };
   return (
     <PageContainer>
       <Header>
-        <TitleText>{t("SearchWork.subTitle")}</TitleText>
+        <Element name={titleElementName}>
+          <TitleText>{t("SearchWork.subTitle")}</TitleText>
+        </Element>
       </Header>
       <WorkSection>
-        {isLoading && <Skeleton active paragraph={{ rows: 4 }} />}
-        {isSuccess && totalCountJobs === 0 ? (
-          <EmptyBox description={t("SearchWork.noResult")} />
-        ) : (
-          <>
-            {jobs
-              ?.slice(firstPostIndex, lastPostIndex)
-              .map(({ id, title, jobDescription, createdAt }) => (
+        {(isLoading || isFetching) && (
+          <Skeleton active paragraph={{ rows: 4 }} />
+        )}
+        {isSuccess &&
+          !isFetching &&
+          (totalCountJobs === 0 ? (
+            <EmptyBox description={t("SearchWork.noResult")} />
+          ) : (
+            <>
+              {jobs?.map(({ id, title, jobDescription, createdAt }) => (
                 <WorkCard
                   key={id}
                   title={title!}
@@ -77,21 +91,26 @@ function SearchWork() {
                 />
               ))}
 
-            <StyledPagination
-              showSizeChanger
-              hideOnSinglePage
-              onShowSizeChange={(_page, pageSize) => setPostsPerPage(pageSize)}
-              current={currentPage}
-              onChange={(page) => setCurrentPage(page)}
-              pageSize={postsPerPage}
-              total={totalCountJobs}
-            />
-          </>
-        )}
+              <StyledPagination
+                showSizeChanger
+                onShowSizeChange={(_page, pageSize) =>
+                  setPostsPerPage(pageSize)
+                }
+                current={currentPage}
+                onChange={(page) => setCurrentPage(page)}
+                pageSize={postsPerPage}
+                total={totalCountJobs}
+              />
+            </>
+          ))}
       </WorkSection>
       <FilterSection>
         {isUserInformationSuccess && filters.category && filters.skills && (
-          <SearchWorkForm filters={filters} setFilters={setFilters} />
+          <SearchWorkForm
+            filters={filters}
+            setFilters={setFilters}
+            setDefaultPage={setDefaultPage}
+          />
         )}
       </FilterSection>
     </PageContainer>

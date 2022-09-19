@@ -4,9 +4,9 @@ import { ILayoutElementWithTitleProps } from "components/layoutElementWithTitle/
 export const SWrapper = styled("div")`
   display: flex;
   align-items: flex-start;
-  flex-direction: column;
   margin-top: 15px;
   margin-bottom: 15px;
+  flex-wrap: wrap;
 `;
 
 export const SH = styled("h3")`

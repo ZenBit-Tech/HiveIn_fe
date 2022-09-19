@@ -11,7 +11,7 @@ const propsDataCollection: ILayoutElementWithoutControl[] = [
   },
   {
     title: "SearchWork.bySkills",
-    element: "skillsLayoutSmall",
+    element: "skillsLayout",
     formFieldName: "skills",
     containerWidth: "half",
   },

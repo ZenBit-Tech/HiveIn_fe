@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { TEXT_GRAY } from "utils/consts/colorConsts";
+import { BOX_BACKGROUND, TEXT_GRAY } from "utils/consts/colorConsts";
 
 interface ITitle {
   font_sz?: string;
@@ -12,6 +12,10 @@ export const Card = styled.div`
   border-radius: 10px;
   margin-bottom: 15px;
   width: 100%;
+  cursor: pointer;
+  &:hover {
+    background-color: ${BOX_BACKGROUND};
+  }
 `;
 
 const JobTitle = styled.div<ITitle>`

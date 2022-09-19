@@ -1,3 +1,6 @@
+import { TEnglishLevel } from "components/layoutElementWithTitle/typesDef";
+import { DurationTypeEnum } from "utils/enums";
+
 export interface ISearchWorkFilters {
   take?: number;
   skip?: number;
@@ -5,6 +8,6 @@ export interface ISearchWorkFilters {
   skills?: { id: number }[];
   rate?: number;
   duration?: number;
-  durationType?: string;
-  englishLevel?: string;
+  durationType?: DurationTypeEnum;
+  englishLevel?: TEnglishLevel;
 }
