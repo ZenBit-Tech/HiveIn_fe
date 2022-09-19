@@ -17,7 +17,9 @@ import {
   getSocket,
 } from "services/notifications/setNotificationsAPI";
 import NavBarButton from "components/UI/buttons/navBarButton/NavBarButton";
-import navLinksPerRole, { NavLinkOptions } from "./NavLinksPerRole";
+import navLinksPerRole, {
+  NavLinkOptions,
+} from "components/navbar/NavLinksPerRole";
 
 function Navbar() {
   const { authToken, signOut, role } = useAuth();
@@ -25,7 +27,7 @@ function Navbar() {
   const { t } = useTranslation();
 
   const [navItens, setNavItens] = useState<NavLinkOptions | null>();
-  const [countNotifications, setCountNotifications] = useState(0);
+  const [countNotifications, setCountNotifications] = useState<number>(0);
 
   const socket = getSocket();
   socket.on("first-message", () => {

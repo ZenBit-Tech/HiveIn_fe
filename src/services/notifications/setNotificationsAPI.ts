@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { io, Socket } from "socket.io-client";
 import { RootState } from "store/store";
+import { NOTIFICATIONS } from "utils/consts/breakepointConsts";
 
 export interface Notifications {
   id?: number;
@@ -38,7 +39,7 @@ const notificationsAPI = createApi({
   }),
   endpoints: (builder) => ({
     getNotifications: builder.query<Notifications[], void>({
-      query: () => "notifications",
+      query: () => NOTIFICATIONS,
     }),
     sendNotification: builder.mutation<Notifications, Notifications>({
       queryFn: (notification: Notifications) => {
@@ -56,7 +57,7 @@ const notificationsAPI = createApi({
     }),
     readNotification: builder.mutation<void, number>({
       query: (arg) => ({
-        url: `notifications/${arg}`,
+        url: `${NOTIFICATIONS}/${arg}`,
         method: "PATCH",
       }),
     }),
