@@ -20,6 +20,7 @@ import NavBarButton from "components/UI/buttons/navBarButton/NavBarButton";
 import navLinksPerRole, {
   NavLinkOptions,
 } from "components/navbar/NavLinksPerRole";
+import { CLIENT_ROLE } from "utils/consts/navBarConsts";
 
 function Navbar() {
   const { authToken, signOut, role } = useAuth();
@@ -86,7 +87,7 @@ function Navbar() {
         mode="horizontal"
         style={{ width: "100%" }}
       >
-        {role === "client" ? (
+        {role === CLIENT_ROLE ? (
           <Menu.Item key={t("Profile.title")}>
             <Link to={CLIENT_PROFILE}>{t("Profile.title")}</Link>
           </Menu.Item>
