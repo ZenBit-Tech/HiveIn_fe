@@ -30,11 +30,6 @@ function Navbar() {
   const [navItens, setNavItens] = useState<NavLinkOptions | null>();
   const [countNotifications, setCountNotifications] = useState<number>(0);
 
-  const socket = getSocket();
-  socket.on("first-message", () => {
-    setCountNotifications(countNotifications + 1);
-  });
-
   useEffect(() => {
     if (!isError && !isLoading && role) {
       const count = data?.filter((item) => !item.read).length;
@@ -49,6 +44,11 @@ function Navbar() {
     }
     // eslint-disable-next-line
   }, [role, authToken]);
+
+  const socket = getSocket();
+  socket.on("first-message", () => {
+    setCountNotifications(countNotifications + 1);
+  });
 
   if (!authToken) {
     return (

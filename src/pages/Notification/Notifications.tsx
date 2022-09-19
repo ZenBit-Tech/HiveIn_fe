@@ -16,6 +16,13 @@ export default function Notifications() {
   const [readNotification] = useReadNotificationMutation();
   const { data, isLoading, isSuccess } = useGetNotificationsQuery();
   const [notifications, setNotifications] = useState<NotificationsType[]>([]);
+
+  useEffect(() => {
+    if (isSuccess && !isLoading && data) {
+      setNotifications(data);
+    }
+  }, [isLoading, isSuccess, data]);
+
   const socket = getSocket();
 
   function receiveNotification(notification: NotificationsType) {
@@ -26,12 +33,6 @@ export default function Notifications() {
   socket.on("first-message", (notification) => {
     receiveNotification(notification);
   });
-
-  useEffect(() => {
-    if (isSuccess && !isLoading && data) {
-      setNotifications(data);
-    }
-  }, [isLoading, isSuccess, data]);
 
   const handleReadNotification = (id: number) => {
     readNotification(id);
