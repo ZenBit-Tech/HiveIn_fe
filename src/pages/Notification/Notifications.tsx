@@ -9,7 +9,7 @@ import {
   Notifications as NotificationsType,
   getSocket,
 } from "services/notifications/setNotificationsAPI";
-import S from "./style";
+import S from "pages/Notification/style";
 
 export default function Notifications() {
   const [sendNotification] = useSendNotificationMutation();
