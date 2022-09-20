@@ -39,7 +39,9 @@ function JobItems({
       <JobTitle>
         <RouterLink to={link}>{title}</RouterLink>
         <DeatailedInfo>
-          <ContractStatus>{contractStatus}</ContractStatus>
+          {contractStatus !== ContractStatusEnum.PENDING && (
+            <ContractStatus>{contractStatus}</ContractStatus>
+          )}
           {t("MyJobs.currency")}
           {hourlyRate}
           {t("MyJobs.perHour")}

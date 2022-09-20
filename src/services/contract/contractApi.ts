@@ -1,15 +1,26 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "store/store";
-import { IContract } from "pages/Freelancer/MyContracts/Contract/interfaces";
 import {
   CONTRACTS,
   FREELANCER_CONTRACTS,
 } from "utils/consts/breakepointConsts";
+import { IJobPost } from "services/jobPosts/setJobPostsAPI";
 
 interface ICloseContract {
   freelancer?: number;
   endDate: Date;
   contractId: number;
+}
+
+export interface IContract {
+  id: number;
+  offer: {
+    id: number;
+    jobPost: IJobPost;
+    status: string;
+  };
+  startDate?: string;
+  endDate?: string;
 }
 
 const contractApi = createApi({
