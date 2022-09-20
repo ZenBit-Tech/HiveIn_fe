@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NavLink from "components/UI/navlink/NavLink";
 import NavbarStyles, { NavBarButtons } from "components/navbar/NavbarStyles";
@@ -9,17 +10,32 @@ import {
   CLIENT_PROFILE,
 } from "utils/consts/routeConsts";
 import useAuth from "hooks/useAuth";
-import { useEffect, useState } from "react";
-import { Menu } from "antd";
+import { Badge, Menu } from "antd";
 import { Link } from "react-router-dom";
+import {
+  useGetNotificationsQuery,
+  getSocket,
+} from "services/notifications/setNotificationsAPI";
 import NavBarButton from "components/UI/buttons/navBarButton/NavBarButton";
+import navLinksPerRole, {
+  NavLinkOptions,
+} from "components/navbar/NavLinksPerRole";
 import { CLIENT_ROLE } from "utils/consts/navBarConsts";
-import navLinksPerRole, { NavLinkOptions } from "./NavLinksPerRole";
 
 function Navbar() {
   const { authToken, signOut, role } = useAuth();
-  const [navItens, setNavItens] = useState<NavLinkOptions | null>();
+  const { data, isError, isLoading } = useGetNotificationsQuery();
   const { t } = useTranslation();
+
+  const [navItens, setNavItens] = useState<NavLinkOptions | null>();
+  const [countNotifications, setCountNotifications] = useState<number>(0);
+
+  useEffect(() => {
+    if (!isError && !isLoading && role) {
+      const count = data?.filter((item) => !item.read).length;
+      setCountNotifications(count || 0);
+    }
+  }, [data, isError, isLoading, role]);
 
   useEffect(() => {
     if (role) setNavItens(navLinksPerRole[role]);
@@ -28,6 +44,11 @@ function Navbar() {
     }
     // eslint-disable-next-line
   }, [role, authToken]);
+
+  const socket = getSocket();
+  socket.on("first-message", () => {
+    setCountNotifications(countNotifications + 1);
+  });
 
   if (!authToken) {
     return (
@@ -46,7 +67,11 @@ function Navbar() {
       case t("Profile.title"):
         return <UserOutlined />;
       case t("Chat.title"):
-        return <BellOutlined />;
+        return (
+          <Badge size="small" count={countNotifications}>
+            <BellOutlined />
+          </Badge>
+        );
       default:
         return undefined;
     }

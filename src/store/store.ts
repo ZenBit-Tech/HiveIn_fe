@@ -12,6 +12,7 @@ import setUserApi from "services/user/setUserAPI";
 import authApi from "services/auth/setAuthAPI";
 import userPersistedReducer from "store/slices/userSlice";
 import setJobPostsAPI from "services/jobPosts/setJobPostsAPI";
+import setNotificationsAPI from "services/notifications/setNotificationsAPI";
 import proposalsApi from "services/jobPosts/proposalsAPI";
 import { getProfileInfoApi } from "services/profileInfo/profileInfoAPI";
 import { getSkillsOrCategory } from "services/categoriesAndSkills/categoriesAndSkills";
@@ -31,6 +32,7 @@ export const store = configureStore({
     [setJobPostsAPI.reducerPath]: setJobPostsAPI.reducer,
     [proposalsApi.reducerPath]: proposalsApi.reducer,
     [getTalentApi.reducerPath]: getTalentApi.reducer,
+    [setNotificationsAPI.reducerPath]: setNotificationsAPI.reducer,
     [contractApi.reducerPath]: contractApi.reducer,
     user: userPersistedReducer,
   },
