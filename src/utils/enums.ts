@@ -1,7 +1,7 @@
 export enum ContractStatusEnum {
-  PENDING = "pending",
-  ACTIVE = "active",
-  CLOSED = "closed",
+  PENDING = "Pending",
+  ACTIVE = "Active",
+  CLOSED = "Closed",
 }
 export enum FilterEnum {
   ALL = "all",

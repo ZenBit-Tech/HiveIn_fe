@@ -1,15 +1,22 @@
-import { Button, Divider, Typography } from "antd";
+import { Divider, Typography } from "antd";
 import JobPost from "components/JobPost/Index";
 import useGoogleAuth from "hooks/useGoogleAuth";
 import { useTranslation } from "react-i18next";
 import { useGetHomePostsQuery } from "services/jobPosts/setJobPostsAPI";
 import { BLUE } from "utils/consts/colorConsts";
 import S from "pages/JobOwner/Home/style";
+import { MY_JOBS_ROUTE } from "utils/consts/routeConsts";
+import SendButton from "components/UI/buttons/SendButton/SendButton";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setIsDraft } from "store/slices/isDraftSlice";
+
+const { Title } = Typography;
 
 export default function ClientHome() {
   useGoogleAuth();
-
-  const { Title } = Typography;
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const { data: drafts } = useGetHomePostsQuery({
     isDraft: true,
@@ -33,9 +40,16 @@ export default function ClientHome() {
         <Divider />
         <S.TitleContainer>
           <Title level={4}>{t("Dashboard.titles.posts")}</Title>
-          <Button shape="round" size="large" type="primary">
-            {t("Dashboard.buttons.seePosts")}
-          </Button>
+          <div>
+            <SendButton
+              onClick={() => {
+                dispatch(setIsDraft({ isDraft: false }));
+                navigate(MY_JOBS_ROUTE);
+              }}
+            >
+              {t("Dashboard.buttons.seePosts")}
+            </SendButton>
+          </div>
         </S.TitleContainer>
         {posts ? (
           posts.map(({ createdAt, title, ...post }) => (
@@ -57,9 +71,16 @@ export default function ClientHome() {
         <Divider />
         <S.TitleContainer>
           <Title level={4}>{t("Dashboard.titles.drafts")}</Title>
-          <Button shape="round" size="large" type="primary">
-            {t("Dashboard.buttons.seeDrafts")}
-          </Button>
+          <div>
+            <SendButton
+              onClick={() => {
+                dispatch(setIsDraft({ isDraft: true }));
+                navigate(MY_JOBS_ROUTE);
+              }}
+            >
+              {t("Dashboard.buttons.seeDrafts")}
+            </SendButton>
+          </div>
         </S.TitleContainer>
         {drafts ? (
           drafts.map(({ createdAt, title, ...draft }) => (

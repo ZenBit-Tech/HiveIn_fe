@@ -58,6 +58,7 @@ export interface IUpdateParams {
 
 const jobPostsAPI = createApi({
   reducerPath: "setJobPostsAPI",
+  refetchOnMountOrArgChange: true,
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_API_URL,
     prepareHeaders: (headers, { getState }) => {
@@ -72,8 +73,8 @@ const jobPostsAPI = createApi({
   }),
   tagTypes: ["Posts"],
   endpoints: (builder) => ({
-    getOwnJobPosts: builder.query<IJobPost[], void>({
-      query: () => `${JOB_POST}/self`,
+    getOwnJobPosts: builder.query<IJobPost[], boolean>({
+      query: (isDraft) => `${JOB_POST}/self/${isDraft}`,
       providesTags: ["Posts"],
     }),
     getOneJobPost: builder.query<IJobPost, IQueryParam>({
