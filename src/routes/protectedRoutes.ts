@@ -6,7 +6,7 @@ import {
   NOTIFICATIONS_ROUTE,
   WELCOME_ROUTE,
 } from "utils/consts/routeConsts";
-import Notifications from "pages/Notifications";
+import Notifications from "pages/Notification/Notifications";
 
 const protectedRoutes: RoutesType[] = [
   {

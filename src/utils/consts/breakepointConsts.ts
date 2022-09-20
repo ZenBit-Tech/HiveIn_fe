@@ -16,3 +16,4 @@ export const HIRED_FREELANCER = "client/hired-freelancers";
 export const VIEWED_FREELANCER = "client/recently-viewed";
 export const FREELANCER_CONTRACTS = "contracts/freelancer/my-contracts";
 export const CONTRACTS = "contracts";
+export const NOTIFICATIONS = "notifications";
