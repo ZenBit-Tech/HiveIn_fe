@@ -12,13 +12,14 @@ import { useGetOneJobPostQuery } from "services/jobPosts/setJobPostsAPI";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Button, Modal, notification } from "antd";
+import { Button, Modal } from "antd";
 import useModalHandler from "hooks/use-modal-handler";
 import defineContractStatus from "utils/functions/defineContractStatus";
 import { ContractStatusEnum } from "utils/enums";
 import LongMenu from "components/UI/DropdownMenus/LongMenu/LongMenu";
 import { useCloseContractMutation } from "services/contract/contractApi";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 dayjs.extend(relativeTime);
 
@@ -32,24 +33,18 @@ function ClientJob(): JSX.Element {
   const [closeContract, { isError, isSuccess, isLoading }] =
     useCloseContractMutation();
 
+  const { modal, toggleModal } = useModalHandler();
+
   useEffect(() => {
     if (!isLoading && isError) {
-      notification.error({
-        description: `${t("MyContracts.server.tryAgain")}`,
-        message: `${t("MyContracts.server.error")}`,
-      });
+      toast.error(t("MyContracts.server.error"));
       return;
     }
     if (!isLoading && isSuccess) {
-      notification.success({
-        description: `${t("MyContracts.server.statusChanged")}`,
-        message: `${t("MyContracts.server.success")}`,
-      });
+      toast.success(t("MyContracts.server.success"));
       refetch();
     }
   }, [isLoading]);
-
-  const { modal, toggleModal } = useModalHandler();
 
   const onModalOk = async () => {
     if (data?.contract) {
@@ -59,6 +54,29 @@ function ClientJob(): JSX.Element {
       });
       toggleModal();
     }
+  };
+
+  const defineButtonType = ():
+    | "link"
+    | "text"
+    | "default"
+    | "primary"
+    | "dashed"
+    | "ghost" => {
+    return defineContractStatus(
+      data?.contract?.startDate,
+      data?.contract?.endDate
+    ) === ContractStatusEnum.ACTIVE
+      ? "primary"
+      : "dashed";
+  };
+  const defineButtonIsDisabled = () => {
+    return (
+      defineContractStatus(
+        data?.contract?.startDate,
+        data?.contract?.endDate
+      ) !== ContractStatusEnum.ACTIVE
+    );
   };
 
   return (
@@ -81,35 +99,25 @@ function ClientJob(): JSX.Element {
               : t("NotFound.notFound")}
           </TitleText>
         </TitleText>
-        <ContractStatus>
-          <span style={{ marginRight: "10px" }}>
-            {t("MyJobs.contractStatusTitle")}
-          </span>
-          <Button
-            size="small"
-            type={
-              defineContractStatus(
+        {data?.contract?.startDate && (
+          <ContractStatus>
+            <span style={{ marginRight: "10px" }}>
+              {t("MyJobs.contractStatusTitle")}
+            </span>
+            <Button
+              size="small"
+              type={defineButtonType()}
+              shape="round"
+              disabled={defineButtonIsDisabled()}
+              onClick={toggleModal}
+            >
+              {defineContractStatus(
                 data?.contract?.startDate,
                 data?.contract?.endDate
-              ) === ContractStatusEnum.ACTIVE
-                ? "primary"
-                : "dashed"
-            }
-            shape="round"
-            disabled={
-              defineContractStatus(
-                data?.contract?.startDate,
-                data?.contract?.endDate
-              ) !== ContractStatusEnum.ACTIVE
-            }
-            onClick={toggleModal}
-          >
-            {defineContractStatus(
-              data?.contract?.startDate,
-              data?.contract?.endDate
-            )}
-          </Button>
-        </ContractStatus>
+              )}
+            </Button>
+          </ContractStatus>
+        )}
       </Header>
       <Section wd="70%">
         <Card>
