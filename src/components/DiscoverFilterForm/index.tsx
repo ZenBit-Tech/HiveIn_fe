@@ -23,6 +23,7 @@ function DiscoverFilterForm() {
 
   const [isFiltersOpen, setIsFiltersOpen] = useState(true);
   const [filters, setFilters] = useState<IFilters | any>({});
+  console.log(filters);
 
   const {
     data: filteredFreelancers,

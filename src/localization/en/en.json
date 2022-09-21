@@ -155,11 +155,7 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": [
-        "pre-intermediate",
-        "intermediate",
-        "upper-intermediate"
-      ]
+      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
     },
     "description": {
       "title": "Description",
@@ -278,7 +274,13 @@
     "hideFilters": "Hide filters",
     "showFilters": "Show filters",
     "save": "Save",
-    "noResult": "No result"
+    "noResult": "No result",
+    "description": "Description",
+    "rate": "Rate",
+    "categoryTitle": "Category",
+    "education": "Education",
+    "experience": "Experience",
+    "send": "Send Invite to interview"
   },
   "PostJob": {
     "title": "Create Job Post",

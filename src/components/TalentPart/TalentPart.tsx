@@ -1,14 +1,15 @@
 import { Pagination, Skeleton, Typography } from "antd";
-import CandidateCard, {
-  IFreelancer,
-} from "components/CandidateCard/CandidateCard";
 import SeeMoreLessButton from "components/SeeMoreLessButton";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import S from "components/TalentPart/styles";
+import FreelancerCard, {
+  IFreelancerSaved,
+} from "../FreelancerCard/FreelancerCard";
 
 export interface ITalentPart {
-  freelancers: IFreelancer[];
+  freelancers: IFreelancerSaved[];
+  setUserId?: (id: number) => void;
   title: string;
   isSuccess: boolean;
   isLoading: boolean;
@@ -17,7 +18,13 @@ export interface ITalentPart {
 const freelancersPerPage = 12;
 const freelancersPerRow = 3;
 
-function TalentPart({ freelancers, title, isSuccess, isLoading }: ITalentPart) {
+function TalentPart({
+  freelancers,
+  title,
+  isSuccess,
+  isLoading,
+  setUserId,
+}: ITalentPart) {
   const [showAllFreelancers, setShowAllFreelancers] = useState(false);
 
   const [page, setPage] = useState(1);
@@ -48,8 +55,8 @@ function TalentPart({ freelancers, title, isSuccess, isLoading }: ITalentPart) {
               showAllFreelancers ? (page - 1) * freelancersPerPage : 0,
               showAllFreelancers ? page * freelancersPerPage : freelancersPerRow
             )
-            .map((freelancer: IFreelancer) => (
-              <CandidateCard {...freelancer} />
+            .map((freelancer) => (
+              <FreelancerCard setUserId={setUserId!} {...freelancer} />
             ))}
         {isSuccess && showAllFreelancers && (
           <Pagination

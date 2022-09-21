@@ -26,7 +26,7 @@ export interface IFreelancer {
   experience: IExperience[];
   position: string;
   rate: string;
-  skills: { id: number }[];
+  skills: { id: number; name?: string }[];
   userId: number;
   user: IUser;
 }
