@@ -195,7 +195,7 @@ function JobItem({
             </Space>
           </Header>
           <ContentBox>
-            {!contract?.endDate && contract?.startDate && (
+            {contract && !contract?.endDate && (
               <SendButton onClick={() => setIsModalOpen(true)}>
                 {t("MyJobs.endContractTitle")}
               </SendButton>

@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Select } from "antd";
 import { useTranslation } from "react-i18next";
 import {
+  IContract,
   useCloseContractMutation,
   useGetContractsQuery,
 } from "services/contract/contractApi";
@@ -9,13 +10,16 @@ import { formatToStandardDate } from "utils/functions/formatDateFunctions";
 import { DurationTypeEnum, FilterEnum } from "utils/enums";
 import { INPUT_DATE_FORMAT_PRIMARY } from "utils/consts/inputPropsConsts";
 import Contract from "pages/Freelancer/MyContracts/Contract/Contract";
-import { IContract } from "pages/Freelancer/MyContracts/Contract/interfaces";
 import {
   Block,
   Container,
   Plug,
   Title,
 } from "pages/Freelancer/MyContracts/MyContractsStyle";
+import SearchWorkDrawer from "components/UI/drawers/SearchWorkDrawer/SearchWorkDrawer";
+import useModalHandler from "hooks/use-modal-handler";
+import { IJobPost } from "services/jobPosts/setJobPostsAPI";
+import { toast } from "react-toastify";
 
 const ZERO = 0;
 
@@ -26,23 +30,42 @@ function MyContracts() {
 
   const { data } = useGetContractsQuery();
 
-  const [closeContract] = useCloseContractMutation();
+  const [closeContract, { isError, isSuccess, isLoading }] =
+    useCloseContractMutation();
 
   const [selectedValue, setSelectedValue] = useState<FilterEnum>(
     FilterEnum.ALL
   );
 
+  const { modal: drawer, toggleModal: toggleDrawer } = useModalHandler();
+
+  const [jobPost, setJobPost] = useState<IJobPost>();
+
+  useEffect(() => {
+    if (!isLoading && isError) {
+      toast.error(t("MyContracts.server.error"));
+      return;
+    }
+    if (!isLoading && isSuccess) {
+      toast.success(t("MyContracts.server.success"));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading]);
+
+  const openJobPost = (index: number) => {
+    if (data) {
+      setJobPost(data[index].offer.jobPost);
+      toggleDrawer();
+    }
+  };
+
   const onChangeHandler = (value: FilterEnum) => {
     setSelectedValue(value);
   };
 
-  const closeContractHandler = async (
-    contractId: number,
-    freelancerId: number
-  ) => {
+  const closeContractHandler = async (contractId: number) => {
     await closeContract({
       contractId,
-      freelancer: freelancerId,
     });
   };
 
@@ -87,28 +110,37 @@ function MyContracts() {
         </Select>
       </Block>
       {data?.length ? (
-        transformResponse(data).map((contract) => (
+        transformResponse(data).map((contract, index) => (
           <Contract
             key={contract.id}
+            jobPostIndex={index}
             contractId={contract.id}
-            freelancerId={contract.freelancer.id}
             closeContract={closeContractHandler}
             contractStatus={contract.status}
             startDate={dateCheck(contract.startDate)}
             endDate={dateCheck(contract.endDate)}
-            duration={contract.jobPost?.duration || ZERO}
+            duration={contract.offer.jobPost?.duration || ZERO}
             durationType={
-              contract.jobPost?.durationType || DurationTypeEnum.WEEK
+              contract.offer.jobPost?.durationType || DurationTypeEnum.WEEK
             }
-            title={contract.jobPost?.title || t("MyContracts.empty")}
+            title={contract.offer.jobPost?.title || t("MyContracts.empty")}
             jobDescription={
-              contract.jobPost?.jobDescription || t("MyContracts.empty")
+              contract.offer.jobPost?.jobDescription || t("MyContracts.empty")
             }
-            rate={contract.jobPost?.rate || ZERO}
+            rate={contract.offer.jobPost?.rate || ZERO}
+            openJobPost={openJobPost}
           />
         ))
       ) : (
         <Plug>{t("MyContracts.noContracts")}</Plug>
+      )}
+      {jobPost && (
+        <SearchWorkDrawer
+          {...jobPost}
+          onClose={toggleDrawer}
+          visible={drawer}
+          sendProposalButtonIsVisible={false}
+        />
       )}
     </Container>
   );

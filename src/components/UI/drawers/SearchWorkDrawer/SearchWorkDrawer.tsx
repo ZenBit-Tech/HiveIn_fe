@@ -30,6 +30,7 @@ const { Title } = Typography;
 interface ISearchWorkDrawerProps extends IJobPost {
   visible: boolean;
   onClose: () => void;
+  sendProposalButtonIsVisible?: boolean;
 }
 
 function SearchWorkDrawer({
@@ -47,6 +48,7 @@ function SearchWorkDrawer({
   createdAt,
   user,
   file,
+  sendProposalButtonIsVisible = true,
 }: ISearchWorkDrawerProps) {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -136,17 +138,19 @@ function SearchWorkDrawer({
 
         <Grid>
           <SideContent>
-            <Header>
-              <SendButton onClick={() => setIsModalOpen(true)}>
-                {t("SearchWork.send")}
-              </SendButton>
-              <SubmitProposalModal
-                idJobPost={id}
-                visible={isModalOpen}
-                closeModal={() => setIsModalOpen(false)}
-                clientBudget={rate}
-              />
-            </Header>
+            {sendProposalButtonIsVisible && (
+              <Header>
+                <SendButton onClick={() => setIsModalOpen(true)}>
+                  {t("SearchWork.send")}
+                </SendButton>
+                <SubmitProposalModal
+                  idJobPost={id}
+                  visible={isModalOpen}
+                  closeModal={() => setIsModalOpen(false)}
+                  clientBudget={rate}
+                />
+              </Header>
+            )}
 
             <ContentBox>
               <Space direction="vertical">
