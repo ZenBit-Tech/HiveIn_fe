@@ -42,7 +42,6 @@ function MyContracts() {
   ) => {
     await closeContract({
       contractId,
-      endDate: new Date(),
       freelancer: freelancerId,
     });
   };

@@ -24,7 +24,7 @@ import { toggleIsDraft } from "store/slices/isDraftSlice";
 const { Title } = Typography;
 
 function ClientJobs() {
-  const { isDraft } = useSelector((state: RootState) => state.isDraft);
+  const isDraft = useSelector((state: RootState) => state.isDraft);
   const dispatch = useDispatch();
 
   const { email } = useAuth();
@@ -61,12 +61,10 @@ function ClientJobs() {
               />
             </Filter>
           </TitleText>
-          {isLoading ? (
+          {isLoading && (
             <DivContainer>
               <Skeleton active paragraph={{ rows: 4 }} />
             </DivContainer>
-          ) : (
-            ""
           )}
 
           {isSuccess && !jobPosts?.length ? (

@@ -43,7 +43,7 @@ export default function ClientHome() {
           <div>
             <SendButton
               onClick={() => {
-                dispatch(setIsDraft({ isDraft: false }));
+                dispatch(setIsDraft(false));
                 navigate(MY_JOBS_ROUTE);
               }}
             >
@@ -74,7 +74,7 @@ export default function ClientHome() {
           <div>
             <SendButton
               onClick={() => {
-                dispatch(setIsDraft({ isDraft: true }));
+                dispatch(setIsDraft(true));
                 navigate(MY_JOBS_ROUTE);
               }}
             >

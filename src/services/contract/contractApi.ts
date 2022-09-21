@@ -7,9 +7,10 @@ import {
 } from "utils/consts/breakepointConsts";
 
 interface ICloseContract {
-  freelancer?: number;
-  endDate: Date;
   contractId: number;
+  isContractStart?: boolean;
+  isContractEnd?: boolean;
+  freelancer?: number;
 }
 
 const contractApi = createApi({
@@ -37,10 +38,14 @@ const contractApi = createApi({
         baseQueryReturnValue,
     }),
     closeContract: builder.mutation<void, ICloseContract>({
-      query: ({ contractId, endDate, freelancer }: ICloseContract) => ({
+      query: ({
+        contractId,
+        isContractEnd = true,
+        freelancer,
+      }: ICloseContract) => ({
         url: `${CONTRACTS}/${contractId}`,
         method: "PATCH",
-        body: { freelancer, endDate },
+        body: { freelancer, isContractEnd },
       }),
       invalidatesTags: () => ["Contract"],
     }),

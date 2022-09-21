@@ -63,7 +63,7 @@ function JobItem({
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const [closeContract, { isError, isSuccess, isLoading }] =
     useCloseContractMutation();
@@ -90,7 +90,6 @@ function JobItem({
     if (contract) {
       await closeContract({
         contractId: contract.id,
-        endDate: new Date(),
       });
       setIsModalOpen(false);
     }
@@ -196,7 +195,7 @@ function JobItem({
             </Space>
           </Header>
           <ContentBox>
-            {!contract?.endDate && (
+            {!contract?.endDate && contract?.startDate && (
               <SendButton onClick={() => setIsModalOpen(true)}>
                 {t("MyJobs.endContractTitle")}
               </SendButton>

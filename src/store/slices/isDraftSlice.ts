@@ -1,22 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-interface IDraft {
-  isDraft: boolean;
-}
-
-const initialState: IDraft = {
-  isDraft: false,
-};
+const initialState: boolean = false;
 
 const isDraftSlice = createSlice({
   name: "isDraft",
   initialState,
   reducers: {
     toggleIsDraft: (state) => {
-      return { ...state, isDraft: !state.isDraft };
+      return !state;
     },
-    setIsDraft: (state, { payload }: PayloadAction<IDraft>) => {
-      return { ...state, isDraft: payload.isDraft };
+    setIsDraft: (_state, { payload }: PayloadAction<boolean>) => {
+      return payload;
     },
   },
 });
