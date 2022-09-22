@@ -49,6 +49,7 @@ function MyContracts() {
     if (!isLoading && isSuccess) {
       toast.success(t("MyContracts.server.success"));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   const openJobPost = (index: number) => {
@@ -65,7 +66,6 @@ function MyContracts() {
   const closeContractHandler = async (contractId: number) => {
     await closeContract({
       contractId,
-      endDate: new Date(),
     });
   };
 

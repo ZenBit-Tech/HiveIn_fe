@@ -7,9 +7,10 @@ import {
 import { IJobPost } from "services/jobPosts/setJobPostsAPI";
 
 interface ICloseContract {
-  freelancer?: number;
-  endDate: Date;
   contractId: number;
+  isContractStart?: boolean;
+  isContractEnd?: boolean;
+  freelancer?: number;
 }
 
 export interface IContract {
@@ -48,10 +49,14 @@ const contractApi = createApi({
         baseQueryReturnValue,
     }),
     closeContract: builder.mutation<void, ICloseContract>({
-      query: ({ contractId, endDate, freelancer }: ICloseContract) => ({
+      query: ({
+        contractId,
+        isContractEnd = true,
+        freelancer,
+      }: ICloseContract) => ({
         url: `${CONTRACTS}/${contractId}`,
         method: "PATCH",
-        body: { freelancer, endDate },
+        body: { freelancer, isContractEnd },
       }),
       invalidatesTags: () => ["Contract"],
     }),

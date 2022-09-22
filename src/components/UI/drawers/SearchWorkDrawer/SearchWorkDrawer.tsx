@@ -5,11 +5,9 @@ import {
 } from "@ant-design/icons";
 import { Drawer, Space, Typography } from "antd";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
-import { SkillTag } from "components/UI/JobItem/JobItemStyles";
 import {
   AttachmentLink,
   ContentBox,
-  DrawerText,
   Grid,
   Header,
   SideContent,
@@ -23,6 +21,8 @@ import SubmitProposalModal from "components/UI/ModalWindows/SubmitProposalModal/
 import { useTranslation } from "react-i18next";
 import { IJobPost } from "services/jobPosts/setJobPostsAPI";
 import { JOB_POST_FILE } from "utils/consts/breakepointConsts";
+import { CustomText } from "components/UI/Typography/CustomText";
+import { SkillTag } from "components/UI/Tags/SkillTag";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
@@ -67,39 +67,39 @@ function SearchWorkDrawer({
         <Grid grow={3}>
           <Header>
             <Title level={3}>{title}</Title>
-            <DrawerText>{dayjs(createdAt).fromNow()}</DrawerText>
+            <CustomText>{dayjs(createdAt).fromNow()}</CustomText>
           </Header>
 
           <ContentBox>
             <Title level={5}>{t("SearchWork.category")}</Title>
             <Space direction="vertical">
-              <DrawerText strong color={BLUE}>
+              <CustomText strong color={BLUE}>
                 {category.name}
-              </DrawerText>
+              </CustomText>
             </Space>
           </ContentBox>
 
           <ContentBox>
-            <DrawerText>{jobDescription}</DrawerText>
+            <CustomText>{jobDescription}</CustomText>
           </ContentBox>
 
           <ContentBox>
             <Title level={5}>{t("SearchWork.price")}</Title>
             <Space direction="vertical">
-              <DrawerText>
+              <CustomText>
                 <DollarCircleFilled
                   style={{ color: `${BLUE}`, padding: "5px" }}
                 />
                 {t("MyJobs.currency")}
                 {rate}
                 {t("MyJobs.perHour")}
-              </DrawerText>
-              <DrawerText>
+              </CustomText>
+              <CustomText>
                 <ThunderboltFilled
                   style={{ color: `${BLUE}`, padding: "5px" }}
                 />
                 {duration} {durationType}
-              </DrawerText>
+              </CustomText>
             </Space>
           </ContentBox>
 
@@ -107,11 +107,11 @@ function SearchWorkDrawer({
             <Title level={5}>{t("SearchWork.habilities")}</Title>
             <Space size={30} style={{ padding: "10px" }}>
               <Space direction="vertical">
-                <DrawerText strong>{t("SearchWork.english")}</DrawerText>
-                <DrawerText>{englishLevel}</DrawerText>
+                <CustomText strong>{t("SearchWork.english")}</CustomText>
+                <CustomText>{englishLevel}</CustomText>
               </Space>
               <Space direction="vertical" style={{ marginLeft: "30px" }}>
-                <DrawerText strong>{t("SearchWork.skills")}</DrawerText>
+                <CustomText strong>{t("SearchWork.skills")}</CustomText>
                 <Space>
                   {skills.map((skill) => (
                     <SkillTag key={skill.id}>{skill.name}</SkillTag>
@@ -154,9 +154,9 @@ function SearchWorkDrawer({
 
             <ContentBox>
               <Space direction="vertical">
-                <DrawerText strong>{t("SearchWork.clientInfo")}</DrawerText>
-                <DrawerText color={TEXT_GRAY}>{user.email}</DrawerText>
-                <DrawerText color={TEXT_GRAY}>{user.description}</DrawerText>
+                <CustomText strong>{t("SearchWork.clientInfo")}</CustomText>
+                <CustomText color={TEXT_GRAY}>{user.email}</CustomText>
+                <CustomText color={TEXT_GRAY}>{user.description}</CustomText>
               </Space>
             </ContentBox>
           </SideContent>

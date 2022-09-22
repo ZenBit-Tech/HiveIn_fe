@@ -19,9 +19,11 @@ import { getSkillsOrCategory } from "services/categoriesAndSkills/categoriesAndS
 import getTalentApi from "services/jobOwner/talentAPI";
 import contractApi from "services/contract/contractApi";
 import forgotPassword from "services/auth/forgotPassword";
+import isDraftReducer from "store/slices/isDraftSlice";
 
 export const store = configureStore({
   reducer: {
+    isDraft: isDraftReducer,
     [setUserApi.reducerPath]: setUserApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [forgotPassword.reducerPath]: forgotPassword.reducer,

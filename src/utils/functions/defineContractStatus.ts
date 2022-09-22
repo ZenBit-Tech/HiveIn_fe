@@ -1,12 +1,6 @@
 import { ContractStatusEnum } from "utils/enums";
 
-const defineContractStatus = (
-  startDate?: Date,
-  endDate?: Date
-): ContractStatusEnum => {
-  if (!startDate) {
-    return ContractStatusEnum.PENDING;
-  }
+const defineContractStatus = (endDate?: Date): ContractStatusEnum => {
   if (!endDate) {
     return ContractStatusEnum.ACTIVE;
   }
