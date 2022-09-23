@@ -18,6 +18,7 @@ import { getSkillsOrCategory } from "services/categoriesAndSkills/categoriesAndS
 import getTalentApi from "services/jobOwner/talentAPI";
 import contractApi from "services/contract/contractApi";
 import forgotPassword from "services/auth/forgotPassword";
+import freelancerApi from "services/freelancer/freelancerAPI";
 
 export const store = configureStore({
   reducer: {
@@ -30,6 +31,7 @@ export const store = configureStore({
     [proposalsApi.reducerPath]: proposalsApi.reducer,
     [getTalentApi.reducerPath]: getTalentApi.reducer,
     [contractApi.reducerPath]: contractApi.reducer,
+    [freelancerApi.reducerPath]: freelancerApi.reducer,
     user: userPersistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -46,7 +48,8 @@ export const store = configureStore({
       .concat(getTalentApi.middleware)
       .concat(contractApi.middleware)
       .prepend(getProfileInfoApi.middleware)
-      .prepend(getSkillsOrCategory.middleware),
+      .prepend(getSkillsOrCategory.middleware)
+      .prepend(freelancerApi.middleware),
 });
 
 export const userPersistor = persistStore(store);

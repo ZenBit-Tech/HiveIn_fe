@@ -11,7 +11,15 @@ import { IFilters, useFilterQuery } from "services/jobOwner/talentAPI";
 import S from "components/DiscoverFilterForm/styles";
 import propsDataCollection from "components/DiscoverFilterForm/staticData";
 
-function DiscoverFilterForm() {
+interface IDiscoverFilterFormProps {
+  setUserId: (id: number) => void;
+  setIsModalOpen: (isOpen: boolean) => void;
+}
+
+function DiscoverFilterForm({
+  setUserId,
+  setIsModalOpen,
+}: IDiscoverFilterFormProps) {
   const {
     handleSubmit,
     control,
@@ -23,7 +31,6 @@ function DiscoverFilterForm() {
 
   const [isFiltersOpen, setIsFiltersOpen] = useState(true);
   const [filters, setFilters] = useState<IFilters | any>({});
-  console.log(filters);
 
   const {
     data: filteredFreelancers,
@@ -64,6 +71,8 @@ function DiscoverFilterForm() {
       {isLoading && <Skeleton active />}
       {isSuccess && filteredFreelancers && (
         <TalentPart
+          setIsModalOpen={setIsModalOpen}
+          setUserId={setUserId}
           freelancers={filteredFreelancers!}
           title=""
           isSuccess={isSuccess}

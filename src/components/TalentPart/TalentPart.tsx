@@ -5,14 +5,18 @@ import { useTranslation } from "react-i18next";
 import S from "components/TalentPart/styles";
 import FreelancerCard, {
   IFreelancerSaved,
-} from "../FreelancerCard/FreelancerCard";
+} from "components/FreelancerCard/FreelancerCard";
 
 export interface ITalentPart {
   freelancers: IFreelancerSaved[];
-  setUserId?: (id: number) => void;
   title: string;
   isSuccess: boolean;
   isLoading: boolean;
+}
+
+export interface ITalentPartProps extends ITalentPart {
+  setUserId: (id: number) => void;
+  setIsModalOpen: (isOpen: boolean) => void;
 }
 
 const freelancersPerPage = 12;
@@ -24,7 +28,8 @@ function TalentPart({
   isSuccess,
   isLoading,
   setUserId,
-}: ITalentPart) {
+  setIsModalOpen,
+}: ITalentPartProps) {
   const [showAllFreelancers, setShowAllFreelancers] = useState(false);
 
   const [page, setPage] = useState(1);
@@ -48,7 +53,9 @@ function TalentPart({
           <S.EmptyBox description={t("Talent.noResult")} />
         )}
         {isLoading &&
-          Array(...Array(freelancersPerRow)).map(() => <Skeleton active />)}
+          Array(...Array(freelancersPerRow)).map((id) => (
+            <Skeleton key={id} active />
+          ))}
         {isSuccess &&
           freelancers
             .slice(
@@ -56,7 +63,12 @@ function TalentPart({
               showAllFreelancers ? page * freelancersPerPage : freelancersPerRow
             )
             .map((freelancer) => (
-              <FreelancerCard setUserId={setUserId!} {...freelancer} />
+              <FreelancerCard
+                setIsModalOpen={setIsModalOpen}
+                key={freelancer.id}
+                setUserId={setUserId!}
+                {...freelancer}
+              />
             ))}
         {isSuccess && showAllFreelancers && (
           <Pagination

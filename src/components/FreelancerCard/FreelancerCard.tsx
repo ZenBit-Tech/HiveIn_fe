@@ -4,7 +4,7 @@ import { useSaveFreelancersMutation } from "services/jobOwner/talentAPI";
 import S from "components/FreelancerCard/styles";
 import { useTranslation } from "react-i18next";
 import { BLUE } from "utils/consts/colorConsts";
-import { IFreelancer } from "../../services/profileInfo/typesDef";
+import { IFreelancer } from "services/profileInfo/typesDef";
 
 export interface IFreelancerSaved extends IFreelancer {
   saved: boolean;
@@ -12,6 +12,7 @@ export interface IFreelancerSaved extends IFreelancer {
 
 export interface IFreelancerCardProps extends IFreelancerSaved {
   setUserId: (id: number) => void;
+  setIsModalOpen: (isOpen: boolean) => void;
 }
 
 function FreelancerCard({
@@ -20,11 +21,16 @@ function FreelancerCard({
   rate,
   userId,
   saved,
+  setIsModalOpen,
   setUserId,
 }: IFreelancerCardProps) {
   const { t } = useTranslation();
 
   const [saveFreelancer] = useSaveFreelancersMutation();
+  const handleCardClick = () => {
+    setIsModalOpen(true);
+    setUserId(userId);
+  };
 
   const setSaved = () => {
     saveFreelancer(userId);
@@ -33,16 +39,10 @@ function FreelancerCard({
   return (
     <S.Card size="default">
       <Row>
-        <S.StyledCol
-          span={6}
-          onClick={() => {
-            console.log(userId);
-            setUserId(userId);
-          }}
-        >
+        <S.StyledCol span={6} onClick={handleCardClick}>
           <Avatar size={50} src={user.avatarURL} />
         </S.StyledCol>
-        <S.StyledCol span={15} onClick={() => console.log(userId)}>
+        <S.StyledCol span={15} onClick={handleCardClick}>
           <Row>
             <h3>{position}</h3>
           </Row>

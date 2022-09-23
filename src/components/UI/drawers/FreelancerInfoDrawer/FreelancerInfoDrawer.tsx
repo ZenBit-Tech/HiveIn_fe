@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { DollarCircleFilled } from "@ant-design/icons";
 import { Avatar, Drawer, Row, Space, Typography } from "antd";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
 import { SkillTag } from "components/UI/JobItem/JobItemStyles";
 import {
-  AttachmentLink,
   ContentBox,
   DrawerText,
   Grid,
@@ -17,9 +15,9 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { useState } from "react";
 import { BLUE, BOX_BACKGROUND, TEXT_GRAY } from "utils/consts/colorConsts";
 import { useTranslation } from "react-i18next";
-import { JOB_POST_FILE } from "utils/consts/breakepointConsts";
-import { IFreelancer } from "../../../../services/profileInfo/typesDef";
-import EducationExperienceCard from "../../../EducationExperienceCard/EducationExperienceCard";
+import { IFreelancer } from "services/profileInfo/typesDef";
+import EducationExperienceCard from "components/EducationExperienceCard/EducationExperienceCard";
+import SubmitInviteModal from "components/UI/ModalWindows/SubmitInviteModal/SubmitInviteModal";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
@@ -39,13 +37,11 @@ function FreelancerInfoDrawer({
   skills,
   education,
   experience,
-  categoryId, // add category name
   user,
+  category,
 }: IFreelancerInfoDrawerProps) {
   const { t } = useTranslation();
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  const category = { name: "Legal" };
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <Drawer
       title=""
@@ -71,7 +67,6 @@ function FreelancerInfoDrawer({
               </Space>
             </Row>
           </Header>
-
           <ContentBox>
             <Title level={5}>{t("SearchWork.habilities")}</Title>
             <Space size={30} style={{ padding: "10px" }}>
@@ -89,40 +84,40 @@ function FreelancerInfoDrawer({
               </Space>
             </Space>
           </ContentBox>
-          <ContentBox>
-            <Title level={5}>{t("Talent.education")}</Title>
-            <Space size={30} style={{ padding: "10px" }} direction="vertical">
-              {education.map((educ) => (
-                <EducationExperienceCard key={educ.id} {...educ} />
-              ))}
-            </Space>
-          </ContentBox>
-          <ContentBox>
-            <Title level={5}>{t("Talent.experience")}</Title>
-            <Space size={30} style={{ padding: "10px" }} direction="vertical">
-              {experience.map((exp) => (
-                <EducationExperienceCard key={exp.id} {...exp} />
-              ))}
-            </Space>
-          </ContentBox>
+          {education.length !== 0 && (
+            <ContentBox>
+              <Title level={5}>{t("Talent.education")}</Title>
+              <Space size={30} style={{ padding: "10px" }} direction="vertical">
+                {education.map((educ) => (
+                  <EducationExperienceCard key={educ.id} {...educ} />
+                ))}
+              </Space>
+            </ContentBox>
+          )}
+          {experience.length !== 0 && (
+            <ContentBox>
+              <Title level={5}>{t("Talent.experience")}</Title>
+              <Space size={30} style={{ padding: "10px" }} direction="vertical">
+                {experience.map((exp) => (
+                  <EducationExperienceCard key={exp.id} {...exp} />
+                ))}
+              </Space>
+            </ContentBox>
+          )}
         </Grid>
 
         <Grid>
           <SideContent>
             <Header>
-              <SendButton
-                onClick={
-                  () => console.log("erogiherg") /* setIsModalOpen(true) */
-                }
-              >
+              <SendButton onClick={() => setIsModalOpen(true)}>
                 {t("Talent.send")}
               </SendButton>
-              {/* <SubmitProposalModal
-                idJobPost={id}
+              <SubmitInviteModal
+                freelancerId={id}
+                freelancerUser={user}
                 visible={isModalOpen}
                 closeModal={() => setIsModalOpen(false)}
-                clientBudget={rate}
-              /> */}
+              />
             </Header>
 
             <ContentBox>

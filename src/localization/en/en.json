@@ -280,7 +280,12 @@
     "categoryTitle": "Category",
     "education": "Education",
     "experience": "Experience",
-    "send": "Send Invite to interview"
+    "send": "Send Invite to interview",
+    "inviteMessage": "Invite message",
+    "inviteTitle": "will be invited to job",
+    "jobs": "Choose job",
+    "sendButton": "Send invite",
+    "defaultInviteMessage": "Hello! I would like to invite you to the interview"
   },
   "PostJob": {
     "title": "Create Job Post",
