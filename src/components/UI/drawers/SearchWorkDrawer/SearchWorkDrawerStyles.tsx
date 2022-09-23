@@ -1,21 +1,13 @@
-import { Typography } from "antd";
 import styled from "styled-components";
 import {
-  BLACK,
   BOX_BORDER,
   LIGHT_GRAY,
   TEXT_GRAY,
   WHITE,
 } from "utils/consts/colorConsts";
 
-const { Text } = Typography;
-
 interface IGrid {
   grow?: number;
-}
-
-interface IText {
-  color?: string;
 }
 
 export const Wrapper = styled.div`
@@ -39,18 +31,16 @@ export const Header = styled.header`
 export const ContentBox = styled.section`
   border-top: 1px solid ${BOX_BORDER};
   padding: 30px;
+  overflow: auto;
 `;
 
 export const SideContent = styled.section`
+  max-width: 300px;
   display: flex;
   border-left: 1px solid ${BOX_BORDER};
   height: 100%;
   flex-direction: column;
   row-gap: 26px;
-`;
-
-export const DrawerText = styled(Text)<IText>`
-  color: ${(props) => props.color || BLACK}; ;
 `;
 
 export const AttachmentLink = styled.a`

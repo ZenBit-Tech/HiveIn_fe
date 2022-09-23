@@ -100,7 +100,7 @@ const navLinksPerRole: NavLinkRoles = {
         links: [
           {
             to: MY_JOBS_ROUTE,
-            title: "Jobs",
+            title: i18next.MyJobs.title,
           },
           {
             to: TALENT_ROUTE,

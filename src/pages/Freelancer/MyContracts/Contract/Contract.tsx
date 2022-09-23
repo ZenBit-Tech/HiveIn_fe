@@ -15,8 +15,9 @@ interface IContract {
   jobDescription: string;
   rate: number;
   contractId: number;
-  freelancerId: number;
-  closeContract: (contractId: number, freelancerId: number) => void;
+  closeContract: (contractId: number) => void;
+  openJobPost: (index: number) => void;
+  jobPostIndex: number;
 }
 
 function Contract({
@@ -30,15 +31,20 @@ function Contract({
   rate,
   contractId,
   closeContract,
-  freelancerId,
+  openJobPost,
+  jobPostIndex,
 }: IContract) {
   const { modal, toggleModal } = useModalHandler();
 
   const { t } = useTranslation();
 
   const modalHandler = () => {
-    closeContract(contractId, freelancerId);
+    closeContract(contractId);
     toggleModal();
+  };
+
+  const openJobPostHandler = () => {
+    openJobPost(jobPostIndex);
   };
 
   return (
@@ -98,7 +104,7 @@ function Contract({
         <Button type="primary" shape="round" style={{ marginRight: "3px" }}>
           {t("MyContracts.goToChatBtn")}
         </Button>
-        <Button type="default" shape="round">
+        <Button type="default" shape="round" onClick={openJobPostHandler}>
           {t("MyContracts.seeJobPostBtn")}
         </Button>
       </Block>

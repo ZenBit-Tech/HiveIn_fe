@@ -12,16 +12,19 @@ import setUserApi from "services/user/setUserAPI";
 import authApi from "services/auth/setAuthAPI";
 import userPersistedReducer from "store/slices/userSlice";
 import setJobPostsAPI from "services/jobPosts/setJobPostsAPI";
+import setNotificationsAPI from "services/notifications/setNotificationsAPI";
 import proposalsApi from "services/jobPosts/proposalsAPI";
 import { getProfileInfoApi } from "services/profileInfo/profileInfoAPI";
 import { getSkillsOrCategory } from "services/categoriesAndSkills/categoriesAndSkills";
 import getTalentApi from "services/jobOwner/talentAPI";
 import contractApi from "services/contract/contractApi";
 import forgotPassword from "services/auth/forgotPassword";
+import isDraftReducer from "store/slices/isDraftSlice";
 import freelancerApi from "services/freelancer/freelancerAPI";
 
 export const store = configureStore({
   reducer: {
+    isDraft: isDraftReducer,
     [setUserApi.reducerPath]: setUserApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [forgotPassword.reducerPath]: forgotPassword.reducer,
@@ -30,6 +33,7 @@ export const store = configureStore({
     [setJobPostsAPI.reducerPath]: setJobPostsAPI.reducer,
     [proposalsApi.reducerPath]: proposalsApi.reducer,
     [getTalentApi.reducerPath]: getTalentApi.reducer,
+    [setNotificationsAPI.reducerPath]: setNotificationsAPI.reducer,
     [contractApi.reducerPath]: contractApi.reducer,
     [freelancerApi.reducerPath]: freelancerApi.reducer,
     user: userPersistedReducer,

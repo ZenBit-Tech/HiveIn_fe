@@ -63,12 +63,14 @@
     "nothingToShow": "No active job posts",
     "info": "About the project",
     "skills": "Necessary Skills",
-    "currency": "$",
+    "currency": "Budget: $",
     "perHour": "/hour",
     "contractStatusTitle": "Contract status:",
     "endContractMessage": "This contract will be ended. Do you want to continue?",
-    "endContractTitle": "End a contract",
-    "continueText": "Continue"
+    "endContractTitle": "End the contract",
+    "continueText": "Continue",
+    "draft?": "Draft?",
+    "draft": "Draft"
   },
   "Chat": {
     "title": "Chat"
