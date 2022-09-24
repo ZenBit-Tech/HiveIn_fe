@@ -18,7 +18,7 @@ import { SkillTag } from "components/UI/Tags/SkillTag";
 import { CustomText } from "components/UI/Typography/CustomText";
 import { useTranslation } from "react-i18next";
 import { IJobPost } from "services/jobPosts/setJobPostsAPI";
-import { JOB_POST_FILE } from "utils/consts/breakepointConsts";
+import { JOB_POST_FILE } from "utils/consts/breakpointConsts";
 import {
   BLUE,
   TAG_CLOSED,

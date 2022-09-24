@@ -20,7 +20,7 @@ import { BLUE, BOX_BACKGROUND, TEXT_GRAY } from "utils/consts/colorConsts";
 import SubmitProposalModal from "components/UI/ModalWindows/SubmitProposalModal/SubmitProposalModal";
 import { useTranslation } from "react-i18next";
 import { IJobPost } from "services/jobPosts/setJobPostsAPI";
-import { JOB_POST_FILE } from "utils/consts/breakepointConsts";
+import { JOB_POST_FILE } from "utils/consts/breakpointConsts";
 import { CustomText } from "components/UI/Typography/CustomText";
 import { SkillTag } from "components/UI/Tags/SkillTag";
 
