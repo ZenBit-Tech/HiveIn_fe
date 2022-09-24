@@ -8,6 +8,7 @@ import {
 import { setSignOut, setToken } from "store/slices/userSlice";
 import { RootState } from "store/store";
 import { AUTH, LOG_OUT, REFRESH } from "utils/consts/breakpointConsts";
+import { UNAUTHORIZED_ERROR } from "utils/consts/errorConsts";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_API_URL,
@@ -42,7 +43,7 @@ const baseQueryWithReauth: BaseQueryFn<
 > = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
 
-  if (result.error && result.error.status === 401) {
+  if (result.error && result.error.status === UNAUTHORIZED_ERROR) {
     // Send refresh token to get new access token
     const refreshResult = await refreshQuery(
       `/${AUTH}/${REFRESH}`,
