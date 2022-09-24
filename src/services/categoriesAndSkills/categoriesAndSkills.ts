@@ -1,15 +1,11 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import apiSlice from "services/api/apiSlice";
 
 interface IResponseData {
   id: number;
   name: string;
 }
 
-export const getSkillsOrCategory = createApi({
-  reducerPath: "skillsAPI",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_URL,
-  }),
+export const getSkillsOrCategory = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getInfo: builder.query<IResponseData[], "skill" | "category">({
       query: (path) => `/${path}`,

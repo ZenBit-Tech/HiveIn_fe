@@ -1,10 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IUser } from "services/user/setUserAPI";
-import { RootState } from "store/store";
-import { JOB_POST } from "utils/consts/breakepointConsts";
+import { JOB_POST } from "utils/consts/breakpointConsts";
 import { IDraftRequestObject } from "components/CreateJobPostForm/typesDef";
 import { TEnglishLevel } from "components/layoutElementWithTitle/typesDef";
 import { DurationTypeEnum } from "utils/enums";
+import apiSlice from "services/api/apiSlice";
 
 export interface ISkills {
   id: number;
@@ -56,22 +55,9 @@ export interface IUpdateParams {
   postId: number;
 }
 
-const jobPostsAPI = createApi({
-  reducerPath: "setJobPostsAPI",
-  refetchOnMountOrArgChange: true,
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const { authToken } = (getState() as RootState).user;
+const apiSliceWithTags = apiSlice.enhanceEndpoints({ addTagTypes: ["Posts"] });
 
-      if (authToken) {
-        headers.set("Authorization", `Bearer ${authToken}`);
-      }
-
-      return headers;
-    },
-  }),
-  tagTypes: ["Posts"],
+const jobPostsAPI = apiSliceWithTags.injectEndpoints({
   endpoints: (builder) => ({
     getOwnJobPosts: builder.query<IJobPost[], boolean>({
       query: (isDraft) => `${JOB_POST}/self/${isDraft}`,
