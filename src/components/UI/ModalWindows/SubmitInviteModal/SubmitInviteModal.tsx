@@ -16,7 +16,7 @@ import { Form } from "components/UI/ModalWindows/SubmitProposalModal/SubmitPropo
 
 interface ISubmitInviteForm extends FieldValues {
   categoryId: number;
-  exampleRequired: string;
+  inviteMessage: string;
 }
 
 interface ISubmitInviteModalProps {
@@ -37,21 +37,21 @@ function SubmitInviteModal({
   const { control, handleSubmit, reset } = useForm<ISubmitInviteForm>({
     resolver: yupResolver(submitInviteSchema),
     defaultValues: {
-      coverLetter: t("Talent.defaultInviteMessage"),
+      inviteMessage: t("Talent.defaultInviteMessage"),
     },
   });
 
   const { data: jobPosts, isSuccess: jobPostIsSuccess } =
-    useGetOwnJobPostsQuery();
+    useGetOwnJobPostsQuery(false);
 
   const [runSendInviteMutation, { isError, isLoading, isSuccess }] =
     useSendInviteMutation();
 
   const onSubmit: SubmitHandler<ISubmitInviteForm> = async ({
     jobId,
-    coverLetter,
+    inviteMessage,
   }) => {
-    await runSendInviteMutation({ jobId, coverLetter, freelancerId });
+    await runSendInviteMutation({ jobId, inviteMessage, freelancerId });
     closeModal();
 
     reset();

@@ -9,7 +9,7 @@ interface ProposalFields {
 }
 
 interface InviteFields {
-  coverLetter: string;
+  inviteMessage: string;
   freelancerId: number;
   jobId: number;
 }

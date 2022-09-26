@@ -1,7 +1,6 @@
 import { DollarCircleFilled } from "@ant-design/icons";
 import { Avatar, Drawer, Row, Space, Typography } from "antd";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
-import { SkillTag } from "components/UI/JobItem/JobItemStyles";
 import {
   ContentBox,
   DrawerText,
@@ -18,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { IFreelancer } from "services/profileInfo/typesDef";
 import EducationExperienceCard from "components/EducationExperienceCard/EducationExperienceCard";
 import SubmitInviteModal from "components/UI/ModalWindows/SubmitInviteModal/SubmitInviteModal";
+import { SkillTag } from "components/UI/Tags/SkillTag";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;

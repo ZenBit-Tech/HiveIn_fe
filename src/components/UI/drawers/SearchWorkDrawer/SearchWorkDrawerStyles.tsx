@@ -1,13 +1,20 @@
 import styled from "styled-components";
+import { Typography } from "antd";
 import {
+  BLACK,
   BOX_BORDER,
   LIGHT_GRAY,
   TEXT_GRAY,
   WHITE,
 } from "utils/consts/colorConsts";
 
+const { Text } = Typography;
 interface IGrid {
   grow?: number;
+}
+
+interface IText {
+  color?: string;
 }
 
 export const Wrapper = styled.div`
@@ -32,6 +39,10 @@ export const ContentBox = styled.section`
   border-top: 1px solid ${BOX_BORDER};
   padding: 30px;
   overflow: auto;
+`;
+
+export const DrawerText = styled(Text)<IText>`
+  color: ${(props) => props.color || BLACK}; ;
 `;
 
 export const SideContent = styled.section`
