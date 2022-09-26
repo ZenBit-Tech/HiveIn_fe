@@ -1,6 +1,11 @@
 import { Link } from "react-scroll";
 import styled from "styled-components";
-import { BOX_BACKGROUND, WHITE } from "utils/consts/colorConsts";
+import {
+  BOX_BACKGROUND,
+  BOX_SHADOW_DARK,
+  BOX_SHADOW_LIGHT,
+  WHITE,
+} from "utils/consts/colorConsts";
 
 export const LeftDiv = styled.div`
   position: fixed;
@@ -11,7 +16,7 @@ const RightDiv = styled.div`
   padding: 20px;
   background: ${BOX_BACKGROUND};
   border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  box-shadow: ${BOX_SHADOW_LIGHT} 0px 1px 3px, ${BOX_SHADOW_DARK} 0px 1px 2px;
 `;
 
 const TitleContainer = styled.div`

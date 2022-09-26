@@ -1,9 +1,12 @@
+import { Dispatch } from "react";
 import { TEnglishLevel } from "components/layoutElementWithTitle/typesDef";
+import { ISkills } from "services/jobPosts/setJobPostsAPI";
+import { DurationTypeEnum } from "utils/enums";
 
 export interface IJobPostFormFields {
   categoryId: number;
   duration: string;
-  durationType: "week" | "month";
+  durationType: DurationTypeEnum;
   englishLevel: TEnglishLevel;
   file: File | null;
   jobDescription: string;
@@ -21,6 +24,12 @@ export interface IDraftRequestObject {
   isDraft: boolean;
   duration?: string;
   categoryId?: number;
-  durationType: "week" | "month";
+  durationType: DurationTypeEnum;
   englishLevel?: TEnglishLevel;
+}
+
+export interface IProps {
+  existedDraftData?: IJobPostFormFields;
+  queriedSkills?: ISkills[];
+  setIsOpen?: Dispatch<boolean>;
 }

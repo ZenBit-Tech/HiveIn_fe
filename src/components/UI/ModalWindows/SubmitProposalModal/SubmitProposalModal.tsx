@@ -2,15 +2,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Modal, Space, Typography } from "antd";
 import Field from "components/DefaultField/DefaultField";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
-import submitProposalSchema from "components/UI/modals/SubmitProposalModelSchema";
-import { Form } from "components/UI/modals/SubmitProposalStyles";
+import submitProposalSchema from "components/UI/ModalWindows/SubmitProposalModal/SubmitProposalModelSchema";
+import { Form } from "components/UI/ModalWindows/SubmitProposalModal/SubmitProposalStyles";
 import { useEffect } from "react";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useSendProposalMutation } from "services/jobPosts/proposalsAPI";
+import { MAX_LENGTH_OF_COVER_LETTER } from "utils/consts/numberConsts";
 
 const { Text } = Typography;
+
 interface ISubmitProposalForm extends FieldValues {
   bid: number;
   exampleRequired: string;
@@ -89,7 +91,7 @@ function SubmitProposalModal({
           control={control}
           name="coverLetter"
           textArea
-          maxLength={250}
+          maxLength={MAX_LENGTH_OF_COVER_LETTER}
         />
         <SendButton>{t("SearchWork.send")}</SendButton>
       </Form>

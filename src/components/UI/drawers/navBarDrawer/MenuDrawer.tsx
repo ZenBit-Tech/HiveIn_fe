@@ -6,11 +6,11 @@ import { Col, Divider, Drawer, Row } from "antd";
 import NavLink from "components/UI/navlink/NavLink";
 import NavBarButton from "components/UI/buttons/navBarButton/NavBarButton";
 import useAuth from "hooks/useAuth";
-import { NavRoleOptions } from "components/navbar/NavLinksPerRole";
 import { SIGN_IN_ROUTE } from "utils/consts/routeConsts";
+import { LinkType } from "components/navbar/NavLinksPerRole";
 
 interface IMenuDrawerProps {
-  drawerLinks: NavRoleOptions[];
+  drawerLinks: LinkType[];
 }
 
 function MenuDrawer({ drawerLinks }: IMenuDrawerProps) {

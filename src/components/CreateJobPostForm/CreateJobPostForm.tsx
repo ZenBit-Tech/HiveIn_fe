@@ -12,8 +12,12 @@ import {
 import { useTranslation } from "react-i18next";
 import propsDataCollection from "components/CreateJobPostForm/staticData";
 import LayoutElementWithTitle from "components/layoutElementWithTitle/LayoutElementWithTitle";
-import { IJobPostFormFields } from "components/CreateJobPostForm/typesDef";
+import {
+  IJobPostFormFields,
+  IProps,
+} from "components/CreateJobPostForm/typesDef";
 import FileBox from "components/FileBox/FileBox";
+import { SButtonsGroup } from "components/CreateJobPostForm/styles";
 import { IFreelancer } from "services/profileInfo/typesDef";
 import { useGetOwnUserQuery } from "services/user/setUserAPI";
 import {
@@ -25,10 +29,10 @@ import {
   jobPostsDraftSchema,
 } from "validation/createJobPostValidationSchema";
 import createDataForResolver from "utils/functions/createDataForResolver";
-import { SButtonsGroup, SWrapper } from "components/CreateJobPostForm/styles";
 import { createJobAttachmentFileTypes } from "utils/consts/fileTypes";
 
-function CreateJobPostForm() {
+function CreateJobPostForm(props: IProps) {
+  const { existedDraftData, queriedSkills, setIsOpen } = props;
   const { data: userData, isError: getUserError } = useGetOwnUserQuery();
 
   const [
@@ -54,9 +58,11 @@ function CreateJobPostForm() {
     handleSubmit,
     control,
     setValue,
-    formState: { errors: validationErrors },
+    reset,
+    formState: { errors: validationErrors, isSubmitSuccessful },
   } = useForm<IJobPostFormFields>({
     context: isDraft,
+    defaultValues: existedDraftData,
     resolver: (data, context) => {
       const { errorsMessages, validData } = context
         ? createDataForResolver(data, jobPostsDraftSchema)
@@ -92,12 +98,20 @@ function CreateJobPostForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFile]);
 
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      setSelectedFile(null);
+      reset();
+    }
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [isSubmitSuccessful]);
+
   const handlerSubmitForm = (data: IJobPostFormFields) => {
     const { skills: skillsId, jobDescription, rate, duration, ...rest } = data;
 
     const objToRequest = {
       ...rest,
-      skillsId: skillsId.length >= 3 ? skillsId : null,
+      skillsId: skillsId?.length >= 3 ? skillsId : null,
       jobDescription: jobDescription || null,
       rate: rate || null,
       duration: duration || undefined,
@@ -107,6 +121,7 @@ function CreateJobPostForm() {
 
     if (isDraft) {
       postDraft(objToRequest);
+      if (setIsOpen) setIsOpen(false);
       return;
     }
 
@@ -124,6 +139,7 @@ function CreateJobPostForm() {
     });
 
     postJobPost(formData);
+    if (setIsOpen) setIsOpen(false);
   };
 
   const handlerPostDraft = () => setIsDraft(() => true);
@@ -146,16 +162,25 @@ function CreateJobPostForm() {
   };
 
   return (
-    <SWrapper>
-      <h2>Create a job post</h2>
+    <div>
+      <h2>
+        {existedDraftData
+          ? t("PostJob.titleForDraft")
+          : t("PostJob.titleForCreate")}
+      </h2>
       <form onSubmit={handleSubmit(handlerSubmitForm)}>
         {propsDataCollection.map((propsData) => (
           <LayoutElementWithTitle
             key={propsData.title}
+            isSubmitSuccess={isSubmitSuccessful}
             control={control as unknown as Control}
             errors={validationErrors as unknown as FieldErrors}
             setValue={setValue as unknown as UseFormSetValue<any>}
-            freelancerInfo={{ skills: [] } as unknown as IFreelancer}
+            freelancerInfo={
+              {
+                skills: queriedSkills || [],
+              } as unknown as IFreelancer
+            }
             {...propsData}
           />
         ))}
@@ -201,7 +226,7 @@ function CreateJobPostForm() {
           </SButtonsGroup>
         )}
       </form>
-    </SWrapper>
+    </div>
   );
 }
 

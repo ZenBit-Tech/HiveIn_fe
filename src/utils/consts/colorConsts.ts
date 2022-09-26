@@ -12,3 +12,7 @@ export const TEXT_GRAY = "#898989";
 export const BOX_BACKGROUND = "#f1f2f4";
 export const BOX_BORDER = "#e0e0e0";
 export const BLUE_MUI_PRIMARY = "#1976d2";
+export const BOX_SHADOW_LIGHT = "rgba(0, 0, 0, 0.12)";
+export const BOX_SHADOW_DARK = "rgba(0, 0, 0, 0.24)";
+export const TAG_SUCCESS = "#2e7d32";
+export const TAG_CLOSED = "#ff699d";
