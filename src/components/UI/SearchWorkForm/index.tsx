@@ -7,6 +7,7 @@ import propsDataCollection from "components/UI/SearchWorkForm/staticData";
 import { Typography } from "antd";
 import { ISearchWorkFilters } from "components/UI/SearchWorkForm/typesDef";
 import { DurationTypeEnum } from "utils/enums";
+import { useState } from "react";
 
 interface ISearchWorkFormProps {
   filters: ISearchWorkFilters;
@@ -23,6 +24,8 @@ function SearchWorkForm({
   setDefaultPage,
 }: ISearchWorkFormProps) {
   const { Title } = Typography;
+
+  const [isReset, setIsReset] = useState(false);
 
   const {
     handleSubmit,
@@ -43,6 +46,22 @@ function SearchWorkForm({
     setDefaultPage();
   };
 
+  const onClear = () => {
+    setIsReset(true);
+    setFilters({ ...filters, skills: [] });
+    reset({
+      category: defaultCategoryId,
+      rate: "",
+      skills: [],
+      duration: "",
+      durationType: defaultDurationType,
+      englishLevel: undefined,
+    });
+    setTimeout(() => {
+      setIsReset(false);
+    }, 1000);
+  };
+
   const { t } = useTranslation();
 
   return (
@@ -51,9 +70,12 @@ function SearchWorkForm({
 
       {propsDataCollection.map((propsData) => (
         <LayoutElementWithTitle
-          freelancerInfo={{ skills: filters.skills } as unknown as IFreelancer}
+          freelancerInfo={
+            { skills: filters.skills || [] } as unknown as IFreelancer
+          }
           setValue={setValue}
           errors={errors}
+          isSubmitSuccess={isReset}
           key={propsData.title}
           control={control}
           {...propsData}
@@ -62,20 +84,7 @@ function SearchWorkForm({
       <S.CustomButton block type="primary" htmlType="submit">
         {t("SearchWork.search")}
       </S.CustomButton>
-      <S.CustomButton
-        block
-        type="ghost"
-        onClick={() => {
-          reset({
-            category: defaultCategoryId,
-            rate: "",
-            duration: "",
-            durationType: defaultDurationType,
-            englishLevel: undefined,
-          });
-          setValue("skills", []);
-        }}
-      >
+      <S.CustomButton block type="ghost" onClick={onClear}>
         {t("SearchWork.clear")}
       </S.CustomButton>
     </S.Form>
