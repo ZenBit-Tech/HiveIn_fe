@@ -25,7 +25,7 @@ function SearchWorkForm({
 }: ISearchWorkFormProps) {
   const { Title } = Typography;
 
-  const [isReset, setIsReset] = useState(false);
+  const [isReset, setIsReset] = useState<boolean>(false);
 
   const {
     handleSubmit,
@@ -66,7 +66,7 @@ function SearchWorkForm({
 
   return (
     <S.Form onSubmit={handleSubmit(onSubmit)}>
-      <Title level={3}>Filters</Title>
+      <Title level={3}>{t("SearchWork.filters")}</Title>
 
       {propsDataCollection.map((propsData) => (
         <LayoutElementWithTitle

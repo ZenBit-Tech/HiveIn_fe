@@ -21,8 +21,8 @@ const defaultPage = 1;
 
 function SearchWork() {
   const { t } = useTranslation();
-  const [currentPage, setCurrentPage] = useState(defaultPage);
-  const [postsPerPage, setPostsPerPage] = useState(workPerPage);
+  const [currentPage, setCurrentPage] = useState<number>(defaultPage);
+  const [postsPerPage, setPostsPerPage] = useState<number>(workPerPage);
 
   const { data: freelancerInfo, isSuccess: isUserInformationSuccess } =
     useGetOwnProfileQuery();
