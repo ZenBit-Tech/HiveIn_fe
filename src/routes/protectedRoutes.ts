@@ -1,4 +1,4 @@
-import Chat from "pages/Chat";
+import Chat from "pages/Chat/Chat";
 import Welcome from "pages/Auth/Welcome";
 import { RoutesType } from "routes/publicRoutes";
 import {

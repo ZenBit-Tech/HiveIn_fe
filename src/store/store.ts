@@ -48,7 +48,8 @@ export const store = configureStore({
       .concat(getTalentApi.middleware)
       .concat(contractApi.middleware)
       .prepend(getProfileInfoApi.middleware)
-      .prepend(getSkillsOrCategory.middleware),
+      .prepend(getSkillsOrCategory.middleware)
+      .prepend(setNotificationsAPI.middleware),
 });
 
 export const userPersistor = persistStore(store);
