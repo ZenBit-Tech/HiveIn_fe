@@ -3,7 +3,11 @@ import { JOB_POST } from "utils/consts/breakpointConsts";
 import { IDraftRequestObject } from "components/CreateJobPostForm/typesDef";
 import { TEnglishLevel } from "components/layoutElementWithTitle/typesDef";
 import { DurationTypeEnum } from "utils/enums";
+
 import apiSlice from "services/api/apiSlice";
+
+import { IWorkCardProps } from "components/UI/WorkCard/WorkCard";
+import { ISearchWorkFilters } from "components/UI/SearchWorkForm/typesDef";
 
 export interface ISkills {
   id: number;
@@ -53,6 +57,11 @@ export interface IUpdateParams {
   rate?: number;
   userId: string;
   postId: number;
+}
+
+export interface IFilterReturnType {
+  data: IWorkCardProps[];
+  totalCount: number;
 }
 
 const apiSliceWithTags = apiSlice.enhanceEndpoints({ addTagTypes: ["Posts"] });
@@ -111,6 +120,15 @@ const jobPostsAPI = apiSliceWithTags.injectEndpoints({
       }),
       invalidatesTags: ["Posts"],
     }),
+    filterJobPosts: builder.query<IFilterReturnType, ISearchWorkFilters>({
+      query: (params) => ({
+        url: `${JOB_POST}/search-job/`,
+        params: {
+          ...params,
+          skills: params.skills?.map((skill) => skill.id).join("_"),
+        },
+      }),
+    }),
   }),
 });
 
@@ -120,6 +138,7 @@ export const {
   useGetHomePostsQuery,
   usePostJobPostMutation,
   usePostDraftMutation,
+  useFilterJobPostsQuery,
   useUpdatePostMutation,
   useDeletePostMutation,
 } = jobPostsAPI;

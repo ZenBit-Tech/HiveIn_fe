@@ -1,7 +1,7 @@
 import MyContracts from "pages/Freelancer/MyContracts/MyContracts";
 import Profile from "pages/Freelancer/Profile";
 import Proposals from "pages/Freelancer/Proposals";
-import SearchWork from "pages/Freelancer/SearchWork";
+import SearchWork from "pages/Freelancer/SearchWork/Index";
 import Settings from "pages/Freelancer/Settings/Settings";
 import { RoutesType } from "routes/publicRoutes";
 import {
