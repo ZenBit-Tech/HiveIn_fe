@@ -23,6 +23,7 @@ export interface ILayoutElementWithoutControl {
     | "educationColumn"
     | "experienceColumn"
     | "skillsLayout"
+    | "skillsLayoutSmall"
     | "text"
     | "phoneInput"
     | "durationPicker";
