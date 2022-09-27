@@ -10,8 +10,9 @@ interface ProposalFields {
 
 interface InviteFields {
   inviteMessage: string;
-  freelancerId: number;
-  jobId: number;
+  idFreelancer: number;
+  idJobPost: number;
+  bid: number;
 }
 
 const proposalsApi = createApi({
@@ -41,7 +42,7 @@ const proposalsApi = createApi({
     }),
     sendInvite: builder.mutation<void, InviteFields>({
       query: ({ ...inviteFields }) => ({
-        url: `/${INVITE}`,
+        url: `/${PROPOSALS}/${INVITE}`,
         method: "POST",
         body: {
           ...inviteFields,

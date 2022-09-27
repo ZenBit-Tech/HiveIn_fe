@@ -3,6 +3,11 @@ import i18next from "localization/en/en.json";
 import { MAX_LENGTH_OF_COVER_LETTER } from "utils/consts/numberConsts";
 
 const submitInviteSchema = yup.object({
+  bid: yup
+    .number()
+    .required(i18next.SendProposalErrors.bidRequired)
+    .positive(i18next.SendProposalErrors.bidPositive)
+    .typeError(i18next.SendProposalErrors.bidTypeError),
   inviteMessage: yup
     .string()
     .required(i18next.SendProposalErrors.coverLetterRequired)

@@ -113,6 +113,7 @@ function FreelancerInfoDrawer({
                 {t("Talent.send")}
               </SendButton>
               <SubmitInviteModal
+                bid={+rate}
                 freelancerId={id}
                 freelancerUser={user}
                 visible={isModalOpen}

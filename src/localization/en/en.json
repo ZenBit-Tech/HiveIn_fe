@@ -287,7 +287,9 @@
     "inviteTitle": "will be invited to job",
     "jobs": "Choose job",
     "sendButton": "Send invite",
-    "defaultInviteMessage": "Hello! I would like to invite you to the interview"
+    "defaultInviteMessage": "Hello! I would like to invite you to the interview",
+    "freelancerRate": "Freelancer rate: ",
+    "success": "Invite sent!"
   },
   "PostJob": {
     "title": "Create Job Post",

@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Modal } from "antd";
+import { Modal, Typography, Space } from "antd";
 import Field from "components/DefaultField/DefaultField";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
 import { useEffect } from "react";
@@ -14,13 +14,18 @@ import JobSelect from "components/UI/jobSelect/JobSelect";
 import submitInviteSchema from "components/UI/ModalWindows/SubmitInviteModal/SubmitInviteModalSchema";
 import { Form } from "components/UI/ModalWindows/SubmitProposalModal/SubmitProposalStyles";
 
+const { Text } = Typography;
+
 interface ISubmitInviteForm extends FieldValues {
-  categoryId: number;
   inviteMessage: string;
+  idFreelancer: number;
+  idJobPost: number;
+  bid: number;
 }
 
 interface ISubmitInviteModalProps {
   freelancerId: number;
+  bid: number;
   visible: boolean;
   closeModal: () => void;
   freelancerUser: IUser;
@@ -29,6 +34,7 @@ interface ISubmitInviteModalProps {
 function SubmitInviteModal({
   freelancerId,
   visible,
+  bid,
   closeModal,
   freelancerUser: { lastName, firstName },
 }: ISubmitInviteModalProps) {
@@ -47,13 +53,9 @@ function SubmitInviteModal({
   const [runSendInviteMutation, { isError, isLoading, isSuccess }] =
     useSendInviteMutation();
 
-  const onSubmit: SubmitHandler<ISubmitInviteForm> = async ({
-    jobId,
-    inviteMessage,
-  }) => {
-    await runSendInviteMutation({ jobId, inviteMessage, freelancerId });
+  const onSubmit: SubmitHandler<ISubmitInviteForm> = async (data) => {
+    await runSendInviteMutation({ ...data, idFreelancer: freelancerId });
     closeModal();
-
     reset();
   };
 
@@ -63,7 +65,7 @@ function SubmitInviteModal({
       return;
     }
     if (!isLoading && isSuccess) {
-      toast.success(t("SearchWork.success"));
+      toast.success(t("Talent.success"));
       reset();
     }
   }, [isLoading]);
@@ -78,6 +80,19 @@ function SubmitInviteModal({
       confirmLoading={isLoading}
     >
       <Form onSubmit={handleSubmit(onSubmit)}>
+        <Space size="large">
+          <Text>
+            {t("Talent.freelancerRate")}
+            {bid}
+            {t("MyJobs.perHour")}
+          </Text>
+        </Space>
+        <Field
+          control={control}
+          name="bid"
+          prefix={t("MyJobs.currency")}
+          suffix={t("MyJobs.perHour")}
+        />
         <Field
           label={t("Talent.inviteMessage")}
           control={control}
@@ -90,7 +105,7 @@ function SubmitInviteModal({
             options={jobPosts}
             label={t("Talent.jobs")}
             control={control}
-            name="jobId"
+            name="idJobPost"
           />
         )}
         <SendButton>{t("Talent.sendButton")}</SendButton>
