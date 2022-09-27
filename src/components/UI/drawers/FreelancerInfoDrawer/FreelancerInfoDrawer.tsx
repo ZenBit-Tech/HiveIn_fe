@@ -1,5 +1,5 @@
 import { DollarCircleFilled } from "@ant-design/icons";
-import { Avatar, Drawer, Row, Space, Typography } from "antd";
+import { Avatar, Drawer, Space, Typography } from "antd";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
 import {
   ContentBox,
@@ -55,7 +55,7 @@ function FreelancerInfoDrawer({
       <Wrapper>
         <Grid grow={3}>
           <Header>
-            <Row gutter={5}>
+            <Space size="large">
               <Avatar size={150} src={user.avatarURL} />
               <Space direction="vertical">
                 <Title level={3}>
@@ -65,7 +65,7 @@ function FreelancerInfoDrawer({
                 <DrawerText>{user.phone}</DrawerText>
                 <DrawerText>{user.email}</DrawerText>
               </Space>
-            </Row>
+            </Space>
           </Header>
           <ContentBox>
             <Title level={5}>{t("SearchWork.habilities")}</Title>
