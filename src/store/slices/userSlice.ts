@@ -4,6 +4,7 @@ import { persistReducer } from "redux-persist";
 
 interface UserState {
   authToken?: string;
+  refreshToken?: string;
   email?: string;
   firstName?: string;
   description?: string;
@@ -12,6 +13,7 @@ interface UserState {
 
 const initialState: UserState = {
   authToken: undefined,
+  refreshToken: undefined,
   email: undefined,
   role: undefined,
   firstName: undefined,
@@ -22,6 +24,10 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
+    setToken: (state, { payload }) => {
+      const { authToken } = payload;
+      return { ...state, authToken };
+    },
     setUser: (state, { payload }: PayloadAction<UserState>) => {
       return { ...state, ...payload };
     },
@@ -36,5 +42,5 @@ const persistConfig = {
 
 const userPersistedReducer = persistReducer(persistConfig, userSlice.reducer);
 
-export const { setUser, setSignOut } = userSlice.actions;
+export const { setToken, setUser, setSignOut } = userSlice.actions;
 export default userPersistedReducer;

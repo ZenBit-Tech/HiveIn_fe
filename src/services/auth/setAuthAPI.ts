@@ -1,5 +1,11 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { AUTH, GOOGLE, SIGN_IN, SIGN_UP } from "utils/consts/breakepointConsts";
+import apiSlice from "services/api/apiSlice";
+import {
+  AUTH,
+  GOOGLE,
+  LOG_OUT,
+  SIGN_IN,
+  SIGN_UP,
+} from "utils/consts/breakpointConsts";
 
 interface AuthFields {
   email: string;
@@ -7,15 +13,16 @@ interface AuthFields {
 }
 
 export interface AuthResponse {
-  token: string;
-  email: string;
-  id: number;
-  role: "freelancer" | "client" | undefined;
+  accessToken: {
+    authToken: string;
+    email: string;
+    id: number;
+    role?: "freelancer" | "client";
+  };
+  refreshToken: string;
 }
 
-const authApi = createApi({
-  reducerPath: "signIn",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
+const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     signIn: builder.mutation<AuthResponse, AuthFields>({
       query: ({ email, password }) => ({
@@ -39,6 +46,12 @@ const authApi = createApi({
       }),
       transformResponse: (response: AuthResponse) => response,
     }),
+    logOut: builder.mutation<void, void>({
+      query: () => ({
+        url: `/${AUTH}/${LOG_OUT}`,
+        method: "POST",
+      }),
+    }),
     googleOAuthSignIn: builder.query<AuthResponse, void>({
       query: () => ({
         url: `/${AUTH}/${GOOGLE}`,
@@ -51,6 +64,7 @@ const authApi = createApi({
 export const {
   useSignInMutation,
   useSignUpMutation,
+  useLogOutMutation,
   useGoogleOAuthSignInQuery,
 } = authApi;
 
