@@ -17,7 +17,7 @@ export interface AuthResponse {
     authToken: string;
     email: string;
     id: number;
-    role: "freelancer" | "client" | undefined;
+    role?: "freelancer" | "client";
   };
   refreshToken: string;
 }
