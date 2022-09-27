@@ -8,6 +8,7 @@ import { Typography } from "antd";
 import { ISearchWorkFilters } from "components/UI/SearchWorkForm/typesDef";
 import { DurationTypeEnum } from "utils/enums";
 import { useState } from "react";
+import { ONESECOND } from "utils/consts/timeConsts";
 
 interface ISearchWorkFormProps {
   filters: ISearchWorkFilters;
@@ -15,7 +16,6 @@ interface ISearchWorkFormProps {
   setDefaultPage: () => void;
 }
 
-const defaultCategoryId = 1;
 const defaultDurationType = DurationTypeEnum.WEEK;
 
 function SearchWorkForm({
@@ -50,7 +50,7 @@ function SearchWorkForm({
     setIsReset(true);
     setFilters({ ...filters, skills: [] });
     reset({
-      category: defaultCategoryId,
+      category: undefined,
       rate: "",
       skills: [],
       duration: "",
@@ -59,7 +59,7 @@ function SearchWorkForm({
     });
     setTimeout(() => {
       setIsReset(false);
-    }, 1000);
+    }, ONESECOND);
   };
 
   const { t } = useTranslation();

@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { useGetOneJobPostQuery } from "services/jobPosts/setJobPostsAPI";
 import SearchWorkDrawer from "components/UI/drawers/SearchWorkDrawer/SearchWorkDrawer";
+import { cutTextByWords } from "utils/functions/cutTextByWords";
 
 export interface IWorkCardProps {
   id: number;
@@ -40,7 +41,7 @@ function WorkCard({ jobDescription, title, createdAt, id }: IWorkCardProps) {
           </JobTitle>
         </JobTitle>
         <JobDescription>
-          {jobDescription.split(" ").slice(0, wordPerCard).join(" ")}...
+          {cutTextByWords(jobDescription, wordPerCard)}
         </JobDescription>
       </Card>
       {isSuccess && (
