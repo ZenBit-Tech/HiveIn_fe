@@ -2,8 +2,10 @@ import styled from "styled-components";
 import { Button, Input } from "antd";
 import { LIGHT_BLUE, LIGHT_GRAY } from "utils/consts/colorConsts";
 import { SendOutlined } from "@ant-design/icons";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
+  EventEnum,
+  getSocket,
   useGetMessagesQuery,
   useSendMessageMutation,
 } from "services/notifications/setNotificationsAPI";
@@ -43,17 +45,30 @@ const InputBlock = styled.div`
 const Element = styled.div`
   margin-top: 10px;
 `;
+const Header = styled.div`
+  background-color: ${LIGHT_BLUE};
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 2px;
+  font-size: 18px;
+  text-align: center;
+`;
 
 interface IChatRoom {
   roomId: number;
   userSelfId: number;
+  jobName: string;
 }
 
-function ChatRoom({ roomId, userSelfId }: IChatRoom) {
+function ChatRoom({ roomId, userSelfId, jobName }: IChatRoom) {
   const { data: messages } = useGetMessagesQuery(roomId);
   const [sendMessage] = useSendMessageMutation();
   const [text, setText] = useState<string>("");
 
+  const socket = getSocket();
+  useEffect(() => {
+    socket.emit(EventEnum.GET_MESSAGES, roomId);
+  }, [roomId]);
   const ref = useChatScroll(messages);
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -67,7 +82,7 @@ function ChatRoom({ roomId, userSelfId }: IChatRoom) {
 
   return (
     <ChatRoomContainer>
-      {/* @ts-ignore */}
+      <Header>{jobName}</Header>
       <MessageBlock ref={ref}>
         {messages?.length ? (
           messages.map((message) => {
@@ -93,7 +108,11 @@ function ChatRoom({ roomId, userSelfId }: IChatRoom) {
         )}
       </MessageBlock>
       <InputBlock>
-        <Input value={text} onChange={onChangeHandler} />
+        <Input
+          value={text}
+          onChange={onChangeHandler}
+          onKeyUp={(event) => event.key === "Enter" && onSendHandler()}
+        />
         <Button onClick={onSendHandler} icon={<SendOutlined />} />
       </InputBlock>
     </ChatRoomContainer>

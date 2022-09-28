@@ -134,13 +134,12 @@ const notificationsAPI = createApi({
           await cacheDataLoaded;
 
           const socket = getSocket();
-          socket.on("connect", () => {});
           socket.emit(EventEnum.GET_ROOMS, () => {});
           socket.on(EventEnum.ROOMS, (rooms: IRoom[]) => {
             updateCachedData((draft) => {
               draft.splice(0, draft.length, ...rooms);
             });
-            rooms.map((room) => socket.emit(EventEnum.JOIN_ROOM, room.id));
+            // rooms.map((room) => socket.emit(EventEnum.JOIN_ROOM, room.id));
           });
 
           await cacheEntryRemoved;

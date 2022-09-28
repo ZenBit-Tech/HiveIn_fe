@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import { DARK_BLUE } from "utils/consts/colorConsts";
+import {
+  EventEnum,
+  getSocket,
+} from "../../../services/notifications/setNotificationsAPI";
 
 const imageLink =
   "https://www.interlinecenter.com/wp-content/uploads/2016/10/dummy-user-img.png";
@@ -33,7 +37,7 @@ const LastMessage = styled.p`
 interface IChatUsersList {
   jobName: string;
   id: number;
-  onClick: (id: number) => void;
+  onClick: (id: number, jobName: string) => void;
   lastMessage: string;
   opponentsName: string;
 }
@@ -45,8 +49,11 @@ function ChatList({
   lastMessage,
   opponentsName,
 }: IChatUsersList) {
-  const onClickHandler = () => {
-    onClick(id);
+  const socket = getSocket();
+  const onClickHandler = async () => {
+    await socket.emit(EventEnum.LEAVE_ROOM);
+    onClick(id, jobName);
+    socket.emit(EventEnum.JOIN_ROOM, id);
   };
 
   return (

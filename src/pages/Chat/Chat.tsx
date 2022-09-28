@@ -30,18 +30,19 @@ function Chat() {
   const { data: user } = useGetOwnUserQuery();
 
   const [roomId, setRoomId] = useState<number | null>(null);
+  const [jobNameForHeader, setJobNameForHeader] = useState<string>("");
 
-  const onClickHandler = (id: number) => {
+  const onClickHandler = (id: number, jobName: string) => {
     setRoomId(id);
+    setJobNameForHeader(jobName);
   };
 
   const defineOpponentsName = (
     freelancer: IChatUser,
     client: IChatUser,
-    // eslint-disable-next-line @typescript-eslint/no-shadow
-    user: IUser
+    currentUser: IUser
   ): string => {
-    if (+user.id!! !== freelancer.id) {
+    if (+currentUser.id!! !== freelancer.id) {
       return `${freelancer.firstName || ""} ${freelancer.lastName || ""}`;
     }
     return `${client.firstName || ""} ${client.lastName || ""}`;
@@ -68,7 +69,11 @@ function Chat() {
             ))}
           </Block>
           {roomId ? (
-            <ChatRoom userSelfId={+user.id!!} roomId={roomId} />
+            <ChatRoom
+              userSelfId={+user.id!!}
+              roomId={roomId}
+              jobName={jobNameForHeader}
+            />
           ) : (
             <div style={{ fontSize: "24px" }}>Please choose the chat</div>
           )}
