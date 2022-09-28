@@ -15,6 +15,7 @@ import {
 } from "services/notifications/setNotificationsAPI";
 import { formatToStandardDate } from "utils/functions/formatDateFunctions";
 import { useTranslation } from "react-i18next";
+import { CHAT_DATE_FORMAT } from "utils/consts/inputPropsConsts";
 import useChatScroll from "hooks/useChatScroll";
 
 interface IChatRoom {
@@ -62,10 +63,13 @@ function ChatRoom({ roomId, userSelfId, jobName }: IChatRoom) {
                 isMine={message.senderId === userSelfId}
               >
                 <div>
-                  <div>
-                    {formatToStandardDate(new Date(message.created_at), "PPpp")}
-                  </div>
                   <div>{message.senderId}</div>
+                  <div>
+                    {formatToStandardDate(
+                      new Date(message.created_at),
+                      CHAT_DATE_FORMAT
+                    )}
+                  </div>
                 </div>
                 <Element>{message.text}</Element>
               </Message>

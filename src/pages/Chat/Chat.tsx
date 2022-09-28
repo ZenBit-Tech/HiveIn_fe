@@ -29,7 +29,7 @@ function Chat() {
     client: IChatUser,
     currentUser: IUser
   ): { name: string; avatar: string } => {
-    if (+currentUser.id!! !== freelancer.id) {
+    if (+currentUser.id!! === freelancer.id) {
       return {
         name: `${freelancer.firstName || ""} ${freelancer.lastName || ""}`,
         avatar: `${freelancer.avatarURL || ""}`,
