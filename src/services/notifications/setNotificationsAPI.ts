@@ -36,7 +36,7 @@ export interface IMessage {
   created_at: string;
   senderId: number;
   text: string;
-  isSystemMessage: boolean;
+  messageType: "fromUser" | "fromSystem";
 }
 
 export interface IRoom {
@@ -124,6 +124,8 @@ const notificationsAPI = createApi({
         method: "PATCH",
       }),
     }),
+
+    // Chat
     getRooms: builder.query<IRoom[], void>({
       queryFn: () => ({ data: [] }),
       async onCacheEntryAdded(
@@ -139,19 +141,17 @@ const notificationsAPI = createApi({
             updateCachedData((draft) => {
               draft.splice(0, draft.length, ...rooms);
             });
-            // rooms.map((room) => socket.emit(EventEnum.JOIN_ROOM, room.id));
           });
 
           await cacheEntryRemoved;
 
-          socket.off("connect");
           socket.off(EventEnum.ROOMS);
         } catch {
-          throw new Error("socket error");
+          throw new Error("Error, cannot get chat rooms");
         }
       },
     }),
-    getMessages: builder.query<IMessage[], number>({
+    messages: builder.query<IMessage[], void>({
       queryFn: () => ({ data: [] }),
       async onCacheEntryAdded(
         roomId,
@@ -161,7 +161,6 @@ const notificationsAPI = createApi({
           await cacheDataLoaded;
 
           const socket = getSocket();
-          socket.emit(EventEnum.GET_MESSAGES, roomId);
           socket.on(EventEnum.MESSAGES, (messages: IMessage[]) => {
             updateCachedData((draft) => {
               draft.splice(0, draft.length, ...messages);
@@ -172,7 +171,7 @@ const notificationsAPI = createApi({
 
           socket.off(EventEnum.MESSAGES);
         } catch {
-          throw new Error("socket error");
+          throw new Error("Error, cannot get chat messages");
         }
       },
     }),
@@ -186,6 +185,39 @@ const notificationsAPI = createApi({
         });
       },
     }),
+    leaveRoom: builder.mutation<void, void>({
+      queryFn: () => {
+        const socket = getSocket();
+        return new Promise((resolve, reject) => {
+          socket.emit(EventEnum.LEAVE_ROOM, null, () => {
+            resolve({ data: undefined });
+            reject(new Error("Leave room error"));
+          });
+        });
+      },
+    }),
+    joinRoom: builder.mutation<void, number>({
+      queryFn: (roomId) => {
+        const socket = getSocket();
+        return new Promise((resolve, reject) => {
+          socket.emit(EventEnum.JOIN_ROOM, roomId, () => {
+            resolve({ data: undefined });
+            reject(new Error(`Cannot join the room with id:${roomId}`));
+          });
+        });
+      },
+    }),
+    getMessages: builder.mutation<void, number>({
+      queryFn: (roomId) => {
+        const socket = getSocket();
+        return new Promise((resolve, reject) => {
+          socket.emit(EventEnum.GET_MESSAGES, roomId, () => {
+            resolve({ data: undefined });
+            reject(new Error(`Cannot find messages for room ${roomId}`));
+          });
+        });
+      },
+    }),
   }),
 });
 
@@ -194,8 +226,11 @@ export const {
   useSendNotificationMutation,
   useReadNotificationMutation,
   useGetRoomsQuery,
-  useGetMessagesQuery,
+  useMessagesQuery,
   useSendMessageMutation,
+  useJoinRoomMutation,
+  useLeaveRoomMutation,
+  useGetMessagesMutation,
 } = notificationsAPI;
 
 export { getSocket };

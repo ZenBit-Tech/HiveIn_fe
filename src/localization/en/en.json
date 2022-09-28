@@ -71,7 +71,10 @@
     "continueText": "Continue"
   },
   "Chat": {
-    "title": "Chat"
+    "title": "Chat",
+    "chooseTheChat": "Please choose the chat",
+    "noChats": "You have no chats",
+    "noMessages": "You have no messages"
   },
   "Settings": {
     "title": "Settings"

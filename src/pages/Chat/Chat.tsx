@@ -1,30 +1,17 @@
-import styled from "styled-components";
-import { LIGHT_BLUE } from "utils/consts/colorConsts";
 import { useState } from "react";
 import {
   IChatUser,
   useGetRoomsQuery,
 } from "services/notifications/setNotificationsAPI";
 import { IUser, useGetOwnUserQuery } from "services/user/setUserAPI";
-import ChatList from "./ChatList/ChatList";
+import { Block, Container, Notification } from "pages/Chat/Chat.styles";
+import { useTranslation } from "react-i18next";
+import ChatRoomsList from "./ChatRoomsList/ChatRoomsList";
 import ChatRoom from "./ChatRoom/ChatRoom";
 
-const Container = styled.div`
-  display: flex;
-`;
-
-const Block = styled.div`
-  border-radius: 10px;
-  background-color: ${LIGHT_BLUE};
-  margin-right: 10px;
-  height: 320px;
-  overflow: scroll;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-`;
-
 function Chat() {
+  const { t } = useTranslation();
+
   const { data: roomsList } = useGetRoomsQuery();
 
   const { data: user } = useGetOwnUserQuery();
@@ -37,15 +24,21 @@ function Chat() {
     setJobNameForHeader(jobName);
   };
 
-  const defineOpponentsName = (
+  const defineOpponentsNameAndAvatar = (
     freelancer: IChatUser,
     client: IChatUser,
     currentUser: IUser
-  ): string => {
+  ): { name: string; avatar: string } => {
     if (+currentUser.id!! !== freelancer.id) {
-      return `${freelancer.firstName || ""} ${freelancer.lastName || ""}`;
+      return {
+        name: `${freelancer.firstName || ""} ${freelancer.lastName || ""}`,
+        avatar: `${freelancer.avatarURL || ""}`,
+      };
     }
-    return `${client.firstName || ""} ${client.lastName || ""}`;
+    return {
+      name: `${client.firstName || ""} ${client.lastName || ""}`,
+      avatar: `${client.avatarURL || ""}`,
+    };
   };
 
   return (
@@ -54,8 +47,8 @@ function Chat() {
         <Container>
           <Block>
             {roomsList.map((room) => (
-              <ChatList
-                opponentsName={defineOpponentsName(
+              <ChatRoomsList
+                opponentsNameAndAvatar={defineOpponentsNameAndAvatar(
                   room.freelancer,
                   room.client,
                   user
@@ -75,11 +68,11 @@ function Chat() {
               jobName={jobNameForHeader}
             />
           ) : (
-            <div style={{ fontSize: "24px" }}>Please choose the chat</div>
+            <Notification>{t("Chat.chooseTheChat")}</Notification>
           )}
         </Container>
       ) : (
-        <div style={{ fontSize: "24px" }}>You have no chats</div>
+        <Notification>{t("Chat.noChats")}</Notification>
       )}
     </div>
   );
