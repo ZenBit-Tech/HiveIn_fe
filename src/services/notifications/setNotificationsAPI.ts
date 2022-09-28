@@ -17,6 +17,11 @@ export enum EventEnum {
   NOTIFICATION_SEND = "'first-message'",
 }
 
+export enum MessageTypeEnum {
+  FROM_USER = "fromUser",
+  FROM_SYSTEM = "fromSystem",
+}
+
 enum ChatRoomStatusEnum {
   FOR_ALL = "forAll",
   FREELANCER_ONLY = "freelancerOnly",
@@ -36,7 +41,7 @@ export interface IMessage {
   created_at: string;
   senderId: number;
   text: string;
-  messageType: "fromUser" | "fromSystem";
+  messageType: MessageTypeEnum;
 }
 
 export interface IRoom {

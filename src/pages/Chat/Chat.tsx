@@ -9,6 +9,11 @@ import { useTranslation } from "react-i18next";
 import ChatRoomsList from "./ChatRoomsList/ChatRoomsList";
 import ChatRoom from "./ChatRoom/ChatRoom";
 
+export interface IRoomUsers {
+  freelancer: IChatUser;
+  client: IChatUser;
+}
+
 function Chat() {
   const { t } = useTranslation();
 
@@ -18,6 +23,7 @@ function Chat() {
 
   const [roomId, setRoomId] = useState<number | null>(null);
   const [jobNameForHeader, setJobNameForHeader] = useState<string>("");
+  const [roomUsers, setRoomUsers] = useState<IRoomUsers>();
 
   const onClickHandler = (id: number, jobName: string) => {
     setRoomId(id);
@@ -40,6 +46,9 @@ function Chat() {
       avatar: `${client.avatarURL || ""}`,
     };
   };
+  const setRoomUsersHandler = (freelancer: IChatUser, client: IChatUser) => {
+    setRoomUsers({ freelancer, client });
+  };
 
   return (
     <div>
@@ -48,6 +57,10 @@ function Chat() {
           <Block>
             {roomsList.map((room) => (
               <ChatRoomsList
+                setRoomUsers={setRoomUsersHandler}
+                freelancer={room.freelancer}
+                client={room.client}
+                isSelected={room.id === roomId}
                 opponentsNameAndAvatar={defineOpponentsNameAndAvatar(
                   room.freelancer,
                   room.client,
@@ -63,6 +76,7 @@ function Chat() {
           </Block>
           {roomId ? (
             <ChatRoom
+              roomUsers={roomUsers}
               userSelfId={+user.id!!}
               roomId={roomId}
               jobName={jobNameForHeader}

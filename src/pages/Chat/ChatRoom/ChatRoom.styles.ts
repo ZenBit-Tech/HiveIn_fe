@@ -1,14 +1,34 @@
 import styled from "styled-components";
-import { LIGHT_BLUE, LIGHT_GRAY } from "utils/consts/colorConsts";
+import { LIGHT_BLUE, LIGHT_GRAY, PRIMARY } from "utils/consts/colorConsts";
 
-export const Message = styled.div<{ isMine: boolean }>`
-  display: flex;
+export const Message = styled.div<{
+  isMine: boolean;
+  isSystemMessage: boolean;
+}>`
+  display: ${({ isMine, isSystemMessage }) =>
+    isMine && isSystemMessage ? "none" : "flex"};
   flex-direction: column;
   padding: 10px;
   margin: 3px;
-  align-self: ${(props) => (props.isMine ? "flex-end" : "flex-start")};
+  align-self: ${(props) => {
+    if (props.isSystemMessage) {
+      return "center";
+    }
+    if (props.isMine) {
+      return "flex-end";
+    }
+    return "flex-start";
+  }};
   border-radius: 5px;
-  background-color: ${(props) => (props.isMine ? LIGHT_BLUE : LIGHT_GRAY)};
+  background-color: ${(props) => {
+    if (props.isSystemMessage) {
+      return PRIMARY;
+    }
+    if (props.isMine) {
+      return LIGHT_BLUE;
+    }
+    return LIGHT_GRAY;
+  }};
 `;
 
 export const MessageBlock = styled.div`
@@ -31,6 +51,8 @@ export const InputBlock = styled.div`
 
 export const Element = styled.div`
   margin-top: 10px;
+  font-size: 18px;
+  font-style: italic;
 `;
 export const Header = styled.div`
   background-color: ${LIGHT_BLUE};

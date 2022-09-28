@@ -1,4 +1,5 @@
 import {
+  IChatUser,
   useJoinRoomMutation,
   useLeaveRoomMutation,
 } from "services/notifications/setNotificationsAPI";
@@ -15,6 +16,10 @@ interface IChatUsersList {
   onClick: (id: number, jobName: string) => void;
   lastMessage: string;
   opponentsNameAndAvatar: { name: string; avatar: string };
+  isSelected: boolean;
+  freelancer: IChatUser;
+  client: IChatUser;
+  setRoomUsers: (freelancer: IChatUser, client: IChatUser) => void;
 }
 
 function ChatRoomsList({
@@ -23,6 +28,10 @@ function ChatRoomsList({
   onClick,
   lastMessage,
   opponentsNameAndAvatar,
+  isSelected,
+  freelancer,
+  client,
+  setRoomUsers,
 }: IChatUsersList) {
   const [leaveRoom] = useLeaveRoomMutation();
   const [joinRoom] = useJoinRoomMutation();
@@ -30,13 +39,14 @@ function ChatRoomsList({
   const onClickHandler = async () => {
     leaveRoom();
     onClick(id, jobName);
+    setRoomUsers(freelancer, client);
     joinRoom(id);
   };
 
   return (
-    <ChatElement onClick={onClickHandler}>
+    <ChatElement isSelected={isSelected} onClick={onClickHandler}>
       <Avatar
-        sx={{ width: 100, height: 100 }}
+        sx={{ width: 60, height: 60 }}
         src={opponentsNameAndAvatar.avatar}
         alt={opponentsNameAndAvatar.name}
       />

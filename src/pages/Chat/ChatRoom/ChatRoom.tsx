@@ -9,6 +9,7 @@ import {
   Element,
 } from "pages/Chat/ChatRoom/ChatRoom.styles";
 import {
+  MessageTypeEnum,
   useGetMessagesMutation,
   useMessagesQuery,
   useSendMessageMutation,
@@ -16,15 +17,17 @@ import {
 import { formatToStandardDate } from "utils/functions/formatDateFunctions";
 import { useTranslation } from "react-i18next";
 import { CHAT_DATE_FORMAT } from "utils/consts/inputPropsConsts";
+import { IRoomUsers } from "pages/Chat/Chat";
 import useChatScroll from "hooks/useChatScroll";
 
 interface IChatRoom {
   roomId: number;
   userSelfId: number;
   jobName: string;
+  roomUsers?: IRoomUsers;
 }
 
-function ChatRoom({ roomId, userSelfId, jobName }: IChatRoom) {
+function ChatRoom({ roomId, userSelfId, jobName, roomUsers }: IChatRoom) {
   const { t } = useTranslation();
 
   const { data: messages } = useMessagesQuery();
@@ -51,6 +54,19 @@ function ChatRoom({ roomId, userSelfId, jobName }: IChatRoom) {
     setText("");
   };
 
+  const defineName = (userID: number): string => {
+    if (roomUsers) {
+      return userID === roomUsers.client.id
+        ? `${roomUsers.client.firstName || "User"} ${
+            roomUsers.client.lastName || "Client"
+          }`
+        : `${roomUsers.freelancer.firstName || "User"} ${
+            roomUsers.freelancer.lastName || "Freelancer"
+          }`;
+    }
+    return "User";
+  };
+
   return (
     <div>
       <Header>{jobName}</Header>
@@ -59,11 +75,18 @@ function ChatRoom({ roomId, userSelfId, jobName }: IChatRoom) {
           messages.map((message) => {
             return (
               <Message
+                isSystemMessage={
+                  message.messageType === MessageTypeEnum.FROM_SYSTEM
+                }
                 key={message.id}
                 isMine={message.senderId === userSelfId}
               >
                 <div>
-                  <div>{message.senderId}</div>
+                  {message.messageType === MessageTypeEnum.FROM_SYSTEM ? (
+                    <div>{t("Chat.systemMessage")}</div>
+                  ) : (
+                    <div>{defineName(message.senderId)}</div>
+                  )}
                   <div>
                     {formatToStandardDate(
                       new Date(message.created_at),
@@ -76,7 +99,7 @@ function ChatRoom({ roomId, userSelfId, jobName }: IChatRoom) {
             );
           })
         ) : (
-          <Message isMine={false}>
+          <Message isMine isSystemMessage>
             <div>{t("Chat.noMessages")}</div>
           </Message>
         )}
