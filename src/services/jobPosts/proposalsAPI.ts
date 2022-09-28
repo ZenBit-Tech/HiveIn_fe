@@ -1,5 +1,5 @@
 import apiSlice from "services/api/apiSlice";
-import { INVITE, PROPOSALS } from "utils/consts/breakpointConsts";
+import { PROPOSALS, INVITE } from "utils/consts/breakpointConsts";
 
 interface ProposalFields {
   coverLetter: string;
