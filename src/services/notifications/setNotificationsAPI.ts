@@ -1,7 +1,7 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import apiSlice from "services/api/apiSlice";
 import { io, Socket } from "socket.io-client";
 import { RootState, store } from "store/store";
-import { NOTIFICATIONS } from "utils/consts/breakepointConsts";
+import { NOTIFICATIONS } from "utils/consts/breakpointConsts";
 
 export enum EventEnum {
   ROOMS = "rooms",
@@ -86,20 +86,7 @@ function getSocket() {
   return socketConnection;
 }
 
-const notificationsAPI = createApi({
-  reducerPath: "setNotificationsAPI",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const { authToken } = (getState() as RootState).user;
-
-      if (authToken) {
-        headers.set("Authorization", `Bearer ${authToken}`);
-      }
-
-      return headers;
-    },
-  }),
+const notificationsAPI = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getNotifications: builder.query<Notifications[], void>({
       query: () => NOTIFICATIONS,

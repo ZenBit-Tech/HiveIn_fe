@@ -1,6 +1,5 @@
-import { Tag } from "antd";
 import styled from "styled-components";
-import { DARK_BLUE, LIGHT_BLUE, TEXT_GRAY } from "utils/consts/colorConsts";
+import { TEXT_GRAY } from "utils/consts/colorConsts";
 
 interface ITitle {
   font_sz?: string;
@@ -16,13 +15,6 @@ const JobTitle = styled.div<ITitle>`
   margin-top: 3px;
 `;
 
-export const SkillTag = styled(Tag)`
-  border-radius: 50px;
-  background-color: ${LIGHT_BLUE};
-  border-color: ${DARK_BLUE};
-  color: ${DARK_BLUE};
-`;
-
 export const PayoutTitle = styled.div`
   font-size: 1em;
 `;
@@ -30,6 +22,12 @@ export const PayoutTitle = styled.div`
 export const JobDescription = styled.div`
   color: ${TEXT_GRAY};
   padding-bottom: 10%;
+`;
+
+export const TitleInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 export default JobTitle;

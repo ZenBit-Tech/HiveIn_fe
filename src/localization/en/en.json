@@ -17,7 +17,17 @@
     "modalTitle": "Additional Information",
     "bid": "Your bid",
     "coverLetter": "Your cover letter",
-    "success": "Proposal sent!"
+    "success": "Proposal sent!",
+    "subTitle": "Jobs on GetJob",
+    "byCategory": "Search by category",
+    "bySkills": "Search by skills",
+    "byPrice": "Search by price per hour",
+    "byTime": "Search by time available per day/hour",
+    "byEnglish": "Search by English level (choose one)",
+    "search": "Search",
+    "clear": "Clear",
+    "filters": "Filters",
+    "noResult": "No result"
   },
   "Proposals": {
     "title": "Proposals"
@@ -63,12 +73,14 @@
     "nothingToShow": "No active job posts",
     "info": "About the project",
     "skills": "Necessary Skills",
-    "currency": "$",
+    "currency": "Budget: $",
     "perHour": "/hour",
     "contractStatusTitle": "Contract status:",
     "endContractMessage": "This contract will be ended. Do you want to continue?",
-    "endContractTitle": "End a contract",
-    "continueText": "Continue"
+    "endContractTitle": "End the contract",
+    "continueText": "Continue",
+    "draft?": "Draft?",
+    "draft": "Draft"
   },
   "Chat": {
     "title": "Chat",
@@ -158,11 +170,7 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": [
-        "pre-intermediate",
-        "intermediate",
-        "upper-intermediate"
-      ]
+      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
     },
     "description": {
       "title": "Description",

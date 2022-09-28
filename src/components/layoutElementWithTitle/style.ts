@@ -6,6 +6,7 @@ export const SWrapper = styled("div")`
   align-items: flex-start;
   margin-top: 15px;
   margin-bottom: 15px;
+  flex-wrap: wrap;
 `;
 
 export const SH = styled("h3")`
