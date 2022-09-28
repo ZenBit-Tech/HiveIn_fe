@@ -1,10 +1,6 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { RootState } from "store/store";
-import {
-  CONTRACTS,
-  FREELANCER_CONTRACTS,
-} from "utils/consts/breakepointConsts";
+import { CONTRACTS, FREELANCER_CONTRACTS } from "utils/consts/breakpointConsts";
 import { IJobPost } from "services/jobPosts/setJobPostsAPI";
+import apiSlice from "services/api/apiSlice";
 
 interface ICloseContract {
   contractId: number;
@@ -24,20 +20,11 @@ export interface IContract {
   endDate?: string;
 }
 
-const contractApi = createApi({
-  reducerPath: "contract",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const { authToken } = (getState() as RootState).user;
+const apiSliceWithTags = apiSlice.enhanceEndpoints({
+  addTagTypes: ["Contract"],
+});
 
-      if (authToken) {
-        headers.set("Authorization", `Bearer ${authToken}`);
-      }
-      return headers;
-    },
-  }),
-  tagTypes: ["Contract"],
+const contractApi = apiSliceWithTags.injectEndpoints({
   endpoints: (builder) => ({
     getContracts: builder.query<IContract[], void>({
       query: () => ({

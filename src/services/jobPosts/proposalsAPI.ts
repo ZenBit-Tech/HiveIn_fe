@@ -1,6 +1,5 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { RootState } from "store/store";
-import { INVITE, PROPOSALS } from "utils/consts/breakepointConsts";
+import apiSlice from "services/api/apiSlice";
+import { INVITE, PROPOSALS } from "utils/consts/breakpointConsts";
 
 interface ProposalFields {
   coverLetter: string;
@@ -15,20 +14,7 @@ interface InviteFields {
   bid: number;
 }
 
-const proposalsApi = createApi({
-  reducerPath: "proposalsApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const { authToken } = (getState() as RootState).user;
-
-      if (authToken) {
-        headers.set("Authorization", `Bearer ${authToken}`);
-      }
-
-      return headers;
-    },
-  }),
+const proposalsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     sendProposal: builder.mutation<void, ProposalFields>({
       query: ({ ...proposalFields }) => ({

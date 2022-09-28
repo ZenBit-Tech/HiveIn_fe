@@ -1,9 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import apiSlice from "services/api/apiSlice";
 import {
   AUTH,
   FORGOT_PASSWORD,
   RESTORE_PASSWORD,
-} from "utils/consts/breakepointConsts";
+} from "utils/consts/breakpointConsts";
 
 interface ForgotPassword {
   email: string;
@@ -14,9 +14,7 @@ interface RestorePassword {
   password: string;
 }
 
-const forgotPassApi = createApi({
-  reducerPath: "forgotPassword",
-  baseQuery: fetchBaseQuery({ baseUrl: process.env.REACT_APP_API_URL }),
+const forgotPassApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     forgotPassword: builder.mutation<boolean, ForgotPassword>({
       query: ({ email }) => ({
@@ -27,7 +25,6 @@ const forgotPassApi = createApi({
         },
       }),
     }),
-
     restorePassword: builder.mutation<boolean, RestorePassword>({
       query: ({ password, token }) => ({
         url: `/${AUTH}/${RESTORE_PASSWORD}`,

@@ -1,13 +1,12 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { RootState } from "store/store";
+import apiSlice from "services/api/apiSlice";
+import { IFreelancerSaved } from "components/FreelancerCard/FreelancerCard";
 import {
   FILTER_FREELANCER,
   HIRED_FREELANCER,
   SAVED_FREELANCERS,
   SAVE_FREELANCER,
   VIEWED_FREELANCER,
-} from "utils/consts/breakepointConsts";
-import { IFreelancerSaved } from "components/FreelancerCard/FreelancerCard";
+} from "utils/consts/breakpointConsts";
 
 export interface IFilters {
   keyWords: string;
@@ -16,21 +15,11 @@ export interface IFilters {
   userId: number;
 }
 
-const getTalentApi = createApi({
-  reducerPath: "talent",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const { authToken } = (getState() as RootState).user;
+const apiSliceWithTags = apiSlice.enhanceEndpoints({
+  addTagTypes: ["Freelancers"],
+});
 
-      if (authToken) {
-        headers.set("Authorization", `Bearer ${authToken}`);
-      }
-
-      return headers;
-    },
-  }),
-  tagTypes: ["Freelancers"],
+const getTalentApi = apiSliceWithTags.injectEndpoints({
   endpoints: (builder) => ({
     filter: builder.query<IFreelancerSaved[], IFilters>({
       query: ({ keyWords, category, skills }) => ({
