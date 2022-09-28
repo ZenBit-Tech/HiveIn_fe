@@ -1,9 +1,9 @@
 import { Space, Typography } from "antd";
-import { IEducation, IExperience } from "../../services/profileInfo/typesDef";
+import { IEducation, IExperience } from "services/profileInfo/typesDef";
+
+const { Text } = Typography;
 
 function EducationExperienceCard(props: IEducation | IExperience) {
-  const { Text } = Typography;
-
   const { startDate, endDate, city, description } = props;
 
   const education = props as IEducation;

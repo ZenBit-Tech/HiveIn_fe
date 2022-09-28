@@ -6,6 +6,10 @@ import S from "components/TalentPart/styles";
 import FreelancerCard, {
   IFreelancerSaved,
 } from "components/FreelancerCard/FreelancerCard";
+import {
+  FREELANCERS_PER_PAGE,
+  FREELANCERS_PER_ROW,
+} from "utils/consts/numberConsts";
 
 export interface ITalentPart {
   freelancers: IFreelancerSaved[];
@@ -19,9 +23,6 @@ export interface ITalentPartProps extends ITalentPart {
   setIsModalOpen: (isOpen: boolean) => void;
 }
 
-const freelancersPerPage = 12;
-const freelancersPerRow = 3;
-
 function TalentPart({
   freelancers,
   title,
@@ -30,9 +31,9 @@ function TalentPart({
   setUserId,
   setIsModalOpen,
 }: ITalentPartProps) {
-  const [showAllFreelancers, setShowAllFreelancers] = useState(false);
+  const [showAllFreelancers, setShowAllFreelancers] = useState<boolean>(false);
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
 
   const { t } = useTranslation();
 
@@ -53,14 +54,16 @@ function TalentPart({
           <S.EmptyBox description={t("Talent.noResult")} />
         )}
         {isLoading &&
-          Array(...Array(freelancersPerRow)).map((id) => (
+          Array(...Array(FREELANCERS_PER_ROW)).map((id) => (
             <Skeleton key={id} active />
           ))}
         {isSuccess &&
           freelancers
             .slice(
-              showAllFreelancers ? (page - 1) * freelancersPerPage : 0,
-              showAllFreelancers ? page * freelancersPerPage : freelancersPerRow
+              showAllFreelancers ? (page - 1) * FREELANCERS_PER_PAGE : 0,
+              showAllFreelancers
+                ? page * FREELANCERS_PER_PAGE
+                : FREELANCERS_PER_ROW
             )
             .map((freelancer) => (
               <FreelancerCard

@@ -12,10 +12,12 @@ import S from "pages/JobOwner/Talent/styles";
 import FreelancerInfoDrawer from "components/UI/drawers/FreelancerInfoDrawer/FreelancerInfoDrawer";
 import { useGetFreelancerByIdQuery } from "services/freelancer/freelancerAPI";
 
+const { Title } = Typography;
+
 function Talent() {
   const [active, setActive] = useState("Talent.discover");
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const [userId, setUserId] = useState<number>(1);
 
@@ -24,7 +26,6 @@ function Talent() {
   });
 
   const { t } = useTranslation();
-  const { Title } = Typography;
 
   const {
     data: savedFreelancers,

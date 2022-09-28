@@ -7,7 +7,7 @@ import {
   SAVE_FREELANCER,
   VIEWED_FREELANCER,
 } from "utils/consts/breakepointConsts";
-import { IFreelancerSaved } from "../../components/FreelancerCard/FreelancerCard";
+import { IFreelancerSaved } from "components/FreelancerCard/FreelancerCard";
 
 export interface IFilters {
   keyWords: string;

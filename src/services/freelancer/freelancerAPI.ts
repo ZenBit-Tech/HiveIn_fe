@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "store/store";
-import { IFreelancerSaved } from "../../components/FreelancerCard/FreelancerCard";
-import { REACT_APP_FREELANCER_PROFILE_INFO_URL } from "../../utils/consts/breakepointConsts";
+import { IFreelancerSaved } from "components/FreelancerCard/FreelancerCard";
+import { REACT_APP_FREELANCER_PROFILE_INFO_URL } from "utils/consts/breakepointConsts";
 
 interface FreelancerId {
   id: number;
