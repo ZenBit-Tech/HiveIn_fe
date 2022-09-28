@@ -286,7 +286,9 @@
     "hideFilters": "Hide filters",
     "showFilters": "Show filters",
     "save": "Save",
-    "noResult": "No result"
+    "noResult": "No result",
+    "filterResults": "Filtered results",
+    "allFreelancers": "All freelancers"
   },
   "PostJob": {
     "title": "Create Job Post",

@@ -14,7 +14,7 @@ export interface ITalentPart {
   isLoading: boolean;
 }
 
-const freelancersPerPage = 12;
+const freelancersPerPage = 6;
 const freelancersPerRow = 3;
 
 function TalentPart({ freelancers, title, isSuccess, isLoading }: ITalentPart) {
@@ -51,17 +51,17 @@ function TalentPart({ freelancers, title, isSuccess, isLoading }: ITalentPart) {
             .map((freelancer: IFreelancer) => (
               <CandidateCard {...freelancer} />
             ))}
-        {isSuccess && showAllFreelancers && (
-          <Pagination
-            hideOnSinglePage
-            pageSize={12}
-            total={freelancers.length}
-            onChange={(pageNumber) => {
-              setPage(pageNumber);
-            }}
-          />
-        )}
       </S.Box>
+      {isSuccess && showAllFreelancers && (
+        <Pagination
+          hideOnSinglePage
+          pageSize={freelancersPerPage}
+          total={freelancers.length}
+          onChange={(pageNumber) => {
+            setPage(pageNumber);
+          }}
+        />
+      )}
     </S.Area>
   );
 }

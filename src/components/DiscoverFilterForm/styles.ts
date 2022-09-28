@@ -6,10 +6,10 @@ const CustomButton = styled(Button)`
   margin: 10px 0;
 `;
 
-const Form = styled("form")`
-  padding: 15px;
-  border-radius: 5px;
+const Div = styled.div`
   background-color: ${LIGHT_GRAY};
+  border-radius: 5px;
+  padding: 15px;
 `;
 
-export default { Form, CustomButton };
+export default { CustomButton, Div };
