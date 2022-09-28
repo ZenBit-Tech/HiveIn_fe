@@ -14,7 +14,7 @@ import {
 } from "services/jobOwner/talentAPI";
 import S from "components/DiscoverFilterForm/styles";
 import propsDataCollection from "components/DiscoverFilterForm/staticData";
-import { ONESECOND } from "utils/consts/timeConsts";
+import { ONE_SECOND } from "utils/consts/timeConsts";
 
 function DiscoverFilterForm() {
   const {
@@ -26,9 +26,9 @@ function DiscoverFilterForm() {
     resolver: yupResolver(schema),
   });
 
-  const [isFiltersOpen, setIsFiltersOpen] = useState(false);
+  const [isFiltersOpen, setIsFiltersOpen] = useState<boolean>(false);
   const [filters, setFilters] = useState<IFilters | any>({});
-  const [isAllFreelancer, setIsAllFreelancer] = useState(true);
+  const [isAllFreelancer, setIsAllFreelancer] = useState<boolean>(true);
 
   const {
     data: filteredFreelancers,
@@ -50,7 +50,7 @@ function DiscoverFilterForm() {
   const changeIsFiltersOpen = () => setIsFiltersOpen(!isFiltersOpen);
   const onSubmit = (filtersForm: FieldValues) => {
     setFilters(filtersForm);
-    setTimeout(changeIsFiltersOpen, ONESECOND);
+    setTimeout(changeIsFiltersOpen, ONE_SECOND);
   };
 
   const { t } = useTranslation();
