@@ -46,6 +46,7 @@ const Box = styled.div`
   background: ${WHITE};
   border-radius: 12px;
   padding: 15px;
+  margin-bottom: 15px;
 `;
 
 const EmptyBox = styled(Empty)`

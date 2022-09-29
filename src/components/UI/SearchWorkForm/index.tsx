@@ -8,7 +8,7 @@ import { Typography } from "antd";
 import { ISearchWorkFilters } from "components/UI/SearchWorkForm/typesDef";
 import { DurationTypeEnum } from "utils/enums";
 import { useState } from "react";
-import { ONESECOND } from "utils/consts/timeConsts";
+import { DEBOUNCE_DELAY } from "utils/consts/timeConsts";
 
 interface ISearchWorkFormProps {
   filters: ISearchWorkFilters;
@@ -59,7 +59,7 @@ function SearchWorkForm({
     });
     setTimeout(() => {
       setIsReset(false);
-    }, ONESECOND);
+    }, DEBOUNCE_DELAY);
   };
 
   const { t } = useTranslation();
