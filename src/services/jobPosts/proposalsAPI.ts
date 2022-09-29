@@ -1,24 +1,20 @@
+import { ProposalType } from "utils/enums";
 import apiSlice from "services/api/apiSlice";
-import { PROPOSALS, INVITE } from "utils/consts/breakpointConsts";
+import { PROPOSALS } from "utils/consts/breakpointConsts";
 
 interface ProposalFields {
-  coverLetter: string;
-  bid: number;
-  idJobPost: number;
-}
-
-interface InviteFields {
-  inviteMessage: string;
+  message: string;
   idFreelancer: number;
   idJobPost: number;
   bid: number;
+  type: ProposalType;
 }
 
 const proposalsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     sendProposal: builder.mutation<void, ProposalFields>({
-      query: ({ ...proposalFields }) => ({
-        url: `/${PROPOSALS}`,
+      query: ({ type, ...proposalFields }) => ({
+        url: `/${PROPOSALS}/${type}`,
         method: "POST",
         body: {
           ...proposalFields,
@@ -26,19 +22,9 @@ const proposalsApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: void) => response,
     }),
-    sendInvite: builder.mutation<void, InviteFields>({
-      query: ({ ...inviteFields }) => ({
-        url: `/${PROPOSALS}/${INVITE}`,
-        method: "POST",
-        body: {
-          ...inviteFields,
-        },
-      }),
-      transformResponse: (response: void) => response,
-    }),
   }),
 });
 
-export const { useSendProposalMutation, useSendInviteMutation } = proposalsApi;
+export const { useSendProposalMutation } = proposalsApi;
 
 export default proposalsApi;

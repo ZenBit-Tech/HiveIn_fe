@@ -6,13 +6,14 @@ import { useEffect } from "react";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { useSendInviteMutation } from "services/jobPosts/proposalsAPI";
+import { useSendProposalMutation } from "services/jobPosts/proposalsAPI";
 import { MAX_LENGTH_OF_COVER_LETTER } from "utils/consts/numberConsts";
 import { IUser } from "services/user/setUserAPI";
 import { useGetOwnJobPostsQuery } from "services/jobPosts/setJobPostsAPI";
 import JobSelect from "components/UI/jobSelect/JobSelect";
 import submitInviteSchema from "components/UI/ModalWindows/SubmitInviteModal/SubmitInviteModalSchema";
 import { Form } from "components/UI/ModalWindows/SubmitProposalModal/SubmitProposalStyles";
+import { ProposalType } from "utils/enums";
 
 const { Text } = Typography;
 
@@ -50,11 +51,16 @@ function SubmitInviteModal({
   const { data: jobPosts, isSuccess: jobPostIsSuccess } =
     useGetOwnJobPostsQuery(false);
 
-  const [runSendInviteMutation, { isError, isLoading, isSuccess }] =
-    useSendInviteMutation();
+  const [runSendProposalMutation, { isError, isLoading, isSuccess }] =
+    useSendProposalMutation();
 
   const onSubmit: SubmitHandler<ISubmitInviteForm> = async (data) => {
-    await runSendInviteMutation({ ...data, idFreelancer: freelancerId });
+    await runSendProposalMutation({
+      ...data,
+      message: data.inviteMessage,
+      idFreelancer: freelancerId,
+      type: ProposalType.INVITE,
+    });
     closeModal();
     reset();
   };

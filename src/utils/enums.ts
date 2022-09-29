@@ -13,3 +13,8 @@ export enum DurationTypeEnum {
   WEEK = "week",
   MONTH = "month",
 }
+
+export enum ProposalType {
+  PROPOSAL = "proposal",
+  INVITE = "invite",
+}
