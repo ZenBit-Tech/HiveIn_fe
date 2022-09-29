@@ -73,17 +73,17 @@ function TalentPart({
                 {...freelancer}
               />
             ))}
-        {isSuccess && showAllFreelancers && (
-          <Pagination
-            hideOnSinglePage
-            pageSize={12}
-            total={freelancers.length}
-            onChange={(pageNumber) => {
-              setPage(pageNumber);
-            }}
-          />
-        )}
       </S.Box>
+      {isSuccess && showAllFreelancers && (
+        <Pagination
+          hideOnSinglePage
+          pageSize={FREELANCERS_PER_PAGE}
+          total={freelancers.length}
+          onChange={(pageNumber) => {
+            setPage(pageNumber);
+          }}
+        />
+      )}
     </S.Area>
   );
 }

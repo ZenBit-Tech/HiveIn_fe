@@ -3,6 +3,7 @@ import { IFreelancerSaved } from "components/FreelancerCard/FreelancerCard";
 import {
   FILTER_FREELANCER,
   HIRED_FREELANCER,
+  REACT_APP_FREELANCER_PROFILE_INFO_URL,
   SAVED_FREELANCERS,
   SAVE_FREELANCER,
   VIEWED_FREELANCER,
@@ -48,6 +49,10 @@ const getTalentApi = apiSliceWithTags.injectEndpoints({
       query: () => `${VIEWED_FREELANCER}`,
       providesTags: () => ["Freelancers"],
     }),
+    getAllFreelancer: builder.query<IFreelancerSaved[], void>({
+      query: () => `${REACT_APP_FREELANCER_PROFILE_INFO_URL}`,
+      providesTags: () => ["Freelancers"],
+    }),
   }),
 });
 
@@ -57,6 +62,7 @@ export const {
   useGetHiredFreelancersQuery,
   useGetRecentlyViewedFreelancersQuery,
   useSaveFreelancersMutation,
+  useGetAllFreelancerQuery,
 } = getTalentApi;
 
 export default getTalentApi;
