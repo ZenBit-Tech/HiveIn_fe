@@ -14,7 +14,7 @@ import {
 } from "services/jobOwner/talentAPI";
 import S from "components/DiscoverFilterForm/styles";
 import propsDataCollection from "components/DiscoverFilterForm/staticData";
-import { ONE_SECOND } from "utils/consts/timeConsts";
+import { DEBOUNCE_DELAY } from "utils/consts/timeConsts";
 
 function DiscoverFilterForm() {
   const {
@@ -50,7 +50,7 @@ function DiscoverFilterForm() {
   const changeIsFiltersOpen = () => setIsFiltersOpen(!isFiltersOpen);
   const onSubmit = (filtersForm: FieldValues) => {
     setFilters(filtersForm);
-    setTimeout(changeIsFiltersOpen, ONE_SECOND);
+    setTimeout(changeIsFiltersOpen, DEBOUNCE_DELAY);
   };
 
   const { t } = useTranslation();
