@@ -152,7 +152,7 @@ function SearchWorkDrawer({
               </Header>
             )}
 
-            <ContentBox showBorder={sendProposalButtonIsVisible}>
+            <ContentBox showBorder={!sendProposalButtonIsVisible}>
               <Space direction="vertical">
                 <CustomText strong>{t("SearchWork.clientInfo")}</CustomText>
                 <CustomText color={TEXT_GRAY}>{user.email}</CustomText>

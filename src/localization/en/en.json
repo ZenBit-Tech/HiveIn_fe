@@ -69,10 +69,14 @@
     "offers": "Job Offers",
     "yourOffers": " Your offers",
     "acceptOffer": "Accept Offer",
-    "rejectOffer": "Reject Offer",
+    "rejectOffer": "Decline Offer",
     "confirmAccept": "Are you sure you want to accept the offer?",
-    "confirmReject": "Are you sure you want to reject the offer?",
-    "status": "Offer Status Changed!"
+    "confirmReject": "Are you sure you want to decline the offer?",
+    "status": "Offer Status Changed!",
+    "drawerTitle": "Offer Status",
+    "drawerRelatedJob": "Related Job Opening",
+    "expireDate": "Offer Expires",
+    "createDate": "Offer Date"
   },
 
   "MyJobs": {

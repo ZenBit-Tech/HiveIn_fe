@@ -27,6 +27,8 @@ import { toast } from "react-toastify";
 import { OfferStatus } from "utils/enums";
 import { Modal } from "antd";
 import { OfferTags } from "components/JobOffers/OfferTags";
+import { PROPOSALS_ROUTE } from "utils/consts/routeConsts";
+import JobOfferDrawer from "components/UI/drawers/JobOfferDrawer/JobOfferDrawer";
 
 dayjs.extend(relativeTime);
 
@@ -38,7 +40,8 @@ interface IJobOffersProps extends IProposalsRes {
 function JobOffers({ id, status, jobPost, refetch }: IJobOffersProps) {
   const { t } = useTranslation();
 
-  const [openDrawer, setOpenDrawer] = useState<boolean>(false);
+  const [openDetailDrawer, setOpenDetailDrawer] = useState<boolean>(false);
+  const [openOfferDrawer, setOpenOfferDrawer] = useState<boolean>(false);
 
   const [runChangeOfferStatus, { isError, isLoading, isSuccess }] =
     useChangeOfferStatusMutation();
@@ -81,13 +84,23 @@ function JobOffers({ id, status, jobPost, refetch }: IJobOffersProps) {
       </DivContainer>
       <DetailDiv>
         <JobTitle>
-          <RouterLink to="/proposals" onClick={() => setOpenDrawer(true)}>
+          <RouterLink to={`${PROPOSALS_ROUTE}`}>
             <div>
-              <CustomText color={BLACK} link={BLACK} strong>
+              <CustomText
+                onClick={() => setOpenOfferDrawer(true)}
+                color={BLACK}
+                link={BLACK}
+                strong
+              >
                 {jobPost.user?.firstName}
               </CustomText>
             </div>
-            <CustomText color={BLUE} link={DARK_BLUE} strong>
+            <CustomText
+              onClick={() => setOpenDetailDrawer(true)}
+              color={BLUE}
+              link={DARK_BLUE}
+              strong
+            >
               {jobPost.title}
             </CustomText>
           </RouterLink>
@@ -124,9 +137,17 @@ function JobOffers({ id, status, jobPost, refetch }: IJobOffersProps) {
           {t("MyJobs.perHour")}
         </JobDescription>
       </DetailDiv>
+      <JobOfferDrawer
+        id={id}
+        status={status}
+        jobPost={jobPost}
+        visible={openOfferDrawer}
+        onClose={() => setOpenOfferDrawer(false)}
+        refetch={refetch}
+      />
       <SearchWorkDrawer
-        visible={openDrawer}
-        onClose={() => setOpenDrawer(false)}
+        visible={openDetailDrawer}
+        onClose={() => setOpenDetailDrawer(false)}
         {...jobPost}
         sendProposalButtonIsVisible={false}
       />
