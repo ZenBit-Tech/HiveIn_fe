@@ -128,6 +128,7 @@ function JobOffers({ id, status, jobPost, refetch }: IJobOffersProps) {
         visible={openDrawer}
         onClose={() => setOpenDrawer(false)}
         {...jobPost}
+        sendProposalButtonIsVisible={false}
       />
     </Wrapper>
   );

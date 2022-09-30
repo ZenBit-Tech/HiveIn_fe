@@ -10,6 +10,10 @@ interface IGrid {
   grow?: number;
 }
 
+interface IContent {
+  showBorder?: boolean;
+}
+
 export const Wrapper = styled.div`
   border: 1px solid ${BOX_BORDER};
   background-color: ${WHITE};
@@ -28,8 +32,9 @@ export const Header = styled.header`
   padding: 20px;
 `;
 
-export const ContentBox = styled.section`
-  border-top: 1px solid ${BOX_BORDER};
+export const ContentBox = styled.section<IContent>`
+  border-top: ${({ showBorder }) =>
+    showBorder ? `1px solid ${BOX_BORDER}` : null};
   padding: 30px;
   overflow: auto;
 `;
