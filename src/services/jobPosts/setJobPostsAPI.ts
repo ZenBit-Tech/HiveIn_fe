@@ -46,8 +46,8 @@ export interface IJobPost {
   user: IUser;
   file?: IFile;
   contract: {
-    startDate: Date;
-    endDate: Date;
+    startDate?: Date;
+    endDate?: Date;
     id: number;
   };
 }
