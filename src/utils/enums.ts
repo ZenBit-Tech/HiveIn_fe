@@ -13,3 +13,9 @@ export enum DurationTypeEnum {
   WEEK = "week",
   MONTH = "month",
 }
+
+export enum OfferStatus {
+  PENDING = "pending",
+  ACTIVE = "active",
+  REJECTED = "rejected",
+}

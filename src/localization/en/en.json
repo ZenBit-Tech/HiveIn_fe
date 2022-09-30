@@ -65,6 +65,16 @@
     "coverLetterRequired": "Insert your cover letter",
     "coverLetterMax": "You've reached the character limit"
   },
+  "Offer": {
+    "offers": "Job Offers",
+    "yourOffers": " Your offers",
+    "acceptOffer": "Accept Offer",
+    "rejectOffer": "Reject Offer",
+    "confirmAccept": "Are you sure you want to accept the offer?",
+    "confirmReject": "Are you sure you want to reject the offer?",
+    "status": "Offer Status Changed!"
+  },
+
   "MyJobs": {
     "title": "Jobs",
     "subTitle": "Your Projects",

@@ -16,3 +16,4 @@ export const BOX_SHADOW_LIGHT = "rgba(0, 0, 0, 0.12)";
 export const BOX_SHADOW_DARK = "rgba(0, 0, 0, 0.24)";
 export const TAG_SUCCESS = "#2e7d32";
 export const TAG_CLOSED = "#ff699d";
+export const TAG_PENDING = "#debe4b";
