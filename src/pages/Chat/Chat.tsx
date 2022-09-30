@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { IChatUser } from "services/notifications/chatTypes";
 import ChatRoomsList from "pages/Chat/ChatRoomsList/ChatRoomsList";
 import ChatRoom from "pages/Chat/ChatRoom/ChatRoom";
+import { ChatRoomStatusEnum } from "services/notifications/chatEnums";
 
 export interface IRoomUsers {
   freelancer: IChatUser;
@@ -22,10 +23,18 @@ function Chat() {
   const [roomId, setRoomId] = useState<number | null>(null);
   const [jobNameForHeader, setJobNameForHeader] = useState<string>("");
   const [roomUsers, setRoomUsers] = useState<IRoomUsers>();
+  const [roomStatus, setRoomStatus] = useState<ChatRoomStatusEnum>(
+    ChatRoomStatusEnum.FOR_ALL
+  );
 
-  const onClickHandler = (id: number, jobName: string) => {
+  const onClickHandler = (
+    id: number,
+    jobName: string,
+    status: ChatRoomStatusEnum
+  ) => {
     setRoomId(id);
     setJobNameForHeader(jobName);
+    setRoomStatus(status);
   };
 
   const defineOpponentsNameAndAvatar = (
@@ -69,11 +78,14 @@ function Chat() {
                 id={room.id}
                 onClick={onClickHandler}
                 jobName={room.jobPost.title}
+                roomStatus={room.status}
               />
             ))}
           </Block>
           {roomId ? (
             <ChatRoom
+              userRole={user.role!}
+              roomStatus={roomStatus}
               roomUsers={roomUsers}
               userSelfId={+user.id!}
               roomId={roomId}

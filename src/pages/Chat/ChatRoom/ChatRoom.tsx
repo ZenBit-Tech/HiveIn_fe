@@ -2,11 +2,12 @@ import { Button, Input } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import { ChangeEvent, useEffect, useState } from "react";
 import {
+  Element,
   Header,
+  InputBlock,
   Message,
   MessageBlock,
-  InputBlock,
-  Element,
+  Warning,
 } from "pages/Chat/ChatRoom/ChatRoom.styles";
 import {
   useGetMessagesMutation,
@@ -18,16 +19,28 @@ import { useTranslation } from "react-i18next";
 import { CHAT_DATE_FORMAT } from "utils/consts/inputPropsConsts";
 import { IRoomUsers } from "pages/Chat/Chat";
 import useChatScroll from "hooks/useChatScroll";
-import { MessageTypeEnum } from "services/notifications/chatEnums";
+import {
+  ChatRoomStatusEnum,
+  MessageTypeEnum,
+} from "services/notifications/chatEnums";
 
 interface IChatRoom {
   roomId: number;
   userSelfId: number;
   jobName: string;
   roomUsers?: IRoomUsers;
+  roomStatus: ChatRoomStatusEnum;
+  userRole: string;
 }
 
-function ChatRoom({ roomId, userSelfId, jobName, roomUsers }: IChatRoom) {
+function ChatRoom({
+  roomId,
+  userSelfId,
+  jobName,
+  roomUsers,
+  roomStatus,
+  userRole,
+}: IChatRoom) {
   const { t } = useTranslation();
 
   const { data: messages } = useMessagesQuery();
@@ -67,9 +80,28 @@ function ChatRoom({ roomId, userSelfId, jobName, roomUsers }: IChatRoom) {
     return "User";
   };
 
+  const disableInput = (): boolean => {
+    if (
+      userRole === "client" &&
+      roomStatus === ChatRoomStatusEnum.CLIENT_ONLY
+    ) {
+      return false;
+    }
+    if (
+      userRole === "freelancer" &&
+      roomStatus === ChatRoomStatusEnum.FREELANCER_ONLY
+    ) {
+      return false;
+    }
+    return roomStatus !== ChatRoomStatusEnum.FOR_ALL;
+  };
+
   return (
     <div>
-      <Header>{jobName}</Header>
+      <Header>
+        {jobName}
+        {roomStatus}
+      </Header>
       <MessageBlock ref={ref}>
         {messages?.length ? (
           messages.map((message) => {
@@ -106,12 +138,14 @@ function ChatRoom({ roomId, userSelfId, jobName, roomUsers }: IChatRoom) {
       </MessageBlock>
       <InputBlock>
         <Input
+          disabled={disableInput()}
           value={text}
           onChange={onChangeHandler}
           onKeyUp={(event) => event.key === "Enter" && onSendHandler()}
         />
         <Button onClick={onSendHandler} icon={<SendOutlined />} />
       </InputBlock>
+      {disableInput() && <Warning>{t("Chat.disabledMessaging")}</Warning>}
     </div>
   );
 }

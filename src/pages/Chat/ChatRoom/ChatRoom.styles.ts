@@ -62,3 +62,6 @@ export const Header = styled.div`
   font-size: 18px;
   text-align: center;
 `;
+export const Warning = styled.div`
+  text-align: center;
+`;

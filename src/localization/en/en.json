@@ -87,7 +87,8 @@
     "chooseTheChat": "Please choose the chat",
     "noChats": "You have no chats",
     "noMessages": "You have no messages",
-    "systemMessage": "System message"
+    "systemMessage": "System message",
+    "disabledMessaging": "You are not able to send any messages in this chat yet"
   },
   "Settings": {
     "title": "Settings"
