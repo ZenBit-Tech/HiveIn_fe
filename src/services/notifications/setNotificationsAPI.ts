@@ -2,81 +2,13 @@ import apiSlice from "services/api/apiSlice";
 import { io, Socket } from "socket.io-client";
 import { RootState, store } from "store/store";
 import { NOTIFICATIONS } from "utils/consts/breakpointConsts";
-
-export enum EventEnum {
-  ROOMS = "rooms",
-  ERROR = "error",
-  GET_ROOMS = "getRooms",
-  JOIN_ROOM = "joinRoom",
-  MESSAGES = "messages",
-  GET_MESSAGES = "getMessages",
-  LEAVE_ROOM = "leaveRoom",
-  ADD_MESSAGE = "addMessage",
-  MESSAGE_ADDED = "messageAdded",
-  NOTIFICATION = "send-first-notification",
-  NOTIFICATION_SEND = "'first-message'",
-}
-
-export enum MessageTypeEnum {
-  FROM_USER = "fromUser",
-  FROM_SYSTEM = "fromSystem",
-}
-
-enum ChatRoomStatusEnum {
-  FOR_ALL = "forAll",
-  FREELANCER_ONLY = "freelancerOnly",
-  CLIENT_ONLY = "clientOnly",
-}
-
-export interface IChatUser {
-  id: number;
-  firstName: string | null;
-  lastName: string | null;
-  avatarURL: string | null;
-}
-
-export interface IMessage {
-  id: number;
-  chatRoomId: number;
-  created_at: string;
-  senderId: number;
-  text: string;
-  messageType: MessageTypeEnum;
-}
-
-export interface IRoom {
-  id: number;
-  status: ChatRoomStatusEnum;
-  freelancer: IChatUser;
-  client: IChatUser;
-  jobPost: {
-    id: number;
-    title: string;
-  };
-  lastMessage: {
-    created_at: Date;
-    id: number;
-    isSystemMessage: boolean;
-    text: string;
-  };
-}
-
-interface ISendMessage {
-  chatRoomId: number;
-  text: string;
-}
-
-export interface Notifications {
-  id?: number;
-  fromUserId: number;
-  toUserId: number;
-  type: string;
-  read?: boolean;
-  fromUser?: {
-    id: number;
-    firstName?: string;
-  };
-}
+import { EventEnum } from "services/notifications/chatEnums";
+import {
+  IMessage,
+  IRoom,
+  ISendMessage,
+  Notifications,
+} from "services/notifications/chatTypes";
 
 let socketConnection: Socket;
 function getSocket() {

@@ -9,7 +9,6 @@ import {
   Element,
 } from "pages/Chat/ChatRoom/ChatRoom.styles";
 import {
-  MessageTypeEnum,
   useGetMessagesMutation,
   useMessagesQuery,
   useSendMessageMutation,
@@ -19,6 +18,7 @@ import { useTranslation } from "react-i18next";
 import { CHAT_DATE_FORMAT } from "utils/consts/inputPropsConsts";
 import { IRoomUsers } from "pages/Chat/Chat";
 import useChatScroll from "hooks/useChatScroll";
+import { MessageTypeEnum } from "services/notifications/chatEnums";
 
 interface IChatRoom {
   roomId: number;

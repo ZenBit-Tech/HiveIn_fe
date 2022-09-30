@@ -9,7 +9,6 @@ export const Block = styled.div`
   border-radius: 10px;
   background-color: ${LIGHT_BLUE};
   margin-right: 10px;
-  height: 320px;
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;

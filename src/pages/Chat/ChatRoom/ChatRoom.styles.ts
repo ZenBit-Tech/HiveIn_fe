@@ -34,9 +34,10 @@ export const Message = styled.div<{
 export const MessageBlock = styled.div`
   display: flex;
   flex-direction: column;
-  width: 500px;
+  max-width: 70vw;
+  min-width: 30vw;
   padding: 10px;
-  max-height: 500px;
+  max-height: 65vh;
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;
@@ -46,7 +47,6 @@ export const MessageBlock = styled.div`
 export const InputBlock = styled.div`
   display: flex;
   padding: 5px;
-  margin: 3px;
 `;
 
 export const Element = styled.div`

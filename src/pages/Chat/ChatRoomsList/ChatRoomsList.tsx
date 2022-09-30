@@ -1,5 +1,4 @@
 import {
-  IChatUser,
   useJoinRoomMutation,
   useLeaveRoomMutation,
 } from "services/notifications/setNotificationsAPI";
@@ -9,6 +8,7 @@ import {
   ChatElement,
 } from "pages/Chat/ChatRoomsList/ChatRoomsList.styles";
 import { Avatar } from "@mui/material";
+import { IChatUser } from "services/notifications/chatTypes";
 
 interface IChatUsersList {
   jobName: string;

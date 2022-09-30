@@ -1,13 +1,11 @@
 import { useState } from "react";
-import {
-  IChatUser,
-  useGetRoomsQuery,
-} from "services/notifications/setNotificationsAPI";
+import { useGetRoomsQuery } from "services/notifications/setNotificationsAPI";
 import { IUser, useGetOwnUserQuery } from "services/user/setUserAPI";
 import { Block, Container, Notification } from "pages/Chat/Chat.styles";
 import { useTranslation } from "react-i18next";
-import ChatRoomsList from "./ChatRoomsList/ChatRoomsList";
-import ChatRoom from "./ChatRoom/ChatRoom";
+import { IChatUser } from "services/notifications/chatTypes";
+import ChatRoomsList from "pages/Chat/ChatRoomsList/ChatRoomsList";
+import ChatRoom from "pages/Chat/ChatRoom/ChatRoom";
 
 export interface IRoomUsers {
   freelancer: IChatUser;
@@ -35,7 +33,7 @@ function Chat() {
     client: IChatUser,
     currentUser: IUser
   ): { name: string; avatar: string } => {
-    if (+currentUser.id!! === freelancer.id) {
+    if (+currentUser.id! !== freelancer.id) {
       return {
         name: `${freelancer.firstName || ""} ${freelancer.lastName || ""}`,
         avatar: `${freelancer.avatarURL || ""}`,
@@ -77,7 +75,7 @@ function Chat() {
           {roomId ? (
             <ChatRoom
               roomUsers={roomUsers}
-              userSelfId={+user.id!!}
+              userSelfId={+user.id!}
               roomId={roomId}
               jobName={jobNameForHeader}
             />
