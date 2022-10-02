@@ -28,6 +28,7 @@ const notificationsAPI = apiSlice.injectEndpoints({
     getNotifications: builder.query<Notifications[], void>({
       query: () => NOTIFICATIONS,
     }),
+
     sendNotification: builder.mutation<Notifications, Notifications>({
       queryFn: (notification: Notifications) => {
         const socket = getSocket();
@@ -42,6 +43,7 @@ const notificationsAPI = apiSlice.injectEndpoints({
         });
       },
     }),
+
     readNotification: builder.mutation<void, number>({
       query: (arg) => ({
         url: `${NOTIFICATIONS}/${arg}`,
@@ -75,6 +77,7 @@ const notificationsAPI = apiSlice.injectEndpoints({
         }
       },
     }),
+
     messages: builder.query<IMessage[], void>({
       queryFn: () => ({ data: [] }),
       async onCacheEntryAdded(
@@ -99,6 +102,7 @@ const notificationsAPI = apiSlice.injectEndpoints({
         }
       },
     }),
+
     sendMessage: builder.mutation<IMessage, ISendMessage>({
       queryFn: (data) => {
         const socket = getSocket();
@@ -109,6 +113,7 @@ const notificationsAPI = apiSlice.injectEndpoints({
         });
       },
     }),
+
     leaveRoom: builder.mutation<void, void>({
       queryFn: () => {
         const socket = getSocket();
@@ -120,6 +125,7 @@ const notificationsAPI = apiSlice.injectEndpoints({
         });
       },
     }),
+
     joinRoom: builder.mutation<void, number>({
       queryFn: (roomId) => {
         const socket = getSocket();
@@ -131,6 +137,7 @@ const notificationsAPI = apiSlice.injectEndpoints({
         });
       },
     }),
+
     getMessages: builder.mutation<void, number>({
       queryFn: (roomId) => {
         const socket = getSocket();
