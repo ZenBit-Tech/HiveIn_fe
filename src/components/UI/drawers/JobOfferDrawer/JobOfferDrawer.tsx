@@ -43,6 +43,7 @@ function JobOfferDrawer({
   id,
   status,
   jobPost,
+  createdAt,
   refetch,
 }: IJobOfferDrawerProps) {
   const { t } = useTranslation();
@@ -94,21 +95,26 @@ function JobOfferDrawer({
       <Wrapper>
         <Grid grow={3}>
           <Header>
-            <Title level={3}>Job Offer</Title>
-            <CustomText>{dayjs(jobPost.createdAt).fromNow()}</CustomText>
+            <Title level={3}>{t("Offer.jobOffer")}</Title>
+            <CustomText>{dayjs(createdAt).fromNow()}</CustomText>
           </Header>
 
           <ContentBox>
             <Title level={5}>{t("Offer.drawerTitle")}</Title>
             <Space direction="vertical">
-              <CustomText strong color={BLUE}>
-                {status.charAt(0).toUpperCase() + status.slice(1)}
+              <CustomText
+                style={{ textTransform: "capitalize" }}
+                strong
+                color={BLUE}
+              >
+                {status}
               </CustomText>
               <CustomText color={TEXT_GRAY} strong>
-                {t("Offer.expireDate")} --
+                {t("Offer.expireDate")}{" "}
+                {dayjs(createdAt).add(2, "day").fromNow()}
               </CustomText>
               <CustomText color={TEXT_GRAY} strong>
-                {t("Offer.createDate")} --
+                {t("Offer.createDate")} {dayjs(createdAt).format("DD/MM/YYYY")}
               </CustomText>
             </Space>
           </ContentBox>

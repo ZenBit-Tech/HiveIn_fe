@@ -13,7 +13,6 @@ import {
 export const Wrapper = styled.div`
   display: flex;
   border-top: 1px solid ${BOX_BORDER};
-  /* align-items: center; */
   justify-content: left;
   padding-inline: 30px;
   padding-block: 10px;
@@ -22,12 +21,10 @@ export const Wrapper = styled.div`
 
 export const DivContainer = styled.div`
   margin-top: 15px;
-  /* padding: 30px; */
 `;
 
 export const DetailDiv = styled.div`
   width: 100%;
-  /* padding: 30px; */
 `;
 
 const JobTitle = styled.div`

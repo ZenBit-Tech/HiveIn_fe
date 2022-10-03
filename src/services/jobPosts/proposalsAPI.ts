@@ -18,6 +18,7 @@ export interface IProposalsRes {
   id: string;
   status: OfferStatus;
   jobPost: IJobPost;
+  createdAt: string;
 }
 
 const proposalsApi = apiSlice.injectEndpoints({

@@ -37,7 +37,13 @@ interface IJobOffersProps extends IProposalsRes {
   refetch: () => void;
 }
 
-function JobOffers({ id, status, jobPost, refetch }: IJobOffersProps) {
+function JobOffers({
+  id,
+  status,
+  jobPost,
+  createdAt,
+  refetch,
+}: IJobOffersProps) {
   const { t } = useTranslation();
 
   const [openDetailDrawer, setOpenDetailDrawer] = useState<boolean>(false);
@@ -116,9 +122,7 @@ function JobOffers({ id, status, jobPost, refetch }: IJobOffersProps) {
               </>
             )}
             <TagStatus>
-              <StatusTag tag={OfferTags[status]}>
-                {status.charAt(0).toUpperCase() + status.slice(1)}
-              </StatusTag>
+              <StatusTag tag={OfferTags[status]}>{status}</StatusTag>
             </TagStatus>
           </HeaderInfo>
         </JobTitle>
@@ -127,12 +131,12 @@ function JobOffers({ id, status, jobPost, refetch }: IJobOffersProps) {
             {jobPost.category?.name}
           </CustomText>
           {" - "}
-          {jobPost.duration} {jobPost.durationType} duration
+          {jobPost.duration} {jobPost.durationType} {t("Offer.duration")}
           {" - "}
           {dayjs(jobPost.createdAt).fromNow()}
         </DeatailedInfo>
         <JobDescription>
-          {"Offer: "}
+          {t("Offer.offer")}
           {jobPost.rate}
           {t("MyJobs.perHour")}
         </JobDescription>
@@ -144,6 +148,7 @@ function JobOffers({ id, status, jobPost, refetch }: IJobOffersProps) {
         visible={openOfferDrawer}
         onClose={() => setOpenOfferDrawer(false)}
         refetch={refetch}
+        createdAt={createdAt}
       />
       <SearchWorkDrawer
         visible={openDetailDrawer}
