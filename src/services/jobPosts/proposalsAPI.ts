@@ -1,17 +1,20 @@
+import { ProposalType } from "utils/enums";
 import apiSlice from "services/api/apiSlice";
 import { PROPOSALS } from "utils/consts/breakpointConsts";
 
 interface ProposalFields {
-  coverLetter: string;
-  bid: number;
+  message: string;
+  idFreelancer: number;
   idJobPost: number;
+  bid: number;
+  type: ProposalType;
 }
 
 const proposalsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     sendProposal: builder.mutation<void, ProposalFields>({
-      query: ({ ...proposalFields }) => ({
-        url: `/${PROPOSALS}`,
+      query: ({ type, ...proposalFields }) => ({
+        url: `/${PROPOSALS}/${type}`,
         method: "POST",
         body: {
           ...proposalFields,

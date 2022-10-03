@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { Typography } from "antd";
+import styled from "styled-components";
 import {
   BLACK,
   BOX_BORDER,
@@ -9,6 +9,7 @@ import {
 } from "utils/consts/colorConsts";
 
 const { Text } = Typography;
+
 interface IGrid {
   grow?: number;
 }
@@ -38,20 +39,18 @@ export const Header = styled.header`
 export const ContentBox = styled.section`
   border-top: 1px solid ${BOX_BORDER};
   padding: 30px;
-  overflow: auto;
-`;
-
-export const DrawerText = styled(Text)<IText>`
-  color: ${(props) => props.color || BLACK}; ;
 `;
 
 export const SideContent = styled.section`
-  max-width: 300px;
   display: flex;
   border-left: 1px solid ${BOX_BORDER};
   height: 100%;
   flex-direction: column;
   row-gap: 26px;
+`;
+
+export const DrawerText = styled(Text)<IText>`
+  color: ${(props) => props.color || BLACK}; ;
 `;
 
 export const AttachmentLink = styled.a`

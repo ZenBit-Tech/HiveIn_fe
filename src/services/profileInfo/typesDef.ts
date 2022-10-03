@@ -1,4 +1,5 @@
 import { IUser } from "services/user/setUserAPI";
+import { ICategory } from "services/jobPosts/setJobPostsAPI";
 
 interface IMutualEdEx {
   city: string;
@@ -15,7 +16,7 @@ export interface IEducation extends IMutualEdEx {
 
 export interface IExperience extends IMutualEdEx {
   jobTitle: string;
-  company: string;
+  employer: string;
 }
 
 export interface IFreelancer {
@@ -26,7 +27,8 @@ export interface IFreelancer {
   experience: IExperience[];
   position: string;
   rate: string;
-  skills: { id: number }[];
+  skills: { id: number; name?: string }[];
   userId: number;
   user: IUser;
+  category: ICategory;
 }

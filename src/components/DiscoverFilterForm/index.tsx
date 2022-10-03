@@ -16,7 +16,15 @@ import S from "components/DiscoverFilterForm/styles";
 import propsDataCollection from "components/DiscoverFilterForm/staticData";
 import { DEBOUNCE_DELAY } from "utils/consts/timeConsts";
 
-function DiscoverFilterForm() {
+interface IDiscoverFilterFormProps {
+  setUserId: (id: number) => void;
+  setIsModalOpen: (isOpen: boolean) => void;
+}
+
+function DiscoverFilterForm({
+  setUserId,
+  setIsModalOpen,
+}: IDiscoverFilterFormProps) {
   const {
     handleSubmit,
     control,
@@ -84,6 +92,8 @@ function DiscoverFilterForm() {
           isSuccess &&
           filteredFreelancers && (
             <TalentPart
+              setIsModalOpen={setIsModalOpen}
+              setUserId={setUserId}
               freelancers={filteredFreelancers!}
               title={t("Talent.filterResults")}
               isSuccess={isSuccess}
@@ -98,6 +108,8 @@ function DiscoverFilterForm() {
           isAllFreelancerSuccess &&
           allFreelancers && (
             <TalentPart
+              setIsModalOpen={setIsModalOpen}
+              setUserId={setUserId}
               freelancers={allFreelancers!}
               title={t("Talent.allFreelancers")}
               isSuccess={isAllFreelancerSuccess}

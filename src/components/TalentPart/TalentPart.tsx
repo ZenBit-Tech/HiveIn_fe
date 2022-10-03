@@ -1,26 +1,39 @@
 import { Pagination, Skeleton, Typography } from "antd";
-import CandidateCard, {
-  IFreelancer,
-} from "components/CandidateCard/CandidateCard";
 import SeeMoreLessButton from "components/SeeMoreLessButton";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import S from "components/TalentPart/styles";
+import FreelancerCard, {
+  IFreelancerSaved,
+} from "components/FreelancerCard/FreelancerCard";
+import {
+  FREELANCERS_PER_PAGE,
+  FREELANCERS_PER_ROW,
+} from "utils/consts/numberConsts";
 
 export interface ITalentPart {
-  freelancers: IFreelancer[];
+  freelancers: IFreelancerSaved[];
   title: string;
   isSuccess: boolean;
   isLoading: boolean;
 }
 
-const freelancersPerPage = 6;
-const freelancersPerRow = 3;
+export interface ITalentPartProps extends ITalentPart {
+  setUserId: (id: number) => void;
+  setIsModalOpen: (isOpen: boolean) => void;
+}
 
-function TalentPart({ freelancers, title, isSuccess, isLoading }: ITalentPart) {
-  const [showAllFreelancers, setShowAllFreelancers] = useState(false);
+function TalentPart({
+  freelancers,
+  title,
+  isSuccess,
+  isLoading,
+  setUserId,
+  setIsModalOpen,
+}: ITalentPartProps) {
+  const [showAllFreelancers, setShowAllFreelancers] = useState<boolean>(false);
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
 
   const { t } = useTranslation();
 
@@ -41,21 +54,30 @@ function TalentPart({ freelancers, title, isSuccess, isLoading }: ITalentPart) {
           <S.EmptyBox description={t("Talent.noResult")} />
         )}
         {isLoading &&
-          Array(...Array(freelancersPerRow)).map(() => <Skeleton active />)}
+          Array(...Array(FREELANCERS_PER_ROW)).map((id) => (
+            <Skeleton key={id} active />
+          ))}
         {isSuccess &&
           freelancers
             .slice(
-              showAllFreelancers ? (page - 1) * freelancersPerPage : 0,
-              showAllFreelancers ? page * freelancersPerPage : freelancersPerRow
+              showAllFreelancers ? (page - 1) * FREELANCERS_PER_PAGE : 0,
+              showAllFreelancers
+                ? page * FREELANCERS_PER_PAGE
+                : FREELANCERS_PER_ROW
             )
-            .map((freelancer: IFreelancer) => (
-              <CandidateCard {...freelancer} />
+            .map((freelancer) => (
+              <FreelancerCard
+                setIsModalOpen={setIsModalOpen}
+                key={freelancer.id}
+                setUserId={setUserId!}
+                {...freelancer}
+              />
             ))}
       </S.Box>
       {isSuccess && showAllFreelancers && (
         <Pagination
           hideOnSinglePage
-          pageSize={freelancersPerPage}
+          pageSize={FREELANCERS_PER_PAGE}
           total={freelancers.length}
           onChange={(pageNumber) => {
             setPage(pageNumber);

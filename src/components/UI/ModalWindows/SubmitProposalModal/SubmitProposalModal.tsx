@@ -10,6 +10,8 @@ import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { useSendProposalMutation } from "services/jobPosts/proposalsAPI";
 import { MAX_LENGTH_OF_COVER_LETTER } from "utils/consts/numberConsts";
+import { ProposalType } from "utils/enums";
+import { useGetOwnProfileQuery } from "services/profileInfo/profileInfoAPI";
 
 const { Text } = Typography;
 
@@ -33,6 +35,8 @@ function SubmitProposalModal({
 }: ISubmitProposalModalProps) {
   const { t } = useTranslation();
 
+  const { data: freelancer } = useGetOwnProfileQuery();
+
   const { control, handleSubmit, reset } = useForm<ISubmitProposalForm>({
     resolver: yupResolver(submitProposalSchema),
   });
@@ -44,7 +48,14 @@ function SubmitProposalModal({
     bid,
     coverLetter,
   }) => {
-    await runSendProposalMutation({ bid, coverLetter, idJobPost });
+    if (freelancer)
+      await runSendProposalMutation({
+        bid,
+        message: coverLetter,
+        idJobPost,
+        idFreelancer: freelancer.id,
+        type: ProposalType.PROPOSAL,
+      });
     closeModal();
 
     reset();

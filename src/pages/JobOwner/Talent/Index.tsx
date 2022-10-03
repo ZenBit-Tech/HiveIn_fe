@@ -9,12 +9,23 @@ import {
   useGetSavedFreelancersQuery,
 } from "services/jobOwner/talentAPI";
 import S from "pages/JobOwner/Talent/styles";
+import FreelancerInfoDrawer from "components/UI/drawers/FreelancerInfoDrawer/FreelancerInfoDrawer";
+import { useGetFreelancerByIdQuery } from "services/freelancer/freelancerAPI";
+
+const { Title } = Typography;
 
 function Talent() {
   const [active, setActive] = useState("Talent.discover");
 
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const [userId, setUserId] = useState<number>(1);
+
+  const { data, isFetching } = useGetFreelancerByIdQuery({
+    id: userId,
+  });
+
   const { t } = useTranslation();
-  const { Title } = Typography;
 
   const {
     data: savedFreelancers,
@@ -52,11 +63,13 @@ function Talent() {
       isLoading: isViewLoading,
     },
   ];
+
   return (
     <>
       <S.LeftDiv>
         {talentPart.map(({ title }) => (
           <S.SButton
+            key={title}
             activeClass="active"
             to={title}
             spy
@@ -73,12 +86,26 @@ function Talent() {
         ))}
       </S.LeftDiv>
       <S.RightDiv>
+        {data && !isFetching && (
+          <FreelancerInfoDrawer
+            visible={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            {...data!}
+          />
+        )}
+
         <Title level={1}>{t("Talent.title")}</Title>
-        <DiscoverFilterForm />
+        <DiscoverFilterForm
+          setIsModalOpen={setIsModalOpen}
+          setUserId={setUserId!}
+        />
         {talentPart.map(({ title, freelancers }) => (
           <>
             <TalentPart
+              key={title}
+              setUserId={setUserId}
               freelancers={freelancers}
+              setIsModalOpen={setIsModalOpen}
               title={title}
               isSuccess={isSaveSuccess}
               isLoading={isSaveLoading}

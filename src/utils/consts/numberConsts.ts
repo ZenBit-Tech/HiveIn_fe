@@ -1,3 +1,5 @@
 export const MAX_LENGTH_OF_JOB_DESCRIPTION = 5000;
 export const MIN_LENGTH_OF_JOB_DESCRIPTION = 10;
 export const MAX_LENGTH_OF_COVER_LETTER = 250;
+export const FREELANCERS_PER_PAGE = 6;
+export const FREELANCERS_PER_ROW = 3;
