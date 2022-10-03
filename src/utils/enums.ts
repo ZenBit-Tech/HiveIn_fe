@@ -14,6 +14,11 @@ export enum DurationTypeEnum {
   MONTH = "month",
 }
 
+export enum ProposalType {
+  PROPOSAL = "proposal",
+  INVITE = "invite",
+}
+
 export enum OfferStatus {
   PENDING = "pending",
   ACTIVE = "active",

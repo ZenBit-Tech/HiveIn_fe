@@ -1,9 +1,9 @@
-import { IFreelancer } from "components/CandidateCard/CandidateCard";
 import apiSlice from "services/api/apiSlice";
-
+import { IFreelancerSaved } from "components/FreelancerCard/FreelancerCard";
 import {
   FILTER_FREELANCER,
   HIRED_FREELANCER,
+  REACT_APP_FREELANCER_PROFILE_INFO_URL,
   SAVED_FREELANCERS,
   SAVE_FREELANCER,
   VIEWED_FREELANCER,
@@ -22,7 +22,7 @@ const apiSliceWithTags = apiSlice.enhanceEndpoints({
 
 const getTalentApi = apiSliceWithTags.injectEndpoints({
   endpoints: (builder) => ({
-    filter: builder.query<IFreelancer[], IFilters>({
+    filter: builder.query<IFreelancerSaved[], IFilters>({
       query: ({ keyWords, category, skills }) => ({
         url: `${FILTER_FREELANCER}/${keyWords}/${category}/${skills}`,
         method: "GET",
@@ -30,23 +30,27 @@ const getTalentApi = apiSliceWithTags.injectEndpoints({
       providesTags: () => ["Freelancers"],
     }),
 
-    getSavedFreelancers: builder.query<IFreelancer[], void>({
+    getSavedFreelancers: builder.query<IFreelancerSaved[], void>({
       query: () => `${SAVED_FREELANCERS}`,
       providesTags: () => ["Freelancers"],
     }),
-    saveFreelancers: builder.mutation<IFreelancer[], number>({
+    saveFreelancers: builder.mutation<IFreelancerSaved[], number>({
       query: (freelancerId) => ({
         url: `${SAVE_FREELANCER}/${freelancerId}`,
         method: "POST",
       }),
       invalidatesTags: ["Freelancers"],
     }),
-    getHiredFreelancers: builder.query<IFreelancer[], void>({
+    getHiredFreelancers: builder.query<IFreelancerSaved[], void>({
       query: () => `${HIRED_FREELANCER}`,
       providesTags: () => ["Freelancers"],
     }),
-    getRecentlyViewedFreelancers: builder.query<IFreelancer[], void>({
+    getRecentlyViewedFreelancers: builder.query<IFreelancerSaved[], void>({
       query: () => `${VIEWED_FREELANCER}`,
+      providesTags: () => ["Freelancers"],
+    }),
+    getAllFreelancer: builder.query<IFreelancerSaved[], void>({
+      query: () => `${REACT_APP_FREELANCER_PROFILE_INFO_URL}`,
       providesTags: () => ["Freelancers"],
     }),
   }),
@@ -58,6 +62,7 @@ export const {
   useGetHiredFreelancersQuery,
   useGetRecentlyViewedFreelancersQuery,
   useSaveFreelancersMutation,
+  useGetAllFreelancerQuery,
 } = getTalentApi;
 
 export default getTalentApi;

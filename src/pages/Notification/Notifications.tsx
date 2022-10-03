@@ -6,9 +6,10 @@ import {
   useSendNotificationMutation,
   useGetNotificationsQuery,
   useReadNotificationMutation,
-  Notifications as NotificationsType,
   getSocket,
 } from "services/notifications/setNotificationsAPI";
+import { Notifications as NotificationsType } from "services/notifications/chatTypes";
+
 import S from "pages/Notification/style";
 
 export default function Notifications() {

@@ -1,12 +1,14 @@
+import { ProposalType, OfferStatus } from "utils/enums";
 import apiSlice from "services/api/apiSlice";
 import { IJobPost } from "services/jobPosts/setJobPostsAPI";
 import { OFFER, PROPOSALS } from "utils/consts/breakpointConsts";
-import { OfferStatus } from "utils/enums";
 
 interface ProposalFields {
-  coverLetter: string;
-  bid: number;
+  message: string;
+  idFreelancer: number;
   idJobPost: number;
+  bid: number;
+  type: ProposalType;
 }
 
 interface OfferFields {
@@ -37,8 +39,8 @@ const proposalsApi = apiSlice.injectEndpoints({
       transformResponse: (response: void) => response,
     }),
     sendProposal: builder.mutation<void, ProposalFields>({
-      query: ({ ...proposalFields }) => ({
-        url: `/${PROPOSALS}`,
+      query: ({ type, ...proposalFields }) => ({
+        url: `/${PROPOSALS}/${type}`,
         method: "POST",
         body: {
           ...proposalFields,

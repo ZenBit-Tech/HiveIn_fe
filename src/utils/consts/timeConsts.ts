@@ -1,2 +1,2 @@
-export const ONESECOND = 1000;
-export const FIVESECONDS = 5000;
+/* eslint-disable import/prefer-default-export */
+export const DEBOUNCE_DELAY = 1000;

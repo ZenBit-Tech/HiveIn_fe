@@ -14,7 +14,7 @@ export interface ISkills {
   name: string;
 }
 
-interface ICategory {
+export interface ICategory {
   id: number;
   name: string;
 }

@@ -1,38 +1,48 @@
 import { HeartOutlined, HeartTwoTone } from "@ant-design/icons";
 import { Avatar, Button, Col, Row, Tooltip } from "antd";
-import { useNavigate } from "react-router-dom";
 import { useSaveFreelancersMutation } from "services/jobOwner/talentAPI";
-import S from "components/CandidateCard/styles";
+import S from "components/FreelancerCard/styles";
 import { useTranslation } from "react-i18next";
 import { BLUE } from "utils/consts/colorConsts";
+import { IFreelancer } from "services/profileInfo/typesDef";
 
-export interface IFreelancer {
-  userId: number;
-  user: {
-    avatarURL: string;
-  };
-  position: string;
-  rate: number;
+export interface IFreelancerSaved extends IFreelancer {
   saved: boolean;
 }
 
-function CandidateCard({ user, position, rate, userId, saved }: IFreelancer) {
+export interface IFreelancerCardProps extends IFreelancerSaved {
+  setUserId: (id: number) => void;
+  setIsModalOpen: (isOpen: boolean) => void;
+}
+
+function FreelancerCard({
+  user,
+  position,
+  rate,
+  userId,
+  saved,
+  setIsModalOpen,
+  setUserId,
+}: IFreelancerCardProps) {
   const { t } = useTranslation();
 
   const [saveFreelancer] = useSaveFreelancersMutation();
+  const handleCardClick = () => {
+    setIsModalOpen(true);
+    setUserId(userId);
+  };
 
   const setSaved = () => {
     saveFreelancer(userId);
   };
 
-  const navigate = useNavigate();
   return (
     <S.Card size="default">
       <Row>
-        <S.StyledCol span={6} onClick={() => navigate(userId)}>
+        <S.StyledCol span={6} onClick={handleCardClick}>
           <Avatar size={50} src={user.avatarURL} />
         </S.StyledCol>
-        <S.StyledCol span={15} onClick={() => navigate(userId)}>
+        <S.StyledCol span={15} onClick={handleCardClick}>
           <Row>
             <h3>{position}</h3>
           </Row>
@@ -56,4 +66,4 @@ function CandidateCard({ user, position, rate, userId, saved }: IFreelancer) {
   );
 }
 
-export default CandidateCard;
+export default FreelancerCard;
