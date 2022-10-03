@@ -11,6 +11,7 @@ import {
 } from "services/notifications/chatTypes";
 
 let socketConnection: Socket;
+
 function getSocket() {
   if (!socketConnection) {
     const { getState } = store;
