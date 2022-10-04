@@ -36,9 +36,13 @@ function SubmitProposalModal({
   const { t } = useTranslation();
 
   const { data: freelancer } = useGetOwnProfileQuery();
+  const { rate, id } = freelancer!;
 
   const { control, handleSubmit, reset } = useForm<ISubmitProposalForm>({
     resolver: yupResolver(submitProposalSchema),
+    defaultValues: {
+      bid: +rate,
+    },
   });
 
   const [runSendProposalMutation, { isError, isLoading, isSuccess }] =
@@ -53,7 +57,7 @@ function SubmitProposalModal({
         bid,
         message: coverLetter,
         idJobPost,
-        idFreelancer: freelancer.id,
+        idFreelancer: id,
         type: ProposalType.PROPOSAL,
       });
     closeModal();
