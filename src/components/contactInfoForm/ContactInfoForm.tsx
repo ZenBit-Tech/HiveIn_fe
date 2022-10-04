@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
+import { Control, FieldErrors, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import i18next from "localization/en/en.json";
 import { toast } from "react-toastify";
@@ -9,10 +9,20 @@ import FormSubmitButton from "components/UI/buttons/formSubmitButton/FormSubmitB
 import { SButtonWrapper } from "components/profileEditForm/styles";
 import contactEditFormValidationSchema from "validation/contactEditFormValidationSchema";
 import {
-  IUser,
   useGetOwnUserQuery,
   useUpdateUserMutation,
 } from "services/user/setUserAPI";
+import { ConfidentialSettings } from "utils/enums";
+import createConfidentialInfo from "utils/functions/createConfidentialInfo";
+
+interface IUser {
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  isVisibleEmail: boolean;
+  isVisiblePhone: boolean;
+}
 
 function ContactInfoForm() {
   const [initialState, setInitialState] = useState<IUser>();
@@ -30,6 +40,12 @@ function ContactInfoForm() {
         firstName: data.firstName ?? "",
         lastName: data.lastName ?? "",
         phone: data.phone ? data.phone.slice(1) : undefined,
+        isVisibleEmail:
+          data.confidentialSetting === ConfidentialSettings.VISIBLE ||
+          data.confidentialSetting === ConfidentialSettings.EMAIL_ONLY,
+        isVisiblePhone:
+          data.confidentialSetting === ConfidentialSettings.VISIBLE ||
+          data.confidentialSetting === ConfidentialSettings.PHONE_ONLY,
       });
   }, [data, isSuccess]);
 
@@ -38,7 +54,7 @@ function ContactInfoForm() {
     reset,
     control,
     formState: { errors },
-  } = useForm<FieldValues>({
+  } = useForm<IUser>({
     resolver: yupResolver(contactEditFormValidationSchema),
     defaultValues: initialState,
   });
@@ -61,14 +77,20 @@ function ContactInfoForm() {
     // eslint-disable-next-line
   }, [submitSuccess, submitError, getUserError]);
 
-  const onSubmit = (formData: any) => {
-    const phone = !formData.phone ? null : `+${formData.phone}`;
+  const onSubmit = (formData: IUser) => {
+    const phone = !formData.phone ? undefined : `+${formData.phone}`;
+    const { isVisibleEmail, isVisiblePhone, ...restData } = formData;
+    const confidentialSetting = createConfidentialInfo(
+      isVisiblePhone,
+      isVisibleEmail
+    );
 
     if (isSuccess)
       updateUser({
         ...data,
-        ...formData,
+        ...restData,
         phone,
+        confidentialSetting,
       });
 
     return null;
@@ -81,8 +103,8 @@ function ContactInfoForm() {
         {propsDataCollection.map((propsData) => (
           <LayoutElementWithTitle
             key={propsData.title}
-            control={control}
-            errors={errors}
+            control={control as unknown as Control}
+            errors={errors as unknown as FieldErrors}
             {...propsData}
           />
         ))}

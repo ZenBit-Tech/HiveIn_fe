@@ -17,10 +17,12 @@ import { IEducation, IExperience } from "services/profileInfo/typesDef";
 import { TFreelancerForProfileForm } from "components/profileEditForm/typesDef";
 
 function ProfileEditForm() {
-  const { data, isSuccess, isError } = useGetOwnProfileQuery();
+  const { data, isSuccess, isError, refetch } = useGetOwnProfileQuery();
 
-  const [updateProfile, { isSuccess: submitSuccess, isError: submitError }] =
-    useUpdateProfileMutation();
+  const [
+    updateProfile,
+    { isSuccess: submitSuccess, isError: submitError, isLoading },
+  ] = useUpdateProfileMutation();
 
   const [initialState, setInitialState] = useState<TFreelancerForProfileForm>();
 
@@ -30,7 +32,7 @@ function ProfileEditForm() {
         ...data,
         skills: data.skills.map(({ id }) => id),
         category: data.categoryId,
-        description: data?.user.description,
+        description: data?.user.description || "",
       });
     }
   }, [data, isSuccess]);
@@ -51,12 +53,22 @@ function ProfileEditForm() {
   }, [reset, initialState]);
 
   useEffect(() => {
-    if (submitSuccess) toast.success(i18next.profileSuccessSubmitMessage);
-    if (submitError || isError)
+    if (!isLoading && submitSuccess) refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading, submitSuccess]);
+
+  useEffect(() => {
+    if (submitSuccess && !isLoading)
+      toast.success(i18next.profileSuccessSubmitMessage);
+    if ((submitError || isError) && !isLoading)
       toast.error(i18next.profileFormErrorMessages.defaultError);
-    if (data === null)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [submitSuccess, submitError, isError]);
+
+  useEffect(() => {
+    if (data === null && !isLoading)
       toast.error(i18next.profileFormErrorMessages.userNotFound);
-  }, [submitSuccess, submitError, data, isError]);
+  }, [data, isLoading]);
 
   type TArgs = IEducation[] | IExperience[];
 
@@ -81,7 +93,7 @@ function ProfileEditForm() {
       position: formData.position,
       rate: formData.rate,
       userId: formData.userId,
-      id: formData.id,
+      id: data?.id,
       skillsIds: formData.skills,
       educations: parseData(formData.education, data?.education!),
       experiences: parseData(formData.experience, data?.experience!),
@@ -90,7 +102,6 @@ function ProfileEditForm() {
         description: formData.description,
       },
     };
-
     updateProfile(objectToQuery);
   };
   return (

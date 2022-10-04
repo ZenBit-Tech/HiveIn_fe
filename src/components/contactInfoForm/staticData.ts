@@ -10,6 +10,13 @@ const propsDataCollection: ILayoutElementWithoutControl[] = [
   },
   {
     containerWidth: "half",
+    title: i18n.contactInfoForm.fieldsData.emailSettings.title,
+    element: "switch",
+    formFieldName: "isVisibleEmail",
+    helperText: i18n.contactInfoForm.fieldsData.emailSettings.helperText,
+  },
+  {
+    containerWidth: "half",
     title: i18n.contactInfoForm.fieldsData.firstName.title,
     element: "textInput",
     formFieldName: "firstName",
@@ -27,6 +34,13 @@ const propsDataCollection: ILayoutElementWithoutControl[] = [
     title: i18n.contactInfoForm.fieldsData.phoneNumber.title,
     element: "phoneInput",
     formFieldName: "phone",
+  },
+  {
+    containerWidth: "half",
+    title: i18n.contactInfoForm.fieldsData.phoneSettings.title,
+    element: "switch",
+    formFieldName: "isVisiblePhone",
+    helperText: i18n.contactInfoForm.fieldsData.phoneSettings.helperText,
   },
 ];
 

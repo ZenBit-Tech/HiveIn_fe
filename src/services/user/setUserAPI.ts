@@ -1,5 +1,6 @@
 import apiSlice from "services/api/apiSlice";
 import { REACT_APP_USER_CONTACT_INFO_URL } from "utils/consts/breakpointConsts";
+import { ConfidentialSettings } from "utils/enums";
 
 export interface IUser {
   id?: string;
@@ -10,12 +11,14 @@ export interface IUser {
   phone?: string;
   description?: string;
   avatarURL?: string;
+  confidentialSetting?: ConfidentialSettings;
 }
 
 const userApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getOwnUser: builder.query<IUser, void>({
       query: () => `/${REACT_APP_USER_CONTACT_INFO_URL}/self`,
+      providesTags: ["contactInfo"],
     }),
     updateUser: builder.mutation<IUser, IUser>({
       query: ({ ...userInfo }: IUser) => ({
@@ -26,6 +29,7 @@ const userApi = apiSlice.injectEndpoints({
         },
       }),
       transformResponse: (response: IUser) => response,
+      invalidatesTags: ["contactInfo"],
     }),
   }),
 });

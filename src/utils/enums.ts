@@ -3,6 +3,7 @@ export enum ContractStatusEnum {
   ACTIVE = "Active",
   CLOSED = "Closed",
 }
+
 export enum FilterEnum {
   ALL = "all",
   ACTIVE = "active",
@@ -12,4 +13,11 @@ export enum FilterEnum {
 export enum DurationTypeEnum {
   WEEK = "week",
   MONTH = "month",
+}
+
+export enum ConfidentialSettings {
+  VISIBLE = "visible",
+  PHONE_ONLY = "phoneOnly",
+  EMAIL_ONLY = "emailOnly",
+  HIDDEN = "hidden",
 }
