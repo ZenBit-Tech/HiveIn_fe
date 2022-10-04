@@ -83,7 +83,12 @@
     "draft": "Draft"
   },
   "Chat": {
-    "title": "Chat"
+    "title": "Chat",
+    "chooseTheChat": "Please choose the chat",
+    "noChats": "You have no chats",
+    "noMessages": "You have no messages",
+    "systemMessage": "System message",
+    "disabledMessaging": "You are not able to send any messages in this chat yet"
   },
   "Settings": {
     "title": "Settings"
@@ -298,7 +303,22 @@
     "hideFilters": "Hide filters",
     "showFilters": "Show filters",
     "save": "Save",
-    "noResult": "No result"
+    "noResult": "No result",
+    "filterResults": "Filtered results",
+    "allFreelancers": "All freelancers",
+    "description": "Description",
+    "rate": "Rate",
+    "categoryTitle": "Category",
+    "education": "Education",
+    "experience": "Experience",
+    "send": "Send Invite to interview",
+    "inviteMessage": "Invite message",
+    "inviteTitle": "will be invited to job",
+    "jobs": "Choose job",
+    "sendButton": "Send invite",
+    "defaultInviteMessage": "Hello! I would like to invite you to the interview",
+    "freelancerRate": "Freelancer rate: ",
+    "success": "Invite sent!"
   },
   "PostJob": {
     "title": "Create Job Post",

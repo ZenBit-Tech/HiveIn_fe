@@ -15,6 +15,11 @@ export enum DurationTypeEnum {
   MONTH = "month",
 }
 
+export enum ProposalType {
+  PROPOSAL = "proposal",
+  INVITE = "invite",
+}
+
 export enum ConfidentialSettings {
   VISIBLE = "visible",
   PHONE_ONLY = "phoneOnly",
