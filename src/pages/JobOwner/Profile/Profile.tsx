@@ -13,8 +13,9 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUser } from "store/slices/userSlice";
 import { store } from "store/store";
-import S from "pages/JobOwner/Profile/style";
+import S, { PhotoBox } from "pages/JobOwner/Profile/style";
 import resolver from "pages/JobOwner/Profile/schema";
+import PhotoUpload from "components/photoUpload/PhotoUpload";
 
 interface ClientForm extends FieldValues {
   name: string;
@@ -92,6 +93,9 @@ export default function ClientProfile() {
     <S.Container>
       <S.Form onSubmit={handleSubmit(onSubmit)}>
         <div style={{ width: "50%" }}>
+          <PhotoBox>
+            <PhotoUpload />
+          </PhotoBox>
           <S.InputBox>
             <TextField
               errors={errors}

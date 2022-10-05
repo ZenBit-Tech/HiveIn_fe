@@ -13,6 +13,7 @@ import {
   useGetOwnUserQuery,
   useUpdateUserMutation,
 } from "services/user/setUserAPI";
+import PhotoUpload from "components/photoUpload/PhotoUpload";
 
 function ContactInfoForm() {
   const [initialState, setInitialState] = useState<IUser>();
@@ -77,7 +78,9 @@ function ContactInfoForm() {
   return (
     <>
       <h2>{i18next.contactInfoForm.title}</h2>
+
       <form onSubmit={handleSubmit(onSubmit)}>
+        <PhotoUpload />
         {propsDataCollection.map((propsData) => (
           <LayoutElementWithTitle
             key={propsData.title}

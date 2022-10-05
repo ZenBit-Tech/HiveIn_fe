@@ -10,6 +10,12 @@ import ImgCrop from "antd-img-crop";
 import { LoadingOutlined, UserOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { UPLOADING, IS_JPEG, IS_PNG } from "utils/photoUploadConsts";
+import { styled } from "@mui/joy";
+
+const UploadStyle = styled(Upload)`
+  display: flex;
+  justify-content: center;
+`;
 
 function PhotoUpload() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -43,9 +49,9 @@ function PhotoUpload() {
 
   return (
     <>
-      <h2>{t("profileUploadPhoto.title")}</h2>
+      {/* <h2>{t("profileUploadPhoto.title")}</h2> */}
       <ImgCrop>
-        <Upload
+        <UploadStyle
           name="avatar"
           action="http://localhost:4000/avatar/upload"
           listType="picture-card"
@@ -62,7 +68,7 @@ function PhotoUpload() {
               <p>{t("profileUploadPhoto.input")}</p>
             </div>
           )}
-        </Upload>
+        </UploadStyle>
       </ImgCrop>
     </>
   );

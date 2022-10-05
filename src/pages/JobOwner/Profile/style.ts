@@ -32,4 +32,9 @@ const InputBox = styled.div`
   margin: 20px 0;
 `;
 
+export const PhotoBox = styled.div`
+  margin: 20px 0;
+  margin-left: auto;
+`;
+
 export default { Container, Form, InputBox };
