@@ -145,8 +145,8 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
                 );
               })
             ) : (
-              <Message isMine isSystemMessage>
-                <div>{t("Chat.noMessages")}</div>
+              <Message isMine={false} isSystemMessage>
+                <div>{t("Chat.chooseAnotherRoom")}</div>
               </Message>
             )}
           </MessageBlock>

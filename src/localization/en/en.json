@@ -86,7 +86,7 @@
     "title": "Chat",
     "chooseTheChat": "Please choose the chat",
     "noChats": "You have no chats",
-    "noMessages": "You have no messages",
+    "chooseAnotherRoom": "You entered the room that does not exist. Please choose another room",
     "systemMessage": "System message",
     "disabledMessaging": "You are not able to send any messages in this chat yet"
   },
