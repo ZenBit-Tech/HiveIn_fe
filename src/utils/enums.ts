@@ -26,3 +26,10 @@ export enum ConfidentialSettings {
   EMAIL_ONLY = "emailOnly",
   HIDDEN = "hidden",
 }
+
+export enum OfferStatus {
+  PENDING = "pending",
+  ACCEPTED = "accepted",
+  REJECTED = "rejected",
+  EXPIRED = "expired",
+}

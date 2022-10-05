@@ -9,7 +9,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import {
   AttachmentLink,
   ContentBox,
-  Grid,
   Header,
   SideContent,
   Wrapper,
@@ -29,7 +28,7 @@ import LongMenu from "components/UI/DropdownMenus/LongMenu/LongMenu";
 import { TagStatus } from "components/UI/JobItems/JobItemsStyles";
 import { StatusTag } from "components/UI/Tags/StatusTag";
 import defineContractStatus from "utils/functions/defineContractStatus";
-import { TitleInfo } from "components/UI/JobItem/JobItemStyles";
+import { Grid, TitleInfo } from "components/UI/JobItem/JobItemStyles";
 import { useNavigate } from "react-router-dom";
 import { MY_JOBS_ROUTE } from "utils/consts/routeConsts";
 import { useEffect, useState } from "react";

@@ -9,6 +9,7 @@ interface ITagProps {
 // eslint-disable-next-line import/prefer-default-export
 export const StatusTag = styled(Tag)<ITagProps>`
   border-radius: 50px;
+  text-transform: capitalize;
   background-color: ${WHITE};
   border-style: dashed;
   border-color: ${({ tag }) => tag || TEXT_GRAY};
