@@ -1,54 +1,84 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Divider } from "antd";
-import LongMenu from "components/UI/DropdownMenus/LongMenu";
+import LongMenu from "components/UI/DropdownMenus/LongMenu/LongMenu";
 import JobTitle, {
   JobDescription,
   DeatailedInfo,
   RouterLink,
-  ContractStatus,
+  TagStatus,
+  Wrapper,
 } from "components/UI/JobItems/JobItemsStyles";
 import { useTranslation } from "react-i18next";
-import ContractStatusEnum from "utils/enums";
+import { CustomText } from "components/UI/Typography/CustomText";
+import { IJobPost } from "services/jobPosts/setJobPostsAPI";
+import { BLUE, TAG_CLOSED, TAG_SUCCESS } from "utils/consts/colorConsts";
+import { SkillTag } from "components/UI/Tags/SkillTag";
+import { StatusTag } from "components/UI/Tags/StatusTag";
+import defineContractStatus from "utils/functions/defineContractStatus";
 
 dayjs.extend(relativeTime);
-interface IJobItemsProps {
-  title: string;
-  description: string;
+
+interface IJobItemsProps extends IJobPost {
   link: string;
-  hourlyRate: number;
-  publishDate: string;
-  contractStatus: ContractStatusEnum;
 }
 
 function JobItems({
+  id,
   title,
-  description,
+  category,
+  jobDescription,
+  rate,
+  skills,
+  duration,
+  durationType,
+  englishLevel,
+  createdAt,
+  contract,
+  isDraft,
   link,
-  hourlyRate,
-  publishDate,
-  contractStatus,
 }: IJobItemsProps) {
   const { t } = useTranslation();
 
   return (
-    <>
+    <Wrapper>
       <JobTitle>
-        <RouterLink to={link}>{title}</RouterLink>
+        <RouterLink to={link}>
+          <CustomText link={BLUE} strong>
+            {title}
+          </CustomText>
+        </RouterLink>
         <DeatailedInfo>
-          <ContractStatus>
-            {contractStatus || ContractStatusEnum.PENDING}
-          </ContractStatus>
-          {t("MyJobs.currency")}
-          {hourlyRate}
-          {t("MyJobs.perHour")}
+          <TagStatus>
+            {contract && (
+              <StatusTag tag={!contract?.endDate ? TAG_SUCCESS : TAG_CLOSED}>
+                {defineContractStatus(contract?.endDate)}
+              </StatusTag>
+            )}
+            {isDraft && <StatusTag>{t("MyJobs.draft")}</StatusTag>}
+          </TagStatus>
         </DeatailedInfo>
-        <LongMenu />
+        <LongMenu id={id} link={link} />
       </JobTitle>
-      <DeatailedInfo>{dayjs(publishDate).fromNow()}</DeatailedInfo>
-      <JobDescription>{description}</JobDescription>
-      <Divider />
-    </>
+      <DeatailedInfo>
+        <CustomText strong color={BLUE}>
+          {category.name}
+        </CustomText>
+        {" - "}
+        {t("MyJobs.currency")}
+        {rate}
+        {t("MyJobs.perHour")}
+        {" - "}
+        English: {englishLevel}
+        {" - "}
+        {duration} {durationType} duration
+        {" - "}
+        {dayjs(createdAt).fromNow()}
+      </DeatailedInfo>
+      <JobDescription>{jobDescription}</JobDescription>
+      {skills.map((skill) => (
+        <SkillTag key={skill?.id}>{skill?.name}</SkillTag>
+      ))}
+    </Wrapper>
   );
 }
 

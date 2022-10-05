@@ -1,6 +1,20 @@
-enum ContractStatusEnum {
-  PENDING = "pending",
+export enum ContractStatusEnum {
+  PENDING = "Pending",
+  ACTIVE = "Active",
+  CLOSED = "Closed",
+}
+export enum FilterEnum {
+  ALL = "all",
   ACTIVE = "active",
   CLOSED = "closed",
 }
-export default ContractStatusEnum;
+
+export enum DurationTypeEnum {
+  WEEK = "week",
+  MONTH = "month",
+}
+
+export enum ProposalType {
+  PROPOSAL = "proposal",
+  INVITE = "invite",
+}

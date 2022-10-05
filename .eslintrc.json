@@ -24,6 +24,16 @@
     "react/react-in-jsx-scope": ["off"],
     "react/jsx-uses-react": ["off"],
     "react/jsx-props-no-spreading": ["off"],
-    "react/no-unescaped-entities": ["off"]
+    "react/no-unescaped-entities": ["off"],
+    "react/require-default-props": ["off"],
+    "padding-line-between-statements": [
+      "error",
+      {
+        "blankLine": "always",
+        "prev": "*",
+        "next": "function"
+      },
+      { "blankLine": "any", "prev": ["export", "import"], "next": ["export", "import"] }
+    ]
   }
 }

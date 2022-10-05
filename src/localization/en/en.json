@@ -3,13 +3,67 @@
     "title": "Home"
   },
   "SearchWork": {
-    "title": "Search Work"
+    "title": "Search Work",
+    "category": "Category",
+    "price": "Price and length",
+    "habilities": "Skills and Abilities",
+    "english": "English level",
+    "img": "Attachments",
+    "skills": "Skills",
+    "send": "Send Proposal",
+    "clientInfo": "About the client",
+    "clientBudget": "Client Budget: $",
+    "profileRate": "Profile Rate: $",
+    "modalTitle": "Additional Information",
+    "bid": "Your bid",
+    "coverLetter": "Your cover letter",
+    "success": "Proposal sent!",
+    "subTitle": "Jobs on GetJob",
+    "byCategory": "Search by category",
+    "bySkills": "Search by skills",
+    "byPrice": "Search by price per hour",
+    "byTime": "Search by time available per day/hour",
+    "byEnglish": "Search by English level (choose one)",
+    "search": "Search",
+    "clear": "Clear",
+    "filters": "Filters",
+    "noResult": "No result"
   },
   "Proposals": {
     "title": "Proposals"
   },
   "MyContracts": {
-    "title": "My Contracts"
+    "title": "My Contracts",
+    "filter": {
+      "all": "All",
+      "active": "Active",
+      "pending": "Pending",
+      "closed": "Closed"
+    },
+    "goToChatBtn": "Go to chat",
+    "seeJobPostBtn": "See the job post",
+    "rateString": "Rate",
+    "durationString": "Duration",
+    "titleString": "Title",
+    "descriptionString": "Description",
+    "contractStatusString": "Contract status",
+    "startDateString": "Start date",
+    "endDateString": "End date",
+    "empty": "Empty",
+    "noContracts": "You have no contracts",
+    "server": {
+      "error": "Error",
+      "tryAgain": "Please, try again",
+      "success": "Success",
+      "statusChanged": "Contract status has been changed"
+    }
+  },
+  "SendProposalErrors": {
+    "bidRequired": "Insert your bid",
+    "bidPositive": "Insert a valid number",
+    "bidTypeError": "You must specify a number",
+    "coverLetterRequired": "Insert your cover letter",
+    "coverLetterMax": "You've reached the character limit"
   },
   "MyJobs": {
     "title": "Jobs",
@@ -19,15 +73,22 @@
     "nothingToShow": "No active job posts",
     "info": "About the project",
     "skills": "Necessary Skills",
-    "currency": "$",
+    "currency": "Budget: $",
     "perHour": "/hour",
     "contractStatusTitle": "Contract status:",
     "endContractMessage": "This contract will be ended. Do you want to continue?",
-    "endContractTitle": "End a contract",
-    "continueText": "Continue"
+    "endContractTitle": "End the contract",
+    "continueText": "Continue",
+    "draft?": "Draft?",
+    "draft": "Draft"
   },
   "Chat": {
-    "title": "Chat"
+    "title": "Chat",
+    "chooseTheChat": "Please choose the chat",
+    "noChats": "You have no chats",
+    "noMessages": "You have no messages",
+    "systemMessage": "System message",
+    "disabledMessaging": "You are not able to send any messages in this chat yet"
   },
   "Settings": {
     "title": "Settings"
@@ -111,11 +172,7 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": [
-        "pre-intermediate",
-        "intermediate",
-        "upper-intermediate"
-      ]
+      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
     },
     "description": {
       "title": "Description",
@@ -166,7 +223,7 @@
     "submitButtonText": "save changes",
     "fieldsData": {
       "email": {
-        "title": "email"
+        "title": "Email"
       },
       "firstName": {
         "title": "First name",
@@ -234,10 +291,27 @@
     "hideFilters": "Hide filters",
     "showFilters": "Show filters",
     "save": "Save",
-    "noResult": "No result"
+    "noResult": "No result",
+    "filterResults": "Filtered results",
+    "allFreelancers": "All freelancers",
+    "description": "Description",
+    "rate": "Rate",
+    "categoryTitle": "Category",
+    "education": "Education",
+    "experience": "Experience",
+    "send": "Send Invite to interview",
+    "inviteMessage": "Invite message",
+    "inviteTitle": "will be invited to job",
+    "jobs": "Choose job",
+    "sendButton": "Send invite",
+    "defaultInviteMessage": "Hello! I would like to invite you to the interview",
+    "freelancerRate": "Freelancer rate: ",
+    "success": "Invite sent!"
   },
   "PostJob": {
     "title": "Create Job Post",
+    "titleForCreate": "Create Job Post",
+    "titleForDraft": "Edit draft",
     "required": "required",
     "formFieldsInfo": {
       "title": {
@@ -250,7 +324,7 @@
         "month": "month"
       },
       "description": {
-        "title": "Enter the charge per hour",
+        "title": "Description",
         "helperText": "Max 5000 symbols"
       }
     },
@@ -267,6 +341,32 @@
       "postDraft": " Save to draft",
       "postJob": "Post job"
     }
+  },
+  "EditDeletePost": {
+    "delete": {
+      "deletedSuccessfully": "Deleted successfully",
+      "deleteError": "Something went wrong",
+      "title": "Delete job post",
+      "deleteConfirmation": "Confirm deletion of job post"
+    },
+    "edit": {
+      "updatedSuccessfully": "Post successfully updated",
+      "updateError": "Error, post not updated",
+      "userNotFound": "User not found",
+      "title": "Edit job post",
+      "text": "You can change only description or rate",
+      "labelRate": "Edit rate",
+      "descriptionLabel": "Edit description",
+      "submitButtonText": "Edit post"
+    },
+    "menuOptions": {
+      "seeMore": "See Post",
+      "edit": "Edit Post",
+      "delete": "Delete"
+    }
+  },
+  "Notifications": {
+    "title": "Notifications"
   },
   "profileUploadPhoto": {
     "title": "Profile photo",

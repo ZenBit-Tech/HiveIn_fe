@@ -1,16 +1,31 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IUser } from "services/user/setUserAPI";
-import { RootState } from "store/store";
-import { JOB_POST } from "utils/consts/brakepointConsts";
+import { JOB_POST } from "utils/consts/breakpointConsts";
 import { IDraftRequestObject } from "components/CreateJobPostForm/typesDef";
-import ContractStatusEnum from "utils/enums";
+import { TEnglishLevel } from "components/layoutElementWithTitle/typesDef";
+import { DurationTypeEnum } from "utils/enums";
 
-interface Skills {
+import apiSlice from "services/api/apiSlice";
+
+import { IWorkCardProps } from "components/UI/WorkCard/WorkCard";
+import { ISearchWorkFilters } from "components/UI/SearchWorkForm/typesDef";
+
+export interface ISkills {
   id: number;
   name: string;
 }
 
-interface QueryParam {
+export interface ICategory {
+  id: number;
+  name: string;
+}
+
+interface IFile {
+  id: number;
+  filename: string;
+  path: string;
+}
+
+interface IQueryParam {
   id?: number;
   isDraft?: boolean;
 }
@@ -19,49 +34,56 @@ export interface IJobPost {
   id: number;
   title: string;
   duration: number;
-  durationType: string;
+  durationType: DurationTypeEnum;
   rate: number;
   isDraft: boolean;
-  englishLevel: string;
+  englishLevel: TEnglishLevel;
   jobDescription: string;
   createdAt: string;
   updatedAt: string;
-  category: string;
-  skills: Skills[];
-  user: IUser[];
+  category: ICategory;
+  skills: ISkills[];
+  user: IUser;
+  file?: IFile;
   contract: {
-    status: ContractStatusEnum;
+    startDate: Date;
+    endDate: Date;
+    id: number;
   };
 }
 
-const jobPostsAPI = createApi({
-  reducerPath: "setJobPostsAPI",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const { authToken } = (getState() as RootState).user;
+export interface IUpdateParams {
+  jobDescription?: string;
+  rate?: number;
+  userId: string;
+  postId: number;
+}
 
-      if (authToken) {
-        headers.set("Authorization", `Bearer ${authToken}`);
-      }
+export interface IFilterReturnType {
+  data: IWorkCardProps[];
+  totalCount: number;
+}
 
-      return headers;
-    },
-  }),
+const apiSliceWithTags = apiSlice.enhanceEndpoints({ addTagTypes: ["Posts"] });
+
+const jobPostsAPI = apiSliceWithTags.injectEndpoints({
   endpoints: (builder) => ({
-    getOwnJobPosts: builder.query<IJobPost[], void>({
-      query: () => `${JOB_POST}/self`,
+    getOwnJobPosts: builder.query<IJobPost[], boolean>({
+      query: (isDraft) => `${JOB_POST}/self/${isDraft}`,
+      providesTags: ["Posts"],
     }),
-    getOneJobPost: builder.query<IJobPost, QueryParam>({
+    getOneJobPost: builder.query<IJobPost, IQueryParam>({
       query: ({ id }) => ({
         url: `${JOB_POST}/${id}`,
         credentials: "include",
       }),
+      providesTags: ["Posts"],
     }),
-    getHomePosts: builder.query<IJobPost[], QueryParam>({
+    getHomePosts: builder.query<IJobPost[], IQueryParam>({
       query: (path) => ({
         url: `${JOB_POST}/home/self/${path.isDraft}`,
       }),
+      providesTags: ["Posts"],
     }),
     postJobPost: builder.mutation<IJobPost, FormData>({
       query: (arg) => ({
@@ -69,6 +91,7 @@ const jobPostsAPI = createApi({
         method: "POST",
         body: arg,
       }),
+      invalidatesTags: ["Posts"],
     }),
     postDraft: builder.mutation<IJobPost, IDraftRequestObject>({
       query: (arg) => ({
@@ -76,6 +99,33 @@ const jobPostsAPI = createApi({
         method: "POST",
         body: {
           ...arg,
+        },
+      }),
+      invalidatesTags: ["Posts"],
+    }),
+    updatePost: builder.mutation<IJobPost, IUpdateParams>({
+      query: ({ postId, ...objToRequest }) => ({
+        url: `${JOB_POST}/${postId}`,
+        method: "PATCH",
+        body: {
+          ...objToRequest,
+        },
+      }),
+      invalidatesTags: ["Posts"],
+    }),
+    deletePost: builder.mutation<null, number>({
+      query: (id) => ({
+        url: `${JOB_POST}/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Posts"],
+    }),
+    filterJobPosts: builder.query<IFilterReturnType, ISearchWorkFilters>({
+      query: (params) => ({
+        url: `${JOB_POST}/search-job/`,
+        params: {
+          ...params,
+          skills: params.skills?.map((skill) => skill.id).join("_"),
         },
       }),
     }),
@@ -88,6 +138,9 @@ export const {
   useGetHomePostsQuery,
   usePostJobPostMutation,
   usePostDraftMutation,
+  useFilterJobPostsQuery,
+  useUpdatePostMutation,
+  useDeletePostMutation,
 } = jobPostsAPI;
 
 export default jobPostsAPI;

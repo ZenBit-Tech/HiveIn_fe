@@ -23,6 +23,7 @@ export interface ILayoutElementWithoutControl {
     | "educationColumn"
     | "experienceColumn"
     | "skillsLayout"
+    | "skillsLayoutSmall"
     | "text"
     | "phoneInput"
     | "durationPicker";
@@ -40,4 +41,5 @@ export interface ILayoutElementWithTitleProps
   control: Control;
   errors: FieldErrorsImpl<DeepRequired<FieldValues>>;
   setValue?: UseFormSetValue<FieldValues>;
+  isSubmitSuccess?: boolean;
 }

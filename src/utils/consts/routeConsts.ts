@@ -18,3 +18,5 @@ export const CLIENT_PROFILE = "/client-profile";
 export const CLIENT_HOME = "/client-home";
 export const TALENT_ROUTE = "/talent";
 export const CREATE_JOB_POST = "/create-job-post";
+export const SEARCH_WORK = "/search-work";
+export const NOTIFICATIONS_ROUTE = "/notifications";

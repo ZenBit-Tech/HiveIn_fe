@@ -3,19 +3,19 @@ import { Button, Typography, Modal } from "antd";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import Field from "components/DefaultField/Index";
+import Field from "components/DefaultField/DefaultField";
 import { useTranslation } from "react-i18next";
 import useAuth from "hooks/useAuth";
 import { useSignInMutation } from "services/auth/setAuthAPI";
-import GoogleAuthButton from "components/UI/googleAuthButton/GoogleAuthButton";
+import GoogleAuthButton from "components/UI/buttons/googleAuthButton/GoogleAuthButton";
 import {
   FORGOT_PASSWORD_ROUTE,
   PROFILE_ROUTE,
   SIGN_UP_ROUTE,
 } from "utils/consts/routeConsts";
 import { PRIMARY } from "utils/consts/colorConsts";
-import S from "./style";
-import signInSchema from "./schema";
+import S from "pages/Auth/SignIn/style";
+import signInSchema from "pages/Auth/SignIn/schema";
 
 interface SignInForm extends FieldValues {
   email: string;
@@ -42,33 +42,12 @@ export default function SignIn() {
     setIsErrorModalOpen(false);
   };
 
-  const success = () => {
-    Modal.success({
-      title: t("SignIn.successLogin"),
-      onOk: () => {
-        navigate(PROFILE_ROUTE);
-        signIn(data!);
-      },
-      centered: true,
-    });
-  };
-
   const errorMessage = (statusCode: string | number) => {
     Modal.error({
       title: t(`ServerErrors.${statusCode}`),
       centered: true,
       okButtonProps: { danger: true },
     });
-  };
-
-  const goToRegister = () => {
-    window.scroll(0, 0);
-    navigate(SIGN_UP_ROUTE);
-  };
-
-  const goToForgotPassword = () => {
-    window.scroll(0, 0);
-    navigate(FORGOT_PASSWORD_ROUTE);
   };
 
   useEffect(() => {
@@ -79,7 +58,8 @@ export default function SignIn() {
       }
     }
     if (!isLoading && isSuccess) {
-      success();
+      signIn(data!);
+      navigate(PROFILE_ROUTE);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
@@ -109,7 +89,9 @@ export default function SignIn() {
             />
             <Text
               style={{ color: PRIMARY, cursor: "pointer" }}
-              onClick={goToForgotPassword}
+              onClick={() => {
+                navigate(FORGOT_PASSWORD_ROUTE);
+              }}
             >
               {t("SignIn.forgotPass")}
             </Text>
@@ -118,6 +100,7 @@ export default function SignIn() {
             style={{ width: "50%", height: "50px", fontSize: "18px" }}
             type="primary"
             htmlType="submit"
+            loading={isLoading}
           >
             {t("SignIn.signIn")}
           </Button>
@@ -126,7 +109,9 @@ export default function SignIn() {
       <S.Footer>
         <Text style={{ fontSize: "16px" }}>{t("SignIn.dontHaveAccount")}</Text>
         <Text
-          onClick={goToRegister}
+          onClick={() => {
+            navigate(SIGN_UP_ROUTE);
+          }}
           style={{ color: PRIMARY, fontSize: "16px", cursor: "pointer" }}
         >
           {t("SignIn.register")}

@@ -1,13 +1,13 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IFreelancer } from "components/CandidateCard/CandidateCard";
-import { RootState } from "store/store";
+import apiSlice from "services/api/apiSlice";
+import { IFreelancerSaved } from "components/FreelancerCard/FreelancerCard";
 import {
   FILTER_FREELANCER,
   HIRED_FREELANCER,
+  REACT_APP_FREELANCER_PROFILE_INFO_URL,
   SAVED_FREELANCERS,
   SAVE_FREELANCER,
   VIEWED_FREELANCER,
-} from "utils/consts/brakepointConsts";
+} from "utils/consts/breakpointConsts";
 
 export interface IFilters {
   keyWords: string;
@@ -16,23 +16,13 @@ export interface IFilters {
   userId: number;
 }
 
-const getTalentApi = createApi({
-  reducerPath: "talent",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const { authToken } = (getState() as RootState).user;
+const apiSliceWithTags = apiSlice.enhanceEndpoints({
+  addTagTypes: ["Freelancers"],
+});
 
-      if (authToken) {
-        headers.set("Authorization", `Bearer ${authToken}`);
-      }
-
-      return headers;
-    },
-  }),
-  tagTypes: ["Freelancers"],
+const getTalentApi = apiSliceWithTags.injectEndpoints({
   endpoints: (builder) => ({
-    filter: builder.query<IFreelancer[], IFilters>({
+    filter: builder.query<IFreelancerSaved[], IFilters>({
       query: ({ keyWords, category, skills }) => ({
         url: `${FILTER_FREELANCER}/${keyWords}/${category}/${skills}`,
         method: "GET",
@@ -40,23 +30,27 @@ const getTalentApi = createApi({
       providesTags: () => ["Freelancers"],
     }),
 
-    getSavedFreelancers: builder.query<IFreelancer[], void>({
+    getSavedFreelancers: builder.query<IFreelancerSaved[], void>({
       query: () => `${SAVED_FREELANCERS}`,
       providesTags: () => ["Freelancers"],
     }),
-    saveFreelancers: builder.mutation<IFreelancer[], number>({
+    saveFreelancers: builder.mutation<IFreelancerSaved[], number>({
       query: (freelancerId) => ({
         url: `${SAVE_FREELANCER}/${freelancerId}`,
         method: "POST",
       }),
       invalidatesTags: ["Freelancers"],
     }),
-    getHiredFreelancers: builder.query<IFreelancer[], void>({
+    getHiredFreelancers: builder.query<IFreelancerSaved[], void>({
       query: () => `${HIRED_FREELANCER}`,
       providesTags: () => ["Freelancers"],
     }),
-    getRecentlyViewedFreelancers: builder.query<IFreelancer[], void>({
+    getRecentlyViewedFreelancers: builder.query<IFreelancerSaved[], void>({
       query: () => `${VIEWED_FREELANCER}`,
+      providesTags: () => ["Freelancers"],
+    }),
+    getAllFreelancer: builder.query<IFreelancerSaved[], void>({
+      query: () => `${REACT_APP_FREELANCER_PROFILE_INFO_URL}`,
       providesTags: () => ["Freelancers"],
     }),
   }),
@@ -68,6 +62,7 @@ export const {
   useGetHiredFreelancersQuery,
   useGetRecentlyViewedFreelancersQuery,
   useSaveFreelancersMutation,
+  useGetAllFreelancerQuery,
 } = getTalentApi;
 
 export default getTalentApi;
