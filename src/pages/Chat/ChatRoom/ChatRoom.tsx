@@ -7,8 +7,8 @@ import {
   InputBlock,
   Message,
   MessageBlock,
-  Warning,
   Notification,
+  Warning,
 } from "pages/Chat/ChatRoom/ChatRoom.styles";
 import {
   useGetMessagesMutation,
@@ -27,10 +27,11 @@ import {
   MessageTypeEnum,
 } from "services/notifications/chatEnums";
 import { useParams } from "react-router-dom";
+import { UserRoleEnum } from "utils/enums";
 
 interface IChatRoom {
   userSelfId: number;
-  userRole: string;
+  userRole: UserRoleEnum;
 }
 
 function ChatRoom({ userSelfId, userRole }: IChatRoom) {
@@ -94,13 +95,13 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
 
   const disableInput = (): boolean => {
     if (
-      userRole === "client" &&
+      userRole === UserRoleEnum.CLIENT &&
       room?.status === ChatRoomStatusEnum.CLIENT_ONLY
     ) {
       return false;
     }
     if (
-      userRole === "freelancer" &&
+      userRole === UserRoleEnum.FREELANCER &&
       room?.status === ChatRoomStatusEnum.FREELANCER_ONLY
     ) {
       return false;
