@@ -53,6 +53,7 @@ function ChatRoom({
 
   useEffect(() => {
     getMessages(roomId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId]);
   const ref = useChatScroll(messages);
 

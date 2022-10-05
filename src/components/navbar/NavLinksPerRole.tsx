@@ -112,6 +112,19 @@ const navLinksPerRole: NavLinkRoles = {
           },
         ],
       },
+      {
+        title: i18next.Chat.title,
+        links: [
+          {
+            to: CHAT_ROUTE,
+            title: i18next.Chat.title,
+          },
+          {
+            to: NOTIFICATIONS_ROUTE,
+            title: i18next.Notifications.title,
+          },
+        ],
+      },
     ],
     home: CLIENT_HOME,
   },
