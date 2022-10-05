@@ -6,6 +6,10 @@ interface ITitle {
   pd_bottom?: string;
 }
 
+interface IGrid {
+  grow?: number;
+}
+
 const JobTitle = styled.div<ITitle>`
   display: flex;
   font-size: ${(props) => props.font_sz || "1em"};
@@ -22,6 +26,13 @@ export const PayoutTitle = styled.div`
 export const JobDescription = styled.div`
   color: ${TEXT_GRAY};
   padding-bottom: 10%;
+`;
+
+export const Grid = styled.div<IGrid>`
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  flex-grow: ${(props) => props.grow || 1};
 `;
 
 export const TitleInfo = styled.div`
