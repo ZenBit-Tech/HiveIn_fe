@@ -1,5 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Modal, Typography, Space } from "antd";
+import LinkButton from "components/UI/buttons/LinkButton/LinkButton";
 import Field from "components/DefaultField/DefaultField";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
 import { useEffect } from "react";
@@ -14,6 +15,7 @@ import JobSelect from "components/UI/jobSelect/JobSelect";
 import submitInviteSchema from "components/UI/ModalWindows/SubmitInviteModal/SubmitInviteModalSchema";
 import { Form } from "components/UI/ModalWindows/SubmitProposalModal/SubmitProposalStyles";
 import { ProposalType } from "utils/enums";
+import { CREATE_JOB_POST } from "utils/consts/routeConsts";
 
 const { Text } = Typography;
 
@@ -78,44 +80,56 @@ function SubmitInviteModal({
 
   return (
     <Modal
-      title={`${firstName} ${lastName} ${t("Talent.inviteTitle")}`}
+      title={
+        jobPosts?.length === 0
+          ? "You don't have any posted jobs yet"
+          : `${firstName} ${lastName} ${t("Talent.inviteTitle")}`
+      }
       visible={visible}
       onOk={closeModal}
       onCancel={closeModal}
       footer={null}
       confirmLoading={isLoading}
     >
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Space size="large">
-          <Text>
-            {t("Talent.freelancerRate")}
-            {bid}
-            {t("MyJobs.perHour")}
-          </Text>
-        </Space>
-        <Field
-          control={control}
-          name="bid"
-          prefix={t("MyJobs.currency")}
-          suffix={t("MyJobs.perHour")}
-        />
-        <Field
-          label={t("Talent.inviteMessage")}
-          control={control}
-          name="inviteMessage"
-          textArea
-          maxLength={MAX_LENGTH_OF_COVER_LETTER}
-        />
-        {jobPostIsSuccess && (
-          <JobSelect
-            options={jobPosts}
-            label={t("Talent.jobs")}
-            control={control}
-            name="idJobPost"
-          />
-        )}
-        <SendButton>{t("Talent.sendButton")}</SendButton>
-      </Form>
+      {jobPostIsSuccess &&
+        (jobPosts.length === 0 ? (
+          <Space size="large" direction="vertical">
+            <Text>Click below to post your first job</Text>
+            <LinkButton link={CREATE_JOB_POST}>
+              {t("MyJobs.postJob")}
+            </LinkButton>
+          </Space>
+        ) : (
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <Space size="large">
+              <Text>
+                {t("Talent.freelancerRate")}
+                {bid}
+                {t("MyJobs.perHour")}
+              </Text>
+            </Space>
+            <Field
+              control={control}
+              name="bid"
+              prefix={t("MyJobs.currency")}
+              suffix={t("MyJobs.perHour")}
+            />
+            <Field
+              label={t("Talent.inviteMessage")}
+              control={control}
+              name="inviteMessage"
+              textArea
+              maxLength={MAX_LENGTH_OF_COVER_LETTER}
+            />
+            <JobSelect
+              options={jobPosts}
+              label={t("Talent.jobs")}
+              control={control}
+              name="idJobPost"
+            />
+            <SendButton>{t("Talent.sendButton")}</SendButton>
+          </Form>
+        ))}
     </Modal>
   );
 }
