@@ -8,51 +8,63 @@ import {
   Message,
   MessageBlock,
   Warning,
+  Notification,
 } from "pages/Chat/ChatRoom/ChatRoom.styles";
 import {
   useGetMessagesMutation,
+  useJoinRoomMutation,
+  useLeaveRoomMutation,
   useMessagesQuery,
+  useRoomQuery,
   useSendMessageMutation,
 } from "services/notifications/setNotificationsAPI";
 import { formatToStandardDate } from "utils/functions/formatDateFunctions";
 import { useTranslation } from "react-i18next";
 import { CHAT_DATE_FORMAT } from "utils/consts/inputPropsConsts";
-import { IRoomUsers } from "pages/Chat/Chat";
 import useChatScroll from "hooks/useChatScroll";
 import {
   ChatRoomStatusEnum,
   MessageTypeEnum,
 } from "services/notifications/chatEnums";
+import { useParams } from "react-router-dom";
 
 interface IChatRoom {
-  roomId: number;
   userSelfId: number;
-  jobName: string;
-  roomUsers?: IRoomUsers;
-  roomStatus: ChatRoomStatusEnum;
   userRole: string;
 }
 
-function ChatRoom({
-  roomId,
-  userSelfId,
-  jobName,
-  roomUsers,
-  roomStatus,
-  userRole,
-}: IChatRoom) {
+function ChatRoom({ userSelfId, userRole }: IChatRoom) {
+  const { roomId } = useParams();
+
   const { t } = useTranslation();
 
   const { data: messages } = useMessagesQuery();
+
+  const { data: room } = useRoomQuery();
 
   const [sendMessage] = useSendMessageMutation();
 
   const [getMessages] = useGetMessagesMutation();
 
+  const [joinRoom] = useJoinRoomMutation();
+
+  const [leaveRoom] = useLeaveRoomMutation();
+
   const [text, setText] = useState<string>("");
 
   useEffect(() => {
-    getMessages(roomId);
+    if (roomId && +roomId) {
+      joinRoom(+roomId);
+
+      getMessages(+roomId);
+
+      return () => {
+        leaveRoom();
+      };
+    }
+    return () => {
+      leaveRoom();
+    };
   }, [roomId]);
   const ref = useChatScroll(messages);
 
@@ -61,20 +73,20 @@ function ChatRoom({
   };
 
   const onSendHandler = () => {
-    if (text.trim()) {
-      sendMessage({ chatRoomId: roomId, text });
+    if (text.trim() && roomId && +roomId) {
+      sendMessage({ chatRoomId: +roomId, text });
     }
     setText("");
   };
 
   const defineName = (userID: number): string => {
-    if (roomUsers) {
-      return userID === roomUsers.client.id
-        ? `${roomUsers.client.firstName || "User"} ${
-            roomUsers.client.lastName || "Client"
+    if (room && room.client && room.freelancer) {
+      return userID === room.client.id
+        ? `${room.client.firstName || "User"} ${
+            room.client.lastName || "Client"
           }`
-        : `${roomUsers.freelancer.firstName || "User"} ${
-            roomUsers.freelancer.lastName || "Freelancer"
+        : `${room.freelancer.firstName || "User"} ${
+            room.freelancer.lastName || "Freelancer"
           }`;
     }
     return "User";
@@ -83,69 +95,75 @@ function ChatRoom({
   const disableInput = (): boolean => {
     if (
       userRole === "client" &&
-      roomStatus === ChatRoomStatusEnum.CLIENT_ONLY
+      room?.status === ChatRoomStatusEnum.CLIENT_ONLY
     ) {
       return false;
     }
     if (
       userRole === "freelancer" &&
-      roomStatus === ChatRoomStatusEnum.FREELANCER_ONLY
+      room?.status === ChatRoomStatusEnum.FREELANCER_ONLY
     ) {
       return false;
     }
-    return roomStatus !== ChatRoomStatusEnum.FOR_ALL;
+    return room?.status !== ChatRoomStatusEnum.FOR_ALL;
   };
 
   return (
     <div>
-      <Header>
-        {jobName}
-        {roomStatus}
-      </Header>
-      <MessageBlock ref={ref}>
-        {messages?.length ? (
-          messages.map((message) => {
-            return (
-              <Message
-                isSystemMessage={
-                  message.messageType === MessageTypeEnum.FROM_SYSTEM
-                }
-                key={message.id}
-                isMine={message.senderId === userSelfId}
-              >
-                <div>
-                  {message.messageType === MessageTypeEnum.FROM_SYSTEM ? (
-                    <div>{t("Chat.systemMessage")}</div>
-                  ) : (
-                    <div>{defineName(message.senderId)}</div>
-                  )}
-                  <div>
-                    {formatToStandardDate(
-                      new Date(message.created_at),
-                      CHAT_DATE_FORMAT
-                    )}
-                  </div>
-                </div>
-                <Element>{message.text}</Element>
+      {roomId && +roomId ? (
+        <div>
+          <Header>
+            {room?.jobPost?.title}
+            {room?.status}
+          </Header>
+          <MessageBlock ref={ref}>
+            {messages?.length ? (
+              messages.map((message) => {
+                return (
+                  <Message
+                    isSystemMessage={
+                      message.messageType === MessageTypeEnum.FROM_SYSTEM
+                    }
+                    key={message.id}
+                    isMine={message.senderId === userSelfId}
+                  >
+                    <div>
+                      {message.messageType === MessageTypeEnum.FROM_SYSTEM ? (
+                        <div>{t("Chat.systemMessage")}</div>
+                      ) : (
+                        <div>{defineName(message.senderId)}</div>
+                      )}
+                      <div>
+                        {formatToStandardDate(
+                          new Date(message.created_at),
+                          CHAT_DATE_FORMAT
+                        )}
+                      </div>
+                    </div>
+                    <Element>{message.text}</Element>
+                  </Message>
+                );
+              })
+            ) : (
+              <Message isMine isSystemMessage>
+                <div>{t("Chat.noMessages")}</div>
               </Message>
-            );
-          })
-        ) : (
-          <Message isMine isSystemMessage>
-            <div>{t("Chat.noMessages")}</div>
-          </Message>
-        )}
-      </MessageBlock>
-      <InputBlock>
-        <Input
-          disabled={disableInput()}
-          value={text}
-          onChange={onChangeHandler}
-          onKeyUp={(event) => event.key === "Enter" && onSendHandler()}
-        />
-        <Button onClick={onSendHandler} icon={<SendOutlined />} />
-      </InputBlock>
-      {disableInput() && <Warning>{t("Chat.disabledMessaging")}</Warning>}
+            )}
+          </MessageBlock>
+          <InputBlock>
+            <Input
+              disabled={disableInput()}
+              value={text}
+              onChange={onChangeHandler}
+              onKeyUp={(event) => event.key === "Enter" && onSendHandler()}
+            />
+            <Button onClick={onSendHandler} icon={<SendOutlined />} />
+          </InputBlock>
+          {disableInput() && <Warning>{t("Chat.disabledMessaging")}</Warning>}
+        </div>
+      ) : (
+        <Notification>{t("Chat.chooseTheChat")}</Notification>
+      )}
     </div>
   );
 }

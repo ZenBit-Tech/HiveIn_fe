@@ -1,5 +1,6 @@
 export enum EventEnum {
   ROOMS = "rooms",
+  ROOM = "room",
   ERROR = "error",
   GET_ROOMS = "getRooms",
   JOIN_ROOM = "joinRoom",
@@ -21,4 +22,12 @@ export enum ChatRoomStatusEnum {
   FOR_ALL = "forAll",
   FREELANCER_ONLY = "freelancerOnly",
   CLIENT_ONLY = "clientOnly",
+}
+
+export enum NotificationTypeEnum {
+  NEW_MESSAGE = "newMessage",
+  OFFER = "offer",
+  INVITE = "invite",
+  OFFER_EXPIRE = "offerExpire",
+  CHAT_EXPIRE = "chatExpire",
 }
