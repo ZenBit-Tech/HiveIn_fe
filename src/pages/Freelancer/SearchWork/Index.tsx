@@ -48,10 +48,12 @@ function SearchWork() {
   }, [isSuccess, data, isFetching]);
 
   useEffect(() => {
-    setFilters({
-      category: freelancerInfo?.categoryId,
-      skills: freelancerInfo?.skills ? freelancerInfo?.skills : [],
-    });
+    if (freelancerInfo) {
+      setFilters({
+        category: freelancerInfo.categoryId,
+        skills: freelancerInfo.skills ?? [],
+      });
+    }
   }, [isUserInformationSuccess]);
 
   useEffect(() => {
@@ -105,7 +107,7 @@ function SearchWork() {
           ))}
       </WorkSection>
       <FilterSection>
-        {isUserInformationSuccess && filters.category && filters.skills && (
+        {isUserInformationSuccess && filters.skills && (
           <SearchWorkForm
             filters={filters}
             setFilters={setFilters}
