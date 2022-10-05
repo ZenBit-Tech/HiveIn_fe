@@ -1,4 +1,4 @@
-import { Drawer, Modal, Space, Typography } from "antd";
+import { Drawer, Space, Typography } from "antd";
 import {
   ContentBox,
   Grid,
@@ -18,15 +18,11 @@ import {
 } from "utils/consts/colorConsts";
 import { useTranslation } from "react-i18next";
 import { CustomText } from "components/UI/Typography/CustomText";
-import {
-  IProposalsRes,
-  useChangeOfferStatusMutation,
-} from "services/jobPosts/proposalsAPI";
+import { IProposalsRes } from "services/jobPosts/proposalsAPI";
 import logo from "assets/logo.svg";
-import { useEffect } from "react";
-import { toast } from "react-toastify";
 import { OfferStatus } from "utils/enums";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
+import useJobOfferStatus from "hooks/useJobOfferStatus";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
@@ -48,39 +44,7 @@ function JobOfferDrawer({
 }: IJobOfferDrawerProps) {
   const { t } = useTranslation();
 
-  const [runChangeOfferStatus, { isError, isLoading, isSuccess }] =
-    useChangeOfferStatusMutation();
-
-  useEffect(() => {
-    if (!isLoading && isError) {
-      toast.error(`${t("Offer.status")}`);
-
-      return;
-    }
-    if (!isLoading && isSuccess) {
-      toast.success(`${t("Offer.status")}`);
-      refetch();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading]);
-
-  const handleAccept = async () => {
-    Modal.confirm({
-      title: `${t("Offer.confirmAccept")}`,
-      onOk: async () => {
-        await runChangeOfferStatus({ id, status: OfferStatus.ACTIVE });
-      },
-    });
-  };
-
-  const handleClose = async () => {
-    Modal.confirm({
-      title: `${t("Offer.confirmReject")}`,
-      onOk: async () => {
-        await runChangeOfferStatus({ id, status: OfferStatus.REJECTED });
-      },
-    });
-  };
+  const { handleAccept, handleDecline } = useJobOfferStatus({ id, refetch });
 
   return (
     <Drawer
@@ -145,7 +109,7 @@ function JobOfferDrawer({
                     borderColor={TAG_CLOSED}
                     hooverColor={WHITE}
                     hooverBackColor={TAG_CLOSED}
-                    onClick={handleClose}
+                    onClick={handleDecline}
                   >
                     {t("Offer.rejectOffer")}
                   </SendButton>

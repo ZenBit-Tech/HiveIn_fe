@@ -17,18 +17,14 @@ import JobTitle, {
   TagStatus,
   Wrapper,
 } from "components/JobOffers/JobOffersStyles";
-import {
-  IProposalsRes,
-  useChangeOfferStatusMutation,
-} from "services/jobPosts/proposalsAPI";
+import { IProposalsRes } from "services/jobPosts/proposalsAPI";
 import SearchWorkDrawer from "components/UI/drawers/SearchWorkDrawer/SearchWorkDrawer";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import { OfferStatus } from "utils/enums";
-import { Modal } from "antd";
 import { OfferTags } from "components/JobOffers/OfferTags";
 import { PROPOSALS_ROUTE } from "utils/consts/routeConsts";
 import JobOfferDrawer from "components/UI/drawers/JobOfferDrawer/JobOfferDrawer";
+import useJobOfferStatus from "hooks/useJobOfferStatus";
 
 dayjs.extend(relativeTime);
 
@@ -49,39 +45,18 @@ function JobOffers({
   const [openDetailDrawer, setOpenDetailDrawer] = useState<boolean>(false);
   const [openOfferDrawer, setOpenOfferDrawer] = useState<boolean>(false);
 
-  const [runChangeOfferStatus, { isError, isLoading, isSuccess }] =
-    useChangeOfferStatusMutation();
+  const { handleAccept, handleDecline, handleExpired } = useJobOfferStatus({
+    id,
+    refetch,
+  });
 
   useEffect(() => {
-    if (!isLoading && isError) {
-      toast.error(`${t("Offer.status")}`);
-
-      return;
-    }
-    if (!isLoading && isSuccess) {
-      toast.success(`${t("Offer.status")}`);
-      refetch();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading]);
-
-  const handleAccept = async () => {
-    Modal.confirm({
-      title: `${t("Offer.confirmAccept")}`,
-      onOk: async () => {
-        await runChangeOfferStatus({ id, status: OfferStatus.ACTIVE });
-      },
-    });
-  };
-
-  const handleClose = async () => {
-    Modal.confirm({
-      title: `${t("Offer.confirmReject")}`,
-      onOk: async () => {
-        await runChangeOfferStatus({ id, status: OfferStatus.REJECTED });
-      },
-    });
-  };
+    if (
+      status !== OfferStatus.EXPIRED &&
+      dayjs(createdAt).add(2, "day").isBefore(new Date())
+    )
+      handleExpired();
+  }, [createdAt, handleExpired, status]);
 
   return (
     <Wrapper>
@@ -111,16 +86,6 @@ function JobOffers({
             </CustomText>
           </RouterLink>
           <HeaderInfo>
-            {status === OfferStatus.PENDING && (
-              <>
-                <AcceptButton onClick={handleAccept}>
-                  {t("Offer.acceptOffer")}
-                </AcceptButton>
-                <RejectButton onClick={handleClose}>
-                  {t("Offer.rejectOffer")}
-                </RejectButton>
-              </>
-            )}
             <TagStatus>
               <StatusTag tag={OfferTags[status]}>{status}</StatusTag>
             </TagStatus>
@@ -140,6 +105,16 @@ function JobOffers({
           {jobPost.rate}
           {t("MyJobs.perHour")}
         </JobDescription>
+        {status === OfferStatus.PENDING && (
+          <>
+            <AcceptButton onClick={handleAccept}>
+              {t("Offer.acceptOffer")}
+            </AcceptButton>
+            <RejectButton onClick={handleDecline}>
+              {t("Offer.rejectOffer")}
+            </RejectButton>
+          </>
+        )}
       </DetailDiv>
       <JobOfferDrawer
         id={id}

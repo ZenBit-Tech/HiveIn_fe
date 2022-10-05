@@ -21,6 +21,7 @@ export enum ProposalType {
 
 export enum OfferStatus {
   PENDING = "pending",
-  ACTIVE = "active",
+  ACCEPTED = "accepted",
   REJECTED = "rejected",
+  EXPIRED = "expired",
 }
