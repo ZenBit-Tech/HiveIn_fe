@@ -1,10 +1,11 @@
 import apiSlice from "services/api/apiSlice";
 import { REACT_APP_USER_CONTACT_INFO_URL } from "utils/consts/breakpointConsts";
+import { UserRoleEnum } from "utils/enums";
 
 export interface IUser {
   id?: string;
   email?: string;
-  role?: string;
+  role?: UserRoleEnum;
   firstName?: string;
   lastName?: string;
   phone?: string;

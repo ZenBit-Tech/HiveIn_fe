@@ -3,7 +3,12 @@ import { useTranslation } from "react-i18next";
 import NavLink from "components/UI/navlink/NavLink";
 import NavbarStyles, { NavBarButtons } from "components/navbar/NavbarStyles";
 import logo from "components/navbar/imgs/logo.svg";
-import { BellOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  BellOutlined,
+  LogoutOutlined,
+  UserOutlined,
+  AuditOutlined,
+} from "@ant-design/icons";
 import {
   SIGN_UP_ROUTE,
   SIGN_IN_ROUTE,
@@ -27,7 +32,7 @@ function Navbar() {
   const { data, isError, isLoading } = useGetNotificationsQuery();
   const { t } = useTranslation();
 
-  const [navItens, setNavItens] = useState<NavLinkOptions | null>();
+  const [navItems, setNavItems] = useState<NavLinkOptions | null>();
   const [countNotifications, setCountNotifications] = useState<number>(0);
 
   useEffect(() => {
@@ -38,9 +43,9 @@ function Navbar() {
   }, [data, isError, isLoading, role]);
 
   useEffect(() => {
-    if (role) setNavItens(navLinksPerRole[role]);
+    if (role) setNavItems(navLinksPerRole[role]);
     else {
-      setNavItens(null);
+      setNavItems(null);
     }
     // eslint-disable-next-line
   }, [role, authToken]);
@@ -66,6 +71,8 @@ function Navbar() {
     switch (itemTitle) {
       case t("Profile.title"):
         return <UserOutlined />;
+      case t("MyJobs.title"):
+        return <AuditOutlined />;
       case t("Chat.title"):
         return (
           <Badge size="small" count={countNotifications}>
@@ -77,9 +84,20 @@ function Navbar() {
     }
   }
 
+  function badgeForChatSubMenu(title: string): JSX.Element | undefined {
+    switch (title) {
+      case t("Chat.title"):
+        return <Badge count={countNotifications} />;
+      case t("Notifications.title"):
+        return <Badge count={countNotifications} />;
+      default:
+        return undefined;
+    }
+  }
+
   return (
     <NavbarStyles>
-      <NavLink path={navItens?.home ?? ""}>
+      <NavLink path={navItems?.home ?? ""}>
         <img height="50px" alt="logo" src={logo} />
       </NavLink>
       <Menu
@@ -88,18 +106,21 @@ function Navbar() {
         style={{ width: "100%" }}
       >
         {role === CLIENT_ROLE ? (
-          <Menu.Item key={t("Profile.title")}>
+          <Menu.Item
+            key={t("Profile.title")}
+            icon={verifyMenuItemIcon("Profile")}
+          >
             <Link to={CLIENT_PROFILE}>{t("Profile.title")}</Link>
           </Menu.Item>
         ) : null}
-        {navItens?.options.map(({ links, title }) => (
+        {navItems?.options.map(({ links, title }) => (
           <Menu.SubMenu
             icon={verifyMenuItemIcon(title)}
             key={title}
             title={title === t("Chat.title") ? "" : title}
           >
             {links.map((link) => (
-              <Menu.Item key={link.to}>
+              <Menu.Item key={link.to} icon={badgeForChatSubMenu(link.title)}>
                 <Link to={link.to}>{link.title}</Link>
               </Menu.Item>
             ))}

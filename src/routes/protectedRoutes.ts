@@ -10,7 +10,7 @@ import Notifications from "pages/Notification/Notifications";
 
 const protectedRoutes: RoutesType[] = [
   {
-    path: CHAT_ROUTE,
+    path: `${CHAT_ROUTE}/*`,
     component: Chat,
   },
   {
