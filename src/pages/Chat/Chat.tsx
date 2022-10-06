@@ -4,9 +4,9 @@ import { IUser, useGetOwnUserQuery } from "services/user/setUserAPI";
 import { Block, Container, Notification } from "pages/Chat/Chat.styles";
 import { useTranslation } from "react-i18next";
 import { IChatUser } from "services/notifications/chatTypes";
-import ChatRoomsList from "pages/Chat/ChatRoomsList/ChatRoomsList";
+import ChatRoomsList from "pages/Chat/components/ChatRoomsList/ChatRoomsList";
 import { NavLink, Route, Routes } from "react-router-dom";
-import ChatRoom from "pages/Chat/ChatRoom/ChatRoom";
+import ChatRoom from "pages/Chat/components/ChatRoom/ChatRoom";
 import { CHAT_ROOM_ROUTE } from "utils/consts/routeConsts";
 
 export interface IRoomUsers {

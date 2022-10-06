@@ -2,7 +2,7 @@ import {
   Block,
   LastMessage,
   ChatElement,
-} from "pages/Chat/ChatRoomsList/ChatRoomsList.styles";
+} from "pages/Chat/components/ChatRoomsList/ChatRoomsList.styles";
 import { Avatar } from "@mui/material";
 
 interface IChatUsersList {
