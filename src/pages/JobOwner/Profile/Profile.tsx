@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
-import { Button } from "antd";
-import TextField from "components/UI/textField/TextField";
+
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
@@ -13,9 +12,14 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUser } from "store/slices/userSlice";
 import { store } from "store/store";
-import S, { PhotoBox } from "pages/JobOwner/Profile/style";
+import S from "pages/JobOwner/Profile/style";
 import resolver from "pages/JobOwner/Profile/schema";
 import PhotoUpload from "components/photoUpload/PhotoUpload";
+import SendButton from "components/UI/buttons/SendButton/SendButton";
+import Field from "components/DefaultField/DefaultField";
+import { Typography } from "antd";
+
+const { Title } = Typography;
 
 interface ClientForm extends FieldValues {
   name: string;
@@ -23,13 +27,7 @@ interface ClientForm extends FieldValues {
 }
 
 export default function ClientProfile() {
-  const {
-    control,
-    handleSubmit,
-    setValue,
-    getValues,
-    formState: { errors },
-  } = useForm<ClientForm>({
+  const { control, handleSubmit, setValue, getValues } = useForm<ClientForm>({
     resolver: yupResolver(resolver),
   });
   const { t } = useTranslation();
@@ -41,7 +39,9 @@ export default function ClientProfile() {
     data,
     isLoading: queryLoad,
     isSuccess: querySuccess,
+    refetch,
   } = useGetOwnUserQuery();
+
   const dispatch = useDispatch();
   const { getState } = store;
   const { user } = getState();
@@ -71,9 +71,9 @@ export default function ClientProfile() {
   }, [queryLoad]);
 
   useEffect(() => {
-    if (!isLoading && isError) toast.error("Something went wrong");
+    if (!isLoading && isError) toast.error(t("ServerErrors.500"));
     if (!isLoading && isSuccess) {
-      toast.success("Profile uploaded");
+      toast.success(t("profileSuccessSubmitMessage"));
       dispatch(
         setUser({
           firstName: getValues("name"),
@@ -89,39 +89,22 @@ export default function ClientProfile() {
       description,
     });
   }
+
   return (
     <S.Container>
       <S.Form onSubmit={handleSubmit(onSubmit)}>
-        <div style={{ width: "50%" }}>
-          <PhotoBox>
-            <PhotoUpload />
-          </PhotoBox>
-          <S.InputBox>
-            <TextField
-              errors={errors}
-              formFieldName="name"
-              type="text"
-              width="full"
-              helperText="Name*"
-              control={control}
-            />
-          </S.InputBox>
-          <S.InputBox>
-            <TextField
-              errors={errors}
-              formFieldName="description"
-              multiline
-              type="text"
-              width="full"
-              helperText="Description of your company"
-              rows={5}
-              control={control}
-            />
-          </S.InputBox>
-          <Button htmlType="submit" shape="round" size="large" type="primary">
-            {t("Dashboard.buttons.save")}
-          </Button>
+        <Title level={3}>{t("contactInfoForm.pic")}</Title>
+        <div>
+          <PhotoUpload avatarUrl={data?.avatar?.url} refetch={refetch} />
         </div>
+        <Field label="Name" control={control} name="name" />
+        <Field
+          label={t("ProfileEditForm.description.title")}
+          control={control}
+          name="description"
+          textArea
+        />
+        <SendButton>{t("Dashboard.buttons.save")}</SendButton>
       </S.Form>
     </S.Container>
   );

@@ -40,7 +40,7 @@ function FreelancerCard({
     <S.Card size="default">
       <Row>
         <S.StyledCol span={6} onClick={handleCardClick}>
-          <Avatar size={50} src={user.avatarURL} />
+          <Avatar size={50} src={user?.avatar?.url} />
         </S.StyledCol>
         <S.StyledCol span={15} onClick={handleCardClick}>
           <Row>

@@ -5,36 +5,36 @@ import {
   BOX_SHADOW_LIGHT,
   WHITE,
 } from "utils/consts/colorConsts";
+import { WRAP_SCREEN_SIZE } from "utils/consts/mediaQueryConsts";
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
   background: ${BOX_BACKGROUND};
   border-radius: 8px;
-  box-shadow: ${BOX_SHADOW_LIGHT} 0px 1px 3px, ${BOX_SHADOW_DARK} 0px 1px 2px;
 `;
 
 const Form = styled.form`
   display: flex;
+  flex-direction: column;
   background: ${WHITE};
   border-radius: 8px;
   align-items: center;
-  justify-content: space-evenly;
-  width: 70%;
-  height: 45vh;
+  justify-content: center;
+  padding: 20px;
+  width: 30%;
   margin: 10px 0;
+  box-shadow: ${BOX_SHADOW_LIGHT} 0px 1px 3px, ${BOX_SHADOW_DARK} 0px 1px 2px;
+
+  @media (max-width: ${WRAP_SCREEN_SIZE}) {
+    width: 100%;
+  }
 `;
 
 const InputBox = styled.div`
   margin: 20px 0;
-`;
-
-export const PhotoBox = styled.div`
-  margin: 20px 0;
-  margin-left: auto;
 `;
 
 export default { Container, Form, InputBox };

@@ -56,7 +56,7 @@ function FreelancerInfoDrawer({
         <Grid grow={3}>
           <Header>
             <Space size="large">
-              <Avatar size={150} src={user.avatarURL} />
+              <Avatar size={150} src={user.avatar?.url} />
               <Space direction="vertical">
                 <Title level={3}>
                   {user.firstName} {user.lastName}

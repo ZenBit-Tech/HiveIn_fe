@@ -10,14 +10,17 @@ import ImgCrop from "antd-img-crop";
 import { LoadingOutlined, UserOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { UPLOADING, IS_JPEG, IS_PNG } from "utils/photoUploadConsts";
-import { styled } from "@mui/joy";
+import useAuth from "hooks/useAuth";
+import { toast } from "react-toastify";
 
-const UploadStyle = styled(Upload)`
-  display: flex;
-  justify-content: center;
-`;
+interface IPhotoUploadProps {
+  avatarUrl?: string;
+  refetch: () => void;
+}
 
-function PhotoUpload() {
+function PhotoUpload({ avatarUrl, refetch }: IPhotoUploadProps) {
+  const { authToken } = useAuth();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const { t } = useTranslation();
@@ -38,39 +41,45 @@ function PhotoUpload() {
   const handleChange: UploadProps["onChange"] = (
     info: UploadChangeParam<UploadFile>
   ) => {
-    if (info.file.status === UPLOADING) setIsLoading(true);
-    else {
-      getBase64(info.file.originFileObj as RcFile, async (url) => {
-        setIsLoading(false);
-        setImageUrl(url);
-      });
+    if (info.file.status === UPLOADING) {
+      setIsLoading(true);
+      return;
     }
+
+    getBase64(info.file.originFileObj as RcFile, async (url) => {
+      setIsLoading(false);
+      setImageUrl(url);
+      refetch();
+      toast.success(t("profileSuccessSubmitMessage"));
+    });
   };
 
   return (
-    <>
-      {/* <h2>{t("profileUploadPhoto.title")}</h2> */}
-      <ImgCrop>
-        <UploadStyle
-          name="avatar"
-          action="http://localhost:4000/avatar/upload"
-          listType="picture-card"
-          maxCount={1}
-          showUploadList={false}
-          beforeUpload={beforeUpload}
-          onChange={handleChange}
-        >
-          {imageUrl ? (
-            <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
-          ) : (
-            <div>
-              {isLoading ? <LoadingOutlined /> : <UserOutlined />}
-              <p>{t("profileUploadPhoto.input")}</p>
-            </div>
-          )}
-        </UploadStyle>
-      </ImgCrop>
-    </>
+    <ImgCrop>
+      <Upload
+        name="avatar"
+        action="http://localhost:4000/auth/avatar"
+        listType="picture-card"
+        maxCount={1}
+        showUploadList={false}
+        beforeUpload={beforeUpload}
+        onChange={handleChange}
+        headers={{ authorization: `Bearer ${authToken}` }}
+      >
+        {(avatarUrl || imageUrl) && !isLoading ? (
+          <img
+            src={imageUrl! || avatarUrl!}
+            alt="avatar"
+            style={{ width: "100%" }}
+          />
+        ) : (
+          <div>
+            {isLoading ? <LoadingOutlined /> : <UserOutlined />}
+            <p>{t("profileUploadPhoto.input")}</p>
+          </div>
+        )}
+      </Upload>
+    </ImgCrop>
   );
 }
 
