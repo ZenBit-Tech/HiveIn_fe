@@ -44,6 +44,7 @@ function useChatRoomData(userRole: UserRoleEnum) {
     return () => {
       leaveRoom();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId]);
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
