@@ -1,13 +1,23 @@
-import SendButtonStyle from "components/UI/buttons/SendButton/SendButtonStyles";
+import SendButtonStyle, {
+  IColors,
+} from "components/UI/buttons/SendButton/SendButtonStyles";
 import { ReactNode } from "react";
 
-interface ISendButtonProps {
+interface ISendButtonProps extends IColors {
   onClick?: () => void;
   children: ReactNode;
 }
 
-function SendButton({ onClick, children }: ISendButtonProps): JSX.Element {
-  return <SendButtonStyle onClick={onClick}>{children}</SendButtonStyle>;
+function SendButton({
+  onClick,
+  children,
+  ...props
+}: ISendButtonProps): JSX.Element {
+  return (
+    <SendButtonStyle {...props} onClick={onClick}>
+      {children}
+    </SendButtonStyle>
+  );
 }
 
 SendButton.defaultProps = {
