@@ -11,6 +11,7 @@ export const RESTORE_PASSWORD = "restore-password";
 export const JOB_POST = "job-post";
 export const JOB_POST_FILE = "job-post/file";
 export const PROPOSALS = "proposal";
+export const OFFER = "offer";
 export const FILTER_FREELANCER = "client/filter";
 export const SAVE_FREELANCER = "client/save";
 export const VIEW_FREELANCER = "client/view";

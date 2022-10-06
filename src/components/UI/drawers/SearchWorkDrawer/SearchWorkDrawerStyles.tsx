@@ -13,6 +13,10 @@ interface IGrid {
   grow?: number;
 }
 
+interface IContent {
+  showBorder?: boolean;
+}
+
 interface IText {
   color?: string;
 }
@@ -27,6 +31,7 @@ export const Wrapper = styled.div`
 export const Grid = styled.div<IGrid>`
   display: flex;
   flex-direction: column;
+  min-width: 650px;
   max-width: 700px;
   flex-grow: ${(props) => props.grow || 1};
 `;
@@ -35,10 +40,21 @@ export const Header = styled.header`
   padding: 20px;
 `;
 
-export const ContentBox = styled.section`
-  border-top: 1px solid ${BOX_BORDER};
+export const ContentBox = styled.section<IContent>`
+  border-top: ${({ showBorder }) =>
+    showBorder ? null : `1px solid ${BOX_BORDER}`};
   padding: 30px;
   overflow: auto;
+`;
+
+export const ProfileBox = styled.section<IContent>`
+  border-top: ${({ showBorder }) =>
+    showBorder ? null : `1px solid ${BOX_BORDER}`};
+  padding: 15px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
 `;
 
 export const DrawerText = styled(Text)<IText>`

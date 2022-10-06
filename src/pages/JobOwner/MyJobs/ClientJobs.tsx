@@ -2,13 +2,11 @@ import { useState } from "react";
 import { Skeleton, Switch, Typography } from "antd";
 import LinkButton from "components/UI/buttons/LinkButton/LinkButton";
 import JobItem from "components/UI/JobItems/JobItems";
-import useAuth from "hooks/useAuth";
 import PageContainer, {
   Card,
   DivContainer,
   Filter,
   Header,
-  NameText,
   Section,
   StyledPagination,
   TitleText,
@@ -27,7 +25,6 @@ function ClientJobs() {
   const isDraft = useSelector((state: RootState) => state.isDraft);
   const dispatch = useDispatch();
 
-  const { email } = useAuth();
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [postsPerPage, setPostsPerPage] = useState<number>(PPG);
@@ -45,7 +42,6 @@ function ClientJobs() {
       <Header>
         <div>
           <Title level={3}>{t("MyJobs.subTitle")}</Title>
-          <NameText>{email}</NameText>
         </div>
         <LinkButton link={CREATE_JOB_POST}>{t("MyJobs.postJob")}</LinkButton>
       </Header>
@@ -68,7 +64,7 @@ function ClientJobs() {
           )}
 
           {isSuccess && !jobPosts?.length ? (
-            t("MyJobs.nothingToShow")
+            <DivContainer>{t("MyJobs.nothingToShow")}</DivContainer>
           ) : (
             <>
               {jobPosts?.slice(firstPostIndex, lastPostIndex).map((jobPost) => (
