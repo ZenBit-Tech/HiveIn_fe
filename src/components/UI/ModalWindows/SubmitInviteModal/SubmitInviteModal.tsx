@@ -23,7 +23,6 @@ interface ISubmitInviteForm extends FieldValues {
   inviteMessage: string;
   idFreelancer: number;
   idJobPost: number;
-  bid: number;
 }
 
 interface ISubmitInviteModalProps {
@@ -56,9 +55,12 @@ function SubmitInviteModal({
   const [runSendProposalMutation, { isError, isLoading, isSuccess }] =
     useSendProposalMutation();
 
-  const onSubmit: SubmitHandler<ISubmitInviteForm> = async (data) => {
+  const onSubmit: SubmitHandler<ISubmitInviteForm> = async (
+    data: ISubmitInviteForm
+  ) => {
     await runSendProposalMutation({
       ...data,
+      bid,
       message: data.inviteMessage,
       idFreelancer: freelancerId,
       type: ProposalType.INVITE,
@@ -108,12 +110,6 @@ function SubmitInviteModal({
                 {t("MyJobs.perHour")}
               </Text>
             </Space>
-            <Field
-              control={control}
-              name="bid"
-              prefix={t("MyJobs.currency")}
-              suffix={t("MyJobs.perHour")}
-            />
             <Field
               label={t("Talent.inviteMessage")}
               control={control}

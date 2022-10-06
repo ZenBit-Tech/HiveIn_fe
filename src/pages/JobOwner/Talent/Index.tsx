@@ -43,7 +43,7 @@ function Talent() {
     isLoading: isViewLoading,
   } = useGetRecentlyViewedFreelancersQuery();
 
-  const talentPart: ITalentPart[] = [
+  const talentParts: ITalentPart[] = [
     {
       title: "Talent.savedTalent",
       freelancers: savedFreelancers ?? [],
@@ -67,7 +67,7 @@ function Talent() {
   return (
     <>
       <S.LeftDiv>
-        {talentPart.map(({ title }) => (
+        {talentParts.map(({ title }) => (
           <S.SButton
             key={title}
             activeClass="active"
@@ -99,7 +99,7 @@ function Talent() {
           setIsModalOpen={setIsModalOpen}
           setUserId={setUserId!}
         />
-        {talentPart.map(({ title, freelancers }) => (
+        {talentParts.map(({ title, freelancers }) => (
           <>
             <TalentPart
               key={title}
