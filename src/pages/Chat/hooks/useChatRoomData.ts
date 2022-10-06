@@ -36,10 +36,6 @@ function useChatRoomData(userRole: UserRoleEnum) {
       joinRoom(+roomId);
 
       getMessages(+roomId);
-
-      return () => {
-        leaveRoom();
-      };
     }
     return () => {
       leaveRoom();
