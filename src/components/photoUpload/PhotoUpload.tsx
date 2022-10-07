@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { UPLOADING, IS_JPEG, IS_PNG } from "utils/photoUploadConsts";
 import useAuth from "hooks/useAuth";
 import { toast } from "react-toastify";
+import { AUTH, AVATAR } from "utils/consts/breakpointConsts";
 
 interface IPhotoUploadProps {
   avatarUrl?: string;
@@ -58,7 +59,7 @@ function PhotoUpload({ avatarUrl, refetch }: IPhotoUploadProps) {
     <ImgCrop>
       <Upload
         name="avatar"
-        action="http://localhost:4000/auth/avatar"
+        action={`${process.env.REACT_APP_API_URL}/${AUTH}/${AVATAR}`}
         listType="picture-card"
         maxCount={1}
         showUploadList={false}
