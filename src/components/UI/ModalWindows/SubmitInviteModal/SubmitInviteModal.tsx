@@ -85,7 +85,7 @@ function SubmitInviteModal({
     <Modal
       title={
         jobPosts?.length === 0
-          ? "You don't have any posted jobs yet"
+          ? t("Talent.dontHavePost")
           : `${firstName} ${lastName} ${t("Talent.inviteTitle")}`
       }
       visible={visible}
@@ -97,7 +97,7 @@ function SubmitInviteModal({
       {jobPostIsSuccess &&
         (jobPosts.length === 0 ? (
           <Space size="large" direction="vertical">
-            <Text>Click below to post your first job</Text>
+            <Text>{t("Talent.createFirstJob")}</Text>
             <LinkButton link={CREATE_JOB_POST}>
               {t("MyJobs.postJob")}
             </LinkButton>
