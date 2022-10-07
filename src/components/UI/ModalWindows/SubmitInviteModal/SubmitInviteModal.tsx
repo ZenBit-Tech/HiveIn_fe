@@ -84,9 +84,9 @@ function SubmitInviteModal({
   return (
     <Modal
       title={
-        jobPosts?.length === 0
-          ? t("Talent.dontHavePost")
-          : `${firstName} ${lastName} ${t("Talent.inviteTitle")}`
+        jobPosts?.length
+          ? `${firstName} ${lastName} ${t("Talent.inviteTitle")}`
+          : t("Talent.dontHavePost")
       }
       visible={visible}
       onOk={closeModal}
@@ -95,14 +95,7 @@ function SubmitInviteModal({
       confirmLoading={isLoading}
     >
       {jobPostIsSuccess &&
-        (jobPosts.length === 0 ? (
-          <Space size="large" direction="vertical">
-            <Text>{t("Talent.createFirstJob")}</Text>
-            <LinkButton link={CREATE_JOB_POST}>
-              {t("MyJobs.postJob")}
-            </LinkButton>
-          </Space>
-        ) : (
+        (jobPosts?.length ? (
           <Form onSubmit={handleSubmit(onSubmit)}>
             <Space size="large">
               <Text>
@@ -126,6 +119,13 @@ function SubmitInviteModal({
             />
             <SendButton>{t("Talent.sendButton")}</SendButton>
           </Form>
+        ) : (
+          <Space size="large" direction="vertical">
+            <Text>{t("Talent.createFirstJob")}</Text>
+            <LinkButton link={CREATE_JOB_POST}>
+              {t("MyJobs.postJob")}
+            </LinkButton>
+          </Space>
         ))}
     </Modal>
   );
