@@ -4,6 +4,12 @@ import i18next from "localization/en/en.json";
 
 const propsDataCollection: ILayoutElementWithoutControl[] = [
   {
+    title: "SearchWork.keyWord",
+    element: "textInput",
+    formFieldName: "keyWord",
+    containerWidth: "half",
+  },
+  {
     title: "SearchWork.byCategory",
     element: "select",
     formFieldName: "category",
