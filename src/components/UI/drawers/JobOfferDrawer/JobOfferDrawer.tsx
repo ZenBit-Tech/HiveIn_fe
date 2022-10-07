@@ -1,4 +1,4 @@
-import { Drawer, Space, Typography } from "antd";
+import { Avatar, Drawer, Space, Typography } from "antd";
 import {
   ContentBox,
   Grid,
@@ -19,7 +19,6 @@ import {
 import { useTranslation } from "react-i18next";
 import { CustomText } from "components/UI/Typography/CustomText";
 import { IProposalsRes } from "services/jobPosts/proposalsAPI";
-import logo from "assets/logo.svg";
 import { OfferStatus } from "utils/enums";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
 import useJobOfferStatus from "hooks/useJobOfferStatus";
@@ -120,7 +119,7 @@ function JobOfferDrawer({
             <ProfileBox showBorder={!(status === OfferStatus.PENDING)}>
               <CustomText strong>{t("SearchWork.clientInfo")}</CustomText>
               <Space direction="vertical" align="center">
-                <img height="50px" alt="logo" src={logo} />
+                <Avatar size={70} alt="logo" src={jobPost?.user?.avatar?.url} />
 
                 <CustomText color={TEXT_GRAY}>
                   {jobPost.user.firstName} {jobPost.user.lastName}

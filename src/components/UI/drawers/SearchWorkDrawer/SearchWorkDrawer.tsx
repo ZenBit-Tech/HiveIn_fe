@@ -3,13 +3,14 @@ import {
   PaperClipOutlined,
   ThunderboltFilled,
 } from "@ant-design/icons";
-import { Drawer, Space, Typography } from "antd";
+import { Avatar, Drawer, Space, Typography } from "antd";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
 import {
   AttachmentLink,
   ContentBox,
   Grid,
   Header,
+  ImgContainer,
   SideContent,
   Wrapper,
 } from "components/UI/drawers/SearchWorkDrawer/SearchWorkDrawerStyles";
@@ -155,6 +156,9 @@ function SearchWorkDrawer({
             <ContentBox showBorder={!sendProposalButtonIsVisible}>
               <Space direction="vertical">
                 <CustomText strong>{t("SearchWork.clientInfo")}</CustomText>
+                <ImgContainer>
+                  <Avatar size={70} alt="logo" src={user?.avatar?.url} />
+                </ImgContainer>
                 <CustomText color={TEXT_GRAY}>{user.email}</CustomText>
                 <CustomText color={TEXT_GRAY}>{user.description}</CustomText>
               </Space>

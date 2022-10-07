@@ -3,13 +3,21 @@ import {
   ThunderboltFilled,
   PaperClipOutlined,
 } from "@ant-design/icons";
-import { Modal, notification, PageHeader, Space, Typography } from "antd";
+import {
+  Avatar,
+  Modal,
+  notification,
+  PageHeader,
+  Space,
+  Typography,
+} from "antd";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import {
   AttachmentLink,
   ContentBox,
   Header,
+  ImgContainer,
   SideContent,
   Wrapper,
 } from "components/UI/drawers/SearchWorkDrawer/SearchWorkDrawerStyles";
@@ -189,6 +197,9 @@ function JobItem({
           <Header>
             <Space direction="vertical">
               <CustomText strong>{t("SearchWork.clientInfo")}</CustomText>
+              <ImgContainer>
+                <Avatar size={70} alt="logo" src={user?.avatar?.url} />
+              </ImgContainer>
               <CustomText color={TEXT_GRAY}>{user.email}</CustomText>
               <CustomText color={TEXT_GRAY}>{user.description}</CustomText>
             </Space>
