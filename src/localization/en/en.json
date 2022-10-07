@@ -66,6 +66,23 @@
     "coverLetterRequired": "Insert your cover letter",
     "coverLetterMax": "You've reached the character limit"
   },
+  "Offer": {
+    "offer": "Offer: ",
+    "duration": "duration: ",
+    "offers": "Job Offers",
+    "jobOffer": "Job Offer",
+    "yourOffers": " Your offers",
+    "acceptOffer": "Accept Offer",
+    "rejectOffer": "Decline Offer",
+    "confirmAccept": "Are you sure you want to accept the offer?",
+    "confirmReject": "Are you sure you want to decline the offer?",
+    "status": "Offer Status Changed!",
+    "drawerTitle": "Offer Status",
+    "drawerRelatedJob": "Related Job Opening",
+    "expireDate": "Offer Expires",
+    "createDate": "Offer Date:"
+  },
+
   "MyJobs": {
     "title": "Jobs",
     "subTitle": "Your Projects",
@@ -87,7 +104,7 @@
     "title": "Chat",
     "chooseTheChat": "Please choose the chat",
     "noChats": "You have no chats",
-    "noMessages": "You have no messages",
+    "chooseAnotherRoom": "You entered the room that does not exist. Please choose another room",
     "systemMessage": "System message",
     "disabledMessaging": "You are not able to send any messages in this chat yet"
   },

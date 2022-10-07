@@ -54,6 +54,7 @@ function SearchWork() {
         skills: freelancerInfo.skills ?? [],
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isUserInformationSuccess]);
 
   useEffect(() => {

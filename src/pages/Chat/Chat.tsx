@@ -1,12 +1,13 @@
-import { useState } from "react";
+/* eslint-disable react/no-children-prop */
 import { useGetRoomsQuery } from "services/notifications/setNotificationsAPI";
 import { IUser, useGetOwnUserQuery } from "services/user/setUserAPI";
 import { Block, Container, Notification } from "pages/Chat/Chat.styles";
 import { useTranslation } from "react-i18next";
 import { IChatUser } from "services/notifications/chatTypes";
-import ChatRoomsList from "pages/Chat/ChatRoomsList/ChatRoomsList";
-import ChatRoom from "pages/Chat/ChatRoom/ChatRoom";
-import { ChatRoomStatusEnum } from "services/notifications/chatEnums";
+import ChatRoomsList from "pages/Chat/components/ChatRoomsList/ChatRoomsList";
+import { NavLink, Route, Routes } from "react-router-dom";
+import ChatRoom from "pages/Chat/components/ChatRoom/ChatRoom";
+import { CHAT_ROOM_ROUTE } from "utils/consts/routeConsts";
 
 export interface IRoomUsers {
   freelancer: IChatUser;
@@ -19,23 +20,6 @@ function Chat() {
   const { data: roomsList } = useGetRoomsQuery();
 
   const { data: user } = useGetOwnUserQuery();
-
-  const [roomId, setRoomId] = useState<number | null>(null);
-  const [jobNameForHeader, setJobNameForHeader] = useState<string>("");
-  const [roomUsers, setRoomUsers] = useState<IRoomUsers>();
-  const [roomStatus, setRoomStatus] = useState<ChatRoomStatusEnum>(
-    ChatRoomStatusEnum.FOR_ALL
-  );
-
-  const onClickHandler = (
-    id: number,
-    jobName: string,
-    status: ChatRoomStatusEnum
-  ) => {
-    setRoomId(id);
-    setJobNameForHeader(jobName);
-    setRoomStatus(status);
-  };
 
   const defineOpponentsNameAndAvatar = (
     freelancer: IChatUser,
@@ -53,9 +37,6 @@ function Chat() {
       avatar: `${client.avatarURL || ""}`,
     };
   };
-  const setRoomUsersHandler = (freelancer: IChatUser, client: IChatUser) => {
-    setRoomUsers({ freelancer, client });
-  };
 
   return (
     <div>
@@ -63,37 +44,33 @@ function Chat() {
         <Container>
           <Block>
             {roomsList.map((room) => (
-              <ChatRoomsList
-                setRoomUsers={setRoomUsersHandler}
-                freelancer={room.freelancer}
-                client={room.client}
-                isSelected={room.id === roomId}
-                opponentsNameAndAvatar={defineOpponentsNameAndAvatar(
-                  room.freelancer,
-                  room.client,
-                  user
-                )}
-                lastMessage={room.lastMessage.text}
+              <NavLink
                 key={room.id}
-                id={room.id}
-                onClick={onClickHandler}
-                jobName={room.jobPost.title}
-                roomStatus={room.status}
+                to={`${room.id}`}
+                children={({ isActive }) => (
+                  <ChatRoomsList
+                    isSelected={isActive}
+                    opponentsNameAndAvatar={defineOpponentsNameAndAvatar(
+                      room.freelancer,
+                      room.client,
+                      user
+                    )}
+                    lastMessage={room.lastMessage.text}
+                    key={room.id}
+                    jobName={room.jobPost.title}
+                  />
+                )}
               />
             ))}
           </Block>
-          {roomId ? (
-            <ChatRoom
-              userRole={user.role!}
-              roomStatus={roomStatus}
-              roomUsers={roomUsers}
-              userSelfId={+user.id!}
-              roomId={roomId}
-              jobName={jobNameForHeader}
+          <Routes>
+            <Route
+              path={CHAT_ROOM_ROUTE}
+              element={
+                <ChatRoom userRole={user.role!} userSelfId={+user.id!} />
+              }
             />
-          ) : (
-            <Notification>{t("Chat.chooseTheChat")}</Notification>
-          )}
+          </Routes>
         </Container>
       ) : (
         <Notification>{t("Chat.noChats")}</Notification>

@@ -74,6 +74,7 @@ function SubmitInviteModal({
       toast.success(t("Talent.success"));
       reset();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   return (

@@ -18,3 +18,16 @@ export enum ProposalType {
   PROPOSAL = "proposal",
   INVITE = "invite",
 }
+
+export enum UserRoleEnum {
+  CLIENT = "client",
+  FREELANCER = "freelancer",
+  UNDEFINED = "",
+}
+
+export enum OfferStatus {
+  PENDING = "pending",
+  ACCEPTED = "accepted",
+  REJECTED = "rejected",
+  EXPIRED = "expired",
+}
