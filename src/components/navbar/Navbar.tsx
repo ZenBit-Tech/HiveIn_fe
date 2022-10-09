@@ -17,10 +17,7 @@ import {
 import useAuth from "hooks/useAuth";
 import { Badge, Menu } from "antd";
 import { Link } from "react-router-dom";
-import {
-  useGetNotificationsQuery,
-  getSocket,
-} from "services/notifications/setNotificationsAPI";
+import { useGetNotificationsCountQuery } from "services/notifications/setNotificationsAPI";
 import NavBarButton from "components/UI/buttons/navBarButton/NavBarButton";
 import navLinksPerRole, {
   NavLinkOptions,
@@ -29,18 +26,16 @@ import { CLIENT_ROLE } from "utils/consts/navBarConsts";
 
 function Navbar() {
   const { authToken, signOut, role } = useAuth();
-  const { data, isError, isLoading } = useGetNotificationsQuery();
   const { t } = useTranslation();
 
   const [navItems, setNavItems] = useState<NavLinkOptions | null>();
-  const [countNotifications, setCountNotifications] = useState<number>(0);
 
-  useEffect(() => {
-    if (!isError && !isLoading && role) {
-      const count = data?.filter((item) => !item.read).length;
-      setCountNotifications(count || 0);
-    }
-  }, [data, isError, isLoading, role]);
+  const [total, setTotal] = useState<number | undefined>();
+
+  const { data: countNotifications } = useGetNotificationsCountQuery(
+    undefined,
+    { skip: !authToken }
+  );
 
   useEffect(() => {
     if (role) setNavItems(navLinksPerRole[role]);
@@ -50,10 +45,14 @@ function Navbar() {
     // eslint-disable-next-line
   }, [role, authToken]);
 
-  const socket = getSocket();
-  socket.on("first-message", () => {
-    setCountNotifications(countNotifications + 1);
-  });
+  useEffect(() => {
+    setTotal(() => {
+      if (countNotifications) {
+        return countNotifications.message + countNotifications.other;
+      }
+      return undefined;
+    });
+  }, [countNotifications]);
 
   if (!authToken) {
     return (
@@ -75,7 +74,7 @@ function Navbar() {
         return <AuditOutlined />;
       case t("Chat.title"):
         return (
-          <Badge size="small" count={countNotifications}>
+          <Badge size="small" count={total}>
             <BellOutlined />
           </Badge>
         );
@@ -87,9 +86,9 @@ function Navbar() {
   function badgeForChatSubMenu(title: string): JSX.Element | undefined {
     switch (title) {
       case t("Chat.title"):
-        return <Badge count={countNotifications} />;
+        return <Badge count={countNotifications?.message} />;
       case t("Notifications.title"):
-        return <Badge count={countNotifications} />;
+        return <Badge count={countNotifications?.other} />;
       default:
         return undefined;
     }
