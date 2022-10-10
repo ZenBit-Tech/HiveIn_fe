@@ -3,3 +3,6 @@ export const MIN_LENGTH_OF_JOB_DESCRIPTION = 10;
 export const MAX_LENGTH_OF_COVER_LETTER = 250;
 export const FREELANCERS_PER_PAGE = 6;
 export const FREELANCERS_PER_ROW = 3;
+export const AVATAR_SIZE_SMALL = 50;
+export const AVATAR_SIZE_MEDIUM = 70;
+export const AVATAR_SIZE_BIG = 150;

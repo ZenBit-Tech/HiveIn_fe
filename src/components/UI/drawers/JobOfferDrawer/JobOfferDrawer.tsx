@@ -22,6 +22,7 @@ import { IProposalsRes } from "services/jobPosts/proposalsAPI";
 import { OfferStatus } from "utils/enums";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
 import useJobOfferStatus from "hooks/useJobOfferStatus";
+import { AVATAR_SIZE_MEDIUM } from "utils/consts/numberConsts";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
@@ -119,7 +120,11 @@ function JobOfferDrawer({
             <ProfileBox showBorder={!(status === OfferStatus.PENDING)}>
               <CustomText strong>{t("SearchWork.clientInfo")}</CustomText>
               <Space direction="vertical" align="center">
-                <Avatar size={70} alt="logo" src={jobPost?.user?.avatar?.url} />
+                <Avatar
+                  size={AVATAR_SIZE_MEDIUM}
+                  alt="logo"
+                  src={jobPost?.user?.avatar?.url}
+                />
 
                 <CustomText color={TEXT_GRAY}>
                   {jobPost.user.firstName} {jobPost.user.lastName}

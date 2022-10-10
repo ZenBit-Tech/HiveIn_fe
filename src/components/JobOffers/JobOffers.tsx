@@ -25,6 +25,7 @@ import { PROPOSALS_ROUTE } from "utils/consts/routeConsts";
 import JobOfferDrawer from "components/UI/drawers/JobOfferDrawer/JobOfferDrawer";
 import useJobOfferStatus from "hooks/useJobOfferStatus";
 import { Avatar } from "antd";
+import { AVATAR_SIZE_MEDIUM } from "utils/consts/numberConsts";
 
 dayjs.extend(relativeTime);
 
@@ -61,7 +62,11 @@ function JobOffers({
   return (
     <Wrapper>
       <DivContainer>
-        <Avatar size={70} alt="logo" src={jobPost?.user?.avatar?.url} />
+        <Avatar
+          size={AVATAR_SIZE_MEDIUM}
+          alt="logo"
+          src={jobPost?.user?.avatar?.url}
+        />
       </DivContainer>
       <DetailDiv>
         <JobTitle>

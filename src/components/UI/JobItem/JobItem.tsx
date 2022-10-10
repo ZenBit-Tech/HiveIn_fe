@@ -42,6 +42,7 @@ import { MY_JOBS_ROUTE } from "utils/consts/routeConsts";
 import { useEffect, useState } from "react";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
 import { useCloseContractMutation } from "services/contract/contractApi";
+import { AVATAR_SIZE_MEDIUM } from "utils/consts/numberConsts";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
@@ -198,7 +199,11 @@ function JobItem({
             <Space direction="vertical">
               <CustomText strong>{t("SearchWork.clientInfo")}</CustomText>
               <ImgContainer>
-                <Avatar size={70} alt="logo" src={user?.avatar?.url} />
+                <Avatar
+                  size={AVATAR_SIZE_MEDIUM}
+                  alt="logo"
+                  src={user?.avatar?.url}
+                />
               </ImgContainer>
               <CustomText color={TEXT_GRAY}>{user.email}</CustomText>
               <CustomText color={TEXT_GRAY}>{user.description}</CustomText>

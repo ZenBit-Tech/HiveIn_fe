@@ -18,6 +18,7 @@ import { IFreelancer } from "services/profileInfo/typesDef";
 import EducationExperienceCard from "components/EducationExperienceCard/EducationExperienceCard";
 import SubmitInviteModal from "components/UI/ModalWindows/SubmitInviteModal/SubmitInviteModal";
 import { SkillTag } from "components/UI/Tags/SkillTag";
+import { AVATAR_SIZE_BIG } from "utils/consts/numberConsts";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
@@ -56,7 +57,7 @@ function FreelancerInfoDrawer({
         <Grid grow={3}>
           <Header>
             <Space size="large">
-              <Avatar size={150} src={user.avatar?.url} />
+              <Avatar size={AVATAR_SIZE_BIG} src={user.avatar?.url} />
               <Space direction="vertical">
                 <Title level={3}>
                   {user.firstName} {user.lastName}

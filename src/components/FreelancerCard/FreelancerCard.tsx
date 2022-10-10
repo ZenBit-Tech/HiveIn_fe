@@ -5,6 +5,7 @@ import S from "components/FreelancerCard/styles";
 import { useTranslation } from "react-i18next";
 import { BLUE } from "utils/consts/colorConsts";
 import { IFreelancer } from "services/profileInfo/typesDef";
+import { AVATAR_SIZE_SMALL } from "utils/consts/numberConsts";
 
 export interface IFreelancerSaved extends IFreelancer {
   saved: boolean;
@@ -40,7 +41,7 @@ function FreelancerCard({
     <S.Card size="default">
       <Row>
         <S.StyledCol span={6} onClick={handleCardClick}>
-          <Avatar size={50} src={user?.avatar?.url} />
+          <Avatar size={AVATAR_SIZE_SMALL} src={user?.avatar?.url} />
         </S.StyledCol>
         <S.StyledCol span={15} onClick={handleCardClick}>
           <Row>
