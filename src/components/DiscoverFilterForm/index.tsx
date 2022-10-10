@@ -6,7 +6,7 @@ import schema from "components/DiscoverFilterForm/schema";
 import { useTranslation } from "react-i18next";
 import { IFreelancer } from "services/profileInfo/typesDef";
 import { Skeleton } from "antd";
-import TalentPart from "components/TalentPart/TalentPart";
+import TalentPart, { ITalentPartData } from "components/TalentPart/TalentPart";
 import {
   IFilters,
   useFilterQuery,
@@ -38,22 +38,26 @@ function DiscoverFilterForm({
   const [filters, setFilters] = useState<IFilters | any>({});
   const [isAllFreelancer, setIsAllFreelancer] = useState<boolean>(true);
 
+  const filtersData = useFilterQuery({ ...filters });
+
   const {
     data: filteredFreelancers,
     isSuccess,
-    isLoading,
     isFetching,
-  } = useFilterQuery({ ...filters });
+    isLoading,
+  } = filtersData;
+
+  const allFreelancersData = useGetAllFreelancerQuery();
 
   const {
     data: allFreelancers,
     isSuccess: isAllFreelancerSuccess,
     isLoading: isAllFreelancerLoading,
-  } = useGetAllFreelancerQuery();
+  } = allFreelancersData;
 
   useEffect(() => {
-    if (filteredFreelancers) setIsAllFreelancer(false);
-  }, [filteredFreelancers]);
+    if (filtersData.data) setIsAllFreelancer(false);
+  }, [filtersData.data]);
 
   const changeIsFiltersOpen = () => setIsFiltersOpen(!isFiltersOpen);
   const onSubmit = (filtersForm: FieldValues) => {
@@ -65,23 +69,21 @@ function DiscoverFilterForm({
 
   return (
     <S.Div>
-      {isFiltersOpen && (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {propsDataCollection.map((propsData) => (
-            <LayoutElementWithTitle
-              freelancerInfo={{ skills: [] } as unknown as IFreelancer}
-              setValue={setValue}
-              errors={errors}
-              key={propsData.title}
-              control={control}
-              {...propsData}
-            />
-          ))}
-          <S.CustomButton block type="primary" htmlType="submit">
-            {t("Talent.search")}
-          </S.CustomButton>
-        </form>
-      )}
+      <S.Form display={isFiltersOpen} onSubmit={handleSubmit(onSubmit)}>
+        {propsDataCollection.map((propsData) => (
+          <LayoutElementWithTitle
+            freelancerInfo={{ skills: [] } as unknown as IFreelancer}
+            setValue={setValue}
+            errors={errors}
+            key={propsData.title}
+            control={control}
+            {...propsData}
+          />
+        ))}
+        <S.CustomButton block type="primary" htmlType="submit">
+          {t("Talent.search")}
+        </S.CustomButton>
+      </S.Form>
       <S.CustomButton block type="ghost" onClick={changeIsFiltersOpen}>
         {isFiltersOpen ? t("Talent.hideFilters") : t("Talent.showFilters")}
       </S.CustomButton>
@@ -94,10 +96,8 @@ function DiscoverFilterForm({
             <TalentPart
               setIsModalOpen={setIsModalOpen}
               setUserId={setUserId}
-              freelancers={filteredFreelancers!}
+              data={filtersData as unknown as ITalentPartData}
               title={t("Talent.filterResults")}
-              isSuccess={isSuccess}
-              isLoading={isLoading}
             />
           )
         ))}
@@ -110,10 +110,8 @@ function DiscoverFilterForm({
             <TalentPart
               setIsModalOpen={setIsModalOpen}
               setUserId={setUserId}
-              freelancers={allFreelancers!}
+              data={allFreelancersData as unknown as ITalentPartData}
               title={t("Talent.allFreelancers")}
-              isSuccess={isAllFreelancerSuccess}
-              isLoading={isAllFreelancerLoading}
             />
           )
         ))}

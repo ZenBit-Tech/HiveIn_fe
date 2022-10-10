@@ -18,6 +18,16 @@ interface ISearchWorkFormProps {
 
 const defaultDurationType = DurationTypeEnum.WEEK;
 
+const defaultFIlters = {
+  category: undefined,
+  rate: undefined,
+  skills: [],
+  duration: undefined,
+  keyWord: "",
+  durationType: defaultDurationType,
+  englishLevel: undefined,
+};
+
 function SearchWorkForm({
   filters,
   setFilters,
@@ -48,15 +58,8 @@ function SearchWorkForm({
 
   const onClear = () => {
     setIsReset(true);
-    setFilters({ ...filters, skills: [] });
-    reset({
-      category: undefined,
-      rate: "",
-      skills: [],
-      duration: "",
-      durationType: defaultDurationType,
-      englishLevel: undefined,
-    });
+    setFilters(defaultFIlters);
+    reset(defaultFIlters);
     setTimeout(() => {
       setIsReset(false);
     }, DEBOUNCE_DELAY);

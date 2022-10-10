@@ -11,7 +11,7 @@ import {
 } from "components/UI/drawers/SearchWorkDrawer/SearchWorkDrawerStyles";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BLUE, BOX_BACKGROUND, TEXT_GRAY } from "utils/consts/colorConsts";
 import { useTranslation } from "react-i18next";
 import { IFreelancer } from "services/profileInfo/typesDef";
@@ -19,6 +19,7 @@ import EducationExperienceCard from "components/EducationExperienceCard/Educatio
 import SubmitInviteModal from "components/UI/ModalWindows/SubmitInviteModal/SubmitInviteModal";
 import { SkillTag } from "components/UI/Tags/SkillTag";
 import { AVATAR_SIZE_BIG } from "utils/consts/numberConsts";
+import { useViewFreelancersMutation } from "services/jobOwner/talentAPI";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
@@ -43,6 +44,13 @@ function FreelancerInfoDrawer({
 }: IFreelancerInfoDrawerProps) {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const [viewFreelancer] = useViewFreelancersMutation();
+
+  useEffect(() => {
+    viewFreelancer(id);
+  }, []);
+
   return (
     <Drawer
       title=""

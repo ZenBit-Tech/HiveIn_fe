@@ -27,7 +27,8 @@
     "search": "Search",
     "clear": "Clear",
     "filters": "Filters",
-    "noResult": "No result"
+    "noResult": "No result",
+    "keyWord": "Search by title and description"
   },
   "Proposals": {
     "title": "Proposals"
@@ -63,7 +64,8 @@
     "bidPositive": "Insert a valid number",
     "bidTypeError": "You must specify a number",
     "coverLetterRequired": "Insert your cover letter",
-    "coverLetterMax": "You've reached the character limit"
+    "coverLetterMax": "You've reached the character limit",
+    "jobPost": "Choose job post"
   },
   "Offer": {
     "offer": "Offer: ",
@@ -103,7 +105,7 @@
     "title": "Chat",
     "chooseTheChat": "Please choose the chat",
     "noChats": "You have no chats",
-    "noMessages": "You have no messages",
+    "chooseAnotherRoom": "You entered the room that does not exist. Please choose another room",
     "systemMessage": "System message",
     "disabledMessaging": "You are not able to send any messages in this chat yet"
   },
@@ -324,7 +326,9 @@
     "sendButton": "Send invite",
     "defaultInviteMessage": "Hello! I would like to invite you to the interview",
     "freelancerRate": "Freelancer rate: ",
-    "success": "Invite sent!"
+    "success": "Invite sent!",
+    "createFirstJob": "Click below to post your first job",
+    "dontHavePost": "You don't have any posted jobs yet"
   },
   "PostJob": {
     "title": "Create Job Post",

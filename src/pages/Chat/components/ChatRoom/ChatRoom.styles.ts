@@ -65,3 +65,6 @@ export const Header = styled.div`
 export const Warning = styled.div`
   text-align: center;
 `;
+export const Notification = styled.div`
+  font-size: 24px;
+`;

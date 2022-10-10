@@ -79,6 +79,30 @@ const notificationsAPI = apiSlice.injectEndpoints({
       },
     }),
 
+    room: builder.query<IRoom, void>({
+      queryFn: () => ({ data: {} as IRoom }),
+      async onCacheEntryAdded(
+        args,
+        { cacheDataLoaded, updateCachedData, cacheEntryRemoved }
+      ) {
+        try {
+          await cacheDataLoaded;
+
+          const socket = getSocket();
+          socket.on(EventEnum.ROOM, (room: IRoom) => {
+            updateCachedData(() => {
+              return room;
+            });
+          });
+
+          await cacheEntryRemoved;
+          socket.off(EventEnum.ROOM);
+        } catch {
+          throw new Error("Error, cannot get current room");
+        }
+      },
+    }),
+
     messages: builder.query<IMessage[], void>({
       queryFn: () => ({ data: [] }),
       async onCacheEntryAdded(
@@ -163,6 +187,7 @@ export const {
   useJoinRoomMutation,
   useLeaveRoomMutation,
   useGetMessagesMutation,
+  useRoomQuery,
 } = notificationsAPI;
 
 export { getSocket };
