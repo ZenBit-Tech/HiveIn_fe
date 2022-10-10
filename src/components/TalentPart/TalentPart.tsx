@@ -11,11 +11,15 @@ import {
   FREELANCERS_PER_ROW,
 } from "utils/consts/numberConsts";
 
-export interface ITalentPart {
-  freelancers: IFreelancerSaved[];
-  title: string;
+export interface ITalentPartData {
+  data: IFreelancerSaved[];
   isSuccess: boolean;
   isLoading: boolean;
+}
+
+export interface ITalentPart {
+  title: string;
+  data: ITalentPartData;
 }
 
 export interface ITalentPartProps extends ITalentPart {
@@ -24,10 +28,8 @@ export interface ITalentPartProps extends ITalentPart {
 }
 
 function TalentPart({
-  freelancers,
+  data: { data: freelancers, isSuccess, isLoading },
   title,
-  isSuccess,
-  isLoading,
   setUserId,
   setIsModalOpen,
 }: ITalentPartProps) {

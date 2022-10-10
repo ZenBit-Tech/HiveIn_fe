@@ -7,6 +7,7 @@ import {
   SAVED_FREELANCERS,
   SAVE_FREELANCER,
   VIEWED_FREELANCER,
+  VIEW_FREELANCER,
 } from "utils/consts/breakpointConsts";
 
 export interface IFilters {
@@ -49,6 +50,13 @@ const getTalentApi = apiSliceWithTags.injectEndpoints({
       query: () => `${VIEWED_FREELANCER}`,
       providesTags: () => ["Freelancers"],
     }),
+    viewFreelancers: builder.mutation<IFreelancerSaved[], number>({
+      query: (freelancerId) => ({
+        url: `${VIEW_FREELANCER}/${freelancerId}`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Freelancers"],
+    }),
     getAllFreelancer: builder.query<IFreelancerSaved[], void>({
       query: () => `${REACT_APP_FREELANCER_PROFILE_INFO_URL}`,
       providesTags: () => ["Freelancers"],
@@ -62,6 +70,7 @@ export const {
   useGetHiredFreelancersQuery,
   useGetRecentlyViewedFreelancersQuery,
   useSaveFreelancersMutation,
+  useViewFreelancersMutation,
   useGetAllFreelancerQuery,
 } = getTalentApi;
 
