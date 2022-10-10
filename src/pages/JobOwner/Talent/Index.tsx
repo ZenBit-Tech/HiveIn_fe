@@ -1,6 +1,6 @@
 import { Divider, Typography } from "antd";
 import DiscoverFilterForm from "components/DiscoverFilterForm";
-import TalentPart, { ITalentPart } from "components/TalentPart/TalentPart";
+import TalentPart, { ITalentPartData } from "components/TalentPart/TalentPart";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -11,6 +11,12 @@ import {
 import S from "pages/JobOwner/Talent/styles";
 import FreelancerInfoDrawer from "components/UI/drawers/FreelancerInfoDrawer/FreelancerInfoDrawer";
 import { useGetFreelancerByIdQuery } from "services/freelancer/freelancerAPI";
+
+const talentPartTitles: string[] = [
+  "Talent.savedTalent",
+  "Talent.yourHires",
+  "Talent.recentlyViewed",
+];
 
 const { Title } = Typography;
 
@@ -27,47 +33,16 @@ function Talent() {
 
   const { t } = useTranslation();
 
-  const {
-    data: savedFreelancers,
-    isSuccess: isSaveSuccess,
-    isLoading: isSaveLoading,
-  } = useGetSavedFreelancersQuery();
-  const {
-    data: hiredFreelancers,
-    isSuccess: isHireSuccess,
-    isLoading: isHireLoading,
-  } = useGetHiredFreelancersQuery();
-  const {
-    data: viewedFreelancers,
-    isSuccess: isViewSuccess,
-    isLoading: isViewLoading,
-  } = useGetRecentlyViewedFreelancersQuery();
+  const saved = useGetSavedFreelancersQuery();
+  const hired = useGetHiredFreelancersQuery();
+  const viewed = useGetRecentlyViewedFreelancersQuery();
 
-  const talentParts: ITalentPart[] = [
-    {
-      title: "Talent.savedTalent",
-      freelancers: savedFreelancers ?? [],
-      isSuccess: isSaveSuccess,
-      isLoading: isSaveLoading,
-    },
-    {
-      title: "Talent.yourHires",
-      freelancers: hiredFreelancers ?? [],
-      isSuccess: isHireSuccess,
-      isLoading: isHireLoading,
-    },
-    {
-      title: "Talent.recentlyViewed",
-      freelancers: viewedFreelancers ?? [],
-      isSuccess: isViewSuccess,
-      isLoading: isViewLoading,
-    },
-  ];
+  const talentPartsData = [saved, hired, viewed];
 
   return (
     <>
       <S.LeftDiv>
-        {talentParts.map(({ title }) => (
+        {talentPartTitles.map((title) => (
           <S.SButton
             key={title}
             activeClass="active"
@@ -99,16 +74,14 @@ function Talent() {
           setIsModalOpen={setIsModalOpen}
           setUserId={setUserId!}
         />
-        {talentParts.map(({ title, freelancers }) => (
+        {talentPartTitles.map((title, index) => (
           <>
             <TalentPart
               key={title}
               setUserId={setUserId}
-              freelancers={freelancers}
+              data={talentPartsData[index] as unknown as ITalentPartData}
               setIsModalOpen={setIsModalOpen}
               title={title}
-              isSuccess={isSaveSuccess}
-              isLoading={isSaveLoading}
             />
             <Divider />
           </>
