@@ -1,14 +1,17 @@
-import { Radio } from "antd";
-import Title from "antd/lib/typography/Title";
+import { Radio, Typography } from "antd";
 import styled from "styled-components";
 import {
   BLUE,
+  BOX_SHADOW_DARK,
+  BOX_SHADOW_LIGHT,
   DARK_BLUE,
   LIGHT_BLUE,
   TEXT_GRAY,
   WHITE,
 } from "utils/consts/colorConsts";
 import { WRAP_SCREEN_SIZE } from "utils/consts/mediaQueryConsts";
+
+const { Title, Text } = Typography;
 
 const Wrapper = styled.div`
   width: 100%;
@@ -17,8 +20,9 @@ const Wrapper = styled.div`
   justify-content: center;
 `;
 
-export const ButtonText = styled(Title)`
-  color: ${TEXT_GRAY};
+export const ButtonText = styled(Text)`
+  font-weight: 700;
+  font-size: 15px;
 `;
 
 export const TitleText = styled(Title)`
@@ -40,7 +44,7 @@ export const RadioGroup = styled(Radio.Group)`
 
 export const RoleRadio = styled(Radio)`
   border: 1px solid ${TEXT_GRAY};
-  padding: 25px;
+  padding: 30px;
   display: flex;
   justify-content: center;
   margin: 20px;
@@ -60,12 +64,14 @@ export const RoleRadio = styled(Radio)`
 `;
 
 export const FormBox = styled.div`
-  border: 1px solid ${TEXT_GRAY};
   max-width: 500px;
   width: 45%;
   height: 70%;
   display: flex;
   flex-wrap: wrap;
+  background: ${WHITE};
+  border-radius: 8px;
+  box-shadow: ${BOX_SHADOW_LIGHT} 0px 1px 3px, ${BOX_SHADOW_DARK} 0px 1px 2px;
   & ${TitleText}:first-child {
     width: 100%;
   }
