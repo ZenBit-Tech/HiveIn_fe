@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { CustomText } from "components/UI/Typography/CustomText";
 import { BLACK, BLUE, DARK_BLUE } from "utils/consts/colorConsts";
 import { StatusTag } from "components/UI/Tags/StatusTag";
-import logo from "assets/logo.svg";
 import JobTitle, {
   AcceptButton,
   DeatailedInfo,
@@ -25,6 +24,8 @@ import { OfferTags } from "components/JobOffers/OfferTags";
 import { PROPOSALS_ROUTE } from "utils/consts/routeConsts";
 import JobOfferDrawer from "components/UI/drawers/JobOfferDrawer/JobOfferDrawer";
 import useJobOfferStatus from "hooks/useJobOfferStatus";
+import { Avatar } from "antd";
+import { AVATAR_SIZE_MEDIUM } from "utils/consts/numberConsts";
 
 dayjs.extend(relativeTime);
 
@@ -61,7 +62,11 @@ function JobOffers({
   return (
     <Wrapper>
       <DivContainer>
-        <img height="50px" alt="logo" src={logo} />
+        <Avatar
+          size={AVATAR_SIZE_MEDIUM}
+          alt="logo"
+          src={jobPost?.user?.avatar?.url}
+        />
       </DivContainer>
       <DetailDiv>
         <JobTitle>

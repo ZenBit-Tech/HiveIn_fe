@@ -227,7 +227,7 @@
     "defaultError": "sorry, something went wrong",
     "requiredEducation": "all fields must be filled in if you want to save changes"
   },
-  "profileSuccessSubmitMessage": "changes saved",
+  "profileSuccessSubmitMessage": "Changes saved",
   "profileEditFormButtonsNames": {
     "submit": "Save changes",
     "addEducation": "+ add education",
@@ -238,19 +238,20 @@
     "contacts": "Edit Contacts"
   },
   "contactInfoForm": {
-    "title": "Contact Info",
-    "submitButtonText": "save changes",
+    "title": "Contact Information",
+    "submitButtonText": "Save changes",
+    "pic": "Company Information",
     "fieldsData": {
       "email": {
         "title": "Email"
       },
       "firstName": {
         "title": "First name",
-        "errorMessage": "please enter your name"
+        "errorMessage": "Please enter your name"
       },
       "lastName": {
         "title": "Last name",
-        "errorMessage": "please enter your last name"
+        "errorMessage": "Please enter your last name"
       },
       "phoneNumber": {
         "title": "Phone number"
@@ -388,5 +389,12 @@
   },
   "Notifications": {
     "title": "Notifications"
+  },
+  "profileUploadPhoto": {
+    "title": "Profile photo",
+    "input": "Click to upload your photo"
+  },
+  "profileUploadPhotoErrors": {
+    "pngOrJpeg": "You can only upload JPG/PNG file"
   }
 }
