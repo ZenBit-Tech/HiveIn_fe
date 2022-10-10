@@ -2,6 +2,10 @@ import { LIGHT_GRAY } from "utils/consts/colorConsts";
 import styled from "styled-components";
 import { Button } from "antd";
 
+interface IForm {
+  display: boolean;
+}
+
 const CustomButton = styled(Button)`
   margin: 10px 0;
 `;
@@ -12,4 +16,8 @@ const Div = styled.div`
   padding: 15px;
 `;
 
-export default { CustomButton, Div };
+const Form = styled.form<IForm>`
+  display: ${(props) => (props.display ? "block" : "none")};
+`;
+
+export default { CustomButton, Div, Form };

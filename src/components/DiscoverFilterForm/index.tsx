@@ -69,23 +69,21 @@ function DiscoverFilterForm({
 
   return (
     <S.Div>
-      {isFiltersOpen && (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {propsDataCollection.map((propsData) => (
-            <LayoutElementWithTitle
-              freelancerInfo={{ skills: [] } as unknown as IFreelancer}
-              setValue={setValue}
-              errors={errors}
-              key={propsData.title}
-              control={control}
-              {...propsData}
-            />
-          ))}
-          <S.CustomButton block type="primary" htmlType="submit">
-            {t("Talent.search")}
-          </S.CustomButton>
-        </form>
-      )}
+      <S.Form display={isFiltersOpen} onSubmit={handleSubmit(onSubmit)}>
+        {propsDataCollection.map((propsData) => (
+          <LayoutElementWithTitle
+            freelancerInfo={{ skills: [] } as unknown as IFreelancer}
+            setValue={setValue}
+            errors={errors}
+            key={propsData.title}
+            control={control}
+            {...propsData}
+          />
+        ))}
+        <S.CustomButton block type="primary" htmlType="submit">
+          {t("Talent.search")}
+        </S.CustomButton>
+      </S.Form>
       <S.CustomButton block type="ghost" onClick={changeIsFiltersOpen}>
         {isFiltersOpen ? t("Talent.hideFilters") : t("Talent.showFilters")}
       </S.CustomButton>
