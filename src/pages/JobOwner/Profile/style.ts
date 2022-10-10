@@ -19,6 +19,7 @@ const Container = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
+  row-gap: 15px;
   background: ${WHITE};
   border-radius: 8px;
   align-items: center;
