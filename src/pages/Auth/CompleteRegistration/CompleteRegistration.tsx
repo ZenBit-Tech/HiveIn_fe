@@ -57,15 +57,11 @@ export default function CompleteRegistration() {
           value={radioOption}
         >
           <RoleRadio value="client">
-            <ButtonText level={5}>
-              {t("CompleteRegistration.client")}
-            </ButtonText>
+            <ButtonText>{t("CompleteRegistration.client")}</ButtonText>
           </RoleRadio>
 
           <RoleRadio value="freelancer">
-            <ButtonText level={5}>
-              {t("CompleteRegistration.freelancer")}
-            </ButtonText>
+            <ButtonText>{t("CompleteRegistration.freelancer")}</ButtonText>
           </RoleRadio>
         </RadioGroup>
         <ApplyButton role={radioOption} onClick={sendToDB}>

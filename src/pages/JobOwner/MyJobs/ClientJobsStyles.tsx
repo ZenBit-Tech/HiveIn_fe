@@ -35,6 +35,7 @@ export const Header = styled.div<BoxSizing>`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 15px;
   @media (max-width: ${WRAP_SCREEN_SIZE}) {
     width: 100%;
   }
