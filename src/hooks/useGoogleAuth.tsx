@@ -20,6 +20,8 @@ const useGoogleAuth = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
+
+  return { authToken, isLoading };
 };
 
 export default useGoogleAuth;
