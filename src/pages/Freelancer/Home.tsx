@@ -4,11 +4,11 @@ import useGoogleAuth from "hooks/useGoogleAuth";
 import { Navigate } from "react-router-dom";
 import {
   CLIENT_HOME,
+  COMPLETE_REGISTRATION_ROUTE,
   SEARCH_WORK_ROUTE,
-  SIGN_IN_ROUTE,
 } from "utils/consts/routeConsts";
 
-const homeRoute = {
+export const homeRoute = {
   freelancer: SEARCH_WORK_ROUTE,
   client: CLIENT_HOME,
 };
@@ -17,9 +17,9 @@ function Home() {
   const { isLoading, authToken } = useGoogleAuth();
   const { role } = useAuth();
 
-  if (authToken) return <Navigate to={homeRoute[role!]} />;
+  if (!role && !isLoading) return <Navigate to={COMPLETE_REGISTRATION_ROUTE} />;
 
-  if (!isLoading) return <Navigate to={SIGN_IN_ROUTE} />;
+  if (authToken && role) return <Navigate to={homeRoute[role!]} />;
 
   return <FallBackSpin />;
 }
