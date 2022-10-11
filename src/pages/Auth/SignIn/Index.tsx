@@ -80,10 +80,10 @@ export default function SignIn() {
         <GoogleAuthButton>{t("SignIn.signInGoogle")}</GoogleAuthButton>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <S.InputContainer>
-            <Field label="Email or username" control={control} name="email" />
+            <Field label={t("SignIn.email")} control={control} name="email" />
             <Field
               type="password"
-              label="Password"
+              label={t("SignIn.password")}
               control={control}
               name="password"
             />
