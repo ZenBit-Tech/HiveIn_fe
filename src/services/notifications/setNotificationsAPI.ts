@@ -65,12 +65,14 @@ const notificationsAPI = apiSlice.injectEndpoints({
           await cacheDataLoaded;
 
           const socket = getSocket();
-          await socket.emit(EventEnum.GET_COUNT_NOTIFICATIONS);
+          socket.on("connect", () => {
+            socket.emit(EventEnum.GET_COUNT_NOTIFICATIONS);
+          });
 
           socket.on(
             EventEnum.GET_COUNT_NOTIFICATIONS,
             (notifications: INotificationsCount) => {
-              updateCachedData(() => notifications);
+              updateCachedData(() => ({ ...notifications }));
             }
           );
 

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { Typography } from "antd";
+import { Button, Typography } from "antd";
 import React, { useEffect } from "react";
 import NotificationBox from "pages/Notification/style";
 import {
@@ -8,21 +8,25 @@ import {
   useReadNotificationsMutation,
 } from "services/notifications/setNotificationsAPI";
 import { formatToStandardDate } from "utils/functions/formatDateFunctions";
+import { useNavigate } from "react-router-dom";
+import { CHAT_ROUTE } from "utils/consts/routeConsts";
 
 export default function Notifications() {
   const { data } = useGetNotificationsQuery();
   const [markNotificationsAsRead] = useReadNotificationsMutation();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     return () => {
       if (data?.notifications) {
-        const notificationIds = data.notifications.map(
-          (notification) => notification.id
-        );
+        const notificationIds = data.notifications
+          .filter((notification) => !notification.isRead)
+          .map((notification) => notification.id);
         markNotificationsAsRead(notificationIds);
       }
     };
-  }, [data]);
+  }, []);
 
   return (
     <>
@@ -35,6 +39,15 @@ export default function Notifications() {
             <Typography>
               Date: {formatToStandardDate(new Date(item.createdAt))}
             </Typography>
+            <Button
+              type="primary"
+              shape="round"
+              onClick={() => {
+                navigate(`${CHAT_ROUTE}/${item.roomId}`);
+              }}
+            >
+              Go to chat
+            </Button>
           </NotificationBox>
         ))
       ) : (

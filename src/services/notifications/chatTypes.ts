@@ -41,13 +41,20 @@ export interface ISendMessage {
   chatRoomId: number;
   text: string;
 }
-
+interface INotificationContent {
+  id: number;
+  message: string;
+}
 export interface INotification {
   id: number;
   isRead: boolean;
   type: NotificationTypeEnum;
   text: string;
   createdAt: Date;
+  roomId: number;
+  message: INotificationContent | null;
+  proposal: INotificationContent | null;
+  offer: INotificationContent | null;
 }
 
 export interface INotificationResponse {

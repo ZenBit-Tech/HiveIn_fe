@@ -6,7 +6,7 @@ export const Message = styled.div<{
   isSystemMessage: boolean;
 }>`
   display: ${({ isMine, isSystemMessage }) =>
-    isMine && isSystemMessage ? "none" : "flex"};
+    !isMine && isSystemMessage ? "none" : "flex"};
   flex-direction: column;
   padding: 10px;
   margin: 3px;

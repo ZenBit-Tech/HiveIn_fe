@@ -32,10 +32,7 @@ function Navbar() {
 
   const [total, setTotal] = useState<number | undefined>();
 
-  const { data: countNotifications } = useGetNotificationsCountQuery(
-    undefined,
-    { skip: !authToken }
-  );
+  const { data: countNotifications } = useGetNotificationsCountQuery();
 
   useEffect(() => {
     if (role) setNavItems(navLinksPerRole[role]);
@@ -47,7 +44,10 @@ function Navbar() {
 
   useEffect(() => {
     setTotal(() => {
-      if (countNotifications) {
+      if (
+        (countNotifications && countNotifications.message) ||
+        (countNotifications && countNotifications.other)
+      ) {
         return countNotifications.message + countNotifications.other;
       }
       return undefined;
