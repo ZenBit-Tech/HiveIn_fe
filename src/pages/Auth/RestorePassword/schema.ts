@@ -4,7 +4,12 @@ const RestorePasswordSchema = yup.object({
   password: yup
     .string()
     .required("Insert a password")
-    .min(8, "Insert at least 8 characters"),
+    .min(8, "Insert at least 8 characters")
+    .max(64, "Max is 64 characters")
+    .matches(/[0-9]/, "Password requires a number")
+    .matches(/[a-z]/, "Password requires a lowercase letter")
+    .matches(/[A-Z]/, "Password requires an uppercase letter")
+    .matches(/[^\w]/, "Password requires a symbol"),
   passwordConfirm: yup
     .string()
     .required("Insert password confirmation")
