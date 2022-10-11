@@ -3,13 +3,21 @@ import {
   ThunderboltFilled,
   PaperClipOutlined,
 } from "@ant-design/icons";
-import { Modal, notification, PageHeader, Space, Typography } from "antd";
+import {
+  Avatar,
+  Modal,
+  notification,
+  PageHeader,
+  Space,
+  Typography,
+} from "antd";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import {
   AttachmentLink,
   ContentBox,
   Header,
+  ImgContainer,
   SideContent,
   Wrapper,
 } from "components/UI/drawers/SearchWorkDrawer/SearchWorkDrawerStyles";
@@ -34,6 +42,7 @@ import { MY_JOBS_ROUTE } from "utils/consts/routeConsts";
 import { useEffect, useState } from "react";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
 import { useCloseContractMutation } from "services/contract/contractApi";
+import { AVATAR_SIZE_MEDIUM } from "utils/consts/numberConsts";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
@@ -189,6 +198,13 @@ function JobItem({
           <Header>
             <Space direction="vertical">
               <CustomText strong>{t("SearchWork.clientInfo")}</CustomText>
+              <ImgContainer>
+                <Avatar
+                  size={AVATAR_SIZE_MEDIUM}
+                  alt="logo"
+                  src={user?.avatar?.url}
+                />
+              </ImgContainer>
               <CustomText color={TEXT_GRAY}>{user.email}</CustomText>
               <CustomText color={TEXT_GRAY}>{user.description}</CustomText>
             </Space>
