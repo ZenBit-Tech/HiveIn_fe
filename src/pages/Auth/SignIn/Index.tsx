@@ -104,19 +104,16 @@ export default function SignIn() {
           >
             {t("SignIn.signIn")}
           </Button>
+          <Text
+            onClick={() => {
+              navigate(SIGN_UP_ROUTE);
+            }}
+            style={{ color: PRIMARY, fontSize: "16px", cursor: "pointer" }}
+          >
+            {t("SignIn.register")}
+          </Text>
         </S.Form>
       </S.FormBox>
-      <S.Footer>
-        <Text style={{ fontSize: "16px" }}>{t("SignIn.dontHaveAccount")}</Text>
-        <Text
-          onClick={() => {
-            navigate(SIGN_UP_ROUTE);
-          }}
-          style={{ color: PRIMARY, fontSize: "16px", cursor: "pointer" }}
-        >
-          {t("SignIn.register")}
-        </Text>
-      </S.Footer>
       <Modal
         visible={isErrorModalOpen}
         title="Succesful login"
