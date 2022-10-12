@@ -4,12 +4,16 @@ import {
   ChatElement,
 } from "pages/Chat/components/ChatRoomsList/ChatRoomsList.styles";
 import { Avatar } from "@mui/material";
+import { Badge } from "antd";
+import { useEffect } from "react";
+import { useReadNotificationsMutation } from "services/notifications/setNotificationsAPI";
 
 interface IChatUsersList {
   jobName: string;
   lastMessage: string;
   opponentsNameAndAvatar: { name: string; avatar: string };
   isSelected: boolean;
+  roomNotifications: number[] | undefined;
 }
 
 function ChatRoomsList({
@@ -17,14 +21,25 @@ function ChatRoomsList({
   lastMessage,
   opponentsNameAndAvatar,
   isSelected,
+  roomNotifications,
 }: IChatUsersList) {
+  const [readNotifications] = useReadNotificationsMutation();
+
+  useEffect(() => {
+    if (isSelected && roomNotifications?.length) {
+      readNotifications(roomNotifications);
+    }
+  }, [isSelected]);
+
   return (
     <ChatElement isSelected={isSelected}>
-      <Avatar
-        sx={{ width: 60, height: 60 }}
-        src={opponentsNameAndAvatar.avatar}
-        alt={opponentsNameAndAvatar.name}
-      />
+      <Badge size="small" count={roomNotifications?.length}>
+        <Avatar
+          sx={{ width: 60, height: 60 }}
+          src={opponentsNameAndAvatar.avatar}
+          alt={opponentsNameAndAvatar.name}
+        />
+      </Badge>
       <Block>
         <div>
           <div>{opponentsNameAndAvatar.name}</div>

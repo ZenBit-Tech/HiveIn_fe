@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Button, Typography } from "antd";
-import React, { useEffect } from "react";
+import React from "react";
 import NotificationBox from "pages/Notification/style";
 import {
   useGetNotificationsQuery,
@@ -17,16 +17,10 @@ export default function Notifications() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    return () => {
-      if (data?.notifications) {
-        const notificationIds = data.notifications
-          .filter((notification) => !notification.isRead)
-          .map((notification) => notification.id);
-        markNotificationsAsRead(notificationIds);
-      }
-    };
-  }, []);
+  const onClickHandler = (roomId: number, notificationId: number) => {
+    markNotificationsAsRead([notificationId]);
+    navigate(`${CHAT_ROUTE}/${roomId}`);
+  };
 
   return (
     <>
@@ -42,9 +36,7 @@ export default function Notifications() {
             <Button
               type="primary"
               shape="round"
-              onClick={() => {
-                navigate(`${CHAT_ROUTE}/${item.roomId}`);
-              }}
+              onClick={() => onClickHandler(item.roomId, item.id)}
             >
               Go to chat
             </Button>

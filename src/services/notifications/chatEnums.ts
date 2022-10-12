@@ -12,6 +12,7 @@ export enum EventEnum {
   GET_COUNT_NOTIFICATIONS = "getCount",
   GET_NOTIFICATIONS = "getNotifications",
   MARK_AS_READ_NOTIFICATION = "markAsRead",
+  GET_MESSAGE_NOTIFICATION = "getMessageNotification",
 }
 
 export enum MessageTypeEnum {

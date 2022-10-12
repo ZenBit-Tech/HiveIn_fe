@@ -40,10 +40,7 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
     <div>
       {roomId && +roomId ? (
         <div>
-          <Header>
-            {room?.jobPost?.title}
-            {room?.status}
-          </Header>
+          <Header>{room?.jobPost?.title}</Header>
           <MessageBlock ref={ref}>
             {messages?.length ? (
               messages.map((message) => {
@@ -73,7 +70,7 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
                 );
               })
             ) : (
-              <Message isMine={false} isSystemMessage>
+              <Message isMine isSystemMessage>
                 <div>{t("Chat.chooseAnotherRoom")}</div>
               </Message>
             )}

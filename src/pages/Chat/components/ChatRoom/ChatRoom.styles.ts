@@ -37,7 +37,7 @@ export const MessageBlock = styled.div`
   max-width: 70vw;
   min-width: 30vw;
   padding: 10px;
-  max-height: 65vh;
+  height: 70vh;
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;

@@ -55,6 +55,33 @@ const notificationsAPI = apiSlice.injectEndpoints({
       },
     }),
 
+    getMessagesNotifications: builder.query<INotificationResponse, void>({
+      queryFn: () => ({ data: {} as INotificationResponse }),
+      async onCacheEntryAdded(
+        args,
+        { cacheDataLoaded, updateCachedData, cacheEntryRemoved }
+      ) {
+        try {
+          await cacheDataLoaded;
+          const socket = getSocket();
+          socket.emit(EventEnum.GET_MESSAGE_NOTIFICATION);
+
+          socket.on(
+            EventEnum.GET_MESSAGE_NOTIFICATION,
+            (response: INotificationResponse) => {
+              updateCachedData(() => response);
+            }
+          );
+
+          await cacheEntryRemoved;
+
+          socket.off(EventEnum.GET_MESSAGE_NOTIFICATION);
+        } catch {
+          throw new Error("Error, cannot message notifications");
+        }
+      },
+    }),
+
     getNotificationsCount: builder.query<INotificationsCount, void>({
       queryFn: () => ({ data: {} as INotificationsCount }),
       async onCacheEntryAdded(
@@ -233,6 +260,7 @@ export const {
   useGetNotificationsCountQuery,
   useGetNotificationsQuery,
   useReadNotificationsMutation,
+  useGetMessagesNotificationsQuery,
 } = notificationsAPI;
 
 export { getSocket };

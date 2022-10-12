@@ -1,5 +1,8 @@
 /* eslint-disable react/no-children-prop */
-import { useGetRoomsQuery } from "services/notifications/setNotificationsAPI";
+import {
+  useGetMessagesNotificationsQuery,
+  useGetRoomsQuery,
+} from "services/notifications/setNotificationsAPI";
 import { IUser, useGetOwnUserQuery } from "services/user/setUserAPI";
 import { Block, Container, Notification } from "pages/Chat/Chat.styles";
 import { useTranslation } from "react-i18next";
@@ -9,17 +12,23 @@ import { NavLink, Route, Routes } from "react-router-dom";
 import ChatRoom from "pages/Chat/components/ChatRoom/ChatRoom";
 import { CHAT_ROOM_ROUTE } from "utils/consts/routeConsts";
 
-export interface IRoomUsers {
-  freelancer: IChatUser;
-  client: IChatUser;
-}
-
 function Chat() {
   const { t } = useTranslation();
 
   const { data: roomsList } = useGetRoomsQuery();
 
   const { data: user } = useGetOwnUserQuery();
+
+  const { data: notificationsResponse } = useGetMessagesNotificationsQuery();
+
+  const getRoomNotifications = (roomId: number): number[] | undefined => {
+    if (notificationsResponse && notificationsResponse.notifications) {
+      return notificationsResponse.notifications
+        .filter((notification) => notification.roomId === roomId)
+        .map((notification) => notification.id);
+    }
+    return undefined;
+  };
 
   const defineOpponentsNameAndAvatar = (
     freelancer: IChatUser,
@@ -49,6 +58,7 @@ function Chat() {
                 to={`${room.id}`}
                 children={({ isActive }) => (
                   <ChatRoomsList
+                    roomNotifications={getRoomNotifications(room.id)}
                     isSelected={isActive}
                     opponentsNameAndAvatar={defineOpponentsNameAndAvatar(
                       room.freelancer,
@@ -69,6 +79,10 @@ function Chat() {
               element={
                 <ChatRoom userRole={user.role!} userSelfId={+user.id!} />
               }
+            />
+            <Route
+              path=""
+              element={<Notification>{t("Chat.chooseTheChat")}</Notification>}
             />
           </Routes>
         </Container>
