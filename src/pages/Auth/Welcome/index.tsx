@@ -1,11 +1,11 @@
 import useAuth from "hooks/useAuth";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { CLIENT_PROFILE, PROFILE_ROUTE } from "utils/consts/routeConsts";
+import { CLIENT_PROFILE, SETTINGS_ROUTE } from "utils/consts/routeConsts";
 import S from "pages/Auth/Welcome/style";
 
 const createProfileRoute = {
-  freelancer: PROFILE_ROUTE,
+  freelancer: SETTINGS_ROUTE,
   client: CLIENT_PROFILE,
 };
 
