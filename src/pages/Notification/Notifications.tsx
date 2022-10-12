@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Button, Typography } from "antd";
 import React from "react";
-import NotificationBox from "pages/Notification/style";
+import NotificationBox, { Container } from "pages/Notification/style";
 import {
   useGetNotificationsQuery,
   useReadNotificationsMutation,
@@ -10,9 +10,13 @@ import {
 import { formatToStandardDate } from "utils/functions/formatDateFunctions";
 import { useNavigate } from "react-router-dom";
 import { CHAT_ROUTE } from "utils/consts/routeConsts";
+import { useTranslation } from "react-i18next";
 
 export default function Notifications() {
+  const { t } = useTranslation();
+
   const { data } = useGetNotificationsQuery();
+
   const [markNotificationsAsRead] = useReadNotificationsMutation();
 
   const navigate = useNavigate();
@@ -23,28 +27,30 @@ export default function Notifications() {
   };
 
   return (
-    <>
-      <h1>Notifications</h1>
+    <Container>
+      <h1>{t("Notifications.title")}</h1>
       {data?.notifications?.length ? (
         data.notifications?.map((item) => (
           <NotificationBox isRead={item.isRead} key={item.id}>
-            <Typography>Notification type: {item.type}</Typography>
-            <Typography>Text: {item.text}</Typography>
+            <Typography.Text strong style={{ textTransform: "capitalize" }}>
+              {item.type}
+            </Typography.Text>
+            {!item.isRead && <Typography>{item.text}</Typography>}
             <Typography>
-              Date: {formatToStandardDate(new Date(item.createdAt))}
+              {formatToStandardDate(new Date(item.createdAt))}
             </Typography>
             <Button
               type="primary"
               shape="round"
               onClick={() => onClickHandler(item.roomId, item.id)}
             >
-              Go to chat
+              {t("Notifications.button")}
             </Button>
           </NotificationBox>
         ))
       ) : (
-        <div>Nothing</div>
+        <div>{t("Notifications.noNotifications")}</div>
       )}
-    </>
+    </Container>
   );
 }

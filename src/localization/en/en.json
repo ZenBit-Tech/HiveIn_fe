@@ -388,7 +388,9 @@
     }
   },
   "Notifications": {
-    "title": "Notifications"
+    "title": "Notifications",
+    "button": "Go to chat",
+    "noNotifications": "You do not have any notifications"
   },
   "profileUploadPhoto": {
     "title": "Profile photo",
