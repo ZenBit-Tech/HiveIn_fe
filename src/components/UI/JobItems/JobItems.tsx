@@ -15,12 +15,15 @@ import { BLUE, TAG_CLOSED, TAG_SUCCESS } from "utils/consts/colorConsts";
 import { SkillTag } from "components/UI/Tags/SkillTag";
 import { StatusTag } from "components/UI/Tags/StatusTag";
 import defineContractStatus from "utils/functions/defineContractStatus";
+import { cutTextByWords } from "utils/functions/cutTextByWords";
 
 dayjs.extend(relativeTime);
 
 interface IJobItemsProps extends IJobPost {
   link: string;
 }
+
+const amountDescriptionWords = 30;
 
 function JobItems({
   id,
@@ -74,7 +77,9 @@ function JobItems({
         {" - "}
         {dayjs(createdAt).fromNow()}
       </DeatailedInfo>
-      <JobDescription>{jobDescription}</JobDescription>
+      <JobDescription>
+        {cutTextByWords(jobDescription, amountDescriptionWords)}
+      </JobDescription>
       {skills.map((skill) => (
         <SkillTag key={skill?.id}>{skill?.name}</SkillTag>
       ))}
