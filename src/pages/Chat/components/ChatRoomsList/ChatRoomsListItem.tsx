@@ -16,7 +16,7 @@ interface IChatUsersList {
   roomNotifications: number[] | undefined;
 }
 
-function ChatRoomsList({
+function ChatRoomsListItem({
   jobName,
   lastMessage,
   opponentsNameAndAvatar,
@@ -29,7 +29,7 @@ function ChatRoomsList({
     if (isSelected && roomNotifications?.length) {
       readNotifications(roomNotifications);
     }
-  }, [isSelected]);
+  }, [isSelected, roomNotifications]);
 
   return (
     <ChatElement isSelected={isSelected}>
@@ -50,4 +50,4 @@ function ChatRoomsList({
     </ChatElement>
   );
 }
-export default ChatRoomsList;
+export default ChatRoomsListItem;
