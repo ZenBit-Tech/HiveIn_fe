@@ -29,6 +29,7 @@ function ChatRoomsListItem({
     if (isSelected && roomNotifications?.length) {
       readNotifications(roomNotifications);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSelected, roomNotifications]);
 
   return (
