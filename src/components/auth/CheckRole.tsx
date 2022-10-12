@@ -10,12 +10,11 @@ interface ICheckRoleProps {
 }
 
 function CheckRole({ guardRole, route, children }: ICheckRoleProps) {
-  const { role, signOut } = useAuth();
+  const { role } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!role) {
-      signOut();
       navigate(SIGN_IN_ROUTE);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

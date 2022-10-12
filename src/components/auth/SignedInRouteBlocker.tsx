@@ -1,14 +1,13 @@
 import { Navigate } from "react-router-dom";
 import useAuth from "hooks/useAuth";
-import { CLIENT_HOME, SEARCH_WORK_ROUTE } from "utils/consts/routeConsts";
-
-const homeRoute = {
-  freelancer: SEARCH_WORK_ROUTE,
-  client: CLIENT_HOME,
-};
+import { COMPLETE_REGISTRATION_ROUTE } from "utils/consts/routeConsts";
+import { homeRoute } from "pages/Freelancer/Home";
 
 function SignedInRouteBlocker({ children }: { children: JSX.Element }) {
   const { authToken, role } = useAuth();
+
+  if (authToken && !role)
+    return <Navigate to={COMPLETE_REGISTRATION_ROUTE} replace />;
 
   if (authToken && role) {
     return <Navigate to={homeRoute[role!]} replace />;

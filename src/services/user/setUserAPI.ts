@@ -2,6 +2,11 @@ import apiSlice from "services/api/apiSlice";
 import { REACT_APP_USER_CONTACT_INFO_URL } from "utils/consts/breakpointConsts";
 import { UserRoleEnum } from "utils/enums";
 
+export interface IPublicFile {
+  id: string;
+  url: string;
+  key: string;
+}
 export interface IUser {
   id?: string;
   email?: string;
@@ -10,7 +15,7 @@ export interface IUser {
   lastName?: string;
   phone?: string;
   description?: string;
-  avatarURL?: string;
+  avatar?: IPublicFile;
 }
 
 const userApi = apiSlice.injectEndpoints({
