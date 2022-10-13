@@ -16,7 +16,7 @@ import {
 } from "utils/consts/routeConsts";
 import useAuth from "hooks/useAuth";
 import { Badge, Menu } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useGetNotificationsCountQuery } from "services/notifications/setNotificationsAPI";
 import NavBarButton from "components/UI/buttons/navBarButton/NavBarButton";
 import navLinksPerRole, {
@@ -34,13 +34,19 @@ function Navbar() {
 
   const { data: countNotifications } = useGetNotificationsCountQuery();
 
+  const { pathname } = useLocation();
+
+  const [path, setPath] = useState(pathname);
+
   useEffect(() => {
-    if (role) setNavItems(navLinksPerRole[role]);
-    else {
+    if (role) {
+      setPath(pathname);
+      setNavItems(navLinksPerRole[role]);
+    } else {
       setNavItems(null);
     }
     // eslint-disable-next-line
-  }, [role, authToken]);
+  }, [role, authToken, pathname]);
 
   useEffect(() => {
     setTotal(() => {
@@ -100,15 +106,12 @@ function Navbar() {
         <img height="50px" alt="logo" src={logo} />
       </NavLink>
       <Menu
-        defaultSelectedKeys={["jobs"]}
+        defaultSelectedKeys={[path]}
         mode="horizontal"
         style={{ width: "100%" }}
       >
         {role === CLIENT_ROLE ? (
-          <Menu.Item
-            key={t("Profile.title")}
-            icon={verifyMenuItemIcon("Profile")}
-          >
+          <Menu.Item key={CLIENT_PROFILE} icon={verifyMenuItemIcon("Profile")}>
             <Link to={CLIENT_PROFILE}>{t("Profile.title")}</Link>
           </Menu.Item>
         ) : null}
@@ -132,6 +135,7 @@ function Navbar() {
           title={t("SignIn.signOut")}
           onClick={signOut}
         />
+        <Link to={CLIENT_PROFILE}>Nav</Link>
       </NavBarButtons>
     </NavbarStyles>
   );
