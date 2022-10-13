@@ -4,7 +4,7 @@ import ChatRoomsListItem from "pages/Chat/components/ChatRoomsList/ChatRoomsList
 import { NavLink, Route, Routes } from "react-router-dom";
 import ChatRoom from "pages/Chat/components/ChatRoom/ChatRoom";
 import { CHAT_ROOM_ROUTE } from "utils/consts/routeConsts";
-import useChatData from "./hooks/useChatData";
+import useChatData from "pages/Chat/hooks/useChatData";
 
 function Chat() {
   const {
