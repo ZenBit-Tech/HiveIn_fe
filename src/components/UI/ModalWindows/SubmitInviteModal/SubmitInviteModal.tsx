@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { useSendProposalMutation } from "services/jobPosts/proposalsAPI";
+import { useSendInviteMutation } from "services/jobPosts/proposalsAPI";
 import { MAX_LENGTH_OF_COVER_LETTER } from "utils/consts/numberConsts";
 import { IUser } from "services/user/setUserAPI";
 import { useGetOwnJobPostsQuery } from "services/jobPosts/setJobPostsAPI";
@@ -52,13 +52,13 @@ function SubmitInviteModal({
   const { data: jobPosts, isSuccess: jobPostIsSuccess } =
     useGetOwnJobPostsQuery(false);
 
-  const [runSendProposalMutation, { isError, isLoading, isSuccess }] =
-    useSendProposalMutation();
+  const [runSendInviteMutation, { isError, isLoading, isSuccess }] =
+    useSendInviteMutation();
 
   const onSubmit: SubmitHandler<ISubmitInviteForm> = async (
     data: ISubmitInviteForm
   ) => {
-    await runSendProposalMutation({
+    await runSendInviteMutation({
       ...data,
       bid,
       message: data.inviteMessage,

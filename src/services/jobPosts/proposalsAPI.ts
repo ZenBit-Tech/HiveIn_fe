@@ -1,9 +1,9 @@
-import { ProposalType, OfferStatus } from "utils/enums";
+import { OfferStatus, ProposalType } from "utils/enums";
 import apiSlice from "services/api/apiSlice";
 import { IJobPost } from "services/jobPosts/setJobPostsAPI";
 import { OFFER, PROPOSALS } from "utils/consts/breakpointConsts";
 
-interface ProposalFields {
+interface InviteFields {
   message: string;
   idFreelancer: number;
   idJobPost: number;
@@ -38,7 +38,7 @@ const proposalsApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: void) => response,
     }),
-    sendProposal: builder.mutation<void, ProposalFields>({
+    sendInvite: builder.mutation<void, InviteFields>({
       query: ({ type, ...proposalFields }) => ({
         url: `/${PROPOSALS}/${type}`,
         method: "POST",
@@ -48,11 +48,20 @@ const proposalsApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: void) => response,
     }),
+    sendProposal: builder.mutation<void, FormData>({
+      query: (arg) => ({
+        url: `/${PROPOSALS}/${ProposalType.PROPOSAL}`,
+        method: "POST",
+        body: arg,
+      }),
+      transformResponse: (response: void) => response,
+    }),
   }),
 });
 
 export const {
   useSendProposalMutation,
+  useSendInviteMutation,
   useGetOwnOffersQuery,
   useChangeOfferStatusMutation,
 } = proposalsApi;

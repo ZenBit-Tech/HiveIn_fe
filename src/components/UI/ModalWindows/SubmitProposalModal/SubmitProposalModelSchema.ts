@@ -8,7 +8,7 @@ const submitProposalSchema = yup.object({
     .required(i18next.SendProposalErrors.bidRequired)
     .positive(i18next.SendProposalErrors.bidPositive)
     .typeError(i18next.SendProposalErrors.bidTypeError),
-  coverLetter: yup
+  message: yup
     .string()
     .required(i18next.SendProposalErrors.coverLetterRequired)
     .max(MAX_LENGTH_OF_COVER_LETTER, i18next.SendProposalErrors.coverLetterMax),
