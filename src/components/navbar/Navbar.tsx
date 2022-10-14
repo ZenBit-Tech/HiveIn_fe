@@ -50,10 +50,7 @@ function Navbar() {
 
   useEffect(() => {
     setTotal(() => {
-      if (
-        (countNotifications && countNotifications.message) ||
-        (countNotifications && countNotifications.other)
-      ) {
+      if (countNotifications?.message || countNotifications?.other) {
         return countNotifications.message + countNotifications.other;
       }
       return undefined;
@@ -105,25 +102,36 @@ function Navbar() {
       <NavLink path={navItems?.home ?? ""}>
         <img height="50px" alt="logo" src={logo} />
       </NavLink>
-      <Menu selectedKeys={[path]} mode="horizontal" style={{ width: "100%" }}>
+      <Menu
+        selectedKeys={[path]}
+        mode="horizontal"
+        style={{ width: "100%", display: "flex" }}
+      >
         {role === CLIENT_ROLE ? (
-          <Menu.Item key={CLIENT_PROFILE} icon={verifyMenuItemIcon("Profile")}>
+          <Menu.Item
+            key={t("Profile.title")}
+            icon={verifyMenuItemIcon("Profile")}
+          >
             <Link to={CLIENT_PROFILE}>{t("Profile.title")}</Link>
           </Menu.Item>
         ) : null}
-        {navItems?.options.map(({ links, title }) => (
-          <Menu.SubMenu
-            icon={verifyMenuItemIcon(title)}
-            key={title}
-            title={title === t("Chat.title") ? "" : title}
-          >
-            {links.map((link) => (
-              <Menu.Item key={link.to} icon={badgeForChatSubMenu(link.title)}>
-                <Link to={link.to}>{link.title}</Link>
-              </Menu.Item>
-            ))}
-          </Menu.SubMenu>
-        ))}
+        {navItems?.options.map(({ links, title }) =>
+          title ? (
+            <Menu.SubMenu
+              icon={verifyMenuItemIcon(title)}
+              key={title}
+              title={title === t("Chat.title") ? "" : title}
+            >
+              {links.map((link) => (
+                <Menu.Item key={link.to} icon={badgeForChatSubMenu(link.title)}>
+                  <Link to={link.to}>{link.title}</Link>
+                </Menu.Item>
+              ))}
+            </Menu.SubMenu>
+          ) : (
+            <li style={{ flexGrow: 1, order: 2 }} />
+          )
+        )}
       </Menu>
       <NavBarButtons>
         <NavBarButton
@@ -131,7 +139,6 @@ function Navbar() {
           title={t("SignIn.signOut")}
           onClick={signOut}
         />
-        <Link to={CLIENT_PROFILE}>Nav</Link>
       </NavBarButtons>
     </NavbarStyles>
   );
