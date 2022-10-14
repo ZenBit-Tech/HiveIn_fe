@@ -16,7 +16,7 @@ import JobTitle, {
   TagStatus,
   Wrapper,
 } from "components/JobOffers/JobOffersStyles";
-import { IProposalsRes } from "services/jobPosts/proposalsAPI";
+import { IOffersRes } from "services/jobPosts/proposalsAPI";
 import SearchWorkDrawer from "components/UI/drawers/SearchWorkDrawer/SearchWorkDrawer";
 import { useEffect, useState } from "react";
 import { OfferStatus } from "utils/enums";
@@ -29,7 +29,7 @@ import { AVATAR_SIZE_MEDIUM } from "utils/consts/numberConsts";
 
 dayjs.extend(relativeTime);
 
-interface IJobOffersProps extends IProposalsRes {
+interface IJobOffersProps extends IOffersRes {
   link?: string;
   refetch: () => void;
 }

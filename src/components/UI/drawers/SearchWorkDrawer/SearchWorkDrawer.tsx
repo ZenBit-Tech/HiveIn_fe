@@ -25,6 +25,7 @@ import { JOB_POST_FILE } from "utils/consts/breakpointConsts";
 import { CustomText } from "components/UI/Typography/CustomText";
 import { SkillTag } from "components/UI/Tags/SkillTag";
 import { AVATAR_SIZE_MEDIUM } from "utils/consts/numberConsts";
+import { useGetProposalsByJobPostQuery } from "services/jobPosts/proposalsAPI";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
@@ -32,7 +33,6 @@ const { Title } = Typography;
 interface ISearchWorkDrawerProps extends IJobPost {
   visible: boolean;
   onClose: () => void;
-  refetch?: () => void;
   sendProposalButtonIsVisible?: boolean;
 }
 
@@ -51,12 +51,14 @@ function SearchWorkDrawer({
   createdAt,
   user,
   file,
-  proposal,
-  refetch,
   sendProposalButtonIsVisible = true,
 }: ISearchWorkDrawerProps) {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { data: proposals, refetch } = useGetProposalsByJobPostQuery(id);
+
+  const showButton = !proposals?.length && sendProposalButtonIsVisible;
 
   return (
     <Drawer
@@ -143,7 +145,7 @@ function SearchWorkDrawer({
 
         <Grid>
           <SideContent>
-            {sendProposalButtonIsVisible && !proposal?.length && (
+            {showButton && (
               <Header>
                 <SendButton onClick={() => setIsModalOpen(true)}>
                   {t("SearchWork.send")}
@@ -158,9 +160,7 @@ function SearchWorkDrawer({
               </Header>
             )}
 
-            <ContentBox
-              showBorder={!sendProposalButtonIsVisible || !!proposal?.length}
-            >
+            <ContentBox showBorder={!showButton}>
               <Space direction="vertical">
                 <CustomText strong>{t("SearchWork.clientInfo")}</CustomText>
                 <ImgContainer>

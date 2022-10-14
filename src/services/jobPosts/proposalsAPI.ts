@@ -1,7 +1,8 @@
 import { OfferStatus, ProposalType } from "utils/enums";
 import apiSlice from "services/api/apiSlice";
 import { IJobPost } from "services/jobPosts/setJobPostsAPI";
-import { OFFER, PROPOSALS } from "utils/consts/breakpointConsts";
+import { JOB_POST, OFFER, PROPOSALS } from "utils/consts/breakpointConsts";
+import { IUser } from "services/user/setUserAPI";
 
 export interface InviteFields {
   message: string;
@@ -10,6 +11,8 @@ export interface InviteFields {
   bid: number;
   type: ProposalType;
   fileId?: number;
+  freelancer?: IUser;
+  jobPost?: IJobPost;
 }
 
 interface OfferFields {
@@ -17,7 +20,7 @@ interface OfferFields {
   status: OfferStatus;
 }
 
-export interface IProposalsRes {
+export interface IOffersRes {
   id: string;
   status: OfferStatus;
   jobPost: IJobPost;
@@ -26,8 +29,11 @@ export interface IProposalsRes {
 
 const proposalsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getOwnOffers: builder.query<IProposalsRes[], void>({
+    getOwnOffers: builder.query<IOffersRes[], void>({
       query: () => `${OFFER}/self`,
+    }),
+    getProposalsByJobPost: builder.query<InviteFields[], number>({
+      query: (jobId) => `${PROPOSALS}/${JOB_POST}/${jobId}`,
     }),
     changeOfferStatus: builder.mutation<void, OfferFields>({
       query: ({ id, ...offerFields }) => ({
@@ -64,6 +70,7 @@ export const {
   useSendProposalMutation,
   useSendInviteMutation,
   useGetOwnOffersQuery,
+  useGetProposalsByJobPostQuery,
   useChangeOfferStatusMutation,
 } = proposalsApi;
 
