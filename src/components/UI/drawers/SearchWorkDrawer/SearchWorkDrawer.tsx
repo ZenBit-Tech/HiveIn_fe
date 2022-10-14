@@ -32,6 +32,7 @@ const { Title } = Typography;
 interface ISearchWorkDrawerProps extends IJobPost {
   visible: boolean;
   onClose: () => void;
+  refetch?: () => void;
   sendProposalButtonIsVisible?: boolean;
 }
 
@@ -50,6 +51,8 @@ function SearchWorkDrawer({
   createdAt,
   user,
   file,
+  proposal,
+  refetch,
   sendProposalButtonIsVisible = true,
 }: ISearchWorkDrawerProps) {
   const { t } = useTranslation();
@@ -140,7 +143,7 @@ function SearchWorkDrawer({
 
         <Grid>
           <SideContent>
-            {sendProposalButtonIsVisible && (
+            {sendProposalButtonIsVisible && !proposal?.length && (
               <Header>
                 <SendButton onClick={() => setIsModalOpen(true)}>
                   {t("SearchWork.send")}
@@ -150,11 +153,14 @@ function SearchWorkDrawer({
                   visible={isModalOpen}
                   closeModal={() => setIsModalOpen(false)}
                   clientBudget={rate}
+                  refetch={refetch!}
                 />
               </Header>
             )}
 
-            <ContentBox showBorder={!sendProposalButtonIsVisible}>
+            <ContentBox
+              showBorder={!sendProposalButtonIsVisible || !!proposal?.length}
+            >
               <Space direction="vertical">
                 <CustomText strong>{t("SearchWork.clientInfo")}</CustomText>
                 <ImgContainer>

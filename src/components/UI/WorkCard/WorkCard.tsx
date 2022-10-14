@@ -23,7 +23,7 @@ function WorkCard({ jobDescription, title, createdAt, id }: IWorkCardProps) {
   const { t } = useTranslation();
 
   const [open, setOpen] = useState(false);
-  const { data, isSuccess } = useGetOneJobPostQuery({
+  const { data, isSuccess, refetch } = useGetOneJobPostQuery({
     id,
   });
 
@@ -48,6 +48,7 @@ function WorkCard({ jobDescription, title, createdAt, id }: IWorkCardProps) {
         <SearchWorkDrawer
           visible={open}
           onClose={() => setOpen(false)}
+          refetch={refetch}
           {...data}
         />
       )}

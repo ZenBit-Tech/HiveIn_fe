@@ -3,12 +3,13 @@ import apiSlice from "services/api/apiSlice";
 import { IJobPost } from "services/jobPosts/setJobPostsAPI";
 import { OFFER, PROPOSALS } from "utils/consts/breakpointConsts";
 
-interface InviteFields {
+export interface InviteFields {
   message: string;
   idFreelancer: number;
   idJobPost: number;
   bid: number;
   type: ProposalType;
+  fileId?: number;
 }
 
 interface OfferFields {
