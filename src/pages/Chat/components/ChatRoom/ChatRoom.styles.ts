@@ -68,3 +68,12 @@ export const Warning = styled.div`
 export const Notification = styled.div`
   font-size: 24px;
 `;
+export const Title = styled.div<{
+  fontSize?: string;
+  bold?: boolean;
+  italic?: boolean;
+}>`
+  font-weight: ${({ bold }) => (bold ? "600" : "")};
+  font-style: ${({ italic }) => (italic ? "italic" : "")};
+  font-size: ${({ fontSize }) => fontSize};
+`;

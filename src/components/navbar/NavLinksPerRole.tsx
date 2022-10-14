@@ -78,6 +78,10 @@ const navLinksPerRole: NavLinkRoles = {
         ],
       },
       {
+        title: "",
+        links: [{ title: "", to: "" }],
+      },
+      {
         title: i18next.Chat.title,
         links: [
           {
@@ -111,6 +115,10 @@ const navLinksPerRole: NavLinkRoles = {
             title: i18next.PostJob.title,
           },
         ],
+      },
+      {
+        title: "",
+        links: [{ title: "", to: "" }],
       },
       {
         title: i18next.Chat.title,
