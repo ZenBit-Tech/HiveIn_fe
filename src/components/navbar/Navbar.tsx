@@ -105,11 +105,7 @@ function Navbar() {
       <NavLink path={navItems?.home ?? ""}>
         <img height="50px" alt="logo" src={logo} />
       </NavLink>
-      <Menu
-        defaultSelectedKeys={[path]}
-        mode="horizontal"
-        style={{ width: "100%" }}
-      >
+      <Menu selectedKeys={[path]} mode="horizontal" style={{ width: "100%" }}>
         {role === CLIENT_ROLE ? (
           <Menu.Item key={CLIENT_PROFILE} icon={verifyMenuItemIcon("Profile")}>
             <Link to={CLIENT_PROFILE}>{t("Profile.title")}</Link>
