@@ -1,5 +1,9 @@
 import apiSlice from "services/api/apiSlice";
-import { REACT_APP_USER_CONTACT_INFO_URL } from "utils/consts/breakpointConsts";
+import {
+  AUTH,
+  REACT_APP_USER_CONTACT_INFO_URL,
+  REMOVE_AVATAR,
+} from "utils/consts/breakpointConsts";
 import { UserRoleEnum } from "utils/enums";
 
 export interface IPublicFile {
@@ -33,9 +37,19 @@ const userApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: IUser) => response,
     }),
+    removeAvatar: builder.mutation<void, void>({
+      query: () => ({
+        url: `/${AUTH}/${REMOVE_AVATAR}`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
-export const { useUpdateUserMutation, useGetOwnUserQuery } = userApi;
+export const {
+  useUpdateUserMutation,
+  useGetOwnUserQuery,
+  useRemoveAvatarMutation,
+} = userApi;
 
 export default userApi;
