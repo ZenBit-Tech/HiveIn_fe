@@ -83,8 +83,13 @@ function useChatRoomData(userRole: UserRoleEnum) {
     return room?.status !== ChatRoomStatusEnum.FOR_ALL;
   };
 
+  const [isDisabled, setIsDisabled] = useState(disableInput());
+  useEffect(() => {
+    setIsDisabled(disableInput());
+  }, [room?.status]);
+
   return {
-    disableInput,
+    isDisabled,
     defineName,
     room,
     roomId,

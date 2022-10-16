@@ -34,8 +34,8 @@ export const Message = styled.div<{
 export const MessageBlock = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 70vw;
-  min-width: 30vw;
+  max-width: 90vw;
+  min-width: 50vw;
   padding: 10px;
   height: 70vh;
   overflow: scroll;

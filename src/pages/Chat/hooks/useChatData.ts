@@ -31,12 +31,14 @@ const useChatData = () => {
   ): { name: string; avatar: string } => {
     if (+currentUser.id! !== freelancer.id) {
       return {
-        name: `${freelancer.firstName || ""} ${freelancer.lastName || ""}`,
+        name: `${freelancer.firstName || "User"} ${
+          freelancer.lastName || "Freelancer"
+        }`,
         avatar: `${freelancer.avatarURL || ""}`,
       };
     }
     return {
-      name: `${client.firstName || ""} ${client.lastName || ""}`,
+      name: `${client.firstName || "User"} ${client.lastName || "Client"}`,
       avatar: `${client.avatarURL || ""}`,
     };
   };

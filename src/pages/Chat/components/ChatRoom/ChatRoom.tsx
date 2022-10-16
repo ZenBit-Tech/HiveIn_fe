@@ -1,4 +1,4 @@
-import { Button, Input } from "antd";
+import { Button, Input, Modal } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import {
   Element,
@@ -16,6 +16,7 @@ import useChatScroll from "hooks/useChatScroll";
 import { MessageTypeEnum } from "services/notifications/chatEnums";
 import { UserRoleEnum } from "utils/enums";
 import useChatRoomData from "pages/Chat/hooks/useChatRoomData";
+import useModalHandler from "../../../../hooks/use-modal-handler";
 
 interface IChatRoom {
   userSelfId: number;
@@ -26,7 +27,7 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
   const {
     roomId,
     room,
-    disableInput,
+    isDisabled,
     t,
     messages,
     defineName,
@@ -34,6 +35,8 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
     onChangeHandler,
     text,
   } = useChatRoomData(userRole);
+
+  const { modal, toggleModal } = useModalHandler();
 
   const ref = useChatScroll(messages);
 
@@ -82,19 +85,38 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
             )}
           </MessageBlock>
           <InputBlock>
+            {userRole === UserRoleEnum.CLIENT && (
+              <Button type="dashed" onClick={toggleModal}>
+                +
+              </Button>
+            )}
             <Input
-              disabled={disableInput()}
+              disabled={isDisabled}
               value={text}
               onChange={onChangeHandler}
               onKeyUp={(event) => event.key === "Enter" && onSendHandler()}
             />
             <Button onClick={onSendHandler} icon={<SendOutlined />} />
           </InputBlock>
-          {disableInput() && <Warning>{t("Chat.disabledMessaging")}</Warning>}
+          {isDisabled && <Warning>{t("Chat.disabledMessaging")}</Warning>}
         </div>
       ) : (
         <Notification>{t("Chat.chooseTheChat")}</Notification>
       )}
+      <Modal visible={modal} onCancel={toggleModal}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <div style={{ fontSize: "24px" }}>Send offer</div>
+          <div style={{ fontSize: "18px" }}>
+            Do you want to send the offer to this user?
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

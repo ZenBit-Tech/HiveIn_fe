@@ -35,7 +35,6 @@ function Chat() {
                     )}
                     lastMessage={room.lastMessage.text}
                     key={room.id}
-                    jobName={room.jobPost.title}
                   />
                 )}
               />

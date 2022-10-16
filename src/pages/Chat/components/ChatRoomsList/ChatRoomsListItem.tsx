@@ -9,7 +9,6 @@ import { useEffect } from "react";
 import { useReadNotificationsMutation } from "services/notifications/setNotificationsAPI";
 
 interface IChatUsersList {
-  jobName: string;
   lastMessage: string;
   opponentsNameAndAvatar: { name: string; avatar: string };
   isSelected: boolean;
@@ -17,7 +16,6 @@ interface IChatUsersList {
 }
 
 function ChatRoomsListItem({
-  jobName,
   lastMessage,
   opponentsNameAndAvatar,
   isSelected,
@@ -42,10 +40,7 @@ function ChatRoomsListItem({
         />
       </Badge>
       <Block>
-        <div>
-          <div>{opponentsNameAndAvatar.name}</div>
-          <div>{jobName}</div>
-        </div>
+        <div>{opponentsNameAndAvatar.name}</div>
         <LastMessage>{lastMessage}</LastMessage>
       </Block>
     </ChatElement>
