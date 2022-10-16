@@ -38,6 +38,7 @@ export default function Notifications() {
           {formatToStandardDate(new Date(item.createdAt))}
         </Typography>
         <Button
+          style={{ marginTop: "10px" }}
           type="primary"
           shape="round"
           onClick={() => onClickHandler(item.roomId, item.id)}

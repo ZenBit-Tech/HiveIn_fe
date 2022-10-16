@@ -12,7 +12,7 @@ interface IChatUsersList {
   lastMessage: string;
   opponentsNameAndAvatar: { name: string; avatar: string };
   isSelected: boolean;
-  roomNotifications: number[] | undefined;
+  roomNotifications?: number[];
 }
 
 function ChatRoomsListItem({
