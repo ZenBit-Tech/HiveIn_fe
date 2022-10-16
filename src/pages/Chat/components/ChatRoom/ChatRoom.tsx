@@ -7,6 +7,7 @@ import {
   Message,
   MessageBlock,
   Notification,
+  Title,
   Warning,
 } from "pages/Chat/components/ChatRoom/ChatRoom.styles";
 import { formatToStandardDate } from "utils/functions/formatDateFunctions";
@@ -41,8 +42,10 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
       {roomId && +roomId ? (
         <div>
           <Header>
-            {room?.jobPost?.title}
-            {room?.status}
+            <Title fontSize="16px">{t("Chat.jobTitle")}</Title>
+            <Title italic bold>
+              {room?.jobPost?.title}
+            </Title>
           </Header>
           <MessageBlock ref={ref}>
             {messages?.length ? (
@@ -73,7 +76,7 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
                 );
               })
             ) : (
-              <Message isMine={false} isSystemMessage>
+              <Message isMine isSystemMessage>
                 <div>{t("Chat.chooseAnotherRoom")}</div>
               </Message>
             )}

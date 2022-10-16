@@ -1,42 +1,19 @@
 /* eslint-disable react/no-children-prop */
-import { useGetRoomsQuery } from "services/notifications/setNotificationsAPI";
-import { IUser, useGetOwnUserQuery } from "services/user/setUserAPI";
 import { Block, Container, Notification } from "pages/Chat/Chat.styles";
-import { useTranslation } from "react-i18next";
-import { IChatUser } from "services/notifications/chatTypes";
-import ChatRoomsList from "pages/Chat/components/ChatRoomsList/ChatRoomsList";
+import ChatRoomsListItem from "pages/Chat/components/ChatRoomsList/ChatRoomsListItem";
 import { NavLink, Route, Routes } from "react-router-dom";
 import ChatRoom from "pages/Chat/components/ChatRoom/ChatRoom";
 import { CHAT_ROOM_ROUTE } from "utils/consts/routeConsts";
-
-export interface IRoomUsers {
-  freelancer: IChatUser;
-  client: IChatUser;
-}
+import useChatData from "pages/Chat/hooks/useChatData";
 
 function Chat() {
-  const { t } = useTranslation();
-
-  const { data: roomsList } = useGetRoomsQuery();
-
-  const { data: user } = useGetOwnUserQuery();
-
-  const defineOpponentsNameAndAvatar = (
-    freelancer: IChatUser,
-    client: IChatUser,
-    currentUser: IUser
-  ): { name: string; avatar: string } => {
-    if (+currentUser.id! !== freelancer.id) {
-      return {
-        name: `${freelancer.firstName || ""} ${freelancer.lastName || ""}`,
-        avatar: `${freelancer.avatarURL || ""}`,
-      };
-    }
-    return {
-      name: `${client.firstName || ""} ${client.lastName || ""}`,
-      avatar: `${client.avatarURL || ""}`,
-    };
-  };
+  const {
+    t,
+    user,
+    roomsList,
+    getRoomNotifications,
+    defineOpponentsNameAndAvatar,
+  } = useChatData();
 
   return (
     <div>
@@ -48,7 +25,8 @@ function Chat() {
                 key={room.id}
                 to={`${room.id}`}
                 children={({ isActive }) => (
-                  <ChatRoomsList
+                  <ChatRoomsListItem
+                    roomNotifications={getRoomNotifications(room.id)}
                     isSelected={isActive}
                     opponentsNameAndAvatar={defineOpponentsNameAndAvatar(
                       room.freelancer,
@@ -69,6 +47,10 @@ function Chat() {
               element={
                 <ChatRoom userRole={user.role!} userSelfId={+user.id!} />
               }
+            />
+            <Route
+              path=""
+              element={<Notification>{t("Chat.chooseTheChat")}</Notification>}
             />
           </Routes>
         </Container>

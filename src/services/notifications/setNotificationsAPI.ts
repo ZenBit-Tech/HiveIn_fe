@@ -1,13 +1,13 @@
 import apiSlice from "services/api/apiSlice";
 import { io, Socket } from "socket.io-client";
 import { RootState, store } from "store/store";
-import { NOTIFICATIONS } from "utils/consts/breakpointConsts";
 import { EventEnum } from "services/notifications/chatEnums";
 import {
   IMessage,
+  INotificationResponse,
+  INotificationsCount,
   IRoom,
   ISendMessage,
-  Notifications,
 } from "services/notifications/chatTypes";
 
 let socketConnection: Socket;
@@ -26,30 +26,102 @@ function getSocket() {
 
 const notificationsAPI = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getNotifications: builder.query<Notifications[], void>({
-      query: () => NOTIFICATIONS,
-    }),
+    // Notifications
+    getNotifications: builder.query<INotificationResponse, void>({
+      queryFn: () => ({ data: {} as INotificationResponse }),
+      async onCacheEntryAdded(
+        args,
+        { cacheDataLoaded, updateCachedData, cacheEntryRemoved }
+      ) {
+        try {
+          await cacheDataLoaded;
+          const socket = getSocket();
 
-    sendNotification: builder.mutation<Notifications, Notifications>({
-      queryFn: (notification: Notifications) => {
-        const socket = getSocket();
-        return new Promise((resolve) => {
-          socket.emit(
-            "send-first-notification",
-            notification,
-            (resolvedNotification: Notifications) => {
-              resolve({ data: resolvedNotification });
+          await socket.emit(EventEnum.GET_NOTIFICATIONS);
+
+          socket.on(
+            EventEnum.GET_NOTIFICATIONS,
+            (response: INotificationResponse) => {
+              updateCachedData(() => response);
             }
           );
-        });
+
+          await cacheEntryRemoved;
+
+          socket.off(EventEnum.GET_NOTIFICATIONS);
+        } catch {
+          throw new Error("Error, cannot get list of notifications");
+        }
       },
     }),
 
-    readNotification: builder.mutation<void, number>({
-      query: (arg) => ({
-        url: `${NOTIFICATIONS}/${arg}`,
-        method: "PATCH",
-      }),
+    getMessagesNotifications: builder.query<INotificationResponse, void>({
+      queryFn: () => ({ data: {} as INotificationResponse }),
+      async onCacheEntryAdded(
+        args,
+        { cacheDataLoaded, updateCachedData, cacheEntryRemoved }
+      ) {
+        try {
+          await cacheDataLoaded;
+          const socket = getSocket();
+          socket.emit(EventEnum.GET_MESSAGE_NOTIFICATION);
+
+          socket.on(
+            EventEnum.GET_MESSAGE_NOTIFICATION,
+            (response: INotificationResponse) => {
+              updateCachedData(() => response);
+            }
+          );
+
+          await cacheEntryRemoved;
+
+          socket.off(EventEnum.GET_MESSAGE_NOTIFICATION);
+        } catch {
+          throw new Error("Error, cannot message notifications");
+        }
+      },
+    }),
+
+    getNotificationsCount: builder.query<INotificationsCount, void>({
+      queryFn: () => ({ data: {} as INotificationsCount }),
+      async onCacheEntryAdded(
+        args,
+        { cacheDataLoaded, updateCachedData, cacheEntryRemoved }
+      ) {
+        try {
+          await cacheDataLoaded;
+
+          const socket = getSocket();
+          socket.on("connect", () => {
+            socket.emit(EventEnum.GET_COUNT_NOTIFICATIONS);
+          });
+
+          socket.on(
+            EventEnum.GET_COUNT_NOTIFICATIONS,
+            (notifications: INotificationsCount) => {
+              updateCachedData(() => ({ ...notifications }));
+            }
+          );
+
+          await cacheEntryRemoved;
+
+          socket.off(EventEnum.GET_COUNT_NOTIFICATIONS);
+        } catch {
+          throw new Error("Error, cannot get number of notifications");
+        }
+      },
+    }),
+
+    readNotifications: builder.mutation<void, number[]>({
+      queryFn: (args) => {
+        const socket = getSocket();
+        return new Promise((resolve, reject) => {
+          socket.emit(EventEnum.MARK_AS_READ_NOTIFICATION, args, () => {
+            resolve({ data: undefined });
+            reject(new Error("MARK_AS_READ_NOTIFICATION error"));
+          });
+        });
+      },
     }),
 
     // Chat
@@ -143,7 +215,7 @@ const notificationsAPI = apiSlice.injectEndpoints({
       queryFn: () => {
         const socket = getSocket();
         return new Promise((resolve, reject) => {
-          socket.emit(EventEnum.LEAVE_ROOM, null, () => {
+          socket.emit(EventEnum.LEAVE_ROOM, undefined, () => {
             resolve({ data: undefined });
             reject(new Error("Leave room error"));
           });
@@ -178,9 +250,6 @@ const notificationsAPI = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetNotificationsQuery,
-  useSendNotificationMutation,
-  useReadNotificationMutation,
   useGetRoomsQuery,
   useMessagesQuery,
   useSendMessageMutation,
@@ -188,6 +257,10 @@ export const {
   useLeaveRoomMutation,
   useGetMessagesMutation,
   useRoomQuery,
+  useGetNotificationsCountQuery,
+  useGetNotificationsQuery,
+  useReadNotificationsMutation,
+  useGetMessagesNotificationsQuery,
 } = notificationsAPI;
 
 export { getSocket };

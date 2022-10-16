@@ -107,6 +107,7 @@
     "noChats": "You have no chats",
     "chooseAnotherRoom": "You entered the room that does not exist. Please choose another room",
     "systemMessage": "System message",
+    "jobTitle": "Job title",
     "disabledMessaging": "You are not able to send any messages in this chat yet"
   },
   "Settings": {
@@ -388,7 +389,9 @@
     }
   },
   "Notifications": {
-    "title": "Notifications"
+    "title": "Notifications",
+    "button": "Go to chat",
+    "noNotifications": "You do not have any notifications"
   },
   "profileUploadPhoto": {
     "title": "Profile photo",
