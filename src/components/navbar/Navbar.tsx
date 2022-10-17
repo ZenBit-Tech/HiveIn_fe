@@ -13,6 +13,8 @@ import {
   SIGN_UP_ROUTE,
   SIGN_IN_ROUTE,
   CLIENT_PROFILE,
+  CHAT_ROUTE,
+  NOTIFICATIONS_ROUTE,
 } from "utils/consts/routeConsts";
 import useAuth from "hooks/useAuth";
 import { Badge, Menu } from "antd";
@@ -75,23 +77,6 @@ function Navbar() {
         return <UserOutlined />;
       case t("MyJobs.title"):
         return <AuditOutlined />;
-      case t("Chat.title"):
-        return (
-          <Badge size="small" count={total}>
-            <BellOutlined />
-          </Badge>
-        );
-      default:
-        return undefined;
-    }
-  }
-
-  function badgeForChatSubMenu(title: string): JSX.Element | undefined {
-    switch (title) {
-      case t("Chat.title"):
-        return <Badge count={countNotifications?.message} />;
-      case t("Notifications.title"):
-        return <Badge count={countNotifications?.other} />;
       default:
         return undefined;
     }
@@ -102,11 +87,7 @@ function Navbar() {
       <NavLink path={navItems?.home ?? ""}>
         <img height="50px" alt="logo" src={logo} />
       </NavLink>
-      <Menu
-        selectedKeys={[path]}
-        mode="horizontal"
-        style={{ width: "100%", display: "flex" }}
-      >
+      <Menu selectedKeys={[path]} mode="horizontal" style={{ width: "100%" }}>
         {role === CLIENT_ROLE ? (
           <Menu.Item
             key={t("Profile.title")}
@@ -115,25 +96,46 @@ function Navbar() {
             <Link to={CLIENT_PROFILE}>{t("Profile.title")}</Link>
           </Menu.Item>
         ) : null}
-        {navItems?.options.map(({ links, title }) =>
-          title ? (
-            <Menu.SubMenu
-              icon={verifyMenuItemIcon(title)}
-              key={title}
-              title={title === t("Chat.title") ? "" : title}
-            >
-              {links.map((link) => (
-                <Menu.Item key={link.to} icon={badgeForChatSubMenu(link.title)}>
-                  <Link to={link.to}>{link.title}</Link>
-                </Menu.Item>
-              ))}
-            </Menu.SubMenu>
-          ) : (
-            <li style={{ flexGrow: 1, order: 2 }} />
-          )
-        )}
+        {navItems?.options.map(({ links, title }) => (
+          <Menu.SubMenu
+            icon={verifyMenuItemIcon(title)}
+            key={title}
+            title={title}
+          >
+            {links.map((link) => (
+              <Menu.Item key={link.to}>
+                <Link to={link.to}>{link.title}</Link>
+              </Menu.Item>
+            ))}
+          </Menu.SubMenu>
+        ))}
       </Menu>
       <NavBarButtons>
+        <Menu selectedKeys={[path]} mode="horizontal">
+          <Menu.SubMenu
+            key="chat"
+            icon={
+              <Badge size="small" count={total}>
+                <BellOutlined />
+              </Badge>
+            }
+          >
+            <Menu.Item
+              icon={<Badge count={countNotifications?.message} />}
+              key={CHAT_ROUTE}
+              title={t("Chat.title")}
+            >
+              <Link to={CHAT_ROUTE}>{t("Chat.title")}</Link>
+            </Menu.Item>
+            <Menu.Item
+              icon={<Badge count={countNotifications?.other} />}
+              key={NOTIFICATIONS_ROUTE}
+              title={t("Notifications.title")}
+            >
+              <Link to={NOTIFICATIONS_ROUTE}>{t("Notifications.title")}</Link>
+            </Menu.Item>
+          </Menu.SubMenu>
+        </Menu>
         <NavBarButton
           icon={<LogoutOutlined />}
           title={t("SignIn.signOut")}

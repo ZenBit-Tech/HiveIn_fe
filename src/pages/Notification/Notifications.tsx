@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Button, Typography } from "antd";
 import React from "react";
 import NotificationBox, { Container } from "pages/Notification/style";
@@ -40,6 +38,7 @@ export default function Notifications() {
           {formatToStandardDate(new Date(item.createdAt))}
         </Typography>
         <Button
+          style={{ marginTop: "10px" }}
           type="primary"
           shape="round"
           onClick={() => onClickHandler(item.roomId, item.id)}

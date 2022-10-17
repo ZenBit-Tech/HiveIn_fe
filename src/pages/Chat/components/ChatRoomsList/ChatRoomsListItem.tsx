@@ -3,8 +3,7 @@ import {
   LastMessage,
   ChatElement,
 } from "pages/Chat/components/ChatRoomsList/ChatRoomsList.styles";
-import { Avatar } from "@mui/material";
-import { Badge } from "antd";
+import { Badge, Avatar } from "antd";
 import { useEffect } from "react";
 import { useReadNotificationsMutation } from "services/notifications/setNotificationsAPI";
 
@@ -12,7 +11,7 @@ interface IChatUsersList {
   lastMessage: string;
   opponentsNameAndAvatar: { name: string; avatar: string };
   isSelected: boolean;
-  roomNotifications: number[] | undefined;
+  roomNotifications?: number[];
 }
 
 function ChatRoomsListItem({
@@ -34,7 +33,7 @@ function ChatRoomsListItem({
     <ChatElement isSelected={isSelected}>
       <Badge size="small" count={roomNotifications?.length}>
         <Avatar
-          sx={{ width: 60, height: 60 }}
+          style={{ width: 60, height: 60 }}
           src={opponentsNameAndAvatar.avatar}
           alt={opponentsNameAndAvatar.name}
         />
