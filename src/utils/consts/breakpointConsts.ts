@@ -22,3 +22,4 @@ export const VIEWED_FREELANCER = "client/recently-viewed";
 export const FREELANCER_CONTRACTS = "contracts/freelancer/my-contracts";
 export const CONTRACTS = "contracts";
 export const NOTIFICATIONS = "notifications";
+export const PROLONG_CHAT = "chat-room/prolong";
