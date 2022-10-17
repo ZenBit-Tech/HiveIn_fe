@@ -44,10 +44,7 @@ function Navbar() {
 
   useEffect(() => {
     setTotal(() => {
-      if (
-        (countNotifications && countNotifications.message) ||
-        (countNotifications && countNotifications.other)
-      ) {
+      if (countNotifications?.message || countNotifications?.other) {
         return countNotifications.message + countNotifications.other;
       }
       return undefined;
@@ -102,7 +99,7 @@ function Navbar() {
       <Menu
         defaultSelectedKeys={["jobs"]}
         mode="horizontal"
-        style={{ width: "100%" }}
+        style={{ width: "100%", display: "flex" }}
       >
         {role === CLIENT_ROLE ? (
           <Menu.Item
@@ -112,19 +109,23 @@ function Navbar() {
             <Link to={CLIENT_PROFILE}>{t("Profile.title")}</Link>
           </Menu.Item>
         ) : null}
-        {navItems?.options.map(({ links, title }) => (
-          <Menu.SubMenu
-            icon={verifyMenuItemIcon(title)}
-            key={title}
-            title={title === t("Chat.title") ? "" : title}
-          >
-            {links.map((link) => (
-              <Menu.Item key={link.to} icon={badgeForChatSubMenu(link.title)}>
-                <Link to={link.to}>{link.title}</Link>
-              </Menu.Item>
-            ))}
-          </Menu.SubMenu>
-        ))}
+        {navItems?.options.map(({ links, title }) =>
+          title ? (
+            <Menu.SubMenu
+              icon={verifyMenuItemIcon(title)}
+              key={title}
+              title={title === t("Chat.title") ? "" : title}
+            >
+              {links.map((link) => (
+                <Menu.Item key={link.to} icon={badgeForChatSubMenu(link.title)}>
+                  <Link to={link.to}>{link.title}</Link>
+                </Menu.Item>
+              ))}
+            </Menu.SubMenu>
+          ) : (
+            <li style={{ flexGrow: 1, order: 2 }} />
+          )
+        )}
       </Menu>
       <NavBarButtons>
         <NavBarButton

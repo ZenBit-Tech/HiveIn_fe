@@ -26,31 +26,35 @@ export default function Notifications() {
     navigate(`${CHAT_ROUTE}/${roomId}`);
   };
 
+  const renderContent = (): JSX.Element[] | JSX.Element => {
+    if (!data?.notifications?.length) {
+      return <div>{t("Notifications.noNotifications")}</div>;
+    }
+    return data.notifications.map((item) => (
+      <NotificationBox isRead={item.isRead} key={item.id}>
+        <Typography.Text strong style={{ textTransform: "capitalize" }}>
+          {item.type}
+        </Typography.Text>
+        {!item.isRead && <Typography>{item.text}</Typography>}
+        <Typography>
+          {formatToStandardDate(new Date(item.createdAt))}
+        </Typography>
+        <Button
+          style={{ marginTop: "10px" }}
+          type="primary"
+          shape="round"
+          onClick={() => onClickHandler(item.roomId, item.id)}
+        >
+          {t("Notifications.button")}
+        </Button>
+      </NotificationBox>
+    ));
+  };
+
   return (
     <Container>
       <h1>{t("Notifications.title")}</h1>
-      {data?.notifications?.length ? (
-        data.notifications?.map((item) => (
-          <NotificationBox isRead={item.isRead} key={item.id}>
-            <Typography.Text strong style={{ textTransform: "capitalize" }}>
-              {item.type}
-            </Typography.Text>
-            {!item.isRead && <Typography>{item.text}</Typography>}
-            <Typography>
-              {formatToStandardDate(new Date(item.createdAt))}
-            </Typography>
-            <Button
-              type="primary"
-              shape="round"
-              onClick={() => onClickHandler(item.roomId, item.id)}
-            >
-              {t("Notifications.button")}
-            </Button>
-          </NotificationBox>
-        ))
-      ) : (
-        <div>{t("Notifications.noNotifications")}</div>
-      )}
+      {renderContent()}
     </Container>
   );
 }
