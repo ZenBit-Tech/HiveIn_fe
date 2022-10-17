@@ -8,9 +8,6 @@ export const SDiv = styled("div")`
   margin-bottom: 10px;
   border: 3px solid ${BLUE_MUI_PRIMARY};
   border-radius: 10px;
-  //white-space: nowrap;
-  //overflow: hidden;
-  //text-overflow: ellipsis;
   display: flex;
   align-items: center;
   gap: 10px;

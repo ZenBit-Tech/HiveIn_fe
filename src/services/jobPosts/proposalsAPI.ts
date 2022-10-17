@@ -1,14 +1,18 @@
-import { ProposalType, OfferStatus } from "utils/enums";
+import { OfferStatus, ProposalType } from "utils/enums";
 import apiSlice from "services/api/apiSlice";
 import { IJobPost } from "services/jobPosts/setJobPostsAPI";
-import { OFFER, PROPOSALS } from "utils/consts/breakpointConsts";
+import { JOB_POST, OFFER, PROPOSALS } from "utils/consts/breakpointConsts";
+import { IUser } from "services/user/setUserAPI";
 
-interface ProposalFields {
+export interface InviteFields {
   message: string;
   idFreelancer: number;
   idJobPost: number;
   bid: number;
   type: ProposalType;
+  fileId?: number;
+  freelancer?: IUser;
+  jobPost?: IJobPost;
 }
 
 interface OfferFields {
@@ -16,7 +20,7 @@ interface OfferFields {
   status: OfferStatus;
 }
 
-export interface IProposalsRes {
+export interface IOffersRes {
   id: string;
   status: OfferStatus;
   jobPost: IJobPost;
@@ -25,8 +29,11 @@ export interface IProposalsRes {
 
 const proposalsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getOwnOffers: builder.query<IProposalsRes[], void>({
+    getOwnOffers: builder.query<IOffersRes[], void>({
       query: () => `${OFFER}/self`,
+    }),
+    getProposalsByJobPost: builder.query<InviteFields[], number>({
+      query: (jobId) => `${PROPOSALS}/${JOB_POST}/${jobId}`,
     }),
     changeOfferStatus: builder.mutation<void, OfferFields>({
       query: ({ id, ...offerFields }) => ({
@@ -38,7 +45,7 @@ const proposalsApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: void) => response,
     }),
-    sendProposal: builder.mutation<void, ProposalFields>({
+    sendInvite: builder.mutation<void, InviteFields>({
       query: ({ type, ...proposalFields }) => ({
         url: `/${PROPOSALS}/${type}`,
         method: "POST",
@@ -48,12 +55,22 @@ const proposalsApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: void) => response,
     }),
+    sendProposal: builder.mutation<void, FormData>({
+      query: (arg) => ({
+        url: `/${PROPOSALS}/${ProposalType.PROPOSAL}`,
+        method: "POST",
+        body: arg,
+      }),
+      transformResponse: (response: void) => response,
+    }),
   }),
 });
 
 export const {
   useSendProposalMutation,
+  useSendInviteMutation,
   useGetOwnOffersQuery,
+  useGetProposalsByJobPostQuery,
   useChangeOfferStatusMutation,
 } = proposalsApi;
 

@@ -31,7 +31,8 @@
     "keyWord": "Search by title and description"
   },
   "Proposals": {
-    "title": "Proposals"
+    "title": "Proposals",
+    "upload": "Click or drag file to this area to upload"
   },
   "MyContracts": {
     "title": "My Contracts",

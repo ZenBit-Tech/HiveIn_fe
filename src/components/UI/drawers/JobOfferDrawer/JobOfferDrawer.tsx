@@ -18,7 +18,7 @@ import {
 } from "utils/consts/colorConsts";
 import { useTranslation } from "react-i18next";
 import { CustomText } from "components/UI/Typography/CustomText";
-import { IProposalsRes } from "services/jobPosts/proposalsAPI";
+import { IOffersRes } from "services/jobPosts/proposalsAPI";
 import { OfferStatus } from "utils/enums";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
 import useJobOfferStatus from "hooks/useJobOfferStatus";
@@ -27,7 +27,7 @@ import { AVATAR_SIZE_MEDIUM } from "utils/consts/numberConsts";
 dayjs.extend(relativeTime);
 const { Title } = Typography;
 
-interface IJobOfferDrawerProps extends IProposalsRes {
+interface IJobOfferDrawerProps extends IOffersRes {
   visible: boolean;
   onClose: () => void;
   refetch: () => void;
