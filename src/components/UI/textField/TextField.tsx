@@ -59,7 +59,7 @@ function TextField(props: ITextFieldProps) {
               />
               {multiline && (
                 <SCountDown>
-                  {maxLength! - (field.value as string).length}
+                  {field.value && maxLength! - (field.value as string).length}
                 </SCountDown>
               )}
             </>
