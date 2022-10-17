@@ -56,7 +56,7 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
   useEffect(() => {
     if (data?.affected && isSuccess) toast.success(t("Chat.prolong"));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSuccess]);
+  }, [isSuccess, data]);
 
   const ref = useChatScroll(messages);
 
