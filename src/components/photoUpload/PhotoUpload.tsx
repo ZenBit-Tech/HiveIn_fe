@@ -20,7 +20,7 @@ function PhotoUpload({ avatarUrl, refetch }: IPhotoUploadProps) {
   const { authToken } = useAuth();
 
   const [previewOpen, setPreviewOpen] = useState<boolean>(false);
-  const [previewImage, setPreviewImage] = useState<string>("");
+  const [previewImage, setPreviewImage] = useState<string | undefined>();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const [runRemoveAvatar] = useRemoveAvatarMutation();
@@ -31,7 +31,7 @@ function PhotoUpload({ avatarUrl, refetch }: IPhotoUploadProps) {
         {
           uid: "-1",
           name: "avatar",
-          status: "done",
+          status: DONE,
           url: avatarUrl,
         },
       ]);
