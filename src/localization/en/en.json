@@ -193,11 +193,15 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
+      "options": [
+        "pre-intermediate",
+        "intermediate",
+        "upper-intermediate"
+      ]
     },
     "description": {
       "title": "Description",
-      "helperText": "Input 30-50 words"
+      "helperText": "Input 30-50 characters"
     },
     "education": {
       "title": "Education",
@@ -237,7 +241,7 @@
   },
   "settingMenuButtonsNames": {
     "profile": "Edit profile",
-    "contacts": "Edit Contacts"
+    "contacts": "Edit contacts"
   },
   "contactInfoForm": {
     "title": "Contact Information",
@@ -257,6 +261,14 @@
       },
       "phoneNumber": {
         "title": "Phone number"
+      },
+      "phoneSettings": {
+        "title": "",
+        "helperText": "Show phone number to job owners?"
+      },
+      "emailSettings": {
+        "title": " ",
+        "helperText": "Show email to job owners?"
       }
     },
     "errorMessages": {

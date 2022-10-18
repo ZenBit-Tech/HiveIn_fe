@@ -10,7 +10,11 @@ function PhoneInputCustom({ name, control }: IPhoneInputProps) {
       name={name}
       control={control}
       render={({ field }) => (
-        <PhoneInput {...field} inputStyle={{ width: "100%" }} country="ua" />
+        <PhoneInput
+          {...field}
+          inputStyle={{ width: "100%", backgroundColor: "inherit" }}
+          country="ua"
+        />
       )}
     />
   );

@@ -1,78 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { toast } from "react-toastify";
+import React from "react";
+import { FieldValues } from "react-hook-form";
 import i18next from "localization/en/en.json";
 import propsDataCollection from "components/profileEditForm/staticData";
 import LayoutElementWithTitle from "components/layoutElementWithTitle/LayoutElementWithTitle";
-import schema from "validation/profileEditFormValidationSchema";
 import FormSubmitButton from "components/UI/buttons/formSubmitButton/FormSubmitButton";
 import { SButtonWrapper } from "components/profileEditForm/styles";
-import {
-  useGetOwnProfileQuery,
-  useUpdateProfileMutation,
-} from "services/profileInfo/profileInfoAPI";
-
-import { IEducation, IExperience } from "services/profileInfo/typesDef";
 import { TFreelancerForProfileForm } from "components/profileEditForm/typesDef";
+import parseData from "utils/functions/parseDataProfileForm";
+import useProfileEditForm from "hooks/useProfileEditForm";
 
 function ProfileEditForm() {
-  const { data, isSuccess, isError } = useGetOwnProfileQuery();
-
-  const [updateProfile, { isSuccess: submitSuccess, isError: submitError }] =
-    useUpdateProfileMutation();
-
-  const [initialState, setInitialState] = useState<TFreelancerForProfileForm>();
-
-  useEffect(() => {
-    if (isSuccess && data) {
-      setInitialState({
-        ...data,
-        skills: data.skills.map(({ id }) => id),
-        category: data.categoryId,
-        description: data?.user.description,
-      });
-    }
-  }, [data, isSuccess]);
-
   const {
+    data,
+    updateProfile,
+    isSuccess,
     handleSubmit,
-    reset,
     control,
     setValue,
-    formState: { errors },
-  } = useForm<FieldValues>({
-    resolver: yupResolver(schema),
-    defaultValues: initialState,
-  });
-
-  useEffect(() => {
-    reset(initialState);
-  }, [reset, initialState]);
-
-  useEffect(() => {
-    if (submitSuccess) toast.success(i18next.profileSuccessSubmitMessage);
-    if (submitError || isError)
-      toast.error(i18next.profileFormErrorMessages.defaultError);
-    if (data === null)
-      toast.error(i18next.profileFormErrorMessages.userNotFound);
-  }, [submitSuccess, submitError, data, isError]);
-
-  type TArgs = IEducation[] | IExperience[];
-
-  const parseData = (current: TArgs, queried: TArgs) => {
-    const queriedId = queried.map(({ id }) => id);
-    const currentId = current.map(({ id }) => id);
-
-    const filteredId = queriedId.filter((id) => !currentId.includes(id));
-
-    const shouldBeDeleted = filteredId.map((id) => ({
-      id,
-      active: false,
-    }));
-
-    return [...current, ...shouldBeDeleted];
-  };
+    errors,
+  } = useProfileEditForm();
 
   const onSubmit = (formData: TFreelancerForProfileForm | FieldValues) => {
     const objectToQuery = {
@@ -81,7 +27,7 @@ function ProfileEditForm() {
       position: formData.position,
       rate: formData.rate,
       userId: formData.userId,
-      id: formData.id,
+      id: data?.id,
       skillsIds: formData.skills,
       educations: parseData(formData.education, data?.education!),
       experiences: parseData(formData.experience, data?.experience!),
@@ -90,7 +36,6 @@ function ProfileEditForm() {
         description: formData.description,
       },
     };
-
     updateProfile(objectToQuery);
   };
   return (
