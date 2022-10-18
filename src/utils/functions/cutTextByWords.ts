@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
-export const cutTextByWords = (text: string, countWords: number) => {
+export const cutTextByWords = (text: string | null, countWords: number) => {
+  if (!text) return "";
   const arrayWord = text.split(" ");
 
   return arrayWord.length <= countWords

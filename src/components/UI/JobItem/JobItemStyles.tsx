@@ -8,6 +8,7 @@ interface ITitle {
 
 interface IGrid {
   grow?: number;
+  wide?: boolean;
 }
 
 const JobTitle = styled.div<ITitle>`
@@ -32,6 +33,7 @@ export const Grid = styled.div<IGrid>`
   display: flex;
   flex-direction: column;
   max-width: 700px;
+  min-width: ${(props) => (props.wide ? "400px" : "250px")};
   flex-grow: ${(props) => props.grow || 1};
 `;
 
