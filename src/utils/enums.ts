@@ -3,6 +3,7 @@ export enum ContractStatusEnum {
   ACTIVE = "Active",
   CLOSED = "Closed",
 }
+
 export enum FilterEnum {
   ALL = "all",
   ACTIVE = "active",
@@ -17,6 +18,13 @@ export enum DurationTypeEnum {
 export enum ProposalType {
   PROPOSAL = "proposal",
   INVITE = "invite",
+}
+
+export enum ConfidentialSettings {
+  VISIBLE = "visible",
+  PHONE_ONLY = "phoneOnly",
+  EMAIL_ONLY = "emailOnly",
+  HIDDEN = "hidden",
 }
 
 export enum UserRoleEnum {

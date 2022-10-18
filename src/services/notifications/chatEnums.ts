@@ -9,8 +9,10 @@ export enum EventEnum {
   LEAVE_ROOM = "leaveRoom",
   ADD_MESSAGE = "addMessage",
   MESSAGE_ADDED = "messageAdded",
-  NOTIFICATION = "send-first-notification",
-  NOTIFICATION_SEND = "'first-message'",
+  GET_COUNT_NOTIFICATIONS = "getCount",
+  GET_NOTIFICATIONS = "getNotifications",
+  MARK_AS_READ_NOTIFICATION = "markAsRead",
+  GET_MESSAGE_NOTIFICATION = "getMessageNotification",
 }
 
 export enum MessageTypeEnum {
@@ -25,9 +27,7 @@ export enum ChatRoomStatusEnum {
 }
 
 export enum NotificationTypeEnum {
-  NEW_MESSAGE = "newMessage",
+  MESSAGE = "message",
   OFFER = "offer",
-  INVITE = "invite",
-  OFFER_EXPIRE = "offerExpire",
-  CHAT_EXPIRE = "chatExpire",
+  PROPOSAL = "proposal",
 }

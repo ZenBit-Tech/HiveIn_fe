@@ -16,4 +16,5 @@ export const Block = styled.div`
 `;
 export const Notification = styled.div`
   font-size: 24px;
+  height: 70vh;
 `;

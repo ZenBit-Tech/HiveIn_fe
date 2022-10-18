@@ -6,6 +6,7 @@ export const getProfileInfoApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getOwnProfile: builder.query<IFreelancer, void>({
       query: () => `${REACT_APP_FREELANCER_PROFILE_INFO_URL}/self`,
+      providesTags: ["profileInfo"],
     }),
     updateProfile: builder.mutation({
       query: (arg) => ({
@@ -14,6 +15,7 @@ export const getProfileInfoApi = apiSlice.injectEndpoints({
         body: {
           ...arg,
         },
+        invalidatesTags: ["profileInfo"],
       }),
     }),
   }),
