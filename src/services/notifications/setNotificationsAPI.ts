@@ -139,11 +139,11 @@ const notificationsAPI = apiSlice.injectEndpoints({
       },
     }),
 
-    leaveRoom: builder.mutation<void, void>({
-      queryFn: () => {
+    leaveRoom: builder.mutation<void, string>({
+      queryFn: (id) => {
         const socket = getSocket();
         return new Promise((resolve, reject) => {
-          socket.emit(EventEnum.LEAVE_ROOM, null, () => {
+          socket.emit(EventEnum.LEAVE_ROOM, id, () => {
             resolve({ data: undefined });
             reject(new Error("Leave room error"));
           });
