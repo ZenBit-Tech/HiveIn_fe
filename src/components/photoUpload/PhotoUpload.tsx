@@ -4,7 +4,7 @@ import { message, Modal, Upload } from "antd";
 import ImgCrop from "antd-img-crop";
 import { UserOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
-import { IS_JPEG, IS_PNG } from "utils/photoUploadConsts";
+import { DONE, IS_JPEG, IS_PNG, UPLOADING } from "utils/photoUploadConsts";
 import useAuth from "hooks/useAuth";
 import { toast } from "react-toastify";
 import { AUTH, AVATAR } from "utils/consts/breakpointConsts";
@@ -19,8 +19,8 @@ function PhotoUpload({ avatarUrl, refetch }: IPhotoUploadProps) {
   const { t } = useTranslation();
   const { authToken } = useAuth();
 
-  const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
+  const [previewOpen, setPreviewOpen] = useState<boolean>(false);
+  const [previewImage, setPreviewImage] = useState<string>("");
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const [runRemoveAvatar] = useRemoveAvatarMutation();
@@ -68,12 +68,12 @@ function PhotoUpload({ avatarUrl, refetch }: IPhotoUploadProps) {
     file,
     fileList: newFileList,
   }) => {
-    if (file.status === "uploading") {
+    if (file.status === UPLOADING) {
       setFileList(newFileList);
       return;
     }
 
-    if (file.status === "done") toast.success(t("profileSuccessSubmitMessage"));
+    if (file.status === DONE) toast.success(t("profileSuccessSubmitMessage"));
 
     refetch();
   };
