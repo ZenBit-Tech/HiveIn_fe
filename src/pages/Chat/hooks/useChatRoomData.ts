@@ -38,7 +38,7 @@ function useChatRoomData(userRole: UserRoleEnum) {
       getMessages(+roomId);
     }
     return () => {
-      leaveRoom();
+      if (roomId) leaveRoom(roomId);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId]);
@@ -95,4 +95,5 @@ function useChatRoomData(userRole: UserRoleEnum) {
     text,
   };
 }
+
 export default useChatRoomData;
