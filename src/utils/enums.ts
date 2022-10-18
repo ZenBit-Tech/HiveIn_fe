@@ -27,6 +27,12 @@ export enum ConfidentialSettings {
   HIDDEN = "hidden",
 }
 
+export enum UserRoleEnum {
+  CLIENT = "client",
+  FREELANCER = "freelancer",
+  UNDEFINED = "",
+}
+
 export enum OfferStatus {
   PENDING = "pending",
   ACCEPTED = "accepted",

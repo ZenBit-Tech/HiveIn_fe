@@ -8,6 +8,7 @@ import apiSlice from "services/api/apiSlice";
 
 import { IWorkCardProps } from "components/UI/WorkCard/WorkCard";
 import { ISearchWorkFilters } from "components/UI/SearchWorkForm/typesDef";
+import { InviteFields } from "services/jobPosts/proposalsAPI";
 
 export interface ISkills {
   id: number;
@@ -44,6 +45,7 @@ export interface IJobPost {
   category: ICategory;
   skills: ISkills[];
   user: IUser;
+  proposal?: InviteFields[];
   file?: IFile;
   contract: {
     startDate?: Date;

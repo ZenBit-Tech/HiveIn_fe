@@ -3,13 +3,14 @@ import {
   PaperClipOutlined,
   ThunderboltFilled,
 } from "@ant-design/icons";
-import { Drawer, Space, Typography } from "antd";
+import { Avatar, Drawer, Space, Typography } from "antd";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
 import {
   AttachmentLink,
   ContentBox,
   Grid,
   Header,
+  ImgContainer,
   SideContent,
   Wrapper,
 } from "components/UI/drawers/SearchWorkDrawer/SearchWorkDrawerStyles";
@@ -23,6 +24,8 @@ import { IJobPost } from "services/jobPosts/setJobPostsAPI";
 import { JOB_POST_FILE } from "utils/consts/breakpointConsts";
 import { CustomText } from "components/UI/Typography/CustomText";
 import { SkillTag } from "components/UI/Tags/SkillTag";
+import { AVATAR_SIZE_MEDIUM } from "utils/consts/numberConsts";
+import { useGetProposalsByJobPostQuery } from "services/jobPosts/proposalsAPI";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
@@ -52,6 +55,10 @@ function SearchWorkDrawer({
 }: ISearchWorkDrawerProps) {
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { data: proposals, refetch } = useGetProposalsByJobPostQuery(id);
+
+  const showButton = !proposals?.length && sendProposalButtonIsVisible;
 
   return (
     <Drawer
@@ -138,7 +145,7 @@ function SearchWorkDrawer({
 
         <Grid>
           <SideContent>
-            {sendProposalButtonIsVisible && (
+            {showButton && (
               <Header>
                 <SendButton onClick={() => setIsModalOpen(true)}>
                   {t("SearchWork.send")}
@@ -148,13 +155,21 @@ function SearchWorkDrawer({
                   visible={isModalOpen}
                   closeModal={() => setIsModalOpen(false)}
                   clientBudget={rate}
+                  refetch={refetch!}
                 />
               </Header>
             )}
 
-            <ContentBox showBorder={!sendProposalButtonIsVisible}>
+            <ContentBox showBorder={!showButton}>
               <Space direction="vertical">
                 <CustomText strong>{t("SearchWork.clientInfo")}</CustomText>
+                <ImgContainer>
+                  <Avatar
+                    size={AVATAR_SIZE_MEDIUM}
+                    alt="logo"
+                    src={user?.avatar?.url}
+                  />
+                </ImgContainer>
                 <CustomText color={TEXT_GRAY}>{user.email}</CustomText>
                 <CustomText color={TEXT_GRAY}>{user.description}</CustomText>
               </Space>

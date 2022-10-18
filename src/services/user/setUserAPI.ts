@@ -1,17 +1,23 @@
 import apiSlice from "services/api/apiSlice";
 import { REACT_APP_USER_CONTACT_INFO_URL } from "utils/consts/breakpointConsts";
-import { ConfidentialSettings } from "utils/enums";
+import { ConfidentialSettings, UserRoleEnum } from "utils/enums";
+
+export interface IPublicFile {
+  id: string;
+  url: string;
+  key: string;
+}
 
 export interface IUser {
   id?: string;
   email?: string;
-  role?: string;
+  role?: UserRoleEnum;
   firstName?: string;
   lastName?: string;
   phone?: string;
   description?: string;
-  avatarURL?: string;
   confidentialSetting?: ConfidentialSettings;
+  avatar?: IPublicFile;
 }
 
 const userApi = apiSlice.injectEndpoints({

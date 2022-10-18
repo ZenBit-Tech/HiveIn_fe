@@ -3,7 +3,12 @@ import { useTranslation } from "react-i18next";
 import NavLink from "components/UI/navlink/NavLink";
 import NavbarStyles, { NavBarButtons } from "components/navbar/NavbarStyles";
 import logo from "components/navbar/imgs/logo.svg";
-import { BellOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  BellOutlined,
+  LogoutOutlined,
+  UserOutlined,
+  AuditOutlined,
+} from "@ant-design/icons";
 import {
   SIGN_UP_ROUTE,
   SIGN_IN_ROUTE,
@@ -12,10 +17,7 @@ import {
 import useAuth from "hooks/useAuth";
 import { Badge, Menu } from "antd";
 import { Link } from "react-router-dom";
-import {
-  useGetNotificationsQuery,
-  getSocket,
-} from "services/notifications/setNotificationsAPI";
+import { useGetNotificationsCountQuery } from "services/notifications/setNotificationsAPI";
 import NavBarButton from "components/UI/buttons/navBarButton/NavBarButton";
 import navLinksPerRole, {
   NavLinkOptions,
@@ -24,31 +26,30 @@ import { CLIENT_ROLE } from "utils/consts/navBarConsts";
 
 function Navbar() {
   const { authToken, signOut, role } = useAuth();
-  const { data, isError, isLoading } = useGetNotificationsQuery();
   const { t } = useTranslation();
 
-  const [navItens, setNavItens] = useState<NavLinkOptions | null>();
-  const [countNotifications, setCountNotifications] = useState<number>(0);
+  const [navItems, setNavItems] = useState<NavLinkOptions | null>();
+
+  const [total, setTotal] = useState<number | undefined>();
+
+  const { data: countNotifications } = useGetNotificationsCountQuery();
 
   useEffect(() => {
-    if (!isError && !isLoading && role) {
-      const count = data?.filter((item) => !item.read).length;
-      setCountNotifications(count || 0);
-    }
-  }, [data, isError, isLoading, role]);
-
-  useEffect(() => {
-    if (role) setNavItens(navLinksPerRole[role]);
+    if (role) setNavItems(navLinksPerRole[role]);
     else {
-      setNavItens(null);
+      setNavItems(null);
     }
     // eslint-disable-next-line
   }, [role, authToken]);
 
-  const socket = getSocket();
-  socket.on("first-message", () => {
-    setCountNotifications(countNotifications + 1);
-  });
+  useEffect(() => {
+    setTotal(() => {
+      if (countNotifications?.message || countNotifications?.other) {
+        return countNotifications.message + countNotifications.other;
+      }
+      return undefined;
+    });
+  }, [countNotifications]);
 
   if (!authToken) {
     return (
@@ -66,9 +67,11 @@ function Navbar() {
     switch (itemTitle) {
       case t("Profile.title"):
         return <UserOutlined />;
+      case t("MyJobs.title"):
+        return <AuditOutlined />;
       case t("Chat.title"):
         return (
-          <Badge size="small" count={countNotifications}>
+          <Badge size="small" count={total}>
             <BellOutlined />
           </Badge>
         );
@@ -77,34 +80,52 @@ function Navbar() {
     }
   }
 
+  function badgeForChatSubMenu(title: string): JSX.Element | undefined {
+    switch (title) {
+      case t("Chat.title"):
+        return <Badge count={countNotifications?.message} />;
+      case t("Notifications.title"):
+        return <Badge count={countNotifications?.other} />;
+      default:
+        return undefined;
+    }
+  }
+
   return (
     <NavbarStyles>
-      <NavLink path={navItens?.home ?? ""}>
+      <NavLink path={navItems?.home ?? ""}>
         <img height="50px" alt="logo" src={logo} />
       </NavLink>
       <Menu
         defaultSelectedKeys={["jobs"]}
         mode="horizontal"
-        style={{ width: "100%" }}
+        style={{ width: "100%", display: "flex" }}
       >
         {role === CLIENT_ROLE ? (
-          <Menu.Item key={t("Profile.title")}>
+          <Menu.Item
+            key={t("Profile.title")}
+            icon={verifyMenuItemIcon("Profile")}
+          >
             <Link to={CLIENT_PROFILE}>{t("Profile.title")}</Link>
           </Menu.Item>
         ) : null}
-        {navItens?.options.map(({ links, title }) => (
-          <Menu.SubMenu
-            icon={verifyMenuItemIcon(title)}
-            key={title}
-            title={title === t("Chat.title") ? "" : title}
-          >
-            {links.map((link) => (
-              <Menu.Item key={link.to}>
-                <Link to={link.to}>{link.title}</Link>
-              </Menu.Item>
-            ))}
-          </Menu.SubMenu>
-        ))}
+        {navItems?.options.map(({ links, title }) =>
+          title ? (
+            <Menu.SubMenu
+              icon={verifyMenuItemIcon(title)}
+              key={title}
+              title={title === t("Chat.title") ? "" : title}
+            >
+              {links.map((link) => (
+                <Menu.Item key={link.to} icon={badgeForChatSubMenu(link.title)}>
+                  <Link to={link.to}>{link.title}</Link>
+                </Menu.Item>
+              ))}
+            </Menu.SubMenu>
+          ) : (
+            <li style={{ flexGrow: 1, order: 2 }} />
+          )
+        )}
       </Menu>
       <NavBarButtons>
         <NavBarButton

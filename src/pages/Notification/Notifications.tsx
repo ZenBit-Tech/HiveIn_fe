@@ -1,65 +1,60 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Button, Typography } from "antd";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import NotificationBox, { Container } from "pages/Notification/style";
 import {
-  useSendNotificationMutation,
   useGetNotificationsQuery,
-  useReadNotificationMutation,
-  getSocket,
+  useReadNotificationsMutation,
 } from "services/notifications/setNotificationsAPI";
-import { Notifications as NotificationsType } from "services/notifications/chatTypes";
-
-import S from "pages/Notification/style";
+import { formatToStandardDate } from "utils/functions/formatDateFunctions";
+import { useNavigate } from "react-router-dom";
+import { CHAT_ROUTE } from "utils/consts/routeConsts";
+import { useTranslation } from "react-i18next";
 
 export default function Notifications() {
-  const [sendNotification] = useSendNotificationMutation();
-  const [readNotification] = useReadNotificationMutation();
-  const { data, isLoading, isSuccess } = useGetNotificationsQuery();
-  const [notifications, setNotifications] = useState<NotificationsType[]>([]);
+  const { t } = useTranslation();
 
-  useEffect(() => {
-    if (isSuccess && !isLoading && data) {
-      setNotifications(data);
+  const { data } = useGetNotificationsQuery();
+
+  const [markNotificationsAsRead] = useReadNotificationsMutation();
+
+  const navigate = useNavigate();
+
+  const onClickHandler = (roomId: number, notificationId: number) => {
+    markNotificationsAsRead([notificationId]);
+    navigate(`${CHAT_ROUTE}/${roomId}`);
+  };
+
+  const renderContent = (): JSX.Element[] | JSX.Element => {
+    if (!data?.notifications?.length) {
+      return <div>{t("Notifications.noNotifications")}</div>;
     }
-  }, [isLoading, isSuccess, data]);
-
-  const socket = getSocket();
-
-  function receiveNotification(notification: NotificationsType) {
-    const newNotification = { ...notification };
-    setNotifications([...notifications, newNotification]);
-  }
-
-  socket.on("first-message", (notification) => {
-    receiveNotification(notification);
-  });
-
-  const handleReadNotification = (id: number) => {
-    readNotification(id);
-  };
-
-  const sendTestNotification = () => {
-    const newNotification = {
-      fromUserId: 1,
-      toUserId: 1,
-      type: "TEST_NOTIFICATION",
-    };
-    sendNotification(newNotification);
-  };
-  return (
-    <>
-      <h1>Notifications</h1>
-      <Button onClick={sendTestNotification}>Create Notification</Button>
-      {notifications.map((item) => (
-        <S.NotificationBox
-          key={item.id}
-          onClick={() => handleReadNotification(item.id || 0)}
+    return data.notifications.map((item) => (
+      <NotificationBox isRead={item.isRead} key={item.id}>
+        <Typography.Text strong style={{ textTransform: "capitalize" }}>
+          {item.type}
+        </Typography.Text>
+        {!item.isRead && <Typography>{item.text}</Typography>}
+        <Typography>
+          {formatToStandardDate(new Date(item.createdAt))}
+        </Typography>
+        <Button
+          style={{ marginTop: "10px" }}
+          type="primary"
+          shape="round"
+          onClick={() => onClickHandler(item.roomId, item.id)}
         >
-          <Typography>Notification type: {item.type}</Typography>
-          <Typography>From: {item.fromUser?.firstName}</Typography>
-        </S.NotificationBox>
-      ))}
-    </>
+          {t("Notifications.button")}
+        </Button>
+      </NotificationBox>
+    ));
+  };
+
+  return (
+    <Container>
+      <h1>{t("Notifications.title")}</h1>
+      {renderContent()}
+    </Container>
   );
 }

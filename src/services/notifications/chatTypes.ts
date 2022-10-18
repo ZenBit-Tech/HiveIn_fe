@@ -1,6 +1,7 @@
 import {
   ChatRoomStatusEnum,
   MessageTypeEnum,
+  NotificationTypeEnum,
 } from "services/notifications/chatEnums";
 
 export interface IChatUser {
@@ -40,15 +41,28 @@ export interface ISendMessage {
   chatRoomId: number;
   text: string;
 }
+interface INotificationContent {
+  id: number;
+  message: string;
+}
+export interface INotification {
+  id: number;
+  isRead: boolean;
+  type: NotificationTypeEnum;
+  text: string;
+  createdAt: Date;
+  roomId: number;
+  message: INotificationContent | null;
+  proposal: INotificationContent | null;
+  offer: INotificationContent | null;
+}
 
-export interface Notifications {
-  id?: number;
-  fromUserId: number;
-  toUserId: number;
-  type: string;
-  read?: boolean;
-  fromUser?: {
-    id: number;
-    firstName?: string;
-  };
+export interface INotificationResponse {
+  notifications: INotification[];
+  count: number;
+}
+
+export interface INotificationsCount {
+  message: number;
+  other: number;
 }

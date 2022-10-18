@@ -1,5 +1,6 @@
 export enum EventEnum {
   ROOMS = "rooms",
+  ROOM = "room",
   ERROR = "error",
   GET_ROOMS = "getRooms",
   JOIN_ROOM = "joinRoom",
@@ -8,8 +9,10 @@ export enum EventEnum {
   LEAVE_ROOM = "leaveRoom",
   ADD_MESSAGE = "addMessage",
   MESSAGE_ADDED = "messageAdded",
-  NOTIFICATION = "send-first-notification",
-  NOTIFICATION_SEND = "'first-message'",
+  GET_COUNT_NOTIFICATIONS = "getCount",
+  GET_NOTIFICATIONS = "getNotifications",
+  MARK_AS_READ_NOTIFICATION = "markAsRead",
+  GET_MESSAGE_NOTIFICATION = "getMessageNotification",
 }
 
 export enum MessageTypeEnum {
@@ -21,4 +24,10 @@ export enum ChatRoomStatusEnum {
   FOR_ALL = "forAll",
   FREELANCER_ONLY = "freelancerOnly",
   CLIENT_ONLY = "clientOnly",
+}
+
+export enum NotificationTypeEnum {
+  MESSAGE = "message",
+  OFFER = "offer",
+  PROPOSAL = "proposal",
 }

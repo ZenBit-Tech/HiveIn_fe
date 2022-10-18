@@ -6,7 +6,7 @@ export const Message = styled.div<{
   isSystemMessage: boolean;
 }>`
   display: ${({ isMine, isSystemMessage }) =>
-    isMine && isSystemMessage ? "none" : "flex"};
+    !isMine && isSystemMessage ? "none" : "flex"};
   flex-direction: column;
   padding: 10px;
   margin: 3px;
@@ -37,7 +37,7 @@ export const MessageBlock = styled.div`
   max-width: 70vw;
   min-width: 30vw;
   padding: 10px;
-  max-height: 65vh;
+  height: 70vh;
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;
@@ -64,4 +64,16 @@ export const Header = styled.div`
 `;
 export const Warning = styled.div`
   text-align: center;
+`;
+export const Notification = styled.div`
+  font-size: 24px;
+`;
+export const Title = styled.div<{
+  fontSize?: string;
+  bold?: boolean;
+  italic?: boolean;
+}>`
+  font-weight: ${({ bold }) => (bold ? "600" : "")};
+  font-style: ${({ italic }) => (italic ? "italic" : "")};
+  font-size: ${({ fontSize }) => fontSize};
 `;

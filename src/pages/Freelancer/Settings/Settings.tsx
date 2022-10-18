@@ -1,4 +1,3 @@
-import React from "react";
 import { Col, Row } from "antd";
 import SettingsMenu from "components/settingsMenu/SettingsMenu";
 import ProfileEditForm from "components/profileEditForm/ProfileEditForm";

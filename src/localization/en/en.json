@@ -27,10 +27,12 @@
     "search": "Search",
     "clear": "Clear",
     "filters": "Filters",
-    "noResult": "No result"
+    "noResult": "No result",
+    "keyWord": "Search by title and description"
   },
   "Proposals": {
-    "title": "Proposals"
+    "title": "Proposals",
+    "upload": "Click or drag file to this area to upload"
   },
   "MyContracts": {
     "title": "My Contracts",
@@ -63,7 +65,8 @@
     "bidPositive": "Insert a valid number",
     "bidTypeError": "You must specify a number",
     "coverLetterRequired": "Insert your cover letter",
-    "coverLetterMax": "You've reached the character limit"
+    "coverLetterMax": "You've reached the character limit",
+    "jobPost": "Choose job post"
   },
   "Offer": {
     "offer": "Offer: ",
@@ -103,8 +106,9 @@
     "title": "Chat",
     "chooseTheChat": "Please choose the chat",
     "noChats": "You have no chats",
-    "noMessages": "You have no messages",
+    "chooseAnotherRoom": "You entered the room that does not exist. Please choose another room",
     "systemMessage": "System message",
+    "jobTitle": "Job title",
     "disabledMessaging": "You are not able to send any messages in this chat yet"
   },
   "Settings": {
@@ -229,7 +233,7 @@
     "defaultError": "sorry, something went wrong",
     "requiredEducation": "all fields must be filled in if you want to save changes"
   },
-  "profileSuccessSubmitMessage": "changes saved",
+  "profileSuccessSubmitMessage": "Changes saved",
   "profileEditFormButtonsNames": {
     "submit": "Save changes",
     "addEducation": "+ add education",
@@ -240,19 +244,20 @@
     "contacts": "Edit contacts"
   },
   "contactInfoForm": {
-    "title": "Contact Info",
-    "submitButtonText": "save changes",
+    "title": "Contact Information",
+    "submitButtonText": "Save changes",
+    "pic": "Company Information",
     "fieldsData": {
       "email": {
         "title": "Email"
       },
       "firstName": {
         "title": "First name",
-        "errorMessage": "please enter your name"
+        "errorMessage": "Please enter your name"
       },
       "lastName": {
         "title": "Last name",
-        "errorMessage": "please enter your last name"
+        "errorMessage": "Please enter your last name"
       },
       "phoneNumber": {
         "title": "Phone number"
@@ -335,7 +340,9 @@
     "sendButton": "Send invite",
     "defaultInviteMessage": "Hello! I would like to invite you to the interview",
     "freelancerRate": "Freelancer rate: ",
-    "success": "Invite sent!"
+    "success": "Invite sent!",
+    "createFirstJob": "Click below to post your first job",
+    "dontHavePost": "You don't have any posted jobs yet"
   },
   "PostJob": {
     "title": "Create Job Post",
@@ -395,6 +402,15 @@
     }
   },
   "Notifications": {
-    "title": "Notifications"
+    "title": "Notifications",
+    "button": "Go to chat",
+    "noNotifications": "You do not have any notifications"
+  },
+  "profileUploadPhoto": {
+    "title": "Profile photo",
+    "input": "Click to upload your photo"
+  },
+  "profileUploadPhotoErrors": {
+    "pngOrJpeg": "You can only upload JPG/PNG file"
   }
 }

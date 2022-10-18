@@ -70,6 +70,12 @@ export const SideContent = styled.section`
   row-gap: 26px;
 `;
 
+export const ImgContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
 export const AttachmentLink = styled.a`
   border-radius: 5px;
   width: 100%;

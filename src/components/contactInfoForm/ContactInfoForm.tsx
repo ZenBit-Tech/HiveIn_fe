@@ -12,6 +12,9 @@ import {
   useGetOwnUserQuery,
   useUpdateUserMutation,
 } from "services/user/setUserAPI";
+import PhotoUpload from "components/photoUpload/PhotoUpload";
+import { SDiv, SH, SWrapper } from "components/layoutElementWithTitle/style";
+import { useTranslation } from "react-i18next";
 import { ConfidentialSettings } from "utils/enums";
 import createConfidentialInfo from "utils/functions/createConfidentialInfo";
 
@@ -26,8 +29,14 @@ interface IUser {
 
 function ContactInfoForm() {
   const [initialState, setInitialState] = useState<IUser>();
+  const { t } = useTranslation();
 
-  const { data, isSuccess, isError: getUserError } = useGetOwnUserQuery();
+  const {
+    data,
+    isSuccess,
+    isError: getUserError,
+    refetch,
+  } = useGetOwnUserQuery();
   const [
     updateUser,
     { error, isError: submitError, isSuccess: submitSuccess },
@@ -99,7 +108,15 @@ function ContactInfoForm() {
   return (
     <>
       <h2>{i18next.contactInfoForm.title}</h2>
+
       <form onSubmit={handleSubmit(onSubmit)}>
+        <SWrapper>
+          <SH>{t("profileUploadPhoto.title")} </SH>
+          <SDiv width="full">
+            <PhotoUpload avatarUrl={data?.avatar?.url} refetch={refetch} />
+          </SDiv>
+        </SWrapper>
+
         {propsDataCollection.map((propsData) => (
           <LayoutElementWithTitle
             key={propsData.title}

@@ -10,4 +10,5 @@ export interface ISearchWorkFilters {
   duration?: number;
   durationType?: DurationTypeEnum;
   englishLevel?: TEnglishLevel;
+  keyWord?: string;
 }
