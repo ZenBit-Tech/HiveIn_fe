@@ -64,7 +64,6 @@ function SubmitProposalModal({
           onChange={({ file }) => setSelectedFile(file.originFileObj)}
           maxCount={1}
           listType="picture"
-          beforeUpload={() => false}
           customRequest={({ onSuccess }) => {
             setTimeout(() => {
               onSuccess!("ok");
