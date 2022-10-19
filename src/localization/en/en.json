@@ -135,6 +135,8 @@
     "signIn": "Sign In",
     "signInGoogle": "Sign In with Google",
     "signOut": "Sign Out",
+    "email": "Email",
+    "password": "Password",
     "dontHaveAccount": "Don't have an account yet?",
     "forgotPass": "Forgot your password?",
     "register": "Register now",
@@ -376,7 +378,9 @@
       "fileUpload": "Upload file",
       "postDraft": " Save to draft",
       "postJob": "Post job"
-    }
+    },
+    "draftButtonTooltip": "Selected file will not be saved in the draft",
+    "uploadButtonTooltip": "Only for post job, not for draft"
   },
   "EditDeletePost": {
     "delete": {

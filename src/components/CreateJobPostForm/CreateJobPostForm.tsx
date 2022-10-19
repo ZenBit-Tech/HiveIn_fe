@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler, useEffect, useState } from "react";
-import { Button } from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SaveIcon from "@mui/icons-material/Save";
 import { toast } from "react-toastify";
@@ -187,32 +187,45 @@ function CreateJobPostForm(props: IProps) {
         {selectedFile ? (
           <FileBox file={selectedFile} handlerRemove={setSelectedFile} />
         ) : (
-          <Button
-            sx={{ marginLeft: "180px", marginBottom: "10px" }}
-            variant="contained"
-            component="label"
+          <Tooltip
+            title={t("PostJob.uploadButtonTooltip")}
+            placement="right"
+            leaveDelay={200}
+            arrow
           >
-            {t("PostJob.buttonsText.fileUpload")}
-            <input
-              hidden
-              onChange={handleUploadFile}
-              accept={fileTypes.join(", ")}
-              type="file"
-            />
-          </Button>
+            <Button
+              sx={{ marginLeft: "180px", marginBottom: "10px" }}
+              variant="contained"
+              component="label"
+            >
+              {t("PostJob.buttonsText.fileUpload")}
+              <input
+                hidden
+                onChange={handleUploadFile}
+                accept={fileTypes.join(", ")}
+                type="file"
+              />
+            </Button>
+          </Tooltip>
         )}
         {!getUserError && (
           <SButtonsGroup>
-            <LoadingButton
-              loading={postDraftLoading || postJobLoading}
-              loadingPosition="start"
-              startIcon={<SaveIcon />}
-              variant="contained"
-              type="submit"
-              onClick={handlerPostDraft}
+            <Tooltip
+              title={selectedFile ? t("PostJob.draftButtonTooltip") : ""}
+              placement="right"
+              arrow
             >
-              {t("PostJob.buttonsText.postDraft")}
-            </LoadingButton>
+              <LoadingButton
+                loading={postDraftLoading || postJobLoading}
+                loadingPosition="start"
+                startIcon={<SaveIcon />}
+                variant="contained"
+                type="submit"
+                onClick={handlerPostDraft}
+              >
+                {t("PostJob.buttonsText.postDraft")}
+              </LoadingButton>
+            </Tooltip>
             <LoadingButton
               loading={postDraftLoading || postJobLoading}
               loadingPosition="start"

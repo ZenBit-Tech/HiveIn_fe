@@ -105,11 +105,10 @@ function JobItem({
 
   return (
     <Wrapper>
-      <Grid grow={3}>
+      <Grid grow={3} wide>
         <Header>
           <TitleInfo>
             <PageHeader onBack={() => navigate(MY_JOBS_ROUTE)} title={title} />
-
             <TitleInfo>
               <TagStatus>
                 {contract && (

@@ -6,6 +6,7 @@ import {
   sxProps,
   SWrapper,
   SErrorMessage,
+  SCountDown,
 } from "components/UI/textField/style";
 
 function TextField(props: ITextFieldProps) {
@@ -38,23 +39,30 @@ function TextField(props: ITextFieldProps) {
           control={control}
           defaultValue=""
           render={({ field }) => (
-            <TextFieldM
-              {...field}
-              disabled={disabled}
-              error={!!errors?.[`${formFieldName}`]?.message}
-              fullWidth
-              sx={helperText ? undefined : sxProps}
-              multiline={multiline}
-              rows={rows}
-              type={type}
-              label={helperText}
-              size="small"
-              InputProps={{
-                rows,
-                endAdornment: !withoutAdornment && endAdornment,
-                inputProps: { maxLength },
-              }}
-            />
+            <>
+              <TextFieldM
+                {...field}
+                disabled={disabled}
+                error={!!errors?.[`${formFieldName}`]?.message}
+                fullWidth
+                sx={helperText ? undefined : sxProps}
+                multiline={multiline}
+                rows={rows}
+                type={type}
+                label={helperText}
+                size="small"
+                InputProps={{
+                  rows,
+                  endAdornment: !withoutAdornment && endAdornment,
+                  inputProps: { maxLength },
+                }}
+              />
+              {multiline && (
+                <SCountDown>
+                  {field.value && maxLength! - (field.value as string).length}
+                </SCountDown>
+              )}
+            </>
           )}
         />
       ) : (

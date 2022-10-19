@@ -20,6 +20,8 @@ export const JobDescription = styled.div`
   margin-block: 15px;
   max-height: 5vh;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export const DeatailedInfo = styled.div`

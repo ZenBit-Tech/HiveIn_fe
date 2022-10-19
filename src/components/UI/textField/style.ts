@@ -15,3 +15,7 @@ export const sxProps = {
 export const SErrorMessage = styled("p")`
   color: ${ERROR};
 `;
+
+export const SCountDown = styled("p")`
+  text-align: end;
+`;
