@@ -51,6 +51,7 @@ export const FilterSection = styled.div<BoxSizing>`
 export const WorkSection = styled.div<BoxSizing>`
   width: 100%;
   display: flex;
+  overflow: hidden;
   flex-direction: column;
   align-items: center;
 `;
