@@ -34,6 +34,7 @@ function Chat() {
                       user
                     )}
                     lastMessage={room.lastMessage.text}
+                    lastMessageDate={room.lastMessage.created_at}
                     key={room.id}
                   />
                 )}

@@ -11,6 +11,9 @@ import {
 import { ChangeEvent, useEffect, useState } from "react";
 import { UserRoleEnum } from "utils/enums";
 import { ChatRoomStatusEnum } from "services/notifications/chatEnums";
+import { useSendOfferMutation } from "services/jobPosts/proposalsAPI";
+import useModalHandler from "hooks/use-modal-handler";
+import { toast } from "react-toastify";
 
 function useChatRoomData(userRole: UserRoleEnum) {
   const { roomId } = useParams();
@@ -29,7 +32,20 @@ function useChatRoomData(userRole: UserRoleEnum) {
 
   const [leaveRoom] = useLeaveRoomMutation();
 
+  const [sendOffer, { isSuccess, isError }] = useSendOfferMutation();
+
   const [text, setText] = useState<string>("");
+
+  const { modal, toggleModal } = useModalHandler();
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Offer has been sent");
+    }
+    if (isError) {
+      toast.error("Not able to send offer");
+    }
+  }, [isSuccess, isError]);
 
   useEffect(() => {
     if (roomId && +roomId) {
@@ -86,7 +102,18 @@ function useChatRoomData(userRole: UserRoleEnum) {
   const [isDisabled, setIsDisabled] = useState(disableInput());
   useEffect(() => {
     setIsDisabled(disableInput());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room?.status]);
+
+  const sendOfferHandler = async () => {
+    if (room) {
+      await sendOffer({
+        jobPostId: room.jobPost.id,
+        freelancerId: room.freelancer.id,
+      });
+      toggleModal();
+    }
+  };
 
   return {
     isDisabled,
@@ -98,6 +125,10 @@ function useChatRoomData(userRole: UserRoleEnum) {
     onSendHandler,
     onChangeHandler,
     text,
+    sendOffer,
+    sendOfferHandler,
+    modal,
+    toggleModal,
   };
 }
 export default useChatRoomData;

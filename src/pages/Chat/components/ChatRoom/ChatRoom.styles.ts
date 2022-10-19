@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { LIGHT_BLUE, LIGHT_GRAY, PRIMARY } from "utils/consts/colorConsts";
+import React from "react";
+import { ButtonProps, Button } from "antd";
 
 export const Message = styled.div<{
   isMine: boolean;
@@ -61,6 +63,9 @@ export const Header = styled.div`
   padding: 2px;
   font-size: 18px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
 `;
 export const Warning = styled.div`
   text-align: center;
@@ -76,4 +81,15 @@ export const Title = styled.div<{
   font-weight: ${({ bold }) => (bold ? "600" : "")};
   font-style: ${({ italic }) => (italic ? "italic" : "")};
   font-size: ${({ fontSize }) => fontSize};
+`;
+
+export const StyledButton: React.FunctionComponent<ButtonProps> = styled(
+  Button
+)`
+  font-size: 18px;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
 `;

@@ -21,12 +21,17 @@ export const Block = styled.div`
   justify-content: space-between;
   padding: 0 5px;
 `;
-export const LastMessage = styled.span`
+export const Text = styled.span<{
+  fontSize?: string;
+  bold?: boolean;
+  italic?: boolean;
+}>`
+  font-size: ${({ fontSize }) => fontSize};
   display: inline-block;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   max-width: 150px;
-  font-style: italic;
-  font-weight: 500;
+  font-style: ${({ italic }) => (italic ? "italic" : "")};
+  font-weight: ${({ bold }) => (bold ? "600" : "")};
 `;

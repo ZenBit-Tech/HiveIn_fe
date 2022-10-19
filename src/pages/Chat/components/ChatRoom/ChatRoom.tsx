@@ -7,6 +7,7 @@ import {
   Message,
   MessageBlock,
   Notification,
+  StyledButton,
   Title,
   Warning,
 } from "pages/Chat/components/ChatRoom/ChatRoom.styles";
@@ -16,7 +17,6 @@ import useChatScroll from "hooks/useChatScroll";
 import { MessageTypeEnum } from "services/notifications/chatEnums";
 import { UserRoleEnum } from "utils/enums";
 import useChatRoomData from "pages/Chat/hooks/useChatRoomData";
-import useModalHandler from "../../../../hooks/use-modal-handler";
 
 interface IChatRoom {
   userSelfId: number;
@@ -34,9 +34,10 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
     onSendHandler,
     onChangeHandler,
     text,
+    sendOfferHandler,
+    toggleModal,
+    modal,
   } = useChatRoomData(userRole);
-
-  const { modal, toggleModal } = useModalHandler();
 
   const ref = useChatScroll(messages);
 
@@ -45,10 +46,17 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
       {roomId && +roomId ? (
         <div>
           <Header>
-            <Title fontSize="16px">{t("Chat.jobTitle")}</Title>
-            <Title italic bold>
-              {room?.jobPost?.title}
-            </Title>
+            <div>
+              <Title fontSize="16px">{t("Chat.jobTitle")}</Title>
+              <Title italic bold>
+                {room?.jobPost?.title}
+              </Title>
+            </div>
+            {userRole === UserRoleEnum.CLIENT && (
+              <StyledButton type="dashed" onClick={toggleModal}>
+                Send offer
+              </StyledButton>
+            )}
           </Header>
           <MessageBlock ref={ref}>
             {messages?.length ? (
@@ -85,11 +93,6 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
             )}
           </MessageBlock>
           <InputBlock>
-            {userRole === UserRoleEnum.CLIENT && (
-              <Button type="dashed" onClick={toggleModal}>
-                +
-              </Button>
-            )}
             <Input
               disabled={isDisabled}
               value={text}
@@ -103,7 +106,7 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
       ) : (
         <Notification>{t("Chat.chooseTheChat")}</Notification>
       )}
-      <Modal visible={modal} onCancel={toggleModal}>
+      <Modal visible={modal} onCancel={toggleModal} onOk={sendOfferHandler}>
         <div
           style={{
             display: "flex",
