@@ -31,7 +31,8 @@
     "keyWord": "Search by title and description"
   },
   "Proposals": {
-    "title": "Proposals"
+    "title": "Proposals",
+    "upload": "Click or drag file to this area to upload"
   },
   "MyContracts": {
     "title": "My Contracts",
@@ -134,6 +135,8 @@
     "signIn": "Sign In",
     "signInGoogle": "Sign In with Google",
     "signOut": "Sign Out",
+    "email": "Email",
+    "password": "Password",
     "dontHaveAccount": "Don't have an account yet?",
     "forgotPass": "Forgot your password?",
     "register": "Register now",
@@ -192,11 +195,15 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
+      "options": [
+        "pre-intermediate",
+        "intermediate",
+        "upper-intermediate"
+      ]
     },
     "description": {
       "title": "Description",
-      "helperText": "Input 30-50 words"
+      "helperText": "Input 30-50 characters"
     },
     "education": {
       "title": "Education",
@@ -236,7 +243,7 @@
   },
   "settingMenuButtonsNames": {
     "profile": "Edit profile",
-    "contacts": "Edit Contacts"
+    "contacts": "Edit contacts"
   },
   "contactInfoForm": {
     "title": "Contact Information",
@@ -256,6 +263,14 @@
       },
       "phoneNumber": {
         "title": "Phone number"
+      },
+      "phoneSettings": {
+        "title": "",
+        "helperText": "Show phone number to job owners?"
+      },
+      "emailSettings": {
+        "title": " ",
+        "helperText": "Show email to job owners?"
       }
     },
     "errorMessages": {
@@ -363,7 +378,9 @@
       "fileUpload": "Upload file",
       "postDraft": " Save to draft",
       "postJob": "Post job"
-    }
+    },
+    "draftButtonTooltip": "Selected file will not be saved in the draft",
+    "uploadButtonTooltip": "Only for post job, not for draft"
   },
   "EditDeletePost": {
     "delete": {

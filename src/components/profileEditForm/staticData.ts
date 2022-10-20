@@ -41,7 +41,7 @@ const propsDataCollection: ILayoutElementWithoutControl[] = [
     formFieldName: "description",
     containerWidth: "half",
     maxLength: 50,
-    helperText: "Input 30-50 words",
+    helperText: i18next.ProfileEditForm.description.helperText,
   },
   {
     title: i18next.ProfileEditForm.education.title,

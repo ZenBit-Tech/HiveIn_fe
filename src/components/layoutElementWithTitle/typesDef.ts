@@ -26,7 +26,8 @@ export interface ILayoutElementWithoutControl {
     | "skillsLayoutSmall"
     | "text"
     | "phoneInput"
-    | "durationPicker";
+    | "durationPicker"
+    | "switch";
   containerWidth: "full" | "half";
   formFieldName: string;
   toggleButtonOptions?: string[] | TEnglishLevel[];

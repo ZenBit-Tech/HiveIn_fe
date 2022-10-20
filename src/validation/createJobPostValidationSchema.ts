@@ -3,9 +3,39 @@ import i18next from "localization/en/en.json";
 import { regexpGreaterThanZero } from "validation/profileEditFormValidationSchema";
 import { MIN_LENGTH_OF_JOB_DESCRIPTION } from "utils/consts/numberConsts";
 
-export const jobPostsDraftSchema = yup.object({
-  title: yup.string().required(i18next.PostJob.required),
-});
+export const jobPostsDraftSchema = yup.object().shape(
+  {
+    title: yup.string().required(i18next.PostJob.required),
+    rate: yup
+      .string()
+      .nullable()
+      .notRequired()
+      .when("rate", {
+        is: (value: string) => value?.length,
+        then: (rule) =>
+          rule.matches(
+            regexpGreaterThanZero,
+            i18next.profileFormErrorMessages.rateSmallerThenZero
+          ),
+      }),
+    duration: yup
+      .string()
+      .nullable()
+      .notRequired()
+      .when("duration", {
+        is: (value: string) => value?.length,
+        then: (rule) =>
+          rule.matches(
+            regexpGreaterThanZero,
+            i18next.profileFormErrorMessages.rateSmallerThenZero
+          ),
+      }),
+  },
+  [
+    ["rate", "rate"],
+    ["duration", "duration"],
+  ]
+);
 
 export const createJobPostValidationSchema = jobPostsDraftSchema.shape({
   categoryId: yup

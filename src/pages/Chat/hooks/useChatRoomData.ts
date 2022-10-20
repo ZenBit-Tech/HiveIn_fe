@@ -32,7 +32,7 @@ function useChatRoomData(userRole: UserRoleEnum) {
 
   const [leaveRoom] = useLeaveRoomMutation();
 
-  const [sendOffer, { isSuccess, isError }] = useSendOfferMutation();
+  const [sendOffer, { isSuccess, isError, error }] = useSendOfferMutation();
 
   const [text, setText] = useState<string>("");
 
@@ -43,8 +43,10 @@ function useChatRoomData(userRole: UserRoleEnum) {
       toast.success("Offer has been sent");
     }
     if (isError) {
-      toast.error("Not able to send offer");
+      // @ts-ignore
+      toast.error(error?.data.message || "Error");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, isError]);
 
   useEffect(() => {
@@ -54,7 +56,7 @@ function useChatRoomData(userRole: UserRoleEnum) {
       getMessages(+roomId);
     }
     return () => {
-      leaveRoom();
+      if (roomId) leaveRoom(roomId);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId]);
@@ -109,7 +111,7 @@ function useChatRoomData(userRole: UserRoleEnum) {
     if (room) {
       await sendOffer({
         jobPostId: room.jobPost.id,
-        freelancerId: room.freelancer.id,
+        freelancerId: room.freelancer.freelancerId,
       });
       toggleModal();
     }
@@ -131,4 +133,5 @@ function useChatRoomData(userRole: UserRoleEnum) {
     toggleModal,
   };
 }
+
 export default useChatRoomData;

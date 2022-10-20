@@ -9,6 +9,7 @@ import EducationLayout from "components/educationLayout/EducationLayout";
 import SkillsLayout from "components/skillsLayout/SkillsLayout";
 import PhoneInput from "components/UI/phoneInput/PhoneInput";
 import InputAndSelectCombined from "components/UI/InputAndSelectCombined/InputAndSelectCombined";
+import Switch from "components/UI/Switch/Switch";
 
 function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
   const {
@@ -123,6 +124,14 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     <InputAndSelectCombined control={control} errors={errors} />
   );
 
+  const renderSwitch = () => (
+    <Switch
+      formFieldName={formFieldName}
+      control={control}
+      text={helperText!}
+    />
+  );
+
   const elementTypes: { [propName: string]: typeof element } = {
     textInput: "textInput",
     numberInput: "numberInput",
@@ -135,6 +144,7 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
     phoneInput: "phoneInput",
     text: "text",
     durationPicker: "durationPicker",
+    switch: "switch",
   };
 
   const renderElement = (type: typeof element): JSX.Element | null => {
@@ -161,6 +171,8 @@ function LayoutElementWithTitle(props: ILayoutElementWithTitleProps) {
         return renderText();
       case elementTypes.durationPicker:
         return renderDurationPicker();
+      case elementTypes.switch:
+        return renderSwitch();
       default:
         return null;
     }

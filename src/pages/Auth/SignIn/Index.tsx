@@ -80,10 +80,10 @@ export default function SignIn() {
         <GoogleAuthButton>{t("SignIn.signInGoogle")}</GoogleAuthButton>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <S.InputContainer>
-            <Field label="Email or username" control={control} name="email" />
+            <Field label={t("SignIn.email")} control={control} name="email" />
             <Field
               type="password"
-              label="Password"
+              label={t("SignIn.password")}
               control={control}
               name="password"
             />
@@ -104,19 +104,16 @@ export default function SignIn() {
           >
             {t("SignIn.signIn")}
           </Button>
+          <Text
+            onClick={() => {
+              navigate(SIGN_UP_ROUTE);
+            }}
+            style={{ color: PRIMARY, fontSize: "16px", cursor: "pointer" }}
+          >
+            {t("SignIn.register")}
+          </Text>
         </S.Form>
       </S.FormBox>
-      <S.Footer>
-        <Text style={{ fontSize: "16px" }}>{t("SignIn.dontHaveAccount")}</Text>
-        <Text
-          onClick={() => {
-            navigate(SIGN_UP_ROUTE);
-          }}
-          style={{ color: PRIMARY, fontSize: "16px", cursor: "pointer" }}
-        >
-          {t("SignIn.register")}
-        </Text>
-      </S.Footer>
       <Modal
         visible={isErrorModalOpen}
         title="Succesful login"

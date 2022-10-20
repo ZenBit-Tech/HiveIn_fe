@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useTranslation } from "react-i18next";
 import JobTitle, {
   Card,
@@ -8,7 +7,6 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { useGetOneJobPostQuery } from "services/jobPosts/setJobPostsAPI";
 import SearchWorkDrawer from "components/UI/drawers/SearchWorkDrawer/SearchWorkDrawer";
-import { cutTextByWords } from "utils/functions/cutTextByWords";
 
 export interface IWorkCardProps {
   id: number;
@@ -16,8 +14,6 @@ export interface IWorkCardProps {
   createdAt: string;
   jobDescription: string;
 }
-
-const wordPerCard = 30;
 
 function WorkCard({ jobDescription, title, createdAt, id }: IWorkCardProps) {
   const { t } = useTranslation();
@@ -40,9 +36,7 @@ function WorkCard({ jobDescription, title, createdAt, id }: IWorkCardProps) {
             {createdAt ? dayjs(createdAt).fromNow() : t("NotFound.notFound")}
           </JobTitle>
         </JobTitle>
-        <JobDescription>
-          {cutTextByWords(jobDescription, wordPerCard)}
-        </JobDescription>
+        <JobDescription>{jobDescription}</JobDescription>
       </Card>
       {isSuccess && (
         <SearchWorkDrawer

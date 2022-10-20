@@ -1,30 +1,20 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Modal, Space, Typography } from "antd";
+import { Modal, Space, Typography, Upload } from "antd";
 import Field from "components/DefaultField/DefaultField";
 import SendButton from "components/UI/buttons/SendButton/SendButton";
-import submitProposalSchema from "components/UI/ModalWindows/SubmitProposalModal/SubmitProposalModelSchema";
 import { Form } from "components/UI/ModalWindows/SubmitProposalModal/SubmitProposalStyles";
-import { useEffect } from "react";
-import { useForm, SubmitHandler, FieldValues } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { toast } from "react-toastify";
-import { useSendProposalMutation } from "services/jobPosts/proposalsAPI";
 import { MAX_LENGTH_OF_COVER_LETTER } from "utils/consts/numberConsts";
-import { ProposalType } from "utils/enums";
-import { useGetOwnProfileQuery } from "services/profileInfo/profileInfoAPI";
+import { InboxOutlined } from "@ant-design/icons";
+import useSubmitProposal from "hooks/useSubmitProposal";
 
 const { Text } = Typography;
-
-interface ISubmitProposalForm extends FieldValues {
-  bid: number;
-  exampleRequired: string;
-}
 
 interface ISubmitProposalModalProps {
   idJobPost: number;
   visible: boolean;
   closeModal: () => void;
   clientBudget: number;
+  refetch: () => void;
 }
 
 function SubmitProposalModal({
@@ -32,50 +22,12 @@ function SubmitProposalModal({
   visible,
   closeModal,
   clientBudget,
+  refetch,
 }: ISubmitProposalModalProps) {
   const { t } = useTranslation();
 
-  const { data: freelancer } = useGetOwnProfileQuery();
-  const { rate, id } = freelancer!;
-
-  const { control, handleSubmit, reset } = useForm<ISubmitProposalForm>({
-    resolver: yupResolver(submitProposalSchema),
-    defaultValues: {
-      bid: +rate,
-    },
-  });
-
-  const [runSendProposalMutation, { isError, isLoading, isSuccess }] =
-    useSendProposalMutation();
-
-  const onSubmit: SubmitHandler<ISubmitProposalForm> = async ({
-    bid,
-    coverLetter,
-  }) => {
-    if (freelancer)
-      await runSendProposalMutation({
-        bid,
-        message: coverLetter,
-        idJobPost,
-        idFreelancer: id,
-        type: ProposalType.PROPOSAL,
-      });
-    closeModal();
-
-    reset();
-  };
-
-  useEffect(() => {
-    if (!isLoading && isError) {
-      toast.error(t("ServerErrors.FETCH_ERROR"));
-      return;
-    }
-    if (!isLoading && isSuccess) {
-      toast.success(t("SearchWork.success"));
-      reset();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoading]);
+  const { isLoading, control, handleSubmit, onSubmit, setSelectedFile } =
+    useSubmitProposal({ idJobPost, refetch, closeModal });
 
   return (
     <Modal
@@ -104,10 +56,26 @@ function SubmitProposalModal({
         <Field
           label={t("SearchWork.coverLetter")}
           control={control}
-          name="coverLetter"
+          name="message"
           textArea
           maxLength={MAX_LENGTH_OF_COVER_LETTER}
         />
+        <Upload.Dragger
+          onChange={({ file }) => setSelectedFile(file.originFileObj)}
+          maxCount={1}
+          listType="picture"
+          customRequest={({ onSuccess }) => {
+            setTimeout(() => {
+              onSuccess!("ok");
+            }, 0);
+          }}
+        >
+          <p className="ant-upload-drag-icon">
+            <InboxOutlined />
+          </p>
+          <Text>{t("Proposals.upload")}</Text>
+        </Upload.Dragger>
+
         <SendButton>{t("SearchWork.send")}</SendButton>
       </Form>
     </Modal>

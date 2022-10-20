@@ -28,6 +28,9 @@ const JobTitle = styled.div<ITitle>`
 export const JobDescription = styled.div`
   color: ${TEXT_GRAY};
   padding-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 export default JobTitle;

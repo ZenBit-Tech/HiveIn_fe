@@ -86,10 +86,12 @@ export const Title = styled.div<{
 export const StyledButton: React.FunctionComponent<ButtonProps> = styled(
   Button
 )`
+  background-color: ${LIGHT_BLUE};
+  border: 1px solid black;
   font-size: 18px;
-  height: 100%;
   position: absolute;
+  text-align: center;
   top: 50%;
   right: 0;
-  transform: translate(0, -50%);
+  transform: translate(-10px, -50%);
 `;

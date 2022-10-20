@@ -53,7 +53,7 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
               </Title>
             </div>
             {userRole === UserRoleEnum.CLIENT && (
-              <StyledButton type="dashed" onClick={toggleModal}>
+              <StyledButton shape="round" onClick={toggleModal}>
                 Send offer
               </StyledButton>
             )}

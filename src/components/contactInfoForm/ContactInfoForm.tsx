@@ -1,83 +1,43 @@
-import React, { useState, useEffect } from "react";
-import { FieldValues, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import React from "react";
+import { Control, FieldErrors } from "react-hook-form";
 import i18next from "localization/en/en.json";
-import { toast } from "react-toastify";
 import LayoutElementWithTitle from "components/layoutElementWithTitle/LayoutElementWithTitle";
 import propsDataCollection from "components/contactInfoForm/staticData";
 import FormSubmitButton from "components/UI/buttons/formSubmitButton/FormSubmitButton";
 import { SButtonWrapper } from "components/profileEditForm/styles";
-import contactEditFormValidationSchema from "validation/contactEditFormValidationSchema";
-import {
-  IUser,
-  useGetOwnUserQuery,
-  useUpdateUserMutation,
-} from "services/user/setUserAPI";
 import PhotoUpload from "components/photoUpload/PhotoUpload";
 import { SDiv, SH, SWrapper } from "components/layoutElementWithTitle/style";
-import { useTranslation } from "react-i18next";
+import createConfidentialInfo from "utils/functions/createConfidentialInfo";
+import useContactInfoForm, {
+  IUserForContactInfo,
+} from "hooks/useContactInfoForm";
 
 function ContactInfoForm() {
-  const [initialState, setInitialState] = useState<IUser>();
-  const { t } = useTranslation();
-
   const {
-    data,
     isSuccess,
-    isError: getUserError,
-    refetch,
-  } = useGetOwnUserQuery();
-  const [
     updateUser,
-    { error, isError: submitError, isSuccess: submitSuccess },
-  ] = useUpdateUserMutation();
-
-  useEffect(() => {
-    if (isSuccess)
-      setInitialState({
-        email: data.email,
-        firstName: data.firstName ?? "",
-        lastName: data.lastName ?? "",
-        phone: data.phone ? data.phone.slice(1) : undefined,
-      });
-  }, [data, isSuccess]);
-
-  const {
+    data,
     handleSubmit,
-    reset,
+    refetch,
     control,
-    formState: { errors },
-  } = useForm<FieldValues>({
-    resolver: yupResolver(contactEditFormValidationSchema),
-    defaultValues: initialState,
-  });
+    errors,
+    t,
+  } = useContactInfoForm();
 
-  useEffect(() => {
-    reset(initialState);
-  }, [reset, initialState]);
-
-  useEffect(() => {
-    if (submitSuccess) toast.success(i18next.profileSuccessSubmitMessage);
-    if (submitError) {
-      toast.error(
-        // @ts-ignore
-        error?.data?.message[0] ||
-          i18next.contactInfoForm.errorMessages.somethingWrong
-      );
-    }
-    if (getUserError)
-      toast.error(i18next.contactInfoForm.errorMessages.userNotFound);
-    // eslint-disable-next-line
-  }, [submitSuccess, submitError, getUserError]);
-
-  const onSubmit = (formData: any) => {
-    const phone = !formData.phone ? null : `+${formData.phone}`;
+  const onSubmit = (formData: IUserForContactInfo) => {
+    const phone = !formData.phone ? undefined : `+${formData.phone}`;
+    const { isVisibleEmail, isVisiblePhone, ...restData } = formData;
+    const confidentialSetting = createConfidentialInfo(
+      isVisiblePhone,
+      isVisibleEmail
+    );
 
     if (isSuccess)
       updateUser({
         ...data,
-        ...formData,
+        ...restData,
         phone,
+        confidentialSetting,
       });
 
     return null;
@@ -98,8 +58,8 @@ function ContactInfoForm() {
         {propsDataCollection.map((propsData) => (
           <LayoutElementWithTitle
             key={propsData.title}
-            control={control}
-            errors={errors}
+            control={control as unknown as Control}
+            errors={errors as unknown as FieldErrors}
             {...propsData}
           />
         ))}
