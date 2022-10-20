@@ -9,6 +9,7 @@ import { PRIMARY } from "utils/consts/colorConsts";
 import { useForgotPasswordMutation } from "services/auth/forgotPassword";
 import S from "pages/Auth/ForgotPassword/style";
 import ForgotPasswordSchema from "pages/Auth/ForgotPassword/schema";
+import { useEffect } from "react";
 
 interface ForgotPasswordForm extends FieldValues {
   email: string;
@@ -22,19 +23,21 @@ export default function ForgotPassword() {
   const { t } = useTranslation();
   const { Title, Text } = Typography;
 
-  const [forgotPassword] = useForgotPasswordMutation();
-
-  const success = () => {
-    Modal.success({
-      title: t("ForgotPassword.checkMailBox"),
-      centered: true,
-    });
-  };
+  const [forgotPassword, { isSuccess, data }] = useForgotPasswordMutation();
 
   async function onSubmit({ email }: ForgotPasswordForm) {
-    await forgotPassword({ email });
-    success();
+    forgotPassword({ email });
   }
+
+  useEffect(() => {
+    if (isSuccess)
+      Modal.success({
+        title: t(
+          data ? "ForgotPassword.checkMailBox" : "ForgotPassword.GoogleSignIn"
+        ),
+        centered: true,
+      });
+  }, [isSuccess, data]);
 
   const goToLogin = () => {
     window.scroll(0, 0);
