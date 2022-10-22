@@ -109,7 +109,9 @@
     "chooseAnotherRoom": "You entered the room that does not exist. Please choose another room",
     "systemMessage": "System message",
     "jobTitle": "Job title",
-    "disabledMessaging": "You are not able to send any messages in this chat yet"
+    "disabledMessaging": "You are not able to send any messages in this chat yet",
+    "sendOffer": "Send offer",
+    "confirmSendOffer": "Do you want to send the offer to this user?"
   },
   "Settings": {
     "title": "Settings"
