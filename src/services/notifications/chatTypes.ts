@@ -11,6 +11,10 @@ export interface IChatUser {
   avatarURL: string | null;
 }
 
+export interface IFreelancerChatUser extends IChatUser {
+  freelancerId: number;
+}
+
 export interface IMessage {
   id: number;
   chatRoomId: number;
@@ -23,7 +27,7 @@ export interface IMessage {
 export interface IRoom {
   id: number;
   status: ChatRoomStatusEnum;
-  freelancer: IChatUser;
+  freelancer: IFreelancerChatUser;
   client: IChatUser;
   jobPost: {
     id: number;

@@ -1,26 +1,28 @@
 import {
   Block,
-  LastMessage,
+  Text,
   ChatElement,
 } from "pages/Chat/components/ChatRoomsList/ChatRoomsList.styles";
 import { Badge, Avatar } from "antd";
 import { useEffect } from "react";
 import { useReadNotificationsMutation } from "services/notifications/setNotificationsAPI";
+import { formatToStandardDate } from "utils/functions/formatDateFunctions";
+import { CHAT_DATE_FORMAT } from "utils/consts/inputPropsConsts";
 
 interface IChatUsersList {
-  jobName: string;
   lastMessage: string;
+  lastMessageDate: Date;
   opponentsNameAndAvatar: { name: string; avatar: string };
   isSelected: boolean;
   roomNotifications?: number[];
 }
 
 function ChatRoomsListItem({
-  jobName,
   lastMessage,
   opponentsNameAndAvatar,
   isSelected,
   roomNotifications,
+  lastMessageDate,
 }: IChatUsersList) {
   const [readNotifications] = useReadNotificationsMutation();
 
@@ -41,11 +43,13 @@ function ChatRoomsListItem({
         />
       </Badge>
       <Block>
-        <div>
-          <div>{opponentsNameAndAvatar.name}</div>
-          <div>{jobName}</div>
-        </div>
-        <LastMessage>{lastMessage}</LastMessage>
+        <Text fontSize="16px">{opponentsNameAndAvatar.name}</Text>
+        <Text fontSize="12px">
+          {formatToStandardDate(new Date(lastMessageDate), CHAT_DATE_FORMAT)}
+        </Text>
+        <Text bold italic fontSize="16px">
+          {lastMessage}
+        </Text>
       </Block>
     </ChatElement>
   );

@@ -1,21 +1,19 @@
 import { Button, Input } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import {
-  Element,
   Header,
   InputBlock,
-  Message,
   MessageBlock,
   Notification,
+  StyledButton,
   Title,
   Warning,
 } from "pages/Chat/components/ChatRoom/ChatRoom.styles";
-import { formatToStandardDate } from "utils/functions/formatDateFunctions";
-import { CHAT_DATE_FORMAT } from "utils/consts/inputPropsConsts";
 import useChatScroll from "hooks/useChatScroll";
-import { MessageTypeEnum } from "services/notifications/chatEnums";
 import { UserRoleEnum } from "utils/enums";
 import useChatRoomData from "pages/Chat/hooks/useChatRoomData";
+import Message from "pages/Chat/components/Message/Message";
+import SendOfferModal from "components/UI/ModalWindows/SendOfferModal/SendOfferModal";
 import { useProlongChatMutation } from "services/chatRoom/chatRoomApi";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -30,13 +28,16 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
   const {
     roomId,
     room,
-    disableInput,
+    isDisabled,
     t,
     messages,
     defineName,
     onSendHandler,
     onChangeHandler,
     text,
+    sendOfferHandler,
+    toggleModal,
+    modal,
   } = useChatRoomData(userRole);
 
   const [prolongChat, { isSuccess, data }] = useProlongChatMutation();
@@ -66,59 +67,60 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
       {roomId && +roomId ? (
         <div>
           <Header>
-            <Title fontSize="16px">{t("Chat.jobTitle")}</Title>
-            <Title italic bold>
-              {room?.jobPost?.title}
-            </Title>
+            <div>
+              <Title fontSize="16px">{t("Chat.jobTitle")}</Title>
+              <Title italic bold>
+                {room?.jobPost?.title}
+              </Title>
+            </div>
+            {userRole === UserRoleEnum.CLIENT && (
+              <StyledButton type="default" shape="round" onClick={toggleModal}>
+                {t("Chat.sendOffer")}
+              </StyledButton>
+            )}
           </Header>
           <MessageBlock ref={ref}>
             {messages?.length ? (
               messages.map((message) => {
                 return (
                   <Message
-                    isSystemMessage={
-                      message.messageType === MessageTypeEnum.FROM_SYSTEM
-                    }
+                    messageType={message.messageType}
+                    text={message.text}
+                    defineName={defineName}
                     key={message.id}
-                    isMine={message.senderId === userSelfId}
-                  >
-                    <div>
-                      {message.messageType === MessageTypeEnum.FROM_SYSTEM ? (
-                        <div>{t("Chat.systemMessage")}</div>
-                      ) : (
-                        <div>{defineName(message.senderId)}</div>
-                      )}
-                      <div>
-                        {formatToStandardDate(
-                          new Date(message.created_at),
-                          CHAT_DATE_FORMAT
-                        )}
-                      </div>
-                    </div>
-                    <Element>{message.text}</Element>
-                  </Message>
+                    created_at={message.created_at}
+                    senderId={message.senderId}
+                    userSelfId={userSelfId}
+                  />
                 );
               })
             ) : (
-              <Message isMine isSystemMessage>
+              <Notification>
                 <div>{t("Chat.chooseAnotherRoom")}</div>
-              </Message>
+              </Notification>
             )}
           </MessageBlock>
           <InputBlock>
             <Input
-              disabled={disableInput()}
+              disabled={isDisabled}
               value={text}
               onChange={onChangeHandler}
               onKeyUp={(event) => event.key === "Enter" && onSendHandler()}
             />
             <Button onClick={onSendHandler} icon={<SendOutlined />} />
           </InputBlock>
-          {disableInput() && <Warning>{t("Chat.disabledMessaging")}</Warning>}
+          {isDisabled && <Warning>{t("Chat.disabledMessaging")}</Warning>}
         </div>
       ) : (
         <Notification>{t("Chat.chooseTheChat")}</Notification>
       )}
+      <SendOfferModal
+        modal={modal}
+        onCancel={toggleModal}
+        onOk={sendOfferHandler}
+        title={t("Chat.sendOffer")}
+        text={t("Chat.confirmSendOffer")}
+      />
     </div>
   );
 }

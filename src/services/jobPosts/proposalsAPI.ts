@@ -63,6 +63,19 @@ const proposalsApi = apiSlice.injectEndpoints({
       }),
       transformResponse: (response: void) => response,
     }),
+
+    sendOffer: builder.mutation<
+      void,
+      { jobPostId: number; freelancerId: number }
+    >({
+      query(arg) {
+        return {
+          url: `/${OFFER}`,
+          method: "POST",
+          body: arg,
+        };
+      },
+    }),
   }),
 });
 
@@ -72,6 +85,7 @@ export const {
   useGetOwnOffersQuery,
   useGetProposalsByJobPostQuery,
   useChangeOfferStatusMutation,
+  useSendOfferMutation,
 } = proposalsApi;
 
 export default proposalsApi;

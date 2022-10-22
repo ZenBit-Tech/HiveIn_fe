@@ -1,41 +1,13 @@
 import styled from "styled-components";
-import { LIGHT_BLUE, LIGHT_GRAY, PRIMARY } from "utils/consts/colorConsts";
-
-export const Message = styled.div<{
-  isMine: boolean;
-  isSystemMessage: boolean;
-}>`
-  display: ${({ isMine, isSystemMessage }) =>
-    !isMine && isSystemMessage ? "none" : "flex"};
-  flex-direction: column;
-  padding: 10px;
-  margin: 3px;
-  align-self: ${(props) => {
-    if (props.isSystemMessage) {
-      return "center";
-    }
-    if (props.isMine) {
-      return "flex-end";
-    }
-    return "flex-start";
-  }};
-  border-radius: 5px;
-  background-color: ${(props) => {
-    if (props.isSystemMessage) {
-      return PRIMARY;
-    }
-    if (props.isMine) {
-      return LIGHT_BLUE;
-    }
-    return LIGHT_GRAY;
-  }};
-`;
+import { LIGHT_BLUE } from "utils/consts/colorConsts";
+import React from "react";
+import { ButtonProps, Button } from "antd";
 
 export const MessageBlock = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 70vw;
-  min-width: 30vw;
+  max-width: 90vw;
+  min-width: 50vw;
   padding: 10px;
   height: 70vh;
   overflow: scroll;
@@ -61,6 +33,9 @@ export const Header = styled.div`
   padding: 2px;
   font-size: 18px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
 `;
 export const Warning = styled.div`
   text-align: center;
@@ -76,4 +51,17 @@ export const Title = styled.div<{
   font-weight: ${({ bold }) => (bold ? "600" : "")};
   font-style: ${({ italic }) => (italic ? "italic" : "")};
   font-size: ${({ fontSize }) => fontSize};
+`;
+
+export const StyledButton: React.FunctionComponent<ButtonProps> = styled(
+  Button
+)`
+  background-color: ${LIGHT_BLUE};
+  box-shadow: rgba(0, 0, 0, 0.15) 0 15px 25px, rgba(0, 0, 0, 0.05) 0 5px 10px;
+  font-weight: 600;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  right: 0;
+  transform: translate(-10px, -50%);
 `;
