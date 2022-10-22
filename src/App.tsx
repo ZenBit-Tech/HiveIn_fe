@@ -2,7 +2,7 @@ import { Layout } from "antd";
 import React, { Suspense } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import Footer from "components/footer/Footer";
+// import Footer from "components/footer/Footer";
 import Navbar from "components/navbar/Navbar";
 import { store, userPersistor } from "store/store";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,7 +20,7 @@ function App() {
             <Layout style={{ minHeight: "100vh" }}>
               <Navbar />
               <Content />
-              <Footer />
+              {/* <Footer /> */}
             </Layout>
           </PersistGate>
         </Provider>
