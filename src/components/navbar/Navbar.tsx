@@ -89,10 +89,7 @@ function Navbar() {
       </NavLink>
       <Menu selectedKeys={[path]} mode="horizontal" style={{ width: "100%" }}>
         {role === CLIENT_ROLE ? (
-          <Menu.Item
-            key={t("Profile.title")}
-            icon={verifyMenuItemIcon("Profile")}
-          >
+          <Menu.Item key={CLIENT_PROFILE} icon={verifyMenuItemIcon("Profile")}>
             <Link to={CLIENT_PROFILE}>{t("Profile.title")}</Link>
           </Menu.Item>
         ) : null}
