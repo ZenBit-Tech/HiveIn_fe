@@ -37,6 +37,7 @@ export default function ForgotPassword() {
         ),
         centered: true,
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, data]);
 
   const goToLogin = () => {
