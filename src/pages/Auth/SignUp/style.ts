@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BOX_BORDER } from "utils/consts/colorConsts";
+import { WHITE } from "utils/consts/colorConsts";
 
 const Container = styled.div`
   width: 100%;
@@ -11,19 +11,21 @@ const Container = styled.div`
 
 const FormBox = styled.div`
   width: 35%;
-  height: 100%;
+  padding-block: 15px;
+  row-gap: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   border-radius: 10px;
-  background-color: ${BOX_BORDER};
-  border: 1px solid ${BOX_BORDER};
+  background-color: ${WHITE};
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 `;
 
 const Form = styled.form`
   width: 80%;
-  height: 70%;
+  row-gap: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
