@@ -62,6 +62,10 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
 
   const ref = useChatScroll(messages);
 
+  const isClient = userRole === UserRoleEnum.CLIENT;
+
+  const isOfferBeenSent = !!room?.offerStatus;
+
   return (
     <div>
       {roomId && +roomId ? (
@@ -73,8 +77,13 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
                 {room?.jobPost?.title}
               </Title>
             </div>
-            {userRole === UserRoleEnum.CLIENT && (
-              <StyledButton type="default" shape="round" onClick={toggleModal}>
+            {isClient && (
+              <StyledButton
+                disabled={isOfferBeenSent}
+                type="dashed"
+                shape="round"
+                onClick={toggleModal}
+              >
                 {t("Chat.sendOffer")}
               </StyledButton>
             )}
