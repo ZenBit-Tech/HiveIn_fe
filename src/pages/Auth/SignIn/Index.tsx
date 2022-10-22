@@ -70,13 +70,13 @@ export default function SignIn() {
 
   return (
     <S.Container>
-      <S.TextsBox>
-        <Title italic>{t("SignIn.title")}</Title>
-        <Title style={{ fontWeight: "400" }} level={2}>
-          {t("SignIn.subtitle")}
-        </Title>
-      </S.TextsBox>
       <S.FormBox>
+        <S.TextsBox>
+          <Title italic>{t("SignIn.title")}</Title>
+          <Title style={{ fontWeight: "400" }} level={2}>
+            {t("SignIn.subtitle")}
+          </Title>
+        </S.TextsBox>
         <GoogleAuthButton>{t("SignIn.signInGoogle")}</GoogleAuthButton>
         <S.Form onSubmit={handleSubmit(onSubmit)}>
           <S.InputContainer>

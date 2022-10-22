@@ -111,7 +111,8 @@
     "jobTitle": "Job title",
     "disabledMessaging": "You are not able to send any messages in this chat yet",
     "sendOffer": "Send offer",
-    "confirmSendOffer": "Do you want to send the offer to this user?"
+    "confirmSendOffer": "Do you want to send the offer to this user?",
+    "prolong": "Chat was prolong for 6 months"
   },
   "Settings": {
     "title": "Settings"
@@ -158,7 +159,8 @@
     "resetPassword": "Reset password",
     "rememberPassword": "Just remembered password?",
     "signIn": "Sign In",
-    "checkMailBox": "If your e-mail is correct, we just send you a recovery e-mail with instructions. Please check your e-mail."
+    "checkMailBox": "If your e-mail is correct, we just send you a recovery e-mail with instructions. Please check your e-mail.",
+    "GoogleSignIn": "User with this email sign up with Google Sign Up. Please login with Google Sign In"
   },
   "RestorePassword": {
     "title": "Change password?",
@@ -197,11 +199,7 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": [
-        "pre-intermediate",
-        "intermediate",
-        "upper-intermediate"
-      ]
+      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
     },
     "description": {
       "title": "Description",

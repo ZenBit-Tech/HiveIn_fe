@@ -14,6 +14,10 @@ import { UserRoleEnum } from "utils/enums";
 import useChatRoomData from "pages/Chat/hooks/useChatRoomData";
 import Message from "pages/Chat/components/Message/Message";
 import SendOfferModal from "components/UI/ModalWindows/SendOfferModal/SendOfferModal";
+import { useProlongChatMutation } from "services/chatRoom/chatRoomApi";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 interface IChatRoom {
   userSelfId: number;
@@ -35,6 +39,26 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
     toggleModal,
     modal,
   } = useChatRoomData(userRole);
+
+  const [prolongChat, { isSuccess, data }] = useProlongChatMutation();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const prolongToken = params.get("prolong");
+
+  useEffect(() => {
+    if (prolongToken) {
+      prolongChat({ token: prolongToken, chatId: +roomId! });
+      navigate(location.pathname);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (data?.affected && isSuccess) toast.success(t("Chat.prolong"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess, data]);
 
   const ref = useChatScroll(messages);
 

@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { WHITE } from "utils/consts/colorConsts";
+import { BOX_BACKGROUND } from "utils/consts/colorConsts";
 
 const Box = styled.div`
   width: 100%;
   height: 125px;
-  background: ${WHITE};
+  background: ${BOX_BACKGROUND};
   border-radius: 12px;
   padding: 15px;
 `;
