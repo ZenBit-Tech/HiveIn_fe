@@ -3,7 +3,7 @@ import {
   MessageTypeEnum,
   NotificationTypeEnum,
 } from "services/notifications/chatEnums";
-import { OfferStatus } from "../../utils/enums";
+import { OfferStatus } from "utils/enums";
 
 export interface IChatUser {
   id: number;
@@ -37,7 +37,7 @@ export interface IRoom {
   lastMessage: {
     created_at: Date;
     id: number;
-    isSystemMessage: boolean;
+    messageType: MessageTypeEnum;
     text: string;
   };
   offerStatus?: OfferStatus;

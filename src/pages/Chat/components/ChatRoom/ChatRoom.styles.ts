@@ -56,7 +56,6 @@ export const Title = styled.div<{
 export const StyledButton: React.FunctionComponent<ButtonProps> = styled(
   Button
 )`
-  background-color: ${LIGHT_BLUE};
   box-shadow: rgba(0, 0, 0, 0.15) 0 15px 25px, rgba(0, 0, 0, 0.05) 0 5px 10px;
   font-weight: 600;
   position: absolute;

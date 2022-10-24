@@ -82,7 +82,11 @@
     "drawerTitle": "Offer Status",
     "drawerRelatedJob": "Related Job Opening",
     "expireDate": "Offer Expires",
-    "createDate": "Offer Date:"
+    "createDate": "Offer Date:",
+    "pendingStatus": "Offer pending",
+    "acceptedStatus": "Offer accepted",
+    "rejectedStatus": "Offer rejected",
+    "expiredStatus": "Offer expired"
   },
 
   "MyJobs": {

@@ -12,6 +12,7 @@ export const JOB_POST = "job-post";
 export const JOB_POST_FILE = "job-post/file";
 export const PROPOSALS = "proposal";
 export const OFFER = "offer";
+export const BY_FREELANCER_AND_JOB_POST = "by-freelancer-and-job-post";
 export const AVATAR = "avatar";
 export const REMOVE_AVATAR = "removeAvatar";
 export const FILTER_FREELANCER = "client/filter";
