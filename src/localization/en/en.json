@@ -84,7 +84,6 @@
     "expireDate": "Offer Expires",
     "createDate": "Offer Date:"
   },
-
   "MyJobs": {
     "title": "Jobs",
     "subTitle": "Your Projects",
@@ -176,7 +175,8 @@
     "freelancer": "I'm a freelancer, looking for work",
     "title": "Join as a client or freelancer",
     "button": "Create My Account",
-    "error": "Server error, please try again"
+    "error": "Server error, please try again",
+    "nameRequirement": "To create a freelancer account enter your first name and last name"
   },
   "Welcome": {
     "title": "Welcome",
@@ -199,7 +199,11 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
+      "options": [
+        "pre-intermediate",
+        "intermediate",
+        "upper-intermediate"
+      ]
     },
     "description": {
       "title": "Description",
