@@ -6,12 +6,12 @@ const contactEditFormValidationSchema = yup.object().shape({
     .string()
     .trim()
     .min(2, i18next.contactInfoForm.fieldsData.firstName.errorMessage)
-    .required(),
+    .required(i18next.contactInfoForm.fieldsData.firstName.errorMessage),
   lastName: yup
     .string()
     .trim()
     .min(2, i18next.contactInfoForm.fieldsData.lastName.errorMessage)
-    .required(),
+    .required(i18next.contactInfoForm.fieldsData.lastName.errorMessage),
 });
 
 export default contactEditFormValidationSchema;

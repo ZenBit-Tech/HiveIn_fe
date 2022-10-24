@@ -1,4 +1,10 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Control, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import Wrapper, {
   RoleRadio,
   TitleText,
@@ -6,15 +12,21 @@ import Wrapper, {
   ApplyButton,
   ButtonText,
   RadioGroup,
+  SForm,
+  SDiv,
 } from "pages/Auth/CompleteRegistration/CompleteRegistrationStyles";
 import useGoogleAuth from "hooks/useGoogleAuth";
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import { setUser } from "store/slices/userSlice";
-import { useNavigate } from "react-router-dom";
 import { WELCOME_ROUTE } from "utils/consts/routeConsts";
 import { useUpdateUserMutation } from "services/user/setUserAPI";
-import { toast } from "react-toastify";
+import { UserRoleEnum } from "utils/enums";
+import Field from "components/DefaultField/DefaultField";
+import contactEditFormValidationSchema from "validation/contactEditFormValidationSchema";
+
+interface IFields {
+  firstName: string;
+  lastName: string;
+}
 
 export default function CompleteRegistration() {
   useGoogleAuth();
@@ -26,6 +38,10 @@ export default function CompleteRegistration() {
 
   const [updateRole, { isError, isLoading, error }] = useUpdateUserMutation();
 
+  const { control, handleSubmit } = useForm<IFields>({
+    resolver: yupResolver(contactEditFormValidationSchema),
+  });
+
   useEffect(() => {
     if (!isLoading && isError) {
       if ("status" in error!) {
@@ -35,7 +51,7 @@ export default function CompleteRegistration() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
-  const sendToDB = async () => {
+  const sendToDB = async (firstName?: string, lastName?: string) => {
     navigate(WELCOME_ROUTE);
     dispatch(
       setUser({
@@ -45,7 +61,18 @@ export default function CompleteRegistration() {
 
     await updateRole({
       role: radioOption,
+      firstName,
+      lastName,
     });
+  };
+
+  const submitHandler = async (data: IFields) => {
+    await sendToDB(data.firstName, data.lastName);
+  };
+
+  const clickHandler = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    await sendToDB();
   };
 
   return (
@@ -64,9 +91,33 @@ export default function CompleteRegistration() {
             <ButtonText>{t("CompleteRegistration.freelancer")}</ButtonText>
           </RoleRadio>
         </RadioGroup>
-        <ApplyButton role={radioOption} onClick={sendToDB}>
-          {t("CompleteRegistration.button")}
-        </ApplyButton>
+        {radioOption === UserRoleEnum.CLIENT && (
+          <ApplyButton onClick={clickHandler}>
+            {t("CompleteRegistration.button")}
+          </ApplyButton>
+        )}
+        {radioOption === UserRoleEnum.FREELANCER && (
+          <SForm onSubmit={handleSubmit(submitHandler)}>
+            <TitleText level={5}>
+              {t("CompleteRegistration.nameRequirement")}
+            </TitleText>
+            <SDiv>
+              <Field
+                label="First name"
+                control={control as unknown as Control<any>}
+                name="firstName"
+              />
+              <Field
+                label="Last name"
+                control={control as unknown as Control<any>}
+                name="lastName"
+              />
+            </SDiv>
+            <ApplyButton type="submit">
+              {t("CompleteRegistration.button")}
+            </ApplyButton>
+          </SForm>
+        )}
       </FormBox>
     </Wrapper>
   );

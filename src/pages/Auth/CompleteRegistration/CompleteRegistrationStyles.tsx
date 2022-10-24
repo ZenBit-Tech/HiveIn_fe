@@ -51,12 +51,15 @@ export const RoleRadio = styled(Radio)`
   max-width: 300px;
   width: 50%;
   border-radius: 10px;
+
   &:hover {
     background-color: ${LIGHT_BLUE};
   }
+
   &:focus-within {
     border: 2px solid ${BLUE};
   }
+
   @media (max-width: ${WRAP_SCREEN_SIZE}) {
     max-width: 100%;
     width: 80%;
@@ -70,14 +73,16 @@ export const FormBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   background: ${WHITE};
-  border-radius: 8px;
   box-shadow: ${BOX_SHADOW_LIGHT} 0px 1px 3px, ${BOX_SHADOW_DARK} 0px 1px 2px;
+
   & ${TitleText}:first-child {
     width: 100%;
   }
+
   & ${RadioGroup}:not(:first-child) {
     flex: 1;
   }
+
   justify-content: center;
   align-items: center;
   border-radius: 10px;
@@ -87,10 +92,10 @@ export const FormBox = styled.div`
   }
 `;
 
-export const ApplyButton = styled.div`
+export const ApplyButton = styled.button`
   cursor: pointer;
   position: relative;
-  display: ${(props) => (props.role ? "flex" : "none")};
+  display: flex;
   font-size: 1.1em;
   align-items: center;
   justify-content: center;
@@ -100,12 +105,29 @@ export const ApplyButton = styled.div`
   border-radius: 50px;
   color: ${WHITE};
   margin: 20px;
+
   &:hover {
     background-color: ${DARK_BLUE};
   }
+
   @media (max-width: ${WRAP_SCREEN_SIZE}) {
     width: 100%;
   }
+`;
+
+export const SForm = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const SDiv = styled.div`
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 `;
 
 export default Wrapper;
