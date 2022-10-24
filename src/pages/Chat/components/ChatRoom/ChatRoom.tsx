@@ -161,6 +161,7 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
               messages.map((message) => {
                 return (
                   <Message
+                    offerStatus={room?.offerStatus}
                     onAccept={acceptButtonHandler}
                     onReject={rejectButtonHandler}
                     messageType={message.messageType}
@@ -204,15 +205,15 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
         modal={acceptOfferModal}
         onCancel={toggleAcceptOfferModal}
         onOk={onAcceptOfferHandler}
-        title="Accept"
-        text="Do you want to accept this offer?"
+        title={t("Offer.acceptOffer")}
+        text={t("Offer.confirmAccept")}
       />
       <OfferModal
         modal={rejectOfferModal}
         onCancel={toggleRejectOfferModal}
         onOk={onRejectOfferHandler}
-        title="Reject"
-        text="Do you want to reject this offer?"
+        title={t("Offer.rejectOffer")}
+        text={t("Offer.confirmReject")}
       />
     </div>
   );

@@ -79,6 +79,7 @@
     "confirmAccept": "Are you sure you want to accept the offer?",
     "confirmReject": "Are you sure you want to decline the offer?",
     "status": "Offer Status Changed!",
+    "error": "Offer Status Has Not Changed!",
     "drawerTitle": "Offer Status",
     "drawerRelatedJob": "Related Job Opening",
     "expireDate": "Offer Expires",
@@ -86,7 +87,8 @@
     "pendingStatus": "Offer pending",
     "acceptedStatus": "Offer accepted",
     "rejectedStatus": "Offer rejected",
-    "expiredStatus": "Offer expired"
+    "expiredStatus": "Offer expired",
+    "offerSent": "Offer has been sent"
   },
 
   "MyJobs": {

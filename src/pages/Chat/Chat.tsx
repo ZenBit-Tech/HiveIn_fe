@@ -13,6 +13,7 @@ function Chat() {
     roomsList,
     getRoomNotifications,
     defineOpponentsNameAndAvatar,
+    defineLastMessage,
   } = useChatData();
 
   return (
@@ -33,7 +34,7 @@ function Chat() {
                       room.client,
                       user
                     )}
-                    lastMessage={room.lastMessage.text}
+                    lastMessage={defineLastMessage(room)}
                     lastMessageDate={room.lastMessage.created_at}
                     key={room.id}
                   />

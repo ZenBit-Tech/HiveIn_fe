@@ -36,3 +36,9 @@ export const Text = styled.div`
   font-size: 18px;
   font-style: italic;
 `;
+
+export const ButtonBlock = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+`;

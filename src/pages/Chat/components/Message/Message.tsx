@@ -2,9 +2,14 @@ import React from "react";
 import { MessageTypeEnum } from "services/notifications/chatEnums";
 import { formatToStandardDate } from "utils/functions/formatDateFunctions";
 import { CHAT_DATE_FORMAT } from "utils/consts/inputPropsConsts";
-import { Container, Text } from "pages/Chat/components/Message/Message.styles";
+import {
+  ButtonBlock,
+  Container,
+  Text,
+} from "pages/Chat/components/Message/Message.styles";
 import { useTranslation } from "react-i18next";
 import { Button } from "antd";
+import { OfferStatus } from "utils/enums";
 
 interface IMessage {
   messageType: MessageTypeEnum;
@@ -15,6 +20,7 @@ interface IMessage {
   defineName: (userID: number) => string;
   onAccept: () => void;
   onReject: () => void;
+  offerStatus?: OfferStatus;
 }
 
 function Message({
@@ -26,6 +32,7 @@ function Message({
   defineName,
   onAccept,
   onReject,
+  offerStatus,
 }: IMessage) {
   const { t } = useTranslation();
 
@@ -38,6 +45,9 @@ function Message({
     }
     return defineName(senderId);
   };
+
+  const isSystemOffer = messageType === MessageTypeEnum.FROM_SYSTEM_OFFER;
+  const isOfferStatusPending = offerStatus === OfferStatus.PENDING;
 
   return (
     <Container
@@ -54,19 +64,13 @@ function Message({
         </div>
       </div>
       <Text>{text}</Text>
-      {messageType === MessageTypeEnum.FROM_SYSTEM_OFFER && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            marginTop: "10px",
-          }}
-        >
-          <Button onClick={onAccept}>Accept</Button>
+      {isSystemOffer && isOfferStatusPending && (
+        <ButtonBlock>
+          <Button onClick={onAccept}>{t("Offer.acceptOffer")}</Button>
           <Button onClick={onReject} danger>
-            Reject
+            {t("Offer.rejectOffer")}
           </Button>
-        </div>
+        </ButtonBlock>
       )}
     </Container>
   );

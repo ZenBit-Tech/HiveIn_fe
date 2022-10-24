@@ -57,17 +57,17 @@ function useChatRoomData(userRole: UserRoleEnum) {
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Offer has been sent");
+      toast.success(t("Offer.offerSent"));
     }
     if (isError) {
       // @ts-ignore
       toast.error(error?.data.message || "Error");
     }
     if (isOfferUpdateSuccess) {
-      toast.success("Offer status has been changed");
+      toast.success(t("Offer.status"));
     }
     if (isOfferUpdateError) {
-      toast.error("Offer status has not been changed");
+      toast.error(t("Offer.error"));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, isError, isOfferUpdateSuccess, isOfferUpdateError]);
