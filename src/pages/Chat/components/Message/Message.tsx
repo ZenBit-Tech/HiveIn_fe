@@ -41,7 +41,7 @@ function Message({
       return t("Chat.systemMessage");
     }
     if (messageType === MessageTypeEnum.FROM_SYSTEM_OFFER) {
-      return "Offer";
+      return t("Chat.offerMessage");
     }
     return defineName(senderId);
   };

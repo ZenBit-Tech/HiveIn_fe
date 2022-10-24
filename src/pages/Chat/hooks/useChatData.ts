@@ -48,7 +48,7 @@ const useChatData = () => {
     if (room.lastMessage.messageType === MessageTypeEnum.FROM_USER) {
       return room.lastMessage.text;
     }
-    return "System message";
+    return t("Chat.systemMessage");
   };
 
   return {
