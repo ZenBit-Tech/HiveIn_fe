@@ -4,7 +4,8 @@ import {
   useGetRoomsQuery,
 } from "services/notifications/setNotificationsAPI";
 import { IUser, useGetOwnUserQuery } from "services/user/setUserAPI";
-import { IChatUser } from "services/notifications/chatTypes";
+import { IChatUser, IRoom } from "services/notifications/chatTypes";
+import { MessageTypeEnum } from "services/notifications/chatEnums";
 
 const useChatData = () => {
   const { t } = useTranslation();
@@ -43,12 +44,20 @@ const useChatData = () => {
     };
   };
 
+  const defineLastMessage = (room: IRoom): string => {
+    if (room.lastMessage.messageType === MessageTypeEnum.FROM_USER) {
+      return room.lastMessage.text;
+    }
+    return t("Chat.systemMessage");
+  };
+
   return {
     t,
     roomsList,
     user,
     getRoomNotifications,
     defineOpponentsNameAndAvatar,
+    defineLastMessage,
   };
 };
 export default useChatData;

@@ -1,7 +1,12 @@
 import { OfferStatus, ProposalType } from "utils/enums";
 import apiSlice from "services/api/apiSlice";
 import { IJobPost } from "services/jobPosts/setJobPostsAPI";
-import { JOB_POST, OFFER, PROPOSALS } from "utils/consts/breakpointConsts";
+import {
+  BY_FREELANCER_AND_JOB_POST,
+  JOB_POST,
+  OFFER,
+  PROPOSALS,
+} from "utils/consts/breakpointConsts";
 import { IUser } from "services/user/setUserAPI";
 
 export interface InviteFields {
@@ -76,6 +81,18 @@ const proposalsApi = apiSlice.injectEndpoints({
         };
       },
     }),
+
+    getOfferId: builder.mutation<
+      IOffersRes,
+      { jobPostId: number; freelancerId: number }
+    >({
+      query({ jobPostId, freelancerId }) {
+        return {
+          url: `/${OFFER}/${BY_FREELANCER_AND_JOB_POST}?jobPostId=${jobPostId}&freelancerId=${freelancerId}`,
+          method: "GET",
+        };
+      },
+    }),
   }),
 });
 
@@ -86,6 +103,7 @@ export const {
   useGetProposalsByJobPostQuery,
   useChangeOfferStatusMutation,
   useSendOfferMutation,
+  useGetOfferIdMutation,
 } = proposalsApi;
 
 export default proposalsApi;

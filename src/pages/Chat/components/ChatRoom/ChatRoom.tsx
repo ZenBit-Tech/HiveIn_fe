@@ -10,14 +10,20 @@ import {
   Warning,
 } from "pages/Chat/components/ChatRoom/ChatRoom.styles";
 import useChatScroll from "hooks/useChatScroll";
-import { UserRoleEnum } from "utils/enums";
+import { OfferStatus, UserRoleEnum } from "utils/enums";
 import useChatRoomData from "pages/Chat/hooks/useChatRoomData";
 import Message from "pages/Chat/components/Message/Message";
-import SendOfferModal from "components/UI/ModalWindows/SendOfferModal/SendOfferModal";
+import OfferModal from "components/UI/ModalWindows/SendOfferModal/OfferModal";
 import { useProlongChatMutation } from "services/chatRoom/chatRoomApi";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import {
+  LIGHT_BLUE,
+  TAG_CLOSED,
+  TAG_PENDING,
+  TAG_SUCCESS,
+} from "utils/consts/colorConsts";
 
 interface IChatRoom {
   userSelfId: number;
@@ -36,8 +42,16 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
     onChangeHandler,
     text,
     sendOfferHandler,
-    toggleModal,
-    modal,
+    toggleSendOfferModal,
+    sendOfferModal,
+    toggleAcceptOfferModal,
+    toggleRejectOfferModal,
+    rejectOfferModal,
+    acceptOfferModal,
+    acceptButtonHandler,
+    rejectButtonHandler,
+    onAcceptOfferHandler,
+    onRejectOfferHandler,
   } = useChatRoomData(userRole);
 
   const [prolongChat, { isSuccess, data }] = useProlongChatMutation();
@@ -62,6 +76,72 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
 
   const ref = useChatScroll(messages);
 
+  const isClient = userRole === UserRoleEnum.CLIENT;
+
+  const renderSendOfferButton = (): JSX.Element => {
+    switch (room?.offerStatus) {
+      case OfferStatus.PENDING:
+        return (
+          <StyledButton
+            disabled
+            style={{ backgroundColor: TAG_PENDING }}
+            type="default"
+            shape="round"
+            onClick={toggleSendOfferModal}
+          >
+            {t("Offer.pendingStatus")}
+          </StyledButton>
+        );
+      case OfferStatus.ACCEPTED:
+        return (
+          <StyledButton
+            disabled
+            style={{ backgroundColor: TAG_SUCCESS }}
+            type="default"
+            shape="round"
+            onClick={toggleSendOfferModal}
+          >
+            {t("Offer.acceptedStatus")}
+          </StyledButton>
+        );
+      case OfferStatus.REJECTED:
+        return (
+          <StyledButton
+            disabled
+            style={{ backgroundColor: TAG_CLOSED }}
+            type="default"
+            shape="round"
+            onClick={toggleSendOfferModal}
+          >
+            {t("Offer.rejectedStatus")}
+          </StyledButton>
+        );
+      case OfferStatus.EXPIRED:
+        return (
+          <StyledButton
+            disabled
+            style={{ backgroundColor: TAG_CLOSED }}
+            type="default"
+            shape="round"
+            onClick={toggleSendOfferModal}
+          >
+            {t("Offer.expiredStatus")}
+          </StyledButton>
+        );
+      default:
+        return (
+          <StyledButton
+            style={{ backgroundColor: LIGHT_BLUE }}
+            type="default"
+            shape="round"
+            onClick={toggleSendOfferModal}
+          >
+            {t("Chat.sendOffer")}
+          </StyledButton>
+        );
+    }
+  };
+
   return (
     <div>
       {roomId && +roomId ? (
@@ -73,17 +153,16 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
                 {room?.jobPost?.title}
               </Title>
             </div>
-            {userRole === UserRoleEnum.CLIENT && (
-              <StyledButton type="default" shape="round" onClick={toggleModal}>
-                {t("Chat.sendOffer")}
-              </StyledButton>
-            )}
+            {isClient && renderSendOfferButton()}
           </Header>
           <MessageBlock ref={ref}>
             {messages?.length ? (
               messages.map((message) => {
                 return (
                   <Message
+                    offerStatus={room?.offerStatus}
+                    onAccept={acceptButtonHandler}
+                    onReject={rejectButtonHandler}
                     messageType={message.messageType}
                     text={message.text}
                     defineName={defineName}
@@ -114,12 +193,26 @@ function ChatRoom({ userSelfId, userRole }: IChatRoom) {
       ) : (
         <Notification>{t("Chat.chooseTheChat")}</Notification>
       )}
-      <SendOfferModal
-        modal={modal}
-        onCancel={toggleModal}
+      <OfferModal
+        modal={sendOfferModal}
+        onCancel={toggleSendOfferModal}
         onOk={sendOfferHandler}
         title={t("Chat.sendOffer")}
         text={t("Chat.confirmSendOffer")}
+      />
+      <OfferModal
+        modal={acceptOfferModal}
+        onCancel={toggleAcceptOfferModal}
+        onOk={onAcceptOfferHandler}
+        title={t("Offer.acceptOffer")}
+        text={t("Offer.confirmAccept")}
+      />
+      <OfferModal
+        modal={rejectOfferModal}
+        onCancel={toggleRejectOfferModal}
+        onOk={onRejectOfferHandler}
+        title={t("Offer.rejectOffer")}
+        text={t("Offer.confirmReject")}
       />
     </div>
   );

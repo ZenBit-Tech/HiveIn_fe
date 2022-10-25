@@ -9,9 +9,13 @@ import {
   useSendMessageMutation,
 } from "services/notifications/setNotificationsAPI";
 import { ChangeEvent, useEffect, useState } from "react";
-import { UserRoleEnum } from "utils/enums";
+import { OfferStatus, UserRoleEnum } from "utils/enums";
 import { ChatRoomStatusEnum } from "services/notifications/chatEnums";
-import { useSendOfferMutation } from "services/jobPosts/proposalsAPI";
+import {
+  useChangeOfferStatusMutation,
+  useGetOfferIdMutation,
+  useSendOfferMutation,
+} from "services/jobPosts/proposalsAPI";
 import useModalHandler from "hooks/use-modal-handler";
 import { toast } from "react-toastify";
 
@@ -34,20 +38,41 @@ function useChatRoomData(userRole: UserRoleEnum) {
 
   const [sendOffer, { isSuccess, isError, error }] = useSendOfferMutation();
 
+  const [getOfferId, { data: offer, error: updateOfferError }] =
+    useGetOfferIdMutation();
+
+  const [
+    changeOfferStatus,
+    { isSuccess: isOfferUpdateSuccess, isError: isOfferUpdateError },
+  ] = useChangeOfferStatusMutation();
+
   const [text, setText] = useState<string>("");
 
-  const { modal, toggleModal } = useModalHandler();
+  const { modal: sendOfferModal, toggleModal: toggleSendOfferModal } =
+    useModalHandler();
+
+  const { modal: acceptOfferModal, toggleModal: toggleAcceptOfferModal } =
+    useModalHandler();
+  const { modal: rejectOfferModal, toggleModal: toggleRejectOfferModal } =
+    useModalHandler();
 
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Offer has been sent");
+      toast.success(t("Offer.offerSent"));
     }
     if (isError) {
       // @ts-ignore
       toast.error(error?.data.message || "Error");
     }
+    if (isOfferUpdateSuccess) {
+      toast.success(t("Offer.status"));
+    }
+    if (isOfferUpdateError) {
+      // @ts-ignore
+      toast.error(updateOfferError?.data.message || t("Offer.error"));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, isOfferUpdateSuccess, isOfferUpdateError]);
 
   useEffect(() => {
     if (roomId && +roomId) {
@@ -113,7 +138,41 @@ function useChatRoomData(userRole: UserRoleEnum) {
         jobPostId: room.jobPost.id,
         freelancerId: room.freelancer.freelancerId,
       });
-      toggleModal();
+      toggleSendOfferModal();
+    }
+  };
+
+  const acceptButtonHandler = async () => {
+    if (room) {
+      await getOfferId({
+        jobPostId: room.jobPost.id,
+        freelancerId: room.freelancer.freelancerId,
+      });
+      toggleAcceptOfferModal();
+    }
+  };
+
+  const rejectButtonHandler = async () => {
+    if (room) {
+      await getOfferId({
+        jobPostId: room.jobPost.id,
+        freelancerId: room.freelancer.freelancerId,
+      });
+      toggleRejectOfferModal();
+    }
+  };
+
+  const onAcceptOfferHandler = async () => {
+    if (offer) {
+      await changeOfferStatus({ id: offer.id, status: OfferStatus.ACCEPTED });
+      toggleAcceptOfferModal();
+    }
+  };
+
+  const onRejectOfferHandler = async () => {
+    if (offer) {
+      await changeOfferStatus({ id: offer.id, status: OfferStatus.REJECTED });
+      toggleRejectOfferModal();
     }
   };
 
@@ -129,8 +188,16 @@ function useChatRoomData(userRole: UserRoleEnum) {
     text,
     sendOffer,
     sendOfferHandler,
-    modal,
-    toggleModal,
+    sendOfferModal,
+    toggleSendOfferModal,
+    acceptOfferModal,
+    toggleAcceptOfferModal,
+    rejectOfferModal,
+    toggleRejectOfferModal,
+    acceptButtonHandler,
+    rejectButtonHandler,
+    onAcceptOfferHandler,
+    onRejectOfferHandler,
   };
 }
 

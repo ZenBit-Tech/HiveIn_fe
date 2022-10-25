@@ -4,7 +4,7 @@ import {
   ModalContainer,
   Text,
   Title,
-} from "components/UI/ModalWindows/SendOfferModal/SendOfferModal.styles";
+} from "components/UI/ModalWindows/SendOfferModal/OfferModal.styles";
 
 interface IProps {
   modal: boolean;
@@ -14,7 +14,7 @@ interface IProps {
   text: string;
 }
 
-function SendOfferModal({ modal, text, title, onOk, onCancel }: IProps) {
+function OfferModal({ modal, text, title, onOk, onCancel }: IProps) {
   return (
     <Modal visible={modal} onCancel={onCancel} onOk={onOk}>
       <ModalContainer>
@@ -25,4 +25,4 @@ function SendOfferModal({ modal, text, title, onOk, onCancel }: IProps) {
   );
 }
 
-export default SendOfferModal;
+export default OfferModal;
