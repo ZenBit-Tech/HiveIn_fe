@@ -38,7 +38,8 @@ function useChatRoomData(userRole: UserRoleEnum) {
 
   const [sendOffer, { isSuccess, isError, error }] = useSendOfferMutation();
 
-  const [getOfferId, { data: offer }] = useGetOfferIdMutation();
+  const [getOfferId, { data: offer, error: updateOfferError }] =
+    useGetOfferIdMutation();
 
   const [
     changeOfferStatus,
@@ -67,7 +68,8 @@ function useChatRoomData(userRole: UserRoleEnum) {
       toast.success(t("Offer.status"));
     }
     if (isOfferUpdateError) {
-      toast.error(t("Offer.error"));
+      // @ts-ignore
+      toast.error(updateOfferError?.data.message || t("Offer.error"));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, isError, isOfferUpdateSuccess, isOfferUpdateError]);
