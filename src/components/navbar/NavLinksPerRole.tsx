@@ -66,11 +66,11 @@ const navLinksPerRole: NavLinkRoles = {
         title: i18next.Profile.title,
         links: [
           {
-            to: SETTINGS_CONTACT_INFO_ROUTE,
+            to: SETTINGS_ROUTE,
             title: i18next.Profile.title,
           },
           {
-            to: SETTINGS_ROUTE,
+            to: SETTINGS_CONTACT_INFO_ROUTE,
             title: i18next.Settings.title,
           },
         ],

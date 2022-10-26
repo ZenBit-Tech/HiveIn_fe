@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import LayoutElementWithTitle from "components/layoutElementWithTitle/LayoutElementWithTitle";
@@ -55,13 +55,10 @@ function DiscoverFilterForm({
     isLoading: isAllFreelancerLoading,
   } = allFreelancersData;
 
-  useEffect(() => {
-    if (filtersData.data) setIsAllFreelancer(false);
-  }, [filtersData.data]);
-
   const changeIsFiltersOpen = () => setIsFiltersOpen(!isFiltersOpen);
   const onSubmit = (filtersForm: FieldValues) => {
     setFilters(filtersForm);
+    setIsAllFreelancer(false);
     setTimeout(changeIsFiltersOpen, DEBOUNCE_DELAY);
   };
 
