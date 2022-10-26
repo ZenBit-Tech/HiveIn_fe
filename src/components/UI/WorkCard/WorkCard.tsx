@@ -12,10 +12,17 @@ export interface IWorkCardProps {
   id: number;
   title: string;
   createdAt: string;
+  updatedAt: string;
   jobDescription: string;
 }
 
-function WorkCard({ jobDescription, title, createdAt, id }: IWorkCardProps) {
+function WorkCard({
+  jobDescription,
+  title,
+  createdAt,
+  id,
+  updatedAt,
+}: IWorkCardProps) {
   const { t } = useTranslation();
 
   const [open, setOpen] = useState(false);
@@ -33,7 +40,20 @@ function WorkCard({ jobDescription, title, createdAt, id }: IWorkCardProps) {
         <JobTitle font_sz="1.5em">
           {title}
           <JobTitle font_sz="0.7em">
-            {createdAt ? dayjs(createdAt).fromNow() : t("NotFound.notFound")}
+            <div>
+              <div>
+                {t("SearchWork.postedAt")}
+                {createdAt
+                  ? dayjs(createdAt).fromNow()
+                  : t("NotFound.notFound")}
+              </div>
+              <div>
+                {t("SearchWork.updatedAt")}
+                {updatedAt
+                  ? dayjs(updatedAt).fromNow()
+                  : t("NotFound.notFound")}
+              </div>
+            </div>
           </JobTitle>
         </JobTitle>
         <JobDescription>{jobDescription}</JobDescription>

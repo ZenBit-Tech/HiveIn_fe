@@ -84,15 +84,18 @@ function SearchWork() {
             <EmptyBox description={t("SearchWork.noResult")} />
           ) : (
             <>
-              {jobs?.map(({ id, title, jobDescription, createdAt }) => (
-                <WorkCard
-                  key={id}
-                  title={title!}
-                  jobDescription={jobDescription!}
-                  id={id}
-                  createdAt={createdAt!}
-                />
-              ))}
+              {jobs?.map(
+                ({ id, title, jobDescription, createdAt, updatedAt }) => (
+                  <WorkCard
+                    key={id}
+                    title={title!}
+                    jobDescription={jobDescription!}
+                    id={id}
+                    createdAt={createdAt!}
+                    updatedAt={updatedAt}
+                  />
+                )
+              )}
 
               <StyledPagination
                 showSizeChanger

@@ -28,7 +28,9 @@
     "clear": "Clear",
     "filters": "Filters",
     "noResult": "No result",
-    "keyWord": "Search by title and description"
+    "keyWord": "Search by title and description",
+    "postedAt": "Posted: ",
+    "updatedAt": "Updated: "
   },
   "Proposals": {
     "title": "Proposals",

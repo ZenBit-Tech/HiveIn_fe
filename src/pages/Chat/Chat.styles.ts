@@ -10,6 +10,7 @@ export const Block = styled.div`
   background-color: ${LIGHT_BLUE};
   margin-right: 10px;
   overflow: scroll;
+  height: 79vh;
   &::-webkit-scrollbar {
     display: none;
   }

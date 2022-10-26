@@ -9,7 +9,7 @@ export const MessageBlock = styled.div`
   max-width: 90vw;
   min-width: 50vw;
   padding: 10px;
-  height: 70vh;
+  height: 65vh;
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;
