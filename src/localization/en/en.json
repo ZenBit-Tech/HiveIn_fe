@@ -168,12 +168,12 @@
     "rememberPassword": "Just remembered password?",
     "signIn": "Sign In",
     "checkMailBox": "If your e-mail is correct, we just send you a recovery e-mail with instructions. Please check your e-mail.",
-    "GoogleSignIn": "User with this email sign up with Google Sign Up. Please login with Google Sign In"
+    "GoogleSignIn": "User with this email signed up with Google account. Please login with Google Sign In"
   },
   "RestorePassword": {
     "title": "Change password?",
     "subtitle": "Choose a new password with this account.",
-    "signIn": "Sign In",
+    "signIn": "Save new password",
     "newPassword": "New password",
     "confirmNewPassword": "Confirm new password",
     "successfullyTitle": "Change password success",
@@ -208,11 +208,7 @@
     },
     "englishLevel": {
       "title": "English level",
-      "options": [
-        "pre-intermediate",
-        "intermediate",
-        "upper-intermediate"
-      ]
+      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
     },
     "description": {
       "title": "Description",
@@ -393,7 +389,7 @@
       "postJob": "Post job"
     },
     "draftButtonTooltip": "Selected file will not be saved in the draft",
-    "uploadButtonTooltip": "Only for post job, not for draft"
+    "uploadButtonTooltip": "You can upload files of such formats as pdf, jpeg, jpg, png, word, txt. File saves only for post job, not for draft."
   },
   "EditDeletePost": {
     "delete": {
