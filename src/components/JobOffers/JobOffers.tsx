@@ -57,6 +57,7 @@ function JobOffers({
       dayjs(createdAt).add(2, "day").isBefore(new Date())
     )
       handleExpired();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createdAt, status]);
 
   return (
