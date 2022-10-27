@@ -49,9 +49,11 @@ function FreelancerInfoDrawer({
   const [viewFreelancer] = useViewFreelancersMutation();
 
   useEffect(() => {
-    viewFreelancer(id);
+    if (visible) {
+      viewFreelancer(id);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [visible]);
 
   return (
     <Drawer
