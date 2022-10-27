@@ -53,11 +53,11 @@ function JobOffers({
 
   useEffect(() => {
     if (
-      status !== OfferStatus.EXPIRED &&
+      status === OfferStatus.PENDING &&
       dayjs(createdAt).add(2, "day").isBefore(new Date())
     )
       handleExpired();
-  }, [createdAt, handleExpired, status]);
+  }, [createdAt, status]);
 
   return (
     <Wrapper>
