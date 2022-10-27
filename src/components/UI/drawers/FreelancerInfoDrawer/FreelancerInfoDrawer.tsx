@@ -20,7 +20,6 @@ import SubmitInviteModal from "components/UI/ModalWindows/SubmitInviteModal/Subm
 import { SkillTag } from "components/UI/Tags/SkillTag";
 import { AVATAR_SIZE_BIG } from "utils/consts/numberConsts";
 import { useViewFreelancersMutation } from "services/jobOwner/talentAPI";
-import { ConfidentialSettings } from "utils/enums";
 
 dayjs.extend(relativeTime);
 const { Title } = Typography;
@@ -73,16 +72,8 @@ function FreelancerInfoDrawer({
                   {user.firstName} {user.lastName}
                 </Title>
                 <Title level={5}>{position}</Title>
-                {(user.confidentialSetting === ConfidentialSettings.VISIBLE ||
-                  user.confidentialSetting ===
-                    ConfidentialSettings.PHONE_ONLY) && (
-                  <DrawerText>{user.phone}</DrawerText>
-                )}
-                {(user.confidentialSetting === ConfidentialSettings.VISIBLE ||
-                  user.confidentialSetting ===
-                    ConfidentialSettings.EMAIL_ONLY) && (
-                  <DrawerText>{user.email}</DrawerText>
-                )}
+                <DrawerText>{user.phone}</DrawerText>
+                <DrawerText>{user.email}</DrawerText>
               </Space>
             </Space>
           </Header>
