@@ -12,7 +12,7 @@ import {
 
 let socketConnection: Socket;
 
-function getSocket() {
+async function getSocket() {
   if (!socketConnection) {
     const { getState } = store;
 
@@ -35,7 +35,7 @@ const notificationsAPI = apiSlice.injectEndpoints({
       ) {
         try {
           await cacheDataLoaded;
-          const socket = getSocket();
+          const socket = await getSocket();
 
           await socket.emit(EventEnum.GET_NOTIFICATIONS);
 
@@ -63,7 +63,7 @@ const notificationsAPI = apiSlice.injectEndpoints({
       ) {
         try {
           await cacheDataLoaded;
-          const socket = getSocket();
+          const socket = await getSocket();
           socket.emit(EventEnum.GET_MESSAGE_NOTIFICATION);
 
           socket.on(
@@ -91,7 +91,7 @@ const notificationsAPI = apiSlice.injectEndpoints({
         try {
           await cacheDataLoaded;
 
-          const socket = getSocket();
+          const socket = await getSocket();
           socket.on("connect", () => {
             socket.emit(EventEnum.GET_COUNT_NOTIFICATIONS);
           });
@@ -113,8 +113,8 @@ const notificationsAPI = apiSlice.injectEndpoints({
     }),
 
     readNotifications: builder.mutation<void, number[]>({
-      queryFn: (args) => {
-        const socket = getSocket();
+      queryFn: async (args) => {
+        const socket = await getSocket();
         return new Promise((resolve, reject) => {
           socket.emit(EventEnum.MARK_AS_READ_NOTIFICATION, args, () => {
             resolve({ data: undefined });
@@ -134,7 +134,7 @@ const notificationsAPI = apiSlice.injectEndpoints({
         try {
           await cacheDataLoaded;
 
-          const socket = getSocket();
+          const socket = await getSocket();
           socket.emit(EventEnum.GET_ROOMS, () => {});
           socket.on(EventEnum.ROOMS, (rooms: IRoom[]) => {
             updateCachedData((draft) => {
@@ -160,7 +160,7 @@ const notificationsAPI = apiSlice.injectEndpoints({
         try {
           await cacheDataLoaded;
 
-          const socket = getSocket();
+          const socket = await getSocket();
           socket.on(EventEnum.ROOM, (room: IRoom) => {
             updateCachedData(() => {
               return room;
@@ -184,7 +184,7 @@ const notificationsAPI = apiSlice.injectEndpoints({
         try {
           await cacheDataLoaded;
 
-          const socket = getSocket();
+          const socket = await getSocket();
           socket.on(EventEnum.MESSAGES, (messages: IMessage[]) => {
             updateCachedData((draft) => {
               draft.splice(0, draft.length, ...messages);
@@ -201,8 +201,8 @@ const notificationsAPI = apiSlice.injectEndpoints({
     }),
 
     sendMessage: builder.mutation<IMessage, ISendMessage>({
-      queryFn: (data) => {
-        const socket = getSocket();
+      queryFn: async (data) => {
+        const socket = await getSocket();
         return new Promise((resolve) => {
           socket.emit(EventEnum.ADD_MESSAGE, data, (message: IMessage) => {
             resolve({ data: message });
@@ -212,8 +212,8 @@ const notificationsAPI = apiSlice.injectEndpoints({
     }),
 
     leaveRoom: builder.mutation<void, string>({
-      queryFn: (id) => {
-        const socket = getSocket();
+      queryFn: async (id) => {
+        const socket = await getSocket();
         return new Promise((resolve, reject) => {
           socket.emit(EventEnum.LEAVE_ROOM, id, () => {
             resolve({ data: undefined });
@@ -224,8 +224,8 @@ const notificationsAPI = apiSlice.injectEndpoints({
     }),
 
     joinRoom: builder.mutation<void, number>({
-      queryFn: (roomId) => {
-        const socket = getSocket();
+      queryFn: async (roomId) => {
+        const socket = await getSocket();
         return new Promise((resolve, reject) => {
           socket.emit(EventEnum.JOIN_ROOM, roomId, () => {
             resolve({ data: undefined });
@@ -236,12 +236,51 @@ const notificationsAPI = apiSlice.injectEndpoints({
     }),
 
     getMessages: builder.mutation<void, number>({
-      queryFn: (roomId) => {
-        const socket = getSocket();
+      queryFn: async (roomId) => {
+        const socket = await getSocket();
         return new Promise((resolve, reject) => {
           socket.emit(EventEnum.GET_MESSAGES, roomId, () => {
             resolve({ data: undefined });
             reject(new Error(`Cannot find messages for room ${roomId}`));
+          });
+        });
+      },
+    }),
+
+    // Errors
+    getWebsocketError: builder.query<Error, void>({
+      queryFn: () => ({ data: {} as Error }),
+      async onCacheEntryAdded(
+        arg,
+        { cacheDataLoaded, updateCachedData, cacheEntryRemoved }
+      ) {
+        try {
+          await cacheDataLoaded;
+
+          const socket = await getSocket();
+          socket.on(EventEnum.ERROR, (error: Error) => {
+            updateCachedData(() => ({
+              ...error,
+            }));
+          });
+
+          await cacheEntryRemoved;
+
+          socket.off(EventEnum.ERROR);
+        } catch {
+          throw new Error("Server error");
+        }
+      },
+      keepUnusedDataFor: 1,
+    }),
+
+    socketDisconnect: builder.mutation<void, void>({
+      queryFn: async () => {
+        const socket = await getSocket();
+        return new Promise((resolve, reject) => {
+          socket.emit("disconnect", undefined, () => {
+            resolve({ data: undefined });
+            reject(new Error(`Cannot disconnect`));
           });
         });
       },
@@ -261,6 +300,8 @@ export const {
   useGetNotificationsQuery,
   useReadNotificationsMutation,
   useGetMessagesNotificationsQuery,
+  useGetWebsocketErrorQuery,
+  useSocketDisconnectMutation,
 } = notificationsAPI;
 
 export { getSocket };

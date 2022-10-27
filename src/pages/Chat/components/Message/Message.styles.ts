@@ -35,6 +35,7 @@ export const Text = styled.div`
   margin-top: 10px;
   font-size: 18px;
   font-style: italic;
+  word-break: break-word;
 `;
 
 export const ButtonBlock = styled.div`
