@@ -113,6 +113,7 @@ function MyContracts() {
         transformResponse(data).map((contract, index) => (
           <Contract
             key={contract.id}
+            chatId={contract.offer.jobPost.chatRoom[0]?.id}
             jobPostIndex={index}
             contractId={contract.id}
             closeContract={closeContractHandler}
