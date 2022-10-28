@@ -25,6 +25,7 @@ import navLinksPerRole, {
   NavLinkOptions,
 } from "components/navbar/NavLinksPerRole";
 import { CLIENT_ROLE } from "utils/consts/navBarConsts";
+import useWSError from "hooks/useWSError";
 
 function Navbar() {
   const { authToken, signOut, role } = useAuth();
@@ -34,7 +35,12 @@ function Navbar() {
 
   const [total, setTotal] = useState<number | undefined>();
 
-  const { data: countNotifications } = useGetNotificationsCountQuery();
+  useWSError();
+
+  const { data: countNotifications } = useGetNotificationsCountQuery(
+    undefined,
+    { skip: !authToken }
+  );
 
   const { pathname } = useLocation();
 

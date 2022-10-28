@@ -7,7 +7,7 @@ export const MessageBlock = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 90vw;
-  min-width: 50vw;
+  width: 50vw;
   padding: 10px;
   height: 65vh;
   overflow: scroll;

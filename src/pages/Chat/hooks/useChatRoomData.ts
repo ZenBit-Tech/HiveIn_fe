@@ -87,7 +87,9 @@ function useChatRoomData(userRole: UserRoleEnum) {
   }, [roomId]);
 
   const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setText(event.currentTarget.value);
+    if (event.currentTarget.value.length <= 255) {
+      setText(event.currentTarget.value);
+    }
   };
 
   const onSendHandler = () => {

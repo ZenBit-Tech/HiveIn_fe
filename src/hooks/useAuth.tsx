@@ -2,9 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthResponse, useLogOutMutation } from "services/auth/setAuthAPI";
 import { setSignOut, setUser } from "store/slices/userSlice";
 import { RootState, userPersistor } from "store/store";
+import { useSocketDisconnectMutation } from "services/notifications/setNotificationsAPI";
 
 const useAuth = () => {
   const [runLogOut] = useLogOutMutation();
+  const [disconnectFromSocket] = useSocketDisconnectMutation();
 
   const { authToken, email, role } = useSelector(
     (state: RootState) => state.user
@@ -26,6 +28,7 @@ const useAuth = () => {
   };
 
   const signOut = async () => {
+    await disconnectFromSocket();
     await runLogOut();
     dispatch(setSignOut());
 
