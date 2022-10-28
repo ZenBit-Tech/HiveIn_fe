@@ -31,6 +31,10 @@ interface IQueryParam {
   isDraft?: boolean;
 }
 
+export interface IChatRoom {
+  id: number;
+}
+
 export interface IJobPost {
   id: number;
   title: string;
@@ -52,6 +56,7 @@ export interface IJobPost {
     endDate?: Date;
     id: number;
   };
+  chatRoom: IChatRoom[];
 }
 
 export interface IUpdateParams {

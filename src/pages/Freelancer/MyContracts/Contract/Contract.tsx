@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { CHAT_ROUTE } from "utils/consts/routeConsts";
 import { ContractStatusEnum, DurationTypeEnum } from "utils/enums";
 import { Button, Modal } from "antd";
 import { useTranslation } from "react-i18next";
@@ -18,6 +20,7 @@ interface IContract {
   closeContract: (contractId: number) => void;
   openJobPost: (index: number) => void;
   jobPostIndex: number;
+  chatId: number;
 }
 
 function Contract({
@@ -33,10 +36,12 @@ function Contract({
   closeContract,
   openJobPost,
   jobPostIndex,
+  chatId,
 }: IContract) {
   const { modal, toggleModal } = useModalHandler();
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const modalHandler = () => {
     closeContract(contractId);
@@ -45,6 +50,10 @@ function Contract({
 
   const openJobPostHandler = () => {
     openJobPost(jobPostIndex);
+  };
+
+  const onGoToChatClick = () => {
+    navigate(`${CHAT_ROUTE}/${chatId}`);
   };
 
   return (
@@ -61,7 +70,7 @@ function Contract({
         <div>
           <Block>
             <Title>{t("MyContracts.rateString")}</Title>
-            <span>{`${rate}${t("MyJobs.currency")}`}</span>
+            <span>{`${rate} $`}</span>
           </Block>
           <Block>
             <Title>{t("MyContracts.durationString")}</Title>
@@ -101,7 +110,12 @@ function Contract({
           <Title>{t("MyContracts.descriptionString")}</Title>
           <span>{jobDescription}</span>
         </Block>
-        <Button type="primary" shape="round" style={{ marginRight: "3px" }}>
+        <Button
+          type="primary"
+          shape="round"
+          style={{ marginRight: "3px" }}
+          onClick={onGoToChatClick}
+        >
           {t("MyContracts.goToChatBtn")}
         </Button>
         <Button type="default" shape="round" onClick={openJobPostHandler}>

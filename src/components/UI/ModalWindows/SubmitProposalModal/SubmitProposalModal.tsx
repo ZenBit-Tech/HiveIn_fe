@@ -73,7 +73,7 @@ function SubmitProposalModal({
           <p className="ant-upload-drag-icon">
             <InboxOutlined />
           </p>
-          <Text>{t("Proposals.upload")}</Text>
+          <Text>{t("Offers.upload")}</Text>
         </Upload.Dragger>
 
         <SendButton>{t("SearchWork.send")}</SendButton>
