@@ -2,10 +2,428 @@
   "Home": {
     "title": "Home"
   },
-  "Dashboard": {
-    "title": "Dashboard"
+  "SearchWork": {
+    "title": "Search Work",
+    "category": "Category",
+    "price": "Price and length",
+    "habilities": "Skills and Abilities",
+    "english": "English level",
+    "img": "Attachments",
+    "skills": "Skills",
+    "send": "Send Proposal",
+    "clientInfo": "About the client",
+    "clientBudget": "Client Budget: $",
+    "profileRate": "Profile Rate: $",
+    "modalTitle": "Additional Information",
+    "bid": "Your bid",
+    "coverLetter": "Your cover letter",
+    "success": "Proposal sent!",
+    "subTitle": "Jobs on GetJob",
+    "byCategory": "Search by category",
+    "bySkills": "Search by skills",
+    "byPrice": "Search by price per hour",
+    "byTime": "Search by time available per day/hour",
+    "byEnglish": "Search by English level (choose one)",
+    "search": "Search",
+    "clear": "Clear",
+    "filters": "Filters",
+    "noResult": "No result",
+    "keyWord": "Search by title and description",
+    "postedAt": "Posted: ",
+    "updatedAt": "Updated: "
   },
-  "Redux": {
-    "title": "Redux test"
+  "Offers": {
+    "title": "Offers",
+    "upload": "Click or drag file to this area to upload"
+  },
+  "MyContracts": {
+    "title": "My Contracts",
+    "filter": {
+      "all": "All",
+      "active": "Active",
+      "pending": "Pending",
+      "closed": "Closed"
+    },
+    "goToChatBtn": "Go to chat",
+    "seeJobPostBtn": "See the job post",
+    "rateString": "Rate",
+    "durationString": "Duration",
+    "titleString": "Title",
+    "descriptionString": "Description",
+    "contractStatusString": "Contract status",
+    "startDateString": "Start date",
+    "endDateString": "End date",
+    "empty": "Empty",
+    "noContracts": "You have no contracts",
+    "server": {
+      "error": "Error",
+      "tryAgain": "Please, try again",
+      "success": "Success",
+      "statusChanged": "Contract status has been changed"
+    }
+  },
+  "SendProposalErrors": {
+    "bidRequired": "Insert your bid",
+    "bidPositive": "Insert a valid number",
+    "bidTypeError": "You must specify a number",
+    "coverLetterRequired": "Insert your cover letter",
+    "coverLetterMax": "You've reached the character limit",
+    "jobPost": "Choose job post"
+  },
+  "Offer": {
+    "offer": "Offer: ",
+    "duration": "duration: ",
+    "offers": "Job Offers",
+    "jobOffer": "Job Offer",
+    "yourOffers": " Your offers",
+    "acceptOffer": "Accept Offer",
+    "rejectOffer": "Decline Offer",
+    "confirmAccept": "Are you sure you want to accept the offer?",
+    "confirmReject": "Are you sure you want to decline the offer?",
+    "status": "Offer Status Changed!",
+    "error": "Offer Status Has Not Changed!",
+    "drawerTitle": "Offer Status",
+    "drawerRelatedJob": "Related Job Opening",
+    "expireDate": "Offer Expires",
+    "createDate": "Offer Date:",
+    "pendingStatus": "Offer pending",
+    "acceptedStatus": "Offer accepted",
+    "rejectedStatus": "Offer rejected",
+    "expiredStatus": "Offer expired",
+    "offerSent": "Offer has been sent"
+  },
+  "MyJobs": {
+    "title": "Jobs",
+    "subTitle": "Your Projects",
+    "postJob": "Post a Job",
+    "allPostings": "Your Postings",
+    "nothingToShow": "No active job posts",
+    "info": "About the project",
+    "skills": "Necessary Skills",
+    "currency": "Budget: $",
+    "perHour": "/hour",
+    "contractStatusTitle": "Contract status:",
+    "endContractMessage": "This contract will be ended. Do you want to continue?",
+    "endContractTitle": "End the contract",
+    "continueText": "Continue",
+    "draft?": "Draft?",
+    "draft": "Draft"
+  },
+  "Chat": {
+    "title": "Chat",
+    "chooseTheChat": "Please choose the chat",
+    "noChats": "You have no chats",
+    "chooseAnotherRoom": "You entered the room that does not exist. Please choose another room",
+    "systemMessage": "System message",
+    "jobTitle": "Job title",
+    "disabledMessaging": "You are not able to send any messages in this chat yet",
+    "sendOffer": "Send offer",
+    "confirmSendOffer": "Do you want to send the offer to this user?",
+    "prolong": "Chat was prolong for 6 months",
+    "offerMessage": "Offer"
+  },
+  "Settings": {
+    "title": "Settings"
+  },
+  "Profile": {
+    "title": "Profile"
+  },
+  "Menu": {
+    "title": "Menu"
+  },
+  "SignUp": {
+    "title": "Sign Up",
+    "signUpGoogle": "Sign Up with Google",
+    "successfulSignUp": "You have been successfully registered",
+    "alreadyRegistered": "Email already registered. Please sign in",
+    "register": "Register",
+    "or": "or",
+    "useEmail": "Use your email"
+  },
+  "SignIn": {
+    "title": "Get Job",
+    "subtitle": "THE BEST WAY TO FIND YOUR JOB",
+    "signIn": "Sign In",
+    "signInGoogle": "Sign In with Google",
+    "signOut": "Sign Out",
+    "email": "Email",
+    "password": "Password",
+    "dontHaveAccount": "Don't have an account yet?",
+    "forgotPass": "Forgot your password?",
+    "register": "Register now",
+    "successLogin": "You have successfully logged in",
+    "errorGoogleOAuth": "Server error, please try again"
+  },
+  "ServerErrors": {
+    "404": "Invalid email and/or password",
+    "401": "Invalid email and/or password",
+    "409": "Email already registered. Please login with your password or Google account.",
+    "500": "Server error, please try again",
+    "FETCH_ERROR": "Server error, please try again"
+  },
+  "ForgotPassword": {
+    "title": "Forgot your password?",
+    "subtitle": "Enter your email. We'll e-mail instructions on how to reset your password.",
+    "resetPassword": "Reset password",
+    "rememberPassword": "Just remembered password?",
+    "signIn": "Sign In",
+    "checkMailBox": "If your e-mail is correct, we just send you a recovery e-mail with instructions. Please check your e-mail.",
+    "GoogleSignIn": "User with this email signed up with Google account. Please login with Google Sign In"
+  },
+  "RestorePassword": {
+    "title": "Change password?",
+    "subtitle": "Choose a new password with this account.",
+    "signIn": "Save new password",
+    "newPassword": "New password",
+    "confirmNewPassword": "Confirm new password",
+    "successfullyTitle": "Change password success",
+    "successfullyText": "You have successfully change password"
+  },
+  "CompleteRegistration": {
+    "client": "I'm a client, hiring for a project",
+    "freelancer": "I'm a freelancer, looking for work",
+    "title": "Join as a client or freelancer",
+    "button": "Create My Account",
+    "error": "Server error, please try again",
+    "nameRequirement": "To create a freelancer account enter your first name and last name"
+  },
+  "Welcome": {
+    "title": "Welcome",
+    "link": "Create my profile"
+  },
+  "ProfileEditForm": {
+    "formTitle": "Profile",
+    "position": {
+      "title": "Position"
+    },
+    "category": {
+      "title": "Category"
+    },
+    "rate": {
+      "title": "Rate",
+      "helperText": "Charge per hour"
+    },
+    "skills": {
+      "title": "Skills"
+    },
+    "englishLevel": {
+      "title": "English level",
+      "options": ["pre-intermediate", "intermediate", "upper-intermediate"]
+    },
+    "description": {
+      "title": "Description",
+      "helperText": "Input 30-50 characters"
+    },
+    "education": {
+      "title": "Education",
+      "helperTextPlace": "School / University",
+      "helperTextPosition": "Degree",
+      "helperTextCity": "City",
+      "helperTextDescription": "Description",
+      "helperTextDateStart": "Start date",
+      "helperTextDateEnd": "End Date"
+    },
+    "experience": {
+      "title": "Experience",
+      "helperTextPlace": "Employer",
+      "helperTextPosition": "Job title",
+      "helperTextCity": "City",
+      "helperTextDescription": "Description",
+      "helperTextDateStart": "Start date",
+      "helperTextDateEnd": "End Date"
+    }
+  },
+  "profileFormErrorMessages": {
+    "positionEmpty": "enter position",
+    "categoryNotChosen": "choose category",
+    "rateSmallerThenZero": "should be greater than 0",
+    "skillsNotChosen": "select at least 3 options",
+    "englishLevelNotChosen": "choose your english level",
+    "descriptionEmpty": "write short description",
+    "userNotFound": "sorry, user not found",
+    "defaultError": "sorry, something went wrong",
+    "requiredEducation": "all fields must be filled in if you want to save changes"
+  },
+  "profileSuccessSubmitMessage": "Changes saved",
+  "profileEditFormButtonsNames": {
+    "submit": "Save changes",
+    "addEducation": "+ add education",
+    "addEmployment": "+ add employment"
+  },
+  "settingMenuButtonsNames": {
+    "profile": "Edit profile",
+    "contacts": "Edit contacts"
+  },
+  "contactInfoForm": {
+    "title": "Contact Information",
+    "submitButtonText": "Save changes",
+    "pic": "Company Information",
+    "fieldsData": {
+      "email": {
+        "title": "Email"
+      },
+      "firstName": {
+        "title": "First name",
+        "errorMessage": "Please enter your name"
+      },
+      "lastName": {
+        "title": "Last name",
+        "errorMessage": "Please enter your last name"
+      },
+      "phoneNumber": {
+        "title": "Phone number"
+      },
+      "phoneSettings": {
+        "title": "",
+        "helperText": "Show phone number to job owners?"
+      },
+      "emailSettings": {
+        "title": " ",
+        "helperText": "Show email to job owners?"
+      }
+    },
+    "errorMessages": {
+      "userNotFound": "userNotFound",
+      "somethingWrong": "something went wrong"
+    }
+  },
+  "Dashboard": {
+    "title": "Profile",
+    "titles": {
+      "posts": "Your postings",
+      "drafts": "Your drafts",
+      "noPosts": "There are no posts",
+      "noDrafts": "There are no drafts"
+    },
+    "buttons": {
+      "save": "Save changes",
+      "createPosts": "Post a job",
+      "seePosts": "See all posts",
+      "seeDrafts": "See all drafts"
+    },
+    "createJobTutorial": {
+      "title": "What is there for you in a Talent?",
+      "subtitle": {
+        "start": "A huge community with millions of talented professionals within",
+        "focus": "4 steps",
+        "end": "away"
+      },
+      "list": {
+        "item1": "Post a job at a GetJobs jobs marketplace",
+        "item2": "Find the best freelancer",
+        "item3": "Send the message in Chat",
+        "item4": "Hire the freelancer"
+      }
+    }
+  },
+  "NotFound": {
+    "notFound": "Not found"
+  },
+  "Talent": {
+    "pageTitle": "Talent",
+    "discover": "Discover",
+    "yourHires": "Your hires",
+    "recentlyViewed": "Recently viewed",
+    "savedTalent": "Saved talent",
+    "title": "Find the best candidate",
+    "keyWords": "Key words:",
+    "category": "Choose a category:",
+    "skills": "Choose at least 3 skills from the following:",
+    "foundCandidates": "Found candidates",
+    "seeAll": "See more",
+    "seeLess": "See less",
+    "search": "Search",
+    "hideFilters": "Hide filters",
+    "showFilters": "Show filters",
+    "save": "Save",
+    "noResult": "No result",
+    "filterResults": "Filtered results",
+    "allFreelancers": "All freelancers",
+    "description": "Description",
+    "rate": "Rate",
+    "categoryTitle": "Category",
+    "education": "Education",
+    "experience": "Experience",
+    "send": "Send Invite to interview",
+    "inviteMessage": "Invite message",
+    "inviteTitle": "will be invited to job",
+    "jobs": "Choose job",
+    "sendButton": "Send invite",
+    "defaultInviteMessage": "Hello! I would like to invite you to the interview",
+    "freelancerRate": "Freelancer rate: ",
+    "success": "Invite sent!",
+    "createFirstJob": "Click below to post your first job",
+    "dontHavePost": "You don't have any posted jobs yet"
+  },
+  "PostJob": {
+    "title": "Create Job Post",
+    "titleForCreate": "Create Job Post",
+    "titleForDraft": "Edit draft",
+    "required": "required",
+    "formFieldsInfo": {
+      "title": {
+        "title": "Title",
+        "helperText": "Write a title for your post"
+      },
+      "duration": {
+        "title": "Duration",
+        "week": "week",
+        "month": "month"
+      },
+      "description": {
+        "title": "Description",
+        "helperText": "Max 5000 symbols"
+      }
+    },
+    "messages": {
+      "draftSuccess": "draft saved",
+      "draftError": "draft not posted",
+      "postSuccess": "job posted",
+      "postError": "job not posted",
+      "bigFileSize": "file's size is too big",
+      "unsupportedFile": "unsupported file type"
+    },
+    "buttonsText": {
+      "fileUpload": "Upload file",
+      "postDraft": " Save to draft",
+      "postJob": "Post job"
+    },
+    "draftButtonTooltip": "Selected file will not be saved in the draft",
+    "uploadButtonTooltip": "You can upload files of such formats as pdf, jpeg, jpg, png, word, txt. File saves only for post job, not for draft."
+  },
+  "EditDeletePost": {
+    "delete": {
+      "deletedSuccessfully": "Deleted successfully",
+      "deleteError": "Something went wrong",
+      "title": "Delete job post",
+      "deleteConfirmation": "Confirm deletion of job post"
+    },
+    "edit": {
+      "updatedSuccessfully": "Post successfully updated",
+      "updateError": "Error, post not updated",
+      "userNotFound": "User not found",
+      "title": "Edit job post",
+      "text": "You can change only description or rate",
+      "labelRate": "Edit rate",
+      "descriptionLabel": "Edit description",
+      "submitButtonText": "Edit post"
+    },
+    "menuOptions": {
+      "seeMore": "See Post",
+      "edit": "Edit Post",
+      "delete": "Delete"
+    }
+  },
+  "Notifications": {
+    "title": "Notifications",
+    "button": "Go to chat",
+    "noNotifications": "You do not have any notifications"
+  },
+  "profileUploadPhoto": {
+    "title": "Profile photo",
+    "input": "Click to upload your photo"
+  },
+  "profileUploadPhotoErrors": {
+    "pngOrJpeg": "You can only upload JPG/PNG file"
   }
 }

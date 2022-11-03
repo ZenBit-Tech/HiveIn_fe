@@ -1,12 +1,18 @@
-import NavLinkStyles from "./style";
+import NavLinkStyles from "components/UI/navlink/NavLinkStyles";
 
-type Props = {
+interface IProps {
   path: string;
-  children: JSX.Element | string;
-};
+  children: React.ReactNode;
+  // eslint-disable-next-line react/require-default-props
+  onClick?: () => void;
+}
 
-function NavLink({ path, children }: Props) {
-  return <NavLinkStyles to={path}>{children}</NavLinkStyles>;
+function NavLink({ onClick, path, children }: IProps) {
+  return (
+    <NavLinkStyles to={path} onClick={onClick}>
+      {children}
+    </NavLinkStyles>
+  );
 }
 
 export default NavLink;
